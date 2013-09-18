@@ -1,4 +1,19 @@
 #################
+## Spring
+#################
+
+*.DS_Store
+bin
+target
+.classpath
+.project
+.settings
+src/main/webapp/META-INF
+.idea
+*.iml
+
+
+#################
 ## Eclipse
 #################
 
@@ -213,3 +228,4 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+/target

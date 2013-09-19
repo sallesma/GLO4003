@@ -20,6 +20,21 @@
 			<artifactId>jdom2</artifactId>
 			<version>2.0.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>3.6.10.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.9</version>
+		</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -159,6 +174,12 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
+            <!-- Jetty Maven Plugin -->
+           <plugin> 
+           	<groupId>org.mortbay.jetty</groupId> <artifactId>jetty-maven-plugin</artifactId> <version>8.1.7.v20120910</version> <configuration>
+<scanIntervalSeconds>10</scanIntervalSeconds> <stopKey>foo</stopKey> <stopPort>9999</stopPort>
+</configuration> 
+			</plugin>
         </plugins>
     </build>
 </project>

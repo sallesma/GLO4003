@@ -1,5 +1,8 @@
 package model;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class UserViewModel extends HasWarning {
 	
 	public UserViewModel() {
@@ -12,10 +15,16 @@ public class UserViewModel extends HasWarning {
 	}
 	
 	private Integer id;
+	@Size(min=1, message = "Entrez un nom de famille")
 	private String lastName;
+	@Size(min=1, message = "entrez un prénon")
 	private String firstName;
+	
+	@Size(min=1, message = "Le nom d'utilisateur est trop court")
 	private String username;
+	@Size(min=3, message = "Le mot de passe est trop court")
 	private String password;
+	@Pattern(regexp="(?s)^[2-9]\\d{2}-\\d{3}-\\d{4}$", message = "le numéro de téléphone doit être de la forme 999-999-9999")
 	private String phoneNumber;
 	private String address;
 	

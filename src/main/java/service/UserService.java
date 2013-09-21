@@ -1,17 +1,30 @@
 package service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import helper.UserConverter;
 
+import java.util.List;
+
+import model.UserViewModel;
+import validator.ModelValidator;
 import database.DbHelper;
 import exceptions.SaveException;
-import model.UserModel;
 
-public class UserService {
+
+public class UserService {	
 	
-	@Autowired
-	private DbHelper dbHelper;	
+	private ModelValidator validator = new ModelValidator();
 	
-	public void saveNew(UserModel user) throws SaveException {		
-		dbHelper.add(user);		
+	public void saveNew(UserViewModel user) throws SaveException {
+		DbHelper dbHelper = DbHelper.getInstance();
+		List<String> errors = validator.validate(user);
+		if (dbHelper.userExist(user.getUsername())) {
+			errors.add("Le nom d'utilisateur est déja utilisé");
+		}
+		
+		if (!errors.isEmpty()) {
+			throw new SaveException(errors);
+		}
+		
+		dbHelper.add(UserConverter.convert(user));			
 	}
 }

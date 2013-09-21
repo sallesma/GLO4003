@@ -1,20 +1,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<% if(entry) %>
+<%@ page import="model.UserViewModel"%> 
+
+<c:forEach var="warning" items="${entry.warning}">        
+    <c:out value="${warning}"/>
+    <p></p>          
+</c:forEach>
 
 <form:form method="post" class="form-horizontal" modelAttribute="entry">
 	<div class="form-group">
 		<label for="name" class="col-lg-2 control-label">Prénom</label>
 		<div class="col-lg-10">
-			<form:input class="form-control" path="firstName" disabled="${fn:length(entry.firstName) > 0}" />
+			<form:input class="form-control" path="firstName" />
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<label for="name" class="col-lg-2 control-label">Nom de famille</label>
 		<div class="col-lg-10">
-			<form:input class="form-control" path="lastName" disabled="${fn:length(entry.lastName) > 0}" />
+			<form:input class="form-control" path="lastName" />
 		</div>
 	</div>
 	
@@ -52,3 +58,6 @@
 		</div>
 	</div>
 </form:form>
+
+<p></p> 
+<a href="/">Retourner à la page principale</a>

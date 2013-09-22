@@ -12,6 +12,7 @@ import exceptions.SaveException;
 
 public class UserService {	
 	
+	private UserConverter converter = new UserConverter();
 	private ModelValidator validator = new ModelValidator();
 	
 	public void saveNew(UserViewModel user) throws SaveException {
@@ -25,6 +26,6 @@ public class UserService {
 			throw new SaveException(errors);
 		}
 		
-		dbHelper.add(UserConverter.convert(user));			
+		dbHelper.add(converter.convert(user));			
 	}
 }

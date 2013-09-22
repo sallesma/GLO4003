@@ -1,12 +1,10 @@
 package database;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.glo4003.project.UserController;
-
-import exceptions.SaveException;
 import model.UserModel;
 
 public class DbHelper {
@@ -21,8 +19,44 @@ public class DbHelper {
 		populate();
 	}
 	
+	public Collection<UserModel> getAllUsers() {
+		return users.values();
+	}
+	
 	public static DbHelper getInstance() {
 		return db;
+	}	
+	
+	public void add(UserModel user) {
+		users.put(nextId.incrementAndGet(), user);
+	}
+	
+	public Boolean userExist(String username) {
+		Boolean exist = false;
+		for (UserModel myUser : users.values()) {
+			if (myUser.getUsername().contentEquals(username)) {
+				exist = true;			
+			}			
+		}
+		
+		return exist;
+	}
+	
+	public static void replaceDb(DbHelper dbHelper) {
+		db = dbHelper;
+	}
+	
+	public DbHelper getNewDb() {
+		return new DbHelper();
+	}
+	
+	public void dropAndRepopulate() {
+		nextId = new AtomicInteger(0);
+		
+		users.clear();
+		matchs.clear();
+		
+		populate();
 	}
 	
 	private void populate() {
@@ -47,26 +81,5 @@ public class DbHelper {
 		user.setUsername(username);	
 		
 		return user;
-	}
-	
-	public void add(UserModel user) throws SaveException {
-		users.put(nextId.incrementAndGet(), user);
-	}
-	
-	public void LogUsers() {
-		for(UserModel user: users.values()) {
-			UserController.logger.info(user.getUsername());
-		}
-	}
-	
-	public Boolean userExist(String username) {
-		Boolean exist = false;
-		for (UserModel myUser : users.values()) {
-			if (myUser.getUsername().contentEquals(username)) {
-				exist = true;			
-			}			
-		}
-		
-		return exist;
-	}
+	}	
  }

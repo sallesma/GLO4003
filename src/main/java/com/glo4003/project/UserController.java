@@ -28,7 +28,7 @@ public class UserController {
 	private UserService userService;	
 	
 	@RequestMapping(value = "/new/user", method = RequestMethod.GET)
-	public String newUser(Locale locale, Model model) {		
+	public String newUser(Model model) {		
 		model.addAttribute("entry", new UserViewModel());		
 		
 		return "user.new";

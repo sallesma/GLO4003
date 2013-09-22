@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConverter {
 	
-	public static Collection<UserViewModel> convert(Map<Integer, UserModel> entries) {
+	public Collection<UserViewModel> convert(Map<Integer, UserModel> entries) {
 		Collection<UserViewModel> viewModels = new LinkedList<UserViewModel>();
 		for (Entry<Integer, UserModel> entry : entries.entrySet()) {
 			UserViewModel viewModel = convert(entry.getValue());
@@ -23,7 +23,7 @@ public class UserConverter {
 		return viewModels;
 	}
 	
-	public static UserViewModel convert(UserModel entry) {
+	public UserViewModel convert(UserModel entry) {
 		UserViewModel viewModel = new UserViewModel();
 		viewModel.setAddress(entry.getAddress());
 		viewModel.setFirstName(entry.getFirstName());
@@ -35,7 +35,7 @@ public class UserConverter {
 		return viewModel;
 	}
 	
-	public static UserModel convert(UserViewModel userViewModel) {
+	public UserModel convert(UserViewModel userViewModel) {
 		UserModel viewModel = new UserModel();
 		viewModel.setAddress(userViewModel.getAddress());
 		viewModel.setFirstName(userViewModel.getFirstName());

@@ -26,6 +26,6 @@ public class UserService {
 			throw new SaveException(errors);
 		}
 		
-		dbHelper.add(converter.convert(user));			
+		dbHelper.addUser(converter.convert(user));			
 	}
 }

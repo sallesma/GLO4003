@@ -52,7 +52,7 @@ public class UserServiceTest {
 		
 		service.saveNew(viewModel);		
 		
-		verify(helper).add(any(UserModel.class));
+		verify(helper).addUser(any(UserModel.class));
 	}
 	
 	@Test
@@ -64,7 +64,7 @@ public class UserServiceTest {
 		} catch(SaveException e) {			
 		}
 		
-		verify(helper, never()).add(any(UserModel.class));
+		verify(helper, never()).addUser(any(UserModel.class));
 	}
 	
 	@Test
@@ -80,7 +80,7 @@ public class UserServiceTest {
 		}
 		
 		assertTrue(exceptionFound);
-		verify(helper, never()).add(any(UserModel.class));
+		verify(helper, never()).addUser(any(UserModel.class));
 	}
 	
 	private UserViewModel getWellFormedUserModel() {

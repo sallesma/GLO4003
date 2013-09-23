@@ -46,7 +46,7 @@ public class DbHelper {
 		db = dbHelper;
 	}
 	
-	public DbHelper getNewDb() {
+	public static DbHelper getNewDb() {
 		return new DbHelper();
 	}
 	

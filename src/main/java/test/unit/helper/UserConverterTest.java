@@ -1,4 +1,4 @@
-package test.helper;
+package test.unit.helper;
 
 import static org.junit.Assert.*;
 import helper.UserConverter;

@@ -4,8 +4,10 @@
 
 <%@ page import="model.UserViewModel"%> 
 
-<c:forEach var="warning" items="${entry.warning}">        
-    <c:out value="${warning}"/>
+<c:forEach var="warning" items="${entry.warning}">   
+	<span style="color:#FF0000;" name="warning">  
+    	<c:out value="${warning}"/>
+    </span>   
     <p></p>          
 </c:forEach>
 

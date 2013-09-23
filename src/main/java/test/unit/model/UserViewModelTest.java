@@ -1,68 +1,70 @@
-package test.model;
+package test.unit.model;
 
-import static org.junit.Assert.assertTrue;
-import model.UserModel;
+import static org.junit.Assert.*;
+import model.UserViewModel;
 
 import org.junit.Test;
 
-public class UserModelTest {
+public class UserViewModelTest {
+	
 
     @Test
     public void NewModelIsEmpty() {
-    	UserModel model = getNewUserModel();
+    	UserViewModel model = getNewUserViewModel();
     	
     	assertTrue(model.getAddress().isEmpty());
     	assertTrue(model.getFirstName().isEmpty());
     	assertTrue(model.getLastName().isEmpty());
     	assertTrue(model.getPassword().isEmpty());
     	assertTrue(model.getPhoneNumber().isEmpty());
-    	assertTrue(model.getUsername().isEmpty());    
+    	assertTrue(model.getUsername().isEmpty());
+    	assertNull(model.getId());    	
     }
     
     @Test
     public void PopulatedModelHasAddress() {
-    	UserModel model = getPopulatedUserModel();
+    	UserViewModel model = getPopulatedUserViewModel();
     	
     	assertTrue(model.getAddress().contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasFirstName() {
-    	UserModel model = getPopulatedUserModel();
+    	UserViewModel model = getPopulatedUserViewModel();
     	
     	assertTrue(model.getFirstName().contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasLastName() {
-    	UserModel model = getPopulatedUserModel();
+    	UserViewModel model = getPopulatedUserViewModel();
     	
     	assertTrue(model.getLastName().contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasPhoneNumber() {
-    	UserModel model = getPopulatedUserModel();
+    	UserViewModel model = getPopulatedUserViewModel();
     	
     	assertTrue(model.getPhoneNumber().contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasUserName() {
-    	UserModel model = getPopulatedUserModel();
+    	UserViewModel model = getPopulatedUserViewModel();
     	
     	assertTrue(model.getUsername().contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasPassword() {
-    	UserModel model = getPopulatedUserModel();
+    	UserViewModel model = getPopulatedUserViewModel();
     	
     	assertTrue(model.getPassword().contentEquals("test"));
     }    
     
-    private UserModel getPopulatedUserModel() {
-    	UserModel model = new UserModel();
+    private UserViewModel getPopulatedUserViewModel() {
+    	UserViewModel model = new UserViewModel();
     	model.setAddress("test");
     	model.setFirstName("test");
     	model.setLastName("test");
@@ -73,9 +75,9 @@ public class UserModelTest {
     	return model;
     }
     
-    private UserModel getNewUserModel() {
+    private UserViewModel getNewUserViewModel() {
     	
-    	return new UserModel();    	
+    	return new UserViewModel();    	
     }
     
 }

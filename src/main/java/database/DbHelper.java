@@ -1,17 +1,17 @@
 package database;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import model.MatchModel;
+import model.UserModel;
 import config.ConfigManager.Genre;
 import config.ConfigManager.Sports;
-
-import model.UserModel;
-import model.MatchModel;
 
 public class DbHelper {
 	
@@ -62,9 +62,17 @@ public class DbHelper {
 		users.put(nextUserId.incrementAndGet(), user4);
 		
 		//Populate DB with matchs
-		MatchModel match1 = createMatch(Sports.football, Genre.M, new Date(2013, 12, 11), "Québec", "ULaval", 100, 500);
+		Calendar cal = Calendar.getInstance();
+		cal.set(2013, 12, 11);
+		MatchModel match1 = createMatch(Sports.football, Genre.M, cal.getTime(), "Québec", "ULaval", 100, 500);
+		cal.set(2013, 12, 9);
+		MatchModel match2 = createMatch(Sports.rugby, Genre.F, cal.getTime(), "Sherbrooke", "unknown", 4, 600);
+		cal.set(2013, 12, 8);
+		MatchModel match3 = createMatch(Sports.volleyball, Genre.F, cal.getTime(), "Rimouski", "Gymnase municipal", 0, 100);
 		
 		matchs.put(nextMatchId.incrementAndGet(), match1);
+		matchs.put(nextMatchId.incrementAndGet(), match2);
+		matchs.put(nextMatchId.incrementAndGet(), match3);
 	}
 	
 	// Users
@@ -84,7 +92,6 @@ public class DbHelper {
 				exist = true;			
 			}			
 		}
-		
 		return exist;
 	}
 		
@@ -96,7 +103,6 @@ public class DbHelper {
 		user.setPassword(password);
 		user.setPhoneNumber("(444) 444-4444");
 		user.setUsername(username);	
-		
 		return user;
 	}
 	
@@ -130,8 +136,6 @@ public class DbHelper {
 		match.setTerrain(terrain);
 		match.setVipRemainingTickets(nbVIPTickets);
 		match.setNormalRemainingTickets(nbNormalTickets);
-		
 		return match;
 	}
-	
  }

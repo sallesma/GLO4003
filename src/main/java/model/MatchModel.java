@@ -11,9 +11,7 @@ public class MatchModel {
 	private int matchID;
 	private Date date;
 	private String city;
-
 	private String terrain;
-	
 	private int vipRemainingTickets;
 	private int normalRemainingTickets;
 	

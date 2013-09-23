@@ -1,7 +1,5 @@
 package com.glo4003.project;
 
-import java.util.Locale;
-
 import model.UserViewModel;
 
 import org.slf4j.Logger;

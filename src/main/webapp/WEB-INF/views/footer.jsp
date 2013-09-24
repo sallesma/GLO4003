@@ -8,7 +8,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./javascript/jquery.js"></script>
-    <script src="./javascript/bootstrap.min.js"></script>
+    <script src="./resources/javascript/jquery.js"></script>
+    <script src="./resources/javascript/bootstrap.min.js"></script>
   </body>
 </html>

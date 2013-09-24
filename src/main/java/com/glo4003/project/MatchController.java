@@ -49,4 +49,13 @@ public class MatchController {
 			model.addAttribute("matchs", matchList);
 		return "matchsList";
 	}
+	
+	@RequestMapping(value = "/match", method = RequestMethod.GET)
+	public String getMatch(Model model, HttpServletRequest request) {	
+		DbHelper dbHelper = DbHelper.getInstance();
+		int id = Integer.valueOf(request.getParameter("matchID"));
+		MatchModel match = dbHelper.getMatchFromId(id);
+		model.addAttribute("match", match);
+		return "match";
+	}
 }

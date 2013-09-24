@@ -64,15 +64,15 @@ public class DbHelper {
 		//Populate DB with matchs
 		Calendar cal = Calendar.getInstance();
 		cal.set(2013, 12, 11);
-		MatchModel match1 = createMatch(Sports.Football, Genre.M, cal.getTime(), "Québec", "ULaval", 100, 500);
+		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", 100, 500);
 		cal.set(2013, 12, 9);
-		MatchModel match2 = createMatch(Sports.Rugby, Genre.F, cal.getTime(), "Sherbrooke", "unknown", 4, 600);
+		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Genre.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", 4, 600);
 		cal.set(2013, 12, 8);
-		MatchModel match3 = createMatch(Sports.Volleyball, Genre.F, cal.getTime(), "Rimouski", "Gymnase municipal", 0, 100);
+		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Genre.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", 0, 100);
 		
-		matchs.put(nextMatchId.incrementAndGet(), match1);
-		matchs.put(nextMatchId.incrementAndGet(), match2);
-		matchs.put(nextMatchId.incrementAndGet(), match3);
+		matchs.put(match1.getMatchID(), match1);
+		matchs.put(match2.getMatchID(), match2);
+		matchs.put(match3.getMatchID(), match3);
 	}
 	
 	// Users
@@ -127,15 +127,12 @@ public class DbHelper {
 		matchs.put(nextMatchId.incrementAndGet(), match);
 	}
 	
-	private MatchModel createMatch(Sports sport, Genre gender, Date date, String city, String terrain, int nbVIPTickets, int nbNormalTickets) {
-		MatchModel match = new MatchModel ();
-		match.setSport(sport);
-		match.setGender(gender);
-		match.setDate(date);
-		match.setCity(city);
-		match.setTerrain(terrain);
-		match.setVipRemainingTickets(nbVIPTickets);
-		match.setNormalRemainingTickets(nbNormalTickets);
+	public MatchModel getMatchFromId(int id){
+		return matchs.get(id);
+	}
+	
+	private MatchModel createMatch(int matchId, Sports sport, Genre gender, Date date, String adversaire, String city, String terrain, int nbVIPTickets, int nbNormalTickets) {
+		MatchModel match = new MatchModel(sport, gender, matchId, date, adversaire, city, terrain, nbVIPTickets, nbNormalTickets);
 		return match;
 	}
  }

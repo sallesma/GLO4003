@@ -2,7 +2,8 @@ package model;
 
 import java.util.Date;
 
-import config.ConfigManager.*;
+import config.ConfigManager.Genre;
+import config.ConfigManager.Sports;
 
 public class MatchModel {
 	
@@ -10,6 +11,7 @@ public class MatchModel {
 	private Genre gender;
 	private int matchID;
 	private Date date;
+	private String adversaire;
 	private String city;
 	private String terrain;
 	private int vipRemainingTickets;
@@ -20,12 +22,27 @@ public class MatchModel {
 		this.setSport(null);
 		this.setGender(null);
 		this.setDate(null);
+		this.setAdversaire("");
 		this.setCity("");
 		this.setTerrain("");
 		this.setVipRemainingTickets(0);
 		this.setNormalRemainingTickets(0);
 	}
 	
+	public MatchModel(Sports sport, Genre gender, int matchID, Date date,
+			String adversaire, String city, String terrain, int vipRemainingTickets,
+			int normalRemainingTickets) {
+		super();
+		this.sport = sport;
+		this.gender = gender;
+		this.matchID = matchID;
+		this.date = date;
+		this.adversaire = adversaire;
+		this.city = city;
+		this.terrain = terrain;
+		this.vipRemainingTickets = vipRemainingTickets;
+		this.normalRemainingTickets = normalRemainingTickets;
+	}
 	
 	// Getter and Setter
 	public int getMatchID() {
@@ -40,6 +57,15 @@ public class MatchModel {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+	public String getAdversaire() {
+		return adversaire;
+	}
+	
+	public void setAdversaire(String adversaire) {
+		this.adversaire = adversaire;
+	}
+	
 	public String getCity() {
 		return city;
 	}

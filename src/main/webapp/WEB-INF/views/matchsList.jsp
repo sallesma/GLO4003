@@ -36,18 +36,24 @@
 					<th>Sport</th>
 					<th>Genre</th>
 					<th>Date</th>
+					<th>Adversaire</th>
 					<th>Ville</th>
 					<th>Terrain</th>
 					<th>Billets disponibles</th>
+					<th>Informations</th>
 				</tr>
 				<c:forEach var="match" items="${matchs}">
 					<tr>
 						<td>${match.sport}</td>
 						<td>${match.gender}</td>
 						<td>${match.date}</td>
+						<td>${match.adversaire}</td>
 						<td>${match.city}</td>
 						<td>${match.terrain}</td>
 						<td>${match.vipRemainingTickets+match.normalRemainingTickets}</td>
+						<td><a href="match?matchID=${match.matchID }">
+							<button type="button" class="btn btn-primary">Info</button>
+							</a></td>
 					</tr>
 				</c:forEach>
 			</table>

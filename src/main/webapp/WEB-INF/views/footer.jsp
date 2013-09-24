@@ -2,6 +2,7 @@
 <%@ page session="false" %>
 
 <footer>
+	<hr/>
 	<p>&copy; Company 2013</p>
 </footer>
 

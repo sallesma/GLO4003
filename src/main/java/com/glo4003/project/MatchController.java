@@ -2,6 +2,7 @@ package com.glo4003.project;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,21 +34,28 @@ public class MatchController {
 		List<Sports> sports = new ArrayList<Sports>(Arrays.asList(Sports.values()));
 		model.addAttribute("sports", sports);
 		
+		Date currentDate = new Date();
 		List<MatchModel> matchList = new ArrayList<MatchModel>(dbHelper.getAllMatchs());
+		List<MatchModel> filteredMatchList = new ArrayList<MatchModel>();
+		
 		if (request.getParameter("sport") != null && !request.getParameter("sport").equals("")) {
-			List<MatchModel> filteredMatchList = new ArrayList<MatchModel>();
 			String sport = request.getParameter("sport");
 			for (MatchModel match : matchList) {
-				if (match.getSport().toString().equals(sport))
+				if (match.getSport().toString().equals(sport) && match.getDate().after(currentDate))
 					filteredMatchList.add(match);
 			}
-			model.addAttribute("matchs", filteredMatchList);
-			if (filteredMatchList.isEmpty())
-				model.addAttribute("noMatch", "Il n'y a plus de matchs pour ce sport");
 		}
-		else
-			model.addAttribute("matchs", matchList);
-		return "matchsList";
+		else {
+			for (MatchModel match : matchList) {
+				if (match.getDate().after(currentDate))
+					filteredMatchList.add(match);
+			}			
+		}
+		model.addAttribute("matchs", filteredMatchList);
+		
+		if (filteredMatchList.isEmpty())
+			model.addAttribute("noMatch", "Il n'y a plus de matchs pour ce sport");
+			return "matchsList";
 	}
 	
 	@RequestMapping(value = "/match", method = RequestMethod.GET)

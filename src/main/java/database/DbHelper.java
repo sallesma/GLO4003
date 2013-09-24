@@ -63,6 +63,8 @@ public class DbHelper {
 		
 		//Populate DB with matchs
 		Calendar cal = Calendar.getInstance();
+		cal.set(2010, 12, 11);
+		MatchModel match0 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", 100, 500);
 		cal.set(2013, 12, 11);
 		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", 100, 500);
 		cal.set(2013, 12, 9);
@@ -70,6 +72,7 @@ public class DbHelper {
 		cal.set(2013, 12, 8);
 		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Genre.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", 0, 100);
 		
+		matchs.put(match0.getMatchID(), match1);
 		matchs.put(match1.getMatchID(), match1);
 		matchs.put(match2.getMatchID(), match2);
 		matchs.put(match3.getMatchID(), match3);

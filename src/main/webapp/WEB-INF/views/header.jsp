@@ -52,7 +52,9 @@
 						<li class="dropdown-header">Nav header</li>
 						<li><a href="#">Separated link</a></li>
 						<li><a href="#">One more separated link</a></li>
-					</ul></li>
+					</ul>
+					<li><a href="newuser">s'inscrire</a></li>
+				</li>
 			</ul>
 			<form class="navbar-form navbar-right">
 				<div class="form-group">
@@ -61,8 +63,9 @@
 				<div class="form-group">
 					<input type="password" placeholder="Password" class="form-control">
 				</div>
-				<button type="submit" class="btn btn-success">Sign in</button>
+				<button type="submit" class="btn btn-success">Sign in</button>				
 			</form>
+			
 		</div>
 		<!--/.navbar-collapse -->
 	</div>

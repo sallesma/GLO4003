@@ -2,6 +2,6 @@ package config;
 
 public class ConfigManager {
 
-	public static enum Sports {football, basketball, rugby, soccer, volleyball};
-	public static enum Genre {M, F};	
-}
+	public static enum Sports {Football, Basketball, Rugby, Soccer, Volleyball};
+	public static enum Genre {M, F};
+	}

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import model.MatchModel;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -22,20 +26,27 @@ public class MatchController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping(value = "/matchs", method = RequestMethod.GET)
-	public String getMatchs(Model model) {	
+	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
+	public String getMatchList(Model model, HttpServletRequest request) {	
 		DbHelper dbHelper = DbHelper.getInstance();
-		model.addAttribute("matchs", dbHelper.getAllMatchs());
 		
 		List<Sports> sports = new ArrayList<Sports>(Arrays.asList(Sports.values()));
 		model.addAttribute("sports", sports);
-		return "matchs";
+		
+		List<MatchModel> matchList = new ArrayList<MatchModel>(dbHelper.getAllMatchs());
+		if (request.getParameter("sport") != null && !request.getParameter("sport").equals("")) {
+			List<MatchModel> filteredMatchList = new ArrayList<MatchModel>();
+			String sport = request.getParameter("sport");
+			for (MatchModel match : matchList) {
+				if (match.getSport().toString().equals(sport))
+					filteredMatchList.add(match);
+			}
+			model.addAttribute("matchs", filteredMatchList);
+			if (filteredMatchList.isEmpty())
+				model.addAttribute("noMatch", "Il n'y a plus de matchs pour ce sport");
+		}
+		else
+			model.addAttribute("matchs", matchList);
+		return "matchsList";
 	}
-	
-//	@RequestMapping(value = "/matchs", method = RequestMethod.POST)
-//	public String postMatchs(Model model) {	
-//		DbHelper dbHelper = DbHelper.getInstance();
-//		model.addAttribute("matchs", dbHelper.getAllMatchs());
-//		return "matchs";
-//	}
 }

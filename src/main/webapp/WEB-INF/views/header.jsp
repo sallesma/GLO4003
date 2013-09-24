@@ -40,7 +40,7 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li><a href="/">Accueil</a></li>
-				<li><a href="matchs">Matchs</a></li>
+				<li><a href="matchsList">Matchs</a></li>
 				<li><a href="#contact">Contact</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Dropdown <b class="caret"></b></a>

@@ -10,7 +10,6 @@
 
 	<c:forEach var="warning" items="${entry.warning}">
 		<c:out value="${warning}" />
-		<p></p>
 	</c:forEach>
 
 	<h2>Description du match</h2>

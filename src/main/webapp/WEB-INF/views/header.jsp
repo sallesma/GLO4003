@@ -53,6 +53,9 @@
 							<li><a href="#">One more separated link</a></li>
 						</ul>
 				</ul>
+				<form method="get" action="/newuser" class="navbar-form navbar-right">
+					<button type="submit" class="btn btn-primary" onclick="/newuser">S'inscrire</button>
+				</form>
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
 						<input type="text" placeholder="Email" class="form-control">
@@ -61,7 +64,6 @@
 						<input type="password" placeholder="Password" class="form-control">
 					</div>
 					<button type="submit" class="btn btn-success">Se connecter</button>
-					<a href="newuser"><button class="btn btn-primary">S'inscrire</button></a>
 				</form>
 
 			</div>

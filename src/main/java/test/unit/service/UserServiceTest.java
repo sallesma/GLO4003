@@ -1,4 +1,4 @@
-package test.service;
+package test.unit.service;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

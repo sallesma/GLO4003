@@ -1,4 +1,4 @@
-package test.controller;
+package test.unit.controller;
 
 import model.UserViewModel;
 
@@ -25,7 +25,7 @@ public class UserControllerTest {
 		Model model = mock(Model.class);
 		String returned = controller.newUser(model);
 		
-		assertTrue(returned.contentEquals("user.new"));
+		assertTrue(returned.contentEquals("newuser"));
 		verify(model).addAttribute(anyString(), any(UserViewModel.class));
 	}
 }

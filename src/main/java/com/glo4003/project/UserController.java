@@ -25,20 +25,20 @@ public class UserController {
 	@Autowired
 	private UserService userService;	
 	
-	@RequestMapping(value = "/new/user", method = RequestMethod.GET)
+	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String newUser(Model model) {		
 		model.addAttribute("entry", new UserViewModel());		
 		
-		return "user.new";
+		return "newuser";
 	}
 	
-	@RequestMapping(value = "/new/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/newuser", method = RequestMethod.POST)
 	public ModelAndView create(UserViewModel viewModel) {		
 		try {
 			userService.saveNew(viewModel);
 		} catch (SaveException e) {
 			viewModel.addWarning(e.getErrors());						
-			return new ModelAndView("user.new","entry", viewModel);
+			return new ModelAndView("newuser","entry", viewModel);
 		}
 		
 		return new ModelAndView("home","entry", viewModel);

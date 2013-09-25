@@ -77,25 +77,22 @@ public class DbHelper {
 		users.put(nextUserId.incrementAndGet(), user4);
 		
 		//Populate DB with matchs
-		Calendar cal = Calendar.getInstance();
-		cal.set(2010, 12, 11);
-		
-		//Create Billet Cat
-		
+
 		ArrayList<BilletCategory> billetsMatch1 = new ArrayList<BilletCategory>();
 		billetsMatch1.add(BilletFactory.getBillet(ConfigManager.BILLET_RESERVE,"Billet loges", 100, 0, 32));
 		billetsMatch1.add(BilletFactory.getBillet(ConfigManager.BILLET_LIBRE, "Debout", 200, 0, 10));
 
-		
+		Calendar cal = Calendar.getInstance();
+		cal.set(2010, 11, 11);
 		MatchModel match0 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
-		cal.set(2013, 12, 11);
+		cal.set(2013, 11, 11);
 		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
-		cal.set(2013, 12, 9);
+		cal.set(2013, 11, 9);
 		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Genre.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
-		cal.set(2013, 12, 8);
+		cal.set(2013, 11, 8);
 		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Genre.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
 		
-		matchs.put(match0.getMatchID(), match1);
+		matchs.put(match0.getMatchID(), match0);
 		matchs.put(match1.getMatchID(), match1);
 		matchs.put(match2.getMatchID(), match2);
 		matchs.put(match3.getMatchID(), match3);

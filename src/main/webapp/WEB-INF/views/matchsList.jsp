@@ -50,7 +50,7 @@
 						<td>${match.adversaire}</td>
 						<td>${match.city}</td>
 						<td>${match.terrain}</td>
-						<td>${match.vipRemainingTickets+match.normalRemainingTickets}</td>
+						<td>${match.nbRemainingTickets}</td>
 						<td><a href="match?matchID=${match.matchID }">
 							<button type="button" class="btn btn-primary">Info</button>
 							</a></td>

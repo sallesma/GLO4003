@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import config.ConfigManager.Genre;
 import config.ConfigManager.Sports;
@@ -14,8 +16,7 @@ public class MatchModel {
 	private String adversaire;
 	private String city;
 	private String terrain;
-	private int vipRemainingTickets;
-	private int normalRemainingTickets;
+	private List<BilletCategory> billets;
 	
 	
 	public MatchModel () {
@@ -25,13 +26,11 @@ public class MatchModel {
 		this.setAdversaire("");
 		this.setCity("");
 		this.setTerrain("");
-		this.setVipRemainingTickets(0);
-		this.setNormalRemainingTickets(0);
+		this.setBillets(new ArrayList<BilletCategory>());
 	}
 	
 	public MatchModel(Sports sport, Genre gender, int matchID, Date date,
-			String adversaire, String city, String terrain, int vipRemainingTickets,
-			int normalRemainingTickets) {
+			String adversaire, String city, String terrain, List<BilletCategory> billets) {
 		super();
 		this.sport = sport;
 		this.gender = gender;
@@ -40,8 +39,19 @@ public class MatchModel {
 		this.adversaire = adversaire;
 		this.city = city;
 		this.terrain = terrain;
-		this.vipRemainingTickets = vipRemainingTickets;
-		this.normalRemainingTickets = normalRemainingTickets;
+		this.setBillets(billets);
+	}
+	
+	public void addBilletCategory(BilletCategory cat) {
+		this.billets.add(cat);
+	}
+	
+	public int getNbRemainingTickets() {
+		int amount = 0;
+		for (BilletCategory cat : this.billets) {
+			amount += cat.getNbRemainingTickets();
+		}
+		return amount;
 	}
 	
 	// Getter and Setter
@@ -78,19 +88,6 @@ public class MatchModel {
 	public void setTerrain(String terrain) {
 		this.terrain = terrain;
 	}
-	public int getVipRemainingTickets() {
-		return vipRemainingTickets;
-	}
-	public void setVipRemainingTickets(int vipRemainingTickets) {
-		this.vipRemainingTickets = vipRemainingTickets;
-	}
-	public int getNormalRemainingTickets() {
-		return normalRemainingTickets;
-	}
-	public void setNormalRemainingTickets(int normalRemainingTickets) {
-		this.normalRemainingTickets = normalRemainingTickets;
-	}
-	
 	
 	public Sports getSport() {
 		return sport;
@@ -109,5 +106,13 @@ public class MatchModel {
 
 	public void setGender(Genre gender) {
 		this.gender = gender;
+	}
+	
+	public List<BilletCategory> getBillets() {
+		return billets;
+	}
+
+	public void setBillets(List<BilletCategory> billets) {
+		this.billets = billets;
 	}
 }

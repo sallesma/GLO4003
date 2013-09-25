@@ -8,7 +8,7 @@
 <div class="container">
 
 	<ul>
-		<c:forEach var="warning" items="${entry.warning}">
+		<c:forEach var="warning" items="${userModel.warning}">
 			<li><span style="color: #FF0000;"> ${warning} </span></li>
 
 		</c:forEach>
@@ -17,7 +17,7 @@
 	<h2>Inscription</h2>
 	<p>Veuillez compléter le formulaire ci-dessous pour vous inscrire.</p>
 	
-	<form:form method="post" class="form-horizontal" modelAttribute="entry">
+	<form:form method="post" class="form-horizontal" modelAttribute="userModel">
 		<div class="form-group">
 			<label for="name" class="col-lg-2 control-label">Prénom</label>
 			<div class="col-lg-3">

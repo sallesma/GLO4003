@@ -1,5 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false"%>
+<%@ page import="model.UserViewModel"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,20 +55,29 @@
 							<li><a href="#">Separated link</a></li>
 							<li><a href="#">One more separated link</a></li>
 						</ul>
-				</ul>
-				<form method="get" action="/newuser" class="navbar-form navbar-right">
-					<button type="submit" class="btn btn-primary" onclick="/newuser">S'inscrire</button>
-				</form>
-				<form class="navbar-form navbar-right">
-					<div class="form-group">
-						<input type="text" placeholder="Email" class="form-control">
-					</div>
-					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
-					</div>
-					<button type="submit" class="btn btn-success">Se connecter</button>
-				</form>
-
+				</ul>			
+									
+					<% UserViewModel userModel = (UserViewModel) request.getAttribute("connectData"); %>
+					<% if (userModel == null) { %>
+						<form:form method="post" class="navbar-form navbar-right" modelAttribute="entry">
+					
+							<div class="form-group">
+								<form:input placeholder="Email" path="username" class="form-control" />
+							</div>
+							<div class="form-group">
+								<form:input type="password" placeholder="Password" path="password" class="form-control" />
+							</div>
+							<button type="submit" class="btn btn-success">Se connecter</button>
+						</form:form>
+						<form method="get" action="/newuser" class="navbar-form navbar-right">
+							<button type="submit" class="btn btn-primary" onclick="/">S'inscrire</button>
+						</form>
+					<% } else { %>
+					<form method="get" action="/disconnect" class="navbar-form navbar-right">
+						<button type="submit" class="btn btn-primary" onclick="/disconnect">Se déconnecter</button>
+					</form>						
+					<%	}%>
+					
 			</div>
 			<!--/.navbar-collapse -->
 		</div>

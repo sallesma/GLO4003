@@ -28,7 +28,17 @@ public class DbHelper {
 	
 	public static DbHelper getInstance() {
 		return db;
-	}	
+	}
+	
+	public UserModel getUserByUsername(String username) {
+		for (UserModel myUser : users.values()) {
+			if (myUser.getUsername().contentEquals(username)) {
+				return myUser;			
+			}			
+		}
+		
+		return null;
+	}
 	
 	public static void replaceDb(DbHelper dbHelper) {
 		db = dbHelper;
@@ -64,9 +74,9 @@ public class DbHelper {
 		//Populate DB with matchs
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 12, 11);
-		MatchModel match0 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", 100, 500);
+		MatchModel match0 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Qu��bec", "ULaval", 100, 500);
 		cal.set(2013, 12, 11);
-		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", 100, 500);
+		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Qu��bec", "ULaval", 100, 500);
 		cal.set(2013, 12, 9);
 		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Genre.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", 4, 600);
 		cal.set(2013, 12, 8);
@@ -96,6 +106,19 @@ public class DbHelper {
 			}			
 		}
 		return exist;
+	}
+	
+	public Boolean isLoginValid(String username, String password) {
+		Boolean found = false;
+		for(UserModel user : users.values()) {
+			if(user.getUsername().contentEquals(username)) {
+				if(user.getPassword().contentEquals(password)) {
+					found = true;
+				}
+			}
+		}
+		
+		return found;
 	}
 		
 	private UserModel createUser(String lastName, String firstName, String username, String password) {

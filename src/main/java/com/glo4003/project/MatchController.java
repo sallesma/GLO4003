@@ -26,7 +26,7 @@ import database.DbHelper;
 @Controller
 public class MatchController {
 
-	public static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) {

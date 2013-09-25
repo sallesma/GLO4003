@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ page import="model.UserViewModel"%>
-
+<%@ page import="config.ConfigManager"%>
 <%@ include file="header.jsp"%>
 
 <div class="container">
@@ -67,6 +67,7 @@
 	<table class="table table-hover">
 		<tr>
 			<th>Catégorie</th>
+			<th>Placement</th>
 			<th>Prix</th>
 			<th>Billets restants</th>
 			<th></th>
@@ -75,14 +76,35 @@
 		<c:forEach var="billet" items="${match.billets}">
 			<tr>
 				<td>${billet.name}</td>
+				<td>${billet.category}</td>				
 				<td>${billet.price}</td>
 				<td>${billet.nbRemainingTickets}</td>
-				<td>
-					<button type="button" class="btn btn-danger">Achat</button>
-				</td>
+				<td><c:set var="billetReserve"
+						value="<%=ConfigManager.BILLET_RESERVE%>" /> <c:choose>
+						<c:when test="${billet.category == billetReserve}">
+							<a href="#" class="btn btn-success" data-toggle="popover"
+								id="choosePlace" title="Choisir votre place" data-html="true"
+								data-content='<form:form action="" method="get" class="form-horizontal" modelAttribute="match">
+				<form:select path="" name="place" class="form-control">
+					<form:options items="${billet.placements}" />
+				</form:select>
+				<br>
+				<button type="submit" class="btn btn-primary">Choisir</button>
+			</form:form>'>Ajouter au panier</a>
+						</c:when>
+
+						<c:otherwise>
+
+							<button type="button" class="btn btn-success">Ajouter au
+								panier</button>
+						</c:otherwise>
+					</c:choose></td>
 			</tr>
 		</c:forEach>
 	</table>
 </div>
-
 <%@ include file="footer.jsp"%>
+<script type="text/javascript">	
+
+$("#choosePlace").popover();
+</script>

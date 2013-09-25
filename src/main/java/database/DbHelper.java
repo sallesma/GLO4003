@@ -12,6 +12,7 @@ import model.BilletCategory;
 import model.BilletFactory;
 import model.MatchModel;
 import model.UserModel;
+import config.ConfigManager;
 import config.ConfigManager.Genre;
 import config.ConfigManager.Sports;
 
@@ -80,8 +81,9 @@ public class DbHelper {
 		//Create Billet Cat
 		
 		ArrayList<BilletCategory> billetsMatch1 = new ArrayList<BilletCategory>();
-		billetsMatch1.add(BilletFactory.getBillet("reserve", 100, 0, 32));
-		billetsMatch1.add(BilletFactory.getBillet("libre", 200, 0, 10));
+		billetsMatch1.add(BilletFactory.getBillet(ConfigManager.BILLET_RESERVE,"Billet loges", 100, 0, 32));
+		billetsMatch1.add(BilletFactory.getBillet(ConfigManager.BILLET_LIBRE, "Debout", 200, 0, 10));
+
 		
 		MatchModel match0 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
 		cal.set(2013, 12, 11);

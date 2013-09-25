@@ -17,13 +17,14 @@
 	<div class="row">
 		<div class="col-md-3">
 			<h2>Filtre</h2>
-
+			<p>Choisissez un sport</p>
 			<form:form action="/matchsList" method="get" class="form-horizontal"
 				modelAttribute="sports">
-				<form:select path="" name="sport" class="form-control" onchange="onsubmit()">
-					<form:option value="">Choissez un sport</form:option>
+				<form:select path="" name="sport" class="form-control">
+					<form:option value="">Tous les sports</form:option>
 					<form:options items="${sports}" />
 				</form:select>
+				<br>
 				<button type="submit" class="btn btn-primary">Filtrer</button>
 			</form:form>
 		</div>

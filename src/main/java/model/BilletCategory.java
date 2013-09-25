@@ -2,6 +2,7 @@ package model;
 
 public abstract class BilletCategory {
 	
+	private String category;
 	private String name;
 	private float price;
 	private int nbInitialTickets;
@@ -9,9 +10,10 @@ public abstract class BilletCategory {
 	
 
 	//Constructor 
-	public BilletCategory(String category, int nbInitialTickets,
+	public BilletCategory(String category, String name, int nbInitialTickets,
 			int nbSoldTickets, float price) {
-		this.name = category;
+		this.category = category;
+		this.name = name;
 		this.price = price;
 		this.nbInitialTickets = nbInitialTickets;
 		this.nbSoldTickets = nbSoldTickets;
@@ -21,6 +23,13 @@ public abstract class BilletCategory {
 		return this.nbInitialTickets - this.nbSoldTickets;
 	}
 	// Getters and Setters
+	public String getCategory() {
+		return category;
+	}
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
 	public String getName() {
 		return name;
 	}

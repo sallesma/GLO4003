@@ -3,7 +3,7 @@
 
 <footer>
 	<hr/>
-	<p>&copy; Company 2013</p>
+	<p>Rouge & Or - Université Laval  &copy;GLO4003-2013</p>
 </footer>
 
     <!-- Bootstrap core JavaScript

@@ -2,7 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false"%>
-<%@ page import="model.UserViewModel"%>
+<%@ page import="model.UserModel"%>
+<%@ page import="database.DbHelper"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +58,7 @@
 						</ul>
 				</ul>			
 									
-					<% UserViewModel userModel = (UserViewModel) request.getAttribute("connectData"); %>
+					<% UserModel userModel = DbHelper.getInstance().getLoggedUser(); %>
 					<% if (userModel == null) { %>
 						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">
 					
@@ -73,10 +74,21 @@
 							<button type="submit" class="btn btn-primary" onclick="/">S'inscrire</button>
 						</form>
 					<% } else { %>
-					<form method="get" action="/disconnect" class="navbar-form navbar-right">
-						<button type="submit" class="btn btn-primary" onclick="/disconnect">Se déconnecter</button>
-					</form>						
-					<%	}%>
+						
+						<div class="btn-group navbar-right navbar-form">
+						
+							<button type="button" class="btn btn-default dropdown-toggle"
+								data-toggle="dropdown">Bonjour, 
+							<%= userModel.getFirstName() %> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Paramètres du compte</a></li>
+								<li class="divider"></li>
+								<li><a href="/disconnect">Se déconnecter</a></li>
+							</ul>
+						</div>
+						
+				<%	}%>
 					
 			</div>
 			<!--/.navbar-collapse -->

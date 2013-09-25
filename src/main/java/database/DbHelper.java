@@ -22,8 +22,10 @@ public class DbHelper {
 	private Map<Integer, UserModel> users = new HashMap<Integer, UserModel>();
 	private AtomicInteger nextMatchId = new AtomicInteger(0);
 	private Map<Integer, MatchModel> matchs = new HashMap<Integer, MatchModel>();
-	
+	private UserModel loggedUser = null;
 	private static DbHelper db = new DbHelper();
+	
+	
 	
 	private DbHelper() {
 		populate();
@@ -172,4 +174,14 @@ public class DbHelper {
 		MatchModel match = new MatchModel(sport, gender, matchId, date, adversaire, city, terrain, cat);
 		return match;
 	}
+
+	public UserModel getLoggedUser() {
+		return loggedUser;
+	}
+
+	public void setLoggedUser(UserModel loggedUser) {
+		this.loggedUser = loggedUser;
+	}
+	
+	
  }

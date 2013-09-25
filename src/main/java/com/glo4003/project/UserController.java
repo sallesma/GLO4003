@@ -1,6 +1,5 @@
 package com.glo4003.project;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,14 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
-
 import service.UserService;
+import database.DbHelper;
 import exceptions.SaveException;
 
 /**
@@ -62,29 +59,29 @@ public class UserController {
 	public ModelAndView login(Model model, LoginViewModel viewModel, HttpServletResponse response) { 
 		
 		if(userService.isLoginValid(viewModel.getUsername(), viewModel.getPassword())) {
-			Cookie cookie = new Cookie("LOGIN", viewModel.getUsername());
-			cookie.setMaxAge(1800);
-			response.addCookie(cookie);
+//			Cookie cookie = new Cookie("LOGIN", viewModel.getUsername());
+//			cookie.setMaxAge(1800);
+//			response.addCookie(cookie);
 			UserModel userModel = userService.getUser(viewModel.getUsername());
-			 
-			model.addAttribute("connectData", userService.convert(userModel));		
+			DbHelper.getInstance().setLoggedUser(userModel);
+//			model.addAttribute("connectData", userService.convert(userModel));		
 			
 			return new ModelAndView("home", "entry", model);
-		}		
-		
+		}
 		return new ModelAndView("home", "entry", viewModel);
 	}
 	
 	@RequestMapping(value = "/disconnect", method = RequestMethod.GET)
 	public String disconnect(Model model, HttpServletRequest request, HttpServletResponse response) {		
-		for (Cookie cookie: request.getCookies()) { 
-			if ("LOGIN".contentEquals(cookie.getName())) { 
-				cookie.setMaxAge(0);
-				cookie.setValue("");
-				response.addCookie(cookie);
-			} 
-		}	
-		model.addAttribute("connectData", null);		
+//		for (Cookie cookie: request.getCookies()) { 
+//			if ("LOGIN".contentEquals(cookie.getName())) { 
+//				cookie.setMaxAge(0);
+//				cookie.setValue("");
+//				response.addCookie(cookie);
+//			} 
+//		}
+		DbHelper.getInstance().setLoggedUser(null);
+//		model.addAttribute("connectData", null);
 		return "redirect:";
 	}
 

@@ -18,7 +18,7 @@
 			<strong>Sport</strong>
 		</div>
 		<div class="col-md-4">
-			<p>${match.sport}${match.gender}</p>
+			<p>${match.sport} ${match.gender}</p>
 		</div>
 	</div>
 	<div class="row">
@@ -58,7 +58,7 @@
 			<strong>Billets disponibles</strong>
 		</div>
 		<div class="col-md-4">
-			<p>${match.vipRemainingTickets+match.normalRemainingTickets}</p>
+			<p>${match.nbRemainingTickets}</p>
 		</div>
 	</div>
 
@@ -68,30 +68,20 @@
 		<tr>
 			<th>Catégorie</th>
 			<th>Prix</th>
-			<th>Placement</th>
-			<th>Billets restant</th>
+			<th>Billets restants</th>
+			<th></th>
 			<th></th>
 		</tr>
-		<tr>
-			<td>Normal</td>
-			<td>15$</td>
-			<td>Libre</td>
-			<td>${match.normalRemainingTickets}</td>
-			<td>
-				<button type="button" class="btn btn-primary">Infos</button>
-				<button type="button" class="btn btn-danger">Achat</button>
-			</td>
-		</tr>
-		<tr>
-			<td>VIP</td>
-			<td>35$</td>
-			<td>Siège réservé</td>
-			<td>${match.vipRemainingTickets}</td>
-			<td>
-				<button type="button" class="btn btn-primary">Infos</button>
-				<button type="button" class="btn btn-danger">Achat</button>
-			</td>
-		</tr>
+		<c:forEach var="billet" items="${match.billets}">
+			<tr>
+				<td>${billet.name}</td>
+				<td>${billet.price}</td>
+				<td>${billet.nbRemainingTickets}</td>
+				<td>
+					<button type="button" class="btn btn-danger">Achat</button>
+				</td>
+			</tr>
+		</c:forEach>
 	</table>
 </div>
 

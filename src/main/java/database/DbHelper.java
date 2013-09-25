@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import model.BilletCategory;
+import model.BilletFactory;
 import model.MatchModel;
 import model.UserModel;
 import config.ConfigManager.Genre;
@@ -64,13 +66,20 @@ public class DbHelper {
 		//Populate DB with matchs
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 12, 11);
-		MatchModel match0 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", 100, 500);
+		
+		//Create Billet Cat
+		
+		ArrayList<BilletCategory> billetsMatch1 = new ArrayList<BilletCategory>();
+		billetsMatch1.add(BilletFactory.getBillet("reserve", 100, 0, 32));
+		billetsMatch1.add(BilletFactory.getBillet("libre", 200, 0, 10));
+		
+		MatchModel match0 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
 		cal.set(2013, 12, 11);
-		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", 100, 500);
+		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Genre.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
 		cal.set(2013, 12, 9);
-		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Genre.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", 4, 600);
+		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Genre.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
 		cal.set(2013, 12, 8);
-		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Genre.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", 0, 100);
+		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Genre.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
 		
 		matchs.put(match0.getMatchID(), match1);
 		matchs.put(match1.getMatchID(), match1);
@@ -134,8 +143,8 @@ public class DbHelper {
 		return matchs.get(id);
 	}
 	
-	private MatchModel createMatch(int matchId, Sports sport, Genre gender, Date date, String adversaire, String city, String terrain, int nbVIPTickets, int nbNormalTickets) {
-		MatchModel match = new MatchModel(sport, gender, matchId, date, adversaire, city, terrain, nbVIPTickets, nbNormalTickets);
+	private MatchModel createMatch(int matchId, Sports sport, Genre gender, Date date, String adversaire, String city, String terrain, ArrayList<BilletCategory> cat) {
+		MatchModel match = new MatchModel(sport, gender, matchId, date, adversaire, city, terrain, cat);
 		return match;
 	}
  }

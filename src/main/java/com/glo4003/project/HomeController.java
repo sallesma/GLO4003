@@ -1,11 +1,8 @@
 package com.glo4003.project;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import model.LoginViewModel;
-import model.UserViewModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,14 +25,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {		
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("entry", new LoginViewModel());	
-		
 		return "home";
 	}
 	

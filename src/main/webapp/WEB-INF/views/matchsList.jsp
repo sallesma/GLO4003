@@ -8,11 +8,6 @@
 
 <div class="container">
 
-	<c:forEach var="warning" items="${warnings}">
-		<c:out value="${warning}" />
-		<p></p>
-	</c:forEach>
-
 	<h1>Matchs à venir</h1>
 	<div class="row">
 		<div class="col-md-3">

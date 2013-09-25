@@ -59,7 +59,7 @@
 									
 					<% UserViewModel userModel = (UserViewModel) request.getAttribute("connectData"); %>
 					<% if (userModel == null) { %>
-						<form:form method="post" class="navbar-form navbar-right" modelAttribute="entry">
+						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">
 					
 							<div class="form-group">
 								<form:input placeholder="Email" path="username" class="form-control" />

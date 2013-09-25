@@ -8,10 +8,6 @@
 
 <div class="container">
 
-	<c:forEach var="warning" items="${entry.warning}">
-		<c:out value="${warning}" />
-	</c:forEach>
-
 	<h2>Description du match</h2>
 	<div class="row">
 		<div class="col-md-2">
@@ -77,7 +73,7 @@
 			<tr>
 				<td>${billet.name}</td>
 				<td>${billet.category}</td>				
-				<td>${billet.price}</td>
+				<td>${billet.price} $</td>
 				<td>${billet.nbRemainingTickets}</td>
 				<td><c:set var="billetReserve"
 						value="<%=ConfigManager.BILLET_RESERVE%>" /> <c:choose>

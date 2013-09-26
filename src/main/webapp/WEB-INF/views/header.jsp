@@ -60,13 +60,12 @@
 									
 					<% UserViewModel userModel = (UserViewModel) request.getSession().getAttribute("loggedUser"); %>
 					<% if (userModel == null) { %>
-						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">
-					
+						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">					
 							<div class="form-group">
-								<form:input placeholder="Email" path="username" class="form-control" />
+								<form:input id="connectUsername" placeholder="Username" path="username" class="form-control" />
 							</div>
 							<div class="form-group">
-								<form:input type="password" placeholder="Password" path="password" class="form-control" />
+								<form:input id="connectPassword" type="password" placeholder="Password" path="password" class="form-control" />
 							</div>
 							<button type="submit" class="btn btn-success">Se connecter</button>
 						</form:form>

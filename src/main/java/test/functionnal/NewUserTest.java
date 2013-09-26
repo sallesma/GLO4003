@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.internal.matchers.StringContains.containsString;
-import static org.mockito.Mockito.spy;
 
 import org.junit.After;
 import org.junit.Before;
@@ -15,8 +14,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import test.helper.BaseTest;
 
 import com.thoughtworks.selenium.Selenium;
-
-import database.DbHelper;
 
 public class NewUserTest extends BaseTest {
 	private Selenium selenium;
@@ -40,7 +37,7 @@ public class NewUserTest extends BaseTest {
 		selenium.waitForPageToLoad("5000");
 		fillForm();
 		
-		selenium.click("css=button.btn.btn-default");
+		selenium.click("id=newUserSubmit");
 		selenium.waitForPageToLoad("10000");
 		
 		assertThat(selenium.getLocation(), containsString(baseUrl + "/newuser"));	
@@ -52,7 +49,7 @@ public class NewUserTest extends BaseTest {
 		selenium.open("/newuser");	
 		selenium.waitForPageToLoad("5000");
 		
-		selenium.click("css=button.btn.btn-default");		
+		selenium.click("id=newUserSubmit");		
 		selenium.waitForPageToLoad("10000");
 		
 		assertThat(selenium.getLocation(), containsString(baseUrl + "/newuser"));	
@@ -63,7 +60,7 @@ public class NewUserTest extends BaseTest {
 		selenium.open("/newuser");		
 		selenium.waitForPageToLoad("5000");
 		
-		selenium.click("css=button.btn.btn-default");
+		selenium.click("id=newUserSubmit");
 		selenium.waitForPageToLoad("10000");		
 		
 		assertTrue(selenium.isTextPresent("Entrez un nom de famille"));	
@@ -71,11 +68,11 @@ public class NewUserTest extends BaseTest {
 	}
 	
 	private void fillForm() {
-		selenium.type("id=firstName", "test");
-		selenium.type("id=lastName", "test");
-		selenium.type("id=username", "test");
-		selenium.type("id=password", "test");
-		selenium.type("id=phoneNumber", "418-657-9823");
-		selenium.type("id=address", "test");
+		selenium.type("id=newUserFirstName", "test");
+		selenium.type("id=newUserLastName", "test");
+		selenium.type("id=newUserUsername", "test");
+		selenium.type("id=newUserPassword", "test");
+		selenium.type("id=newUserPhoneNumber", "418-657-9823");
+		selenium.type("id=newUserAddress", "test");
 	}	
 }

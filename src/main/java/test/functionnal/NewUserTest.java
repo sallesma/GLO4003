@@ -67,7 +67,7 @@ public class NewUserTest extends BaseTest {
 		selenium.waitForPageToLoad("10000");		
 		
 		assertTrue(selenium.isTextPresent("Entrez un nom de famille"));	
-		assertFalse(selenium.isTextPresent("Le nom d'utilisateur est déja utilisé"));	
+		assertFalse(selenium.isTextPresent("Le nom d'utilisateur est deja utilise"));	
 	}
 	
 	private void fillForm() {

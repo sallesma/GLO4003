@@ -1,19 +1,22 @@
 package test.unit.controller;
 
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import model.UserViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
 import com.glo4003.project.UserController;
 
 public class UserControllerTest {
 	
-	UserController controller;
+	private UserController controller;
 	
 	@Before
 	public void initialize() {
@@ -26,6 +29,6 @@ public class UserControllerTest {
 		String returned = controller.newUser(model);
 		
 		assertTrue(returned.contentEquals("newuser"));
-		verify(model).addAttribute(anyString(), any(UserViewModel.class));
+		verify(model).addAttribute(anyString(), any(Object.class));
 	}
 }

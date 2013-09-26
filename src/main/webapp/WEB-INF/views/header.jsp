@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false"%>
-<%@ page import="model.UserModel"%>
+<%@ page import="model.UserViewModel"%>
 <%@ page import="database.DbHelper"%>
 
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
 						</ul>
 				</ul>			
 									
-					<% UserModel userModel = (UserModel)request.getSession().getAttribute("loggedUser"); %>
+					<% UserViewModel userModel = (UserViewModel) request.getSession().getAttribute("loggedUser"); %>
 					<% if (userModel == null) { %>
 						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">
 					

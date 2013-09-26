@@ -58,7 +58,7 @@ public class UserController {
 	public ModelAndView login(Model model, LoginViewModel viewModel, HttpServletRequest request) { 
 		
 		if(userService.isLoginValid(viewModel.getUsername(), viewModel.getPassword())) {
-			UserModel userModel = userService.getUser(viewModel.getUsername());
+			UserViewModel userModel = userService.convert(userService.getUser(viewModel.getUsername()));
 			request.getSession().setAttribute("loggedUser", userModel);
 			
 			return new ModelAndView("home", "entry", model);

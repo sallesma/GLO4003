@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.UserService;
-import database.DbHelper;
 import exceptions.SaveException;
 
 /**
@@ -56,15 +55,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ModelAndView login(Model model, LoginViewModel viewModel, HttpServletResponse response) { 
+	public ModelAndView login(Model model, LoginViewModel viewModel, HttpServletRequest request) { 
 		
 		if(userService.isLoginValid(viewModel.getUsername(), viewModel.getPassword())) {
-//			Cookie cookie = new Cookie("LOGIN", viewModel.getUsername());
-//			cookie.setMaxAge(1800);
-//			response.addCookie(cookie);
 			UserModel userModel = userService.getUser(viewModel.getUsername());
-			DbHelper.getInstance().setLoggedUser(userModel);
-//			model.addAttribute("connectData", userService.convert(userModel));		
+			request.getSession().setAttribute("loggedUser", userModel);
 			
 			return new ModelAndView("home", "entry", model);
 		}
@@ -73,15 +68,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/disconnect", method = RequestMethod.GET)
 	public String disconnect(Model model, HttpServletRequest request, HttpServletResponse response) {		
-//		for (Cookie cookie: request.getCookies()) { 
-//			if ("LOGIN".contentEquals(cookie.getName())) { 
-//				cookie.setMaxAge(0);
-//				cookie.setValue("");
-//				response.addCookie(cookie);
-//			} 
-//		}
-		DbHelper.getInstance().setLoggedUser(null);
-//		model.addAttribute("connectData", null);
+		request.getSession().setAttribute("loggedUser", null);
 		return "redirect:";
 	}
 

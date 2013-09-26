@@ -58,7 +58,7 @@
 						</ul>
 				</ul>			
 									
-					<% UserModel userModel = DbHelper.getInstance().getLoggedUser(); %>
+					<% UserModel userModel = (UserModel)request.getSession().getAttribute("loggedUser"); %>
 					<% if (userModel == null) { %>
 						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">
 					

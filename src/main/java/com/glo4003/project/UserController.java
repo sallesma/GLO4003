@@ -71,5 +71,13 @@ public class UserController {
 		request.getSession().setAttribute("loggedUser", null);
 		return "redirect:";
 	}
+	
+//	@RequestMapping(value = "/settings", method = RequestMethod.GET)
+//	public String editUser(Model model) {
+//		model.addAttribute("userModel", new UserViewModel());
+//		model.addAttribute("entry", new LoginViewModel());
+//
+//		return "newuser";
+//	}
 
 }

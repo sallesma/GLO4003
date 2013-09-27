@@ -72,12 +72,12 @@ public class UserController {
 		return "redirect:";
 	}
 	
-//	@RequestMapping(value = "/settings", method = RequestMethod.GET)
-//	public String editUser(Model model) {
-//		model.addAttribute("userModel", new UserViewModel());
-//		model.addAttribute("entry", new LoginViewModel());
-//
-//		return "newuser";
-//	}
+	@RequestMapping(value = "/settings", method = RequestMethod.GET)
+	public String editUser(Model model) {
+		model.addAttribute("userModel", new UserViewModel());
+		model.addAttribute("entry", new LoginViewModel());
+
+		return "edituser";
+	}
 
 }

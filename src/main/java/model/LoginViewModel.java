@@ -1,6 +1,6 @@
 package model;
 
-public class LoginViewModel {
+public class LoginViewModel extends HasWarning {
 	
 	public LoginViewModel() {
 		username = "";
@@ -8,7 +8,7 @@ public class LoginViewModel {
 	}
 	
 	private String username;
-
+	
 	private String password;
 
 	public String getPassword() {

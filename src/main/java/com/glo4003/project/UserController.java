@@ -1,5 +1,7 @@
 package com.glo4003.project;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,13 +58,17 @@ public class UserController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public ModelAndView login(Model model, LoginViewModel viewModel, HttpServletRequest request) { 
+		List<String> warnings = userService.validate(viewModel.getUsername(), viewModel.getPassword());
 		
-		if(userService.isLoginValid(viewModel.getUsername(), viewModel.getPassword())) {
+		if(warnings.isEmpty()) {
 			UserViewModel userModel = userService.convert(userService.getUser(viewModel.getUsername()));
 			request.getSession().setAttribute("loggedUser", userModel);
 			
 			return new ModelAndView("home", "entry", model);
 		}
+		
+		viewModel.addWarning(warnings);
+		
 		return new ModelAndView("home", "entry", viewModel);
 	}
 	

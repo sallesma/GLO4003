@@ -44,38 +44,32 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/">Accueil</a></li>
-					<li><a href="matchsList">Matchs</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul>
+					<li><a href="matchsList">Matchs</a></li>					
 				</ul>			
 									
 					<% UserViewModel userModel = (UserViewModel) request.getSession().getAttribute("loggedUser"); %>
 					<% if (userModel == null) { %>
-						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">					
-							<div class="form-group">
-								<form:input id="connectUsername" placeholder="Username" path="username" class="form-control" />
+						<form:form action="/" method="post" class="navbar-form navbar-right" modelAttribute="entry">
+										
+							<div class="form-group">								
+								<form:input id="connectUsername" placeholder="Nom d'utilisateur" path="username" class="form-control" />
 							</div>
 							<div class="form-group">
-								<form:input id="connectPassword" type="password" placeholder="Password" path="password" class="form-control" />
+								<form:input id="connectPassword" type="password" placeholder="Mot de passe" path="password" class="form-control" />
 							</div>
-							<button type="submit" class="btn btn-success">Se connecter</button>
+							<button  type="submit" class="btn btn-success">Se connecter</button>
+							<div>
+							<c:forEach var="warning" items="${entry.warning}">
+								<span style="color: #FF0000;"> ${warning} </span> 									
+							</c:forEach>
+							</div>
 						</form:form>
 						<form method="get" action="/newuser" class="navbar-form navbar-right">
 							<button type="submit" class="btn btn-primary" onclick="/">S'inscrire</button>
 						</form>
-					<% } else { %>
 						
-						<div class="btn-group navbar-right navbar-form">
-						
+					<% } else { %>						
+						<div class="btn-group navbar-right navbar-form">						
 							<button type="button" class="btn btn-default dropdown-toggle"
 								data-toggle="dropdown">Bonjour, 
 							<%= userModel.getFirstName() %> <span class="caret"></span>

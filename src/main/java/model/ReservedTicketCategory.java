@@ -3,12 +3,11 @@ package model;
 import java.util.ArrayList;
 
 
-public class BilletSiegeReserve extends BilletCategory {
+public class ReservedTicketCategory extends AbstractTicketCategory {
 
-	
 	private ArrayList<String> placements;
 	
-	public BilletSiegeReserve(String cat, String name, int nbInitialTickets,
+	public ReservedTicketCategory(String cat, String name, int nbInitialTickets,
 			int nbSoldTickets, float price) {
 		super(cat, name, nbInitialTickets, nbSoldTickets, price);
 		this.placements = new ArrayList<String>();

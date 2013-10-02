@@ -43,10 +43,10 @@
 						<td>${match.sport}</td>
 						<td>${match.gender}</td>
 						<td>${match.date}</td>
-						<td>${match.adversaire}</td>
+						<td>${match.opponent}</td>
 						<td>${match.city}</td>
-						<td>${match.terrain}</td>
-						<td>${match.nbRemainingTickets}</td>
+						<td>${match.field}</td>
+						<td>${match.numberRemainingTickets}</td>
 						<td><a href="match?matchID=${match.matchID }">
 							<button type="button" class="btn btn-primary">Info</button>
 							</a></td>

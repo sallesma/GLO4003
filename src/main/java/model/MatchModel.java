@@ -4,52 +4,52 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import config.ConfigManager.Genre;
+import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
 
 public class MatchModel {
 	
 	private Sports sport;
-	private Genre gender;
+	private Gender gender;
 	private int matchID;
 	private Date date;
-	private String adversaire;
+	private String opponent;
 	private String city;
-	private String terrain;
-	private List<BilletCategory> billets;
+	private String field;
+	private List<AbstractTicketCategory> tickets;
 	
 	
 	public MatchModel () {
 		this.setSport(null);
 		this.setGender(null);
 		this.setDate(null);
-		this.setAdversaire("");
+		this.setOpponent("");
 		this.setCity("");
-		this.setTerrain("");
-		this.setBillets(new ArrayList<BilletCategory>());
+		this.setField("");
+		this.setTickets(new ArrayList<AbstractTicketCategory>());
 	}
 	
-	public MatchModel(Sports sport, Genre gender, int matchID, Date date,
-			String adversaire, String city, String terrain, List<BilletCategory> billets) {
+	public MatchModel(Sports sport, Gender gender, int matchID, Date date,
+			String adversaire, String city, String terrain, List<AbstractTicketCategory> billets) {
 		super();
 		this.sport = sport;
 		this.gender = gender;
 		this.matchID = matchID;
 		this.date = date;
-		this.adversaire = adversaire;
+		this.opponent = adversaire;
 		this.city = city;
-		this.terrain = terrain;
-		this.setBillets(billets);
+		this.field = terrain;
+		this.setTickets(billets);
 	}
 	
-	public void addBilletCategory(BilletCategory cat) {
-		this.billets.add(cat);
+	public void addTicketCategory(AbstractTicketCategory cat) {
+		this.tickets.add(cat);
 	}
 	
-	public int getNbRemainingTickets() {
+	public int getNumberRemainingTickets() {
 		int amount = 0;
-		for (BilletCategory cat : this.billets) {
-			amount += cat.getNbRemainingTickets();
+		for (AbstractTicketCategory cat : this.tickets) {
+			amount += cat.getNumberRemainingTickets();
 		}
 		return amount;
 	}
@@ -68,12 +68,12 @@ public class MatchModel {
 		this.date = date;
 	}
 
-	public String getAdversaire() {
-		return adversaire;
+	public String getOpponent() {
+		return opponent;
 	}
 	
-	public void setAdversaire(String adversaire) {
-		this.adversaire = adversaire;
+	public void setOpponent(String opponent) {
+		this.opponent = opponent;
 	}
 	
 	public String getCity() {
@@ -82,11 +82,11 @@ public class MatchModel {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getTerrain() {
-		return terrain;
+	public String getField() {
+		return field;
 	}
-	public void setTerrain(String terrain) {
-		this.terrain = terrain;
+	public void setField(String field) {
+		this.field = field;
 	}
 	
 	public Sports getSport() {
@@ -99,20 +99,20 @@ public class MatchModel {
 	}
 
 
-	public Genre getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
 
-	public void setGender(Genre gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 	
-	public List<BilletCategory> getBillets() {
-		return billets;
+	public List<AbstractTicketCategory> getTickets() {
+		return tickets;
 	}
 
-	public void setBillets(List<BilletCategory> billets) {
-		this.billets = billets;
+	public void setTickets(List<AbstractTicketCategory> tickets) {
+		this.tickets = tickets;
 	}
 }

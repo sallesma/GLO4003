@@ -1,6 +1,6 @@
 package test.unit.model;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import model.UserModel;
 
 import org.junit.Test;
@@ -16,7 +16,8 @@ public class UserModelTest {
     	assertTrue(model.getLastName().isEmpty());
     	assertTrue(model.getPassword().isEmpty());
     	assertTrue(model.getPhoneNumber().isEmpty());
-    	assertTrue(model.getUsername().isEmpty());    
+    	assertTrue(model.getUsername().isEmpty()); 
+    	assertFalse(model.isAdmin()); 
     }
     
     @Test
@@ -59,7 +60,14 @@ public class UserModelTest {
     	UserModel model = getPopulatedUserModel();
     	
     	assertTrue(model.getPassword().contentEquals("test"));
-    }    
+    }
+    
+    @Test
+    public void PopulatedUSerModelIsNotAdmin() {
+    	UserModel model = getPopulatedUserModel();
+    	
+    	assertFalse(model.isAdmin());
+    }
     
     private UserModel getPopulatedUserModel() {
     	UserModel model = new UserModel();
@@ -68,7 +76,8 @@ public class UserModelTest {
     	model.setLastName("test");
     	model.setPassword("test");
     	model.setPhoneNumber("test");
-    	model.setUsername("test");    	
+    	model.setUsername("test");
+    	model.setIsAdmin(false);
     	
     	return model;
     }

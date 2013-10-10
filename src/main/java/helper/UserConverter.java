@@ -31,7 +31,7 @@ public class UserConverter {
 		viewModel.setPassword(entry.getPassword());
 		viewModel.setPhoneNumber(entry.getPhoneNumber());
 		viewModel.setUsername(entry.getUsername());
-		
+		viewModel.setIsAdmin(entry.isAdmin());
 		return viewModel;
 	}
 	
@@ -43,7 +43,7 @@ public class UserConverter {
 		viewModel.setPassword(userViewModel.getPassword());
 		viewModel.setPhoneNumber(userViewModel.getPhoneNumber());
 		viewModel.setUsername(userViewModel.getUsername());
-		
+		viewModel.setIsAdmin(userViewModel.isAdmin());
 		return viewModel;
 	}
 }

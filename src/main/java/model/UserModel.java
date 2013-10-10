@@ -7,7 +7,8 @@ public class UserModel {
 		username = "";
 		password = "";
 		phoneNumber = "";
-		address = "";				
+		address = "";
+		isAdmin = false;
 	}
 	
 	private String lastName;
@@ -16,6 +17,7 @@ public class UserModel {
 	private String password;
 	private String phoneNumber;
 	private String address;
+	private boolean isAdmin;
 	
 	public void fromView(UserViewModel model) {
 		
@@ -56,5 +58,13 @@ public class UserModel {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}	
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 }

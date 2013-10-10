@@ -65,15 +65,17 @@ public class DbHelper {
 	private void populate() {
 		
 		//Populate DB with users
-		UserModel user1 = createUser("Matt", "Martin", "MM", "password");
-		UserModel user2 = createUser("Houde", "Louis-Jos??", "LH", "password");
-		UserModel user3 = createUser("Baddouri", "Rachid", "RB", "password");
-		UserModel user4 = createUser("Petit", "Martin", "MP", "password");
+		UserModel user1 = createUser("Matt", "Martin", "MM", "password", false);
+		UserModel user2 = createUser("Houde", "Louis-Jos??", "LH", "password", false);
+		UserModel user3 = createUser("Baddouri", "Rachid", "RB", "password", false);
+		UserModel user4 = createUser("Petit", "Martin", "MP", "password", false);
+		UserModel admin1 = createUser("Admin", "Admin", "admin", "admin", true);
 		
 		users.put(nextUserId.incrementAndGet(), user1);
 		users.put(nextUserId.incrementAndGet(), user2);
 		users.put(nextUserId.incrementAndGet(), user3);
 		users.put(nextUserId.incrementAndGet(), user4);
+		users.put(nextUserId.incrementAndGet(), admin1);
 		
 		//Populate DB with matchs
 
@@ -130,14 +132,15 @@ public class DbHelper {
 		return found;
 	}
 		
-	private UserModel createUser(String lastName, String firstName, String username, String password) {
+	private UserModel createUser(String lastName, String firstName, String username, String password, boolean isAdmin) {
 		UserModel user= new UserModel();
 		user.setAddress("Address");
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setPassword(password);
 		user.setPhoneNumber("(444) 444-4444");
-		user.setUsername(username);	
+		user.setUsername(username);
+		user.setIsAdmin(isAdmin);
 		return user;
 	}
 	

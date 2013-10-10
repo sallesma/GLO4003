@@ -75,10 +75,11 @@
 				<td>${billet.category}</td>				
 				<td>${billet.price} $</td>
 				<td>${billet.numberRemainingTickets}</td>
-				<td><c:set var="billetReserve" value="<%=ConfigManager.RESERVED_TICKET%>" /> <c:choose>
+				<td><c:set var="billetReserve" value="<%=ConfigManager.RESERVED_TICKET%>" />
+				<c:choose>
 						<c:when test="${billet.category == billetReserve}">
-							<a href="#" class="btn btn-success" data-toggle="popover"
-								id="choosePlace" title="Choisir votre place" data-html="true"
+							<a href="#" class="btn btn-success choosePlace" data-toggle="popover"
+								title="Choisir votre place" data-html="true"
 								data-content='<form:form action="" method="get" class="form-horizontal" modelAttribute="match">
 				<form:select path="" name="place" class="form-control">
 					<form:options items="${billet.placements}" />
@@ -94,6 +95,9 @@
 								panier</button>
 						</c:otherwise>
 					</c:choose></td>
+					<% if (userModel.isAdmin()) { %>
+						<%@ include file="admin/addTickets.jsp"%>
+					<% } %>	
 			</tr>
 		</c:forEach>
 	</table>
@@ -101,5 +105,5 @@
 <%@ include file="footer.jsp"%>
 <script type="text/javascript">	
 
-$("#choosePlace").popover();
+$(".choosePlace").popover();
 </script>

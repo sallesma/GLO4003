@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -14,16 +15,16 @@ import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
 
 public class MatchFilter {
-	List<Sports> sportsList = new ArrayList<Sports>(Arrays.asList(Sports.values()));
-	List<Gender> genderList = new ArrayList<Gender>(Arrays.asList(Gender.values()));
-	Set<String> opponentsList = null;
+	private List<Sports> sportsList = new ArrayList<Sports>(Arrays.asList(Sports.values()));
+	private List<Gender> genderList = new ArrayList<Gender>(Arrays.asList(Gender.values()));
+	private Set<String> opponentsList = null;
 	
-	List<MatchModel> matchList = null;
-	String sport = null;
-	String gender = null;
-	String opponent = null;
-	String fromDate = null;
-	String toDate = null;
+	private List<MatchModel> matchList = null;
+	private String sport = null;
+	private String gender = null;
+	private String opponent = null;
+	private String fromDate = null;
+	private String toDate = null;
 
 	public MatchFilter(List<MatchModel> matchList) {
 		this.matchList = matchList;
@@ -31,6 +32,15 @@ public class MatchFilter {
 		for ( MatchModel match : matchList ) {
 			opponentsList.add(match.getOpponent());
 		}
+		
+		fromDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).format(new Date());
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.YEAR, 1);
+		Date oneYearLater = cal.getTime();
+		toDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).format(oneYearLater);
+		
+		FilterFromDate();
+		
 	}
 
 	public MatchFilter(List<MatchModel> matchList, String sport, String gender, String opponent, String fromDate, String toDate) {

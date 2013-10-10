@@ -17,13 +17,13 @@ public class BilletFactoryTest {
 
 	@Test
 	public void testGetSeatedBillet() {
-		 BilletCategory billet = BilletFactory.getBillet(ConfigManager.BILLET_RESERVE, Mockito.anyString(), anyInt(), anyInt(), anyFloat());
+		 BilletCategory billet = BilletFactory.getBillet(ConfigManager.BILLET_RESERVE, "test", 2, 2, 2);
 		 assertTrue(billet.getClass() == BilletSiegeReserve.class);
 	}
 
 	@Test
 	public void testGetFreeBillet() {
-		BilletCategory billet = BilletFactory.getBillet(ConfigManager.BILLET_LIBRE,Mockito.anyString(), anyInt(), anyInt(), anyFloat());
+		BilletCategory billet = BilletFactory.getBillet(ConfigManager.BILLET_LIBRE, "test", 2, 2, 2);
 		assertTrue(billet.getClass() == BilletAdmissionGenerale.class);
 	}
 }

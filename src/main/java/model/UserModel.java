@@ -10,6 +10,7 @@ public class UserModel {
 		address = "";				
 	}
 	
+	private Long id;
 	private String lastName;
 	private String firstName;
 	private String username;
@@ -24,6 +25,14 @@ public class UserModel {
 	public String getLastName() {
 		return lastName;
 	}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}

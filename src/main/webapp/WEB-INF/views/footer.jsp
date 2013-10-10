@@ -11,5 +11,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./resources/javascript/jquery.js"></script>
     <script src="./resources/javascript/bootstrap.min.js"></script>
+    <script src="./resources/javascript/bootstrap-datepicker.js"></script>
+    <script src="./resources/javascript/app.js"></script>
   </body>
 </html>

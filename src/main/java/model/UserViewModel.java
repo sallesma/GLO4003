@@ -11,7 +11,8 @@ public class UserViewModel extends HasWarning {
 		username = "";
 		password = "";
 		phoneNumber = "";
-		address = "";				
+		address = "";
+		isAdmin = false;
 	}
 	
 	private Integer id;
@@ -27,6 +28,8 @@ public class UserViewModel extends HasWarning {
 	@Pattern(regexp="(?s)^[2-9]\\d{2}-\\d{3}-\\d{4}$", message = "le numero de telephone doit etre de la forme 999-999-9999")
 	private String phoneNumber;
 	private String address;
+	
+	private boolean isAdmin;
 	
 	public Integer getId() {
 		return id;
@@ -71,5 +74,11 @@ public class UserViewModel extends HasWarning {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(boolean isAdmin){
+		this.isAdmin = isAdmin;
 	}
 }

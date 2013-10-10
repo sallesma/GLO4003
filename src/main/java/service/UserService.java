@@ -1,6 +1,5 @@
 package service;
 
-import helper.CookieHelper;
 import helper.UserConverter;
 
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ public class UserService {
 	
 	private UserConverter converter = new UserConverter();
 	private ModelValidator validator = new ModelValidator();
-	private CookieHelper cookieHelper = new CookieHelper();
 	
 	public void saveNew(UserViewModel user) throws SaveException {
 		DbHelper dbHelper = DbHelper.getInstance();

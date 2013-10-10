@@ -30,7 +30,7 @@ public class UserConverterTest {
 	
 	@Test
 	public void canConvertUserModel() {
-		UserModel model = spy(createUserModel("Matt", "Martin", "MM", "password"));
+		UserModel model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
 		converter.convert(model);		
 		
 		verify(model, times(1)).getAddress();
@@ -38,12 +38,13 @@ public class UserConverterTest {
 		verify(model, times(1)).getLastName();
 		verify(model, times(1)).getPassword();
 		verify(model, times(1)).getPhoneNumber();
-		verify(model, times(1)).getUsername();		
+		verify(model, times(1)).getUsername();
+		verify(model, times(1)).isAdmin();
 	}
 	
 	@Test
 	public void canConvertUserViewModel() {
-		UserViewModel model = spy(createUserViewModel("Matt", "Martin", "MM", "password"));
+		UserViewModel model = spy(createUserViewModel("Matt", "Martin", "MM", "password", false));
 		converter.convert(model);		
 		
 		verify(model, times(1)).getAddress();
@@ -58,10 +59,10 @@ public class UserConverterTest {
 		AtomicInteger nextId = new AtomicInteger(0);
 		Map<Integer, UserModel> users = new HashMap<Integer, UserModel>();
 		
-		UserModel user1 = createUserModel("Matt", "Martin", "MM", "password");
-		UserModel user2 = createUserModel("Houde", "Louis-Jos??", "LH", "password");
-		UserModel user3 = createUserModel("Baddouri", "Rachid", "RB", "password");
-		UserModel user4 = createUserModel("Petit", "Martin", "MP", "password");
+		UserModel user1 = createUserModel("Matt", "Martin", "MM", "password", false);
+		UserModel user2 = createUserModel("Houde", "Louis-Jos??", "LH", "password", false);
+		UserModel user3 = createUserModel("Baddouri", "Rachid", "RB", "password", false);
+		UserModel user4 = createUserModel("Petit", "Martin", "MP", "password", false);
 		
 		users.put(nextId.incrementAndGet(), user1);
 		users.put(nextId.incrementAndGet(), user2);
@@ -71,7 +72,7 @@ public class UserConverterTest {
 		return users;
 	}
 	
-	private UserModel createUserModel(String lastName, String firstName, String username, String password) {
+	private UserModel createUserModel(String lastName, String firstName, String username, String password, boolean isAdmin) {
 		UserModel user= new UserModel();
 		user.setAddress("Address");
 		user.setFirstName(firstName);
@@ -79,11 +80,11 @@ public class UserConverterTest {
 		user.setPassword(password);
 		user.setPhoneNumber("(444) 444-4444");
 		user.setUsername(username);	
-		
+		user.setIsAdmin(isAdmin);
 		return user;
 	}	
 	
-	private UserViewModel createUserViewModel(String lastName, String firstName, String username, String password) {
+	private UserViewModel createUserViewModel(String lastName, String firstName, String username, String password, boolean isAdmin) {
 		UserViewModel user= new UserViewModel();
 		user.setAddress("Address");
 		user.setFirstName(firstName);
@@ -91,6 +92,7 @@ public class UserConverterTest {
 		user.setPassword(password);
 		user.setPhoneNumber("(444) 444-4444");
 		user.setUsername(username);	
+		user.setIsAdmin(isAdmin);
 		
 		return user;
 	}	

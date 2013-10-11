@@ -10,12 +10,12 @@ import java.util.Hashtable;
 
 
 
-public class FileAcces {
+public class FileAccess {
 	
 	private Hashtable<String, String> fileName = new Hashtable<String, String>();
 
 
-	public FileAcces() {
+	public FileAccess() {
 		fileName.put("User", "user.xml");
 		fileName.put("Match", "match.xml");
 		fileName.put("", "association.xml");

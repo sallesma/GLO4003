@@ -1,16 +1,16 @@
 package database;
 
 
-import nu.xom.*;
-
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.*;
 import java.util.Hashtable;
 
+import nu.xom.Element;
+import nu.xom.ParsingException;
+import nu.xom.ValidityException;
 
 
-public class FileAccess {
+
+public class FileAccess implements AbstractFileAccess {
 	
 	private Hashtable<String, String> fileName = new Hashtable<String, String>();
 
@@ -23,7 +23,7 @@ public class FileAccess {
 
 	public void save(Element elem, String objectName) throws IOException, ValidityException, ParsingException
 	{
-		
+	/*	
 		Path p = Paths.get(fileName.get(objectName));
 		
 		Element elementId = elem.getFirstChildElement("ID");
@@ -68,7 +68,13 @@ public class FileAccess {
         serializer.setIndent(4);
         serializer.setMaxLength(64);
         serializer.write(doc);
-		
+		*/
+	}
+
+	@Override
+	public Element getByID(long id, String objectName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	/*

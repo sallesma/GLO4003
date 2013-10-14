@@ -1,4 +1,4 @@
-package test.functionnal;
+package test.functionnal.front;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import test.helper.BaseTest;
+import test.functionnal.back.helper.BaseTest;
 
 import com.thoughtworks.selenium.Selenium;
 

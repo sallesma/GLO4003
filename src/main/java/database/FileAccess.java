@@ -1,14 +1,19 @@
 package database;
 
-
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Hashtable;
 
+import nu.xom.Builder;
+import nu.xom.Document;
 import nu.xom.Element;
+import nu.xom.Elements;
 import nu.xom.ParsingException;
+import nu.xom.Serializer;
 import nu.xom.ValidityException;
-
-
 
 public class FileAccess implements AbstractFileAccess {
 	
@@ -22,8 +27,7 @@ public class FileAccess implements AbstractFileAccess {
 	}
 
 	public void save(Element elem, String objectName) throws IOException, ValidityException, ParsingException
-	{
-	/*	
+	{	
 		Path p = Paths.get(fileName.get(objectName));
 		
 		Element elementId = elem.getFirstChildElement("ID");
@@ -67,8 +71,7 @@ public class FileAccess implements AbstractFileAccess {
 		Serializer serializer = new Serializer(out, "ISO-8859-1");
         serializer.setIndent(4);
         serializer.setMaxLength(64);
-        serializer.write(doc);
-		*/
+        serializer.write(doc);	
 	}
 
 	@Override

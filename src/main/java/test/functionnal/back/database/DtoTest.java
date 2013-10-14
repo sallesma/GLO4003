@@ -66,6 +66,7 @@ public class DtoTest {
 	public void test() throws Exception {
 		TestClass3 test = new TestClass3();
 		Element elem = dto.toElement(test);
+		
 		@SuppressWarnings("unused")
 		String result = elem.toXML();
 		String ee = "";

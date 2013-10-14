@@ -1,6 +1,6 @@
 package model;
 
-public class UserModel implements ModelInterface{
+public class UserModel implements ModelInterface {
 	public UserModel() {
 		lastName = "";
 		firstName = "";

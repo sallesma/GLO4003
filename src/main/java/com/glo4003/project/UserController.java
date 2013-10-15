@@ -73,11 +73,27 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/settings", method = RequestMethod.GET)
-	public String editUser(Model model) {
-		model.addAttribute("userModel", new UserViewModel());
+	public String settings(Model model) {
+		model.addAttribute("userModel", new UserViewModel());//Récupérer ici le UserModel courant ?
 		model.addAttribute("entry", new LoginViewModel());
 
-		return "edituser";
+		return "settings";
+	}
+	
+	@RequestMapping(value = "/settings", method = RequestMethod.POST)
+	public String modify(Model model, UserViewModel viewModel) {		
+		try {
+			userService. modify(viewModel);
+		} catch (SaveException e) {
+			viewModel.addWarning(e.getErrors());
+			model.addAttribute("userModel", viewModel);
+			model.addAttribute("entry", new LoginViewModel());
+			
+			return "newuser";
+		}
+		
+		model.addAttribute("entry", new LoginViewModel());
+		return "settings";
 	}
 
 }

@@ -108,6 +108,11 @@ public class DbHelper {
 		users.put(nextUserId.incrementAndGet(), user);
 	}
 	
+	public void save(UserModel user, Integer id){
+		users.remove(id);
+		users.put(id, user);
+	}
+	
 	public Boolean userExist(String username) {
 		Boolean exist = false;
 		for (UserModel myUser : users.values()) {
@@ -179,6 +184,5 @@ public class DbHelper {
 	public void setLoggedUser(UserModel loggedUser) {
 		this.loggedUser = loggedUser;
 	}
-	
 	
  }

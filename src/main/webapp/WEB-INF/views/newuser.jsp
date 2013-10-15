@@ -36,7 +36,7 @@
 		<div class="form-group">
 			<label for="phone" class="col-lg-2 control-label">Nom d'utilisateur</label>
 			<div class="col-lg-3">
-				<form:input id="newUserUsername" class="form-control" path="username" />
+				<form:input id="newUserUsername" class="form-control" path="username"/>
 			</div>
 		</div>
 

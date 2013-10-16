@@ -20,10 +20,6 @@ public class UserModel implements ModelInterface {
 	private String address;
 	private boolean isAdmin;
 	
-	public void fromView(UserViewModel model) {
-		
-	}
-	
 	public String getLastName() {
 		return lastName;
 	}

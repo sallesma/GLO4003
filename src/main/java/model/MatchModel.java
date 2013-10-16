@@ -7,7 +7,7 @@ import java.util.List;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
 
-public class MatchModel {
+public class MatchModel implements ModelInterface {
 	
 	private Sports sport;
 	private Gender gender;
@@ -114,5 +114,17 @@ public class MatchModel {
 
 	public void setTickets(List<AbstractTicketCategory> tickets) {
 		this.tickets = tickets;
+	}
+
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setId(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -16,11 +16,11 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import converter.XmlObjectConverter;
-import database.Dto;
+import database.XmlModelConverter;
 
 public class DtoTest {
 	
-	private Dto dto = new Dto();
+	private XmlModelConverter dto = new XmlModelConverter();
 	
 	@Before
 	public void bootstrap() {
@@ -68,12 +68,11 @@ public class DtoTest {
 		Element elem = dto.toElement(test);
 		
 		@SuppressWarnings("unused")
-		String result = elem.toXML();
-		String ee = "";
+		String result = elem.toXML();		
 	}
 	
 	private static class TestClass3 implements ModelInterface {
-		long id = 1;
+		Long id = 1L;
 		String test1 = "test1";
 		String test2 = "test2";
 		
@@ -82,12 +81,19 @@ public class DtoTest {
 			testClass4List.add(new TestClass4());
 			testClass4List.add(new TestClass4());
 		}
+		
 		@XStreamImplicit(itemFieldName="TestClass4")
 		@XStreamConverter(XmlObjectConverter.class)
 		List<TestClass4> testClass4List;
 		
 		public Long getId() {			
 			return id;
+		}
+
+		@Override
+		public void setId(Long id) {
+			this.id = id;
+			
 		}		
 	}
 	
@@ -97,10 +103,16 @@ public class DtoTest {
 		
 		public Long getId() {			
 			return id;
-		}		
+		}	
+		
+		@Override
+		public void setId(Long id) {
+			this.id = id;
+			
+		}	
 	}
 	
-	private static class TestClass implements ModelInterface {
+	public static class TestClass implements ModelInterface {
 		long id = 1;
 		String test1 = "test1";
 		String test2 = "test2";
@@ -111,14 +123,26 @@ public class DtoTest {
 		public Long getId() {			
 			return id;
 		}		
+		
+		@Override
+		public void setId(Long id) {
+			this.id = id;
+			
+		}	
 	}
 	
-	private static class TestClass2 implements ModelInterface {
+	public static class TestClass2 implements ModelInterface {
 		long id = 2;
 		long four = 4;
 		
 		public Long getId() {			
 			return id;
-		}		
+		}
+		
+		@Override
+		public void setId(Long id) {
+			this.id = id;
+			
+		}	
 	}
 }

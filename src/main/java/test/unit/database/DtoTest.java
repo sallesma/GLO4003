@@ -17,16 +17,16 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import converter.XmlObjectConverter;
-import database.Dto;
+import database.XmlModelConverter;
 
 public class DtoTest {
 	private XStream xstream;
-	private Dto dto;
+	private XmlModelConverter dto;
 	
 	@Before
 	public void bootstrap() {
 		xstream = spy(new XStream());
-		dto = spy(new Dto(xstream));
+		dto = spy(new XmlModelConverter(xstream));
 		dto.registerModel(TestClass.class);
 		dto.registerModel(TestClass2.class);
 	}

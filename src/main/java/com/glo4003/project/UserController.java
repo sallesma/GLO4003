@@ -74,14 +74,14 @@ public class UserController {
 	
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
 	public String updateUser(Model model,HttpServletRequest request) {
-		model.addAttribute("userModel", request.getSession().getAttribute("loggedUser"));//Récupérer ici le UserModel courant ?
-		model.addAttribute("entry", new LoginViewModel());
+		model.addAttribute("userModel", request.getSession().getAttribute("loggedUser"));
+//		model.addAttribute("entry", new LoginViewModel());
 
 		return "updateUser";
 	}
 	
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public String modify(Model model, UserViewModel viewModel) {		
+	public String modify(Model model, HttpServletRequest request, UserViewModel viewModel) {		
 		try {
 			userService. modify(viewModel);
 		} catch (SaveException e) {
@@ -89,10 +89,10 @@ public class UserController {
 			model.addAttribute("userModel", viewModel);
 			model.addAttribute("entry", new LoginViewModel());
 			
-			return "newuser";
+			return "updateUser";
 		}
 		
-		model.addAttribute("entry", new LoginViewModel());
+		request.getSession().setAttribute("loggedUser", viewModel);
 		return "home";
 	}
 

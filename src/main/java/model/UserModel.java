@@ -1,29 +1,36 @@
 package model;
 
-public class UserModel {
+public class UserModel implements ModelInterface {
 	public UserModel() {
 		lastName = "";
 		firstName = "";
 		username = "";
 		password = "";
 		phoneNumber = "";
-		address = "";				
+		address = "";
+		isAdmin = false;
 	}
 	
+	private Long id;
 	private String lastName;
 	private String firstName;
 	private String username;
 	private String password;
 	private String phoneNumber;
 	private String address;
-	
-	public void fromView(UserViewModel model) {
-		
-	}
+	private boolean isAdmin;
 	
 	public String getLastName() {
 		return lastName;
 	}
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
@@ -56,5 +63,13 @@ public class UserModel {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}	
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 }

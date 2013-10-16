@@ -1,8 +1,8 @@
 package service;
 
-import helper.CookieHelper;
 import helper.UserConverter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.UserModel;
@@ -15,7 +15,6 @@ public class UserService {
 	
 	private UserConverter converter = new UserConverter();
 	private ModelValidator validator = new ModelValidator();
-	private CookieHelper cookieHelper = new CookieHelper();
 	
 	public void saveNew(UserViewModel user) throws SaveException {
 		DbHelper dbHelper = DbHelper.getInstance();
@@ -29,8 +28,8 @@ public class UserService {
 		}
 		
 		dbHelper.addUser(converter.convert(user));			
-	}
-	
+	}	
+
 	public void modify(UserViewModel user) throws SaveException {
 		DbHelper dbHelper = DbHelper.getInstance();
 		List<String> errors = validator.validate(user);
@@ -44,11 +43,17 @@ public class UserService {
 		
 		dbHelper.save(converter.convert(user), user.getId());			
 	}
-	
-	public Boolean isLoginValid(String username, String password) {
+
+	public List<String> validate(String username, String password) {	
 		DbHelper dbHelper = DbHelper.getInstance();
+		List<String> warnings = new ArrayList<String>();
+		if (!dbHelper.userExist(username)) {
+			warnings.add("Le nom d'utilisateur n'existe pas");			
+		} else if (!dbHelper.isLoginValid(username, password)) {
+			warnings.add("Le nom d'utilisateur ou le mot de passe est invalide");
+		}
 		
-		return dbHelper.isLoginValid(username, password);		
+		return warnings;		
 	}
 	
 	public UserModel getUser(String username) {

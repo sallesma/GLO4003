@@ -3,10 +3,10 @@ package test.unit.model;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Matchers.anyInt;
-import model.BilletAdmissionGenerale;
-import model.BilletCategory;
-import model.BilletFactory;
-import model.BilletSiegeReserve;
+import model.GeneralAdmissionTicketCategory;
+import model.AbstractTicketCategory;
+import model.TicketCategoryFactory;
+import model.ReservedTicketCategory;
 
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -17,13 +17,13 @@ public class BilletFactoryTest {
 
 	@Test
 	public void testGetSeatedBillet() {
-		 BilletCategory billet = BilletFactory.getBillet(ConfigManager.BILLET_RESERVE, Mockito.anyString(), anyInt(), anyInt(), anyFloat());
-		 assertTrue(billet.getClass() == BilletSiegeReserve.class);
+		 AbstractTicketCategory billet = TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET, Mockito.anyString(), anyInt(), anyInt(), anyFloat());
+		 assertTrue(billet.getClass() == ReservedTicketCategory.class);
 	}
 
 	@Test
 	public void testGetFreeBillet() {
-		BilletCategory billet = BilletFactory.getBillet(ConfigManager.BILLET_LIBRE,Mockito.anyString(), anyInt(), anyInt(), anyFloat());
-		assertTrue(billet.getClass() == BilletAdmissionGenerale.class);
+		AbstractTicketCategory billet = TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET,Mockito.anyString(), anyInt(), anyInt(), anyFloat());
+		assertTrue(billet.getClass() == GeneralAdmissionTicketCategory.class);
 	}
 }

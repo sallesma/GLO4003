@@ -95,7 +95,7 @@
 								panier</button>
 						</c:otherwise>
 					</c:choose></td>
-					<% if (userModel.isAdmin()) { %>
+					<% if ( (userModel != null ) && (userModel.isAdmin())) { %>
 						<%@ include file="admin/addTickets.jsp"%>
 					<% } %>	
 			</tr>

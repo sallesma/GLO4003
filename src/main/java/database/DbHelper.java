@@ -92,11 +92,13 @@ public class DbHelper {
 		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Gender.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
 		cal.set(2013, 11, 8);
 		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
+		MatchModel match4 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.M, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
 		
 		matchs.put(match0.getMatchID(), match0);
 		matchs.put(match1.getMatchID(), match1);
 		matchs.put(match2.getMatchID(), match2);
 		matchs.put(match3.getMatchID(), match3);
+		matchs.put(match4.getMatchID(), match4);
 	}
 	
 	// Users

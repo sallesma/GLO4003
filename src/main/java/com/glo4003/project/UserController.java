@@ -72,15 +72,15 @@ public class UserController {
 		return "redirect:";
 	}
 	
-	@RequestMapping(value = "/settings", method = RequestMethod.GET)
-	public String settings(Model model) {
-		model.addAttribute("userModel", new UserViewModel());//Récupérer ici le UserModel courant ?
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+	public String updateUser(Model model,HttpServletRequest request) {
+		model.addAttribute("userModel", request.getSession().getAttribute("loggedUser"));//Récupérer ici le UserModel courant ?
 		model.addAttribute("entry", new LoginViewModel());
 
-		return "settings";
+		return "updateUser";
 	}
 	
-	@RequestMapping(value = "/settings", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
 	public String modify(Model model, UserViewModel viewModel) {		
 		try {
 			userService. modify(viewModel);
@@ -93,7 +93,7 @@ public class UserController {
 		}
 		
 		model.addAttribute("entry", new LoginViewModel());
-		return "settings";
+		return "home";
 	}
 
 }

@@ -26,7 +26,7 @@
 					</c:when>
 					<c:otherwise>
 						<div class="btn-group">
-  							<button type="button" class="btn btn-primary" disabled="disabled">${filter.sport}</button>
+  							<button type="button" class="btn btn-primary" disabled="disabled">Sport : ${filter.sport}</button>
   							<button type="button" class="btn btn-primary removeFilter">x</button>
   						</div>
   						<input type="hidden" name="sport" value="${filter.sport}">
@@ -45,7 +45,7 @@
 					</c:when>
 					<c:otherwise>
 						<div class="btn-group">
-  							<button type="button" class="btn btn-primary" disabled="disabled">${filter.gender}</button>
+  							<button type="button" class="btn btn-primary" disabled="disabled">Genre : ${filter.gender}</button>
   							<button type="button" class="btn btn-primary removeFilter">x</button>
   						</div>
   						<input type="hidden" name="gender" value="${filter.gender}">
@@ -64,7 +64,7 @@
 					</c:when>
 					<c:otherwise>
 						<div class="btn-group">
-  							<button type="button" class="btn btn-primary" disabled="disabled">${filter.opponent}</button>
+  							<button type="button" class="btn btn-primary" disabled="disabled">Adversaire : ${filter.opponent}</button>
   							<button type="button" class="btn btn-primary removeFilter">x</button>
   						</div>
   						<input type="hidden" name="opponent" value="${filter.opponent}">
@@ -109,7 +109,7 @@
 						<td>${match.field}</td>
 						<td>${match.numberRemainingTickets}</td>
 						<td><a href="match?matchID=${match.matchID }">
-								<button type="button" class="btn btn-primary" id="infoButton">Info</button>
+								<button type="button" class="btn btn-primary">Info</button>
 						</a></td>
 					</tr>
 				</c:forEach>

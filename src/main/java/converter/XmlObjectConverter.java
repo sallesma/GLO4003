@@ -3,6 +3,7 @@ package converter;
 import model.ModelInterface;
 import nu.xom.Element;
 
+import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
@@ -11,6 +12,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import database.XmlModelConverter;
 import database.dto.FileAccess;
+import exceptions.PersistException;
 
 public class XmlObjectConverter implements Converter {
 	
@@ -20,8 +22,13 @@ public class XmlObjectConverter implements Converter {
     public void marshal(Object source, HierarchicalStreamWriter writer,
             MarshallingContext context) {    	
     	ModelInterface model = (ModelInterface) source;
+    	String name = source.getClass().getSimpleName();
     	if (model.getId() == null) {
-    		model.setId(fileAccess.getNewId());
+    		try {
+				model.setId(fileAccess.getNewId(name));
+			} catch (PersistException e) {
+				throw new ConversionException(e.getMessage());
+			}
     	}
     	
         writer.setValue(model.getId().toString());
@@ -30,7 +37,12 @@ public class XmlObjectConverter implements Converter {
     public Object unmarshal(HierarchicalStreamReader reader,
             UnmarshallingContext context) {   	    	
     	Long id = Long.valueOf(reader.getValue());
-    	Element elem = fileAccess.getByID(id, reader.getNodeName());  	
+    	Element elem;
+		try {
+			elem = fileAccess.getByID(id, reader.getNodeName());
+		} catch (PersistException e) {
+			throw new ConversionException(e.getMessage());
+		}  	
     	
         return dto.toObject(elem);
     }

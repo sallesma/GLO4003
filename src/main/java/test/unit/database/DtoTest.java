@@ -1,12 +1,9 @@
 package test.unit.database;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.mock;
 import model.ModelInterface;
 import nu.xom.Element;
 
@@ -21,20 +18,21 @@ import database.XmlModelConverter;
 
 public class DtoTest {
 	private XStream xstream;
-	private XmlModelConverter dto;
+	private XmlModelConverter converter;
 	
 	@Before
 	public void bootstrap() {
 		xstream = spy(new XStream());
-		dto = spy(new XmlModelConverter(xstream));
-		dto.registerModel(TestClass.class);
-		dto.registerModel(TestClass2.class);
+		converter = spy(new XmlModelConverter(xstream));
+		
+		converter.registerModel(TestClass.class);
+		converter.registerModel(TestClass2.class);
 	}
 	
 	@Test
 	public void canConvertToXml() throws Exception {		
 		TestClass test = new TestClass();
-		Element elem = dto.toElement(test);
+		Element elem = converter.toElement(test);
 		
 		verify(xstream, times(1)).toXML(eq(test));
 	}
@@ -54,6 +52,11 @@ public class DtoTest {
 		
 		public Long getId() {			
 			return id;
+		}
+
+		@Override
+		public void setId(Long id) {
+			this.id = id;
 		}		
 	}
 	
@@ -63,7 +66,12 @@ public class DtoTest {
 		
 		public Long getId() {			
 			return id;
-		}		
+		}
+		
+		@Override
+		public void setId(Long id) {
+			this.id = id;
+		}	
 	}
 }
 

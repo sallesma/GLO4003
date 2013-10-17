@@ -36,7 +36,11 @@ public class UserViewModel extends HasWarning {
 	private ArrayList<InstantiateTicketModel> tickets;
 	
 	public int getNbTicketsInCart() {
-		return this.tickets.size();
+		if (this.tickets != null) 
+			return this.tickets.size();
+		
+		else 
+			return 0;
 	}
 
 	public Integer getId() {

@@ -50,7 +50,11 @@ public class UserModel implements ModelInterface {
 	}
 	
 	public int getNbTicketsInCart() {
-		return this.tickets.size();
+		if (this.tickets != null) 
+			return this.tickets.size();
+		
+		else 
+			return 0;
 	}
 	
 	

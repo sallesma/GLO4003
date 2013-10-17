@@ -15,7 +15,7 @@ public class UserViewModel extends HasWarning {
 		phoneNumber = "";
 		address = "";
 		isAdmin = false;
-		tickets=null;
+		tickets=new ArrayList<InstantiateTicketModel>();
 	}
 	
 	private Integer id;

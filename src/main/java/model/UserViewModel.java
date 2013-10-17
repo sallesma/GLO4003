@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -13,6 +15,7 @@ public class UserViewModel extends HasWarning {
 		phoneNumber = "";
 		address = "";
 		isAdmin = false;
+		tickets=null;
 	}
 	
 	private Integer id;
@@ -30,7 +33,12 @@ public class UserViewModel extends HasWarning {
 	private String address;
 	
 	private boolean isAdmin;
+	private ArrayList<InstantiateTicketModel> tickets;
 	
+	public int getNbTicketsInCart() {
+		return this.tickets.size();
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -80,5 +88,12 @@ public class UserViewModel extends HasWarning {
 	}
 	public void setIsAdmin(boolean isAdmin){
 		this.isAdmin = isAdmin;
+	}
+	public ArrayList<InstantiateTicketModel> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(ArrayList<InstantiateTicketModel> tickets) {
+		this.tickets = tickets;
 	}
 }

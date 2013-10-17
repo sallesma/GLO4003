@@ -69,7 +69,7 @@
 			<th></th>
 			<th></th>
 		</tr>
-		<c:forEach var="billet" items="${match.tickets}">
+		<c:forEach var="billet" items="${match.tickets}" varStatus="status">
 			<tr>
 				<td>${billet.name}</td>
 				<td>${billet.category}</td>				
@@ -80,10 +80,12 @@
 						<c:when test="${billet.category == billetReserve}">
 							<a href="#" class="btn btn-success choosePlace" data-toggle="popover"
 								title="Choisir votre place" data-html="true"
-								data-content='<form:form action="" method="get" class="form-horizontal" modelAttribute="match">
+								data-content='<form:form action="/add" method="get" class="form-horizontal" modelAttribute="match">
 				<form:select path="" name="place" class="form-control">
 					<form:options items="${billet.placements}" />
 				</form:select>
+				<input type="hidden" name="matchID" value="${match.matchID }"></input>
+				<input type="hidden" name="catID" value="${status.index}"></input>
 				<br>
 				<button type="submit" class="btn btn-primary">Choisir</button>
 			</form:form>'>Ajouter au panier</a>
@@ -91,8 +93,16 @@
 
 						<c:otherwise>
 
-							<button type="button" class="btn btn-success">Ajouter au
-								panier</button>
+							<a href="#" class="btn btn-success choosePlace" data-toggle="popover"
+								title="Choisir votre place" data-html="true"
+								data-content='<form:form action="/add" method="get" class="form-horizontal" modelAttribute="match">
+				<input type="text" name ="nbPlace" placeholder="Nombre de place"></input>
+				<br><br>
+				<input type="hidden" name="matchID" value="${match.matchID }"></input>
+				<input type="hidden" name="catID" value="${status.index}"></input>
+				
+				<button type="submit" class="btn btn-primary">Choisir</button>
+			</form:form>'>Ajouter au panier</a>
 						</c:otherwise>
 					</c:choose></td>
 					<% if ( (userModel != null ) && (userModel.isAdmin())) { %>

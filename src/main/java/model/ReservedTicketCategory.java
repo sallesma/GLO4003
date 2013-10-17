@@ -26,5 +26,11 @@ public class ReservedTicketCategory extends AbstractTicketCategory {
 		this.placements = placements;
 	}
 	
+	public void remove(String placement, int nbPlace) {
+		// Now, User can select only one reserved ticket at time
+		// nbPlace is always 1;
+		this.placements.remove(placement);
+		this.setNumberSoldTickets(this.getNumberSoldTickets() + nbPlace);
+	}
 
 }

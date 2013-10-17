@@ -32,18 +32,20 @@ public class UserConverter {
 		viewModel.setPhoneNumber(entry.getPhoneNumber());
 		viewModel.setUsername(entry.getUsername());
 		viewModel.setIsAdmin(entry.isAdmin());
+		viewModel.setTickets(entry.getTickets());
 		return viewModel;
 	}
 	
 	public UserModel convert(UserViewModel userViewModel) {
-		UserModel viewModel = new UserModel();
-		viewModel.setAddress(userViewModel.getAddress());
-		viewModel.setFirstName(userViewModel.getFirstName());
-		viewModel.setLastName(userViewModel.getLastName());
-		viewModel.setPassword(userViewModel.getPassword());
-		viewModel.setPhoneNumber(userViewModel.getPhoneNumber());
-		viewModel.setUsername(userViewModel.getUsername());
-		viewModel.setIsAdmin(userViewModel.isAdmin());
-		return viewModel;
+		UserModel userModel = new UserModel();
+		userModel.setAddress(userViewModel.getAddress());
+		userModel.setFirstName(userViewModel.getFirstName());
+		userModel.setLastName(userViewModel.getLastName());
+		userModel.setPassword(userViewModel.getPassword());
+		userModel.setPhoneNumber(userViewModel.getPhoneNumber());
+		userModel.setUsername(userViewModel.getUsername());
+		userModel.setIsAdmin(userViewModel.isAdmin());
+		userModel.setTickets(userViewModel.getTickets());
+		return userModel;
 	}
 }

@@ -88,7 +88,7 @@
 				<input type="hidden" name="catID" value="${status.index}"></input>
 				<br>
 				<button type="submit" class="btn btn-primary">Choisir</button>
-			</form:form>'>Ajouter au panier</a>
+			</form:form>' <% if (userModel == null) { %> disabled="true"<%} %>>Ajouter au panier</a>
 						</c:when>
 
 						<c:otherwise>
@@ -102,7 +102,7 @@
 				<input type="hidden" name="catID" value="${status.index}"></input>
 				
 				<button type="submit" class="btn btn-primary">Choisir</button>
-			</form:form>'>Ajouter au panier</a>
+			</form:form>'  <% if (userModel == null) { %> disabled="true"<%} %>>Ajouter au panier</a>
 						</c:otherwise>
 					</c:choose></td>
 					<% if ( (userModel != null ) && (userModel.isAdmin())) { %>

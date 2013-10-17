@@ -9,15 +9,18 @@ import nu.xom.Element;
 import nu.xom.ParsingException;
 
 import com.thoughtworks.xstream.XStream;
+import static org.mockito.Mockito.*;
 
+import database.dto.FileAccess;
 import exceptions.ConvertException;
+import exceptions.PersistException;
 
 public class XmlModelConverter {
 
 	private XStream xstream;
 
 	public XmlModelConverter() {
-		xstream = new XStream();
+		xstream = new XStream();		
 		bootstrap();
 	}
 
@@ -27,10 +30,13 @@ public class XmlModelConverter {
 	}
 
 	public nu.xom.Element toElement(ModelInterface model)
-			throws ConvertException {
+			throws ConvertException, PersistException {
+		String modelName = model.getClass().getSimpleName();
+		if(model.getId() == 0L) {
+			model.setId(FileAccess.getInstance().getNewId(modelName));
+		}
 		xstream.autodetectAnnotations(true);
 		nu.xom.Document doc;
-
 		try {
 			doc = new Builder().build(xstream.toXML(model), null);
 		} catch (ParsingException | IOException e) {
@@ -38,12 +44,12 @@ public class XmlModelConverter {
 		}
 
 		Element elem = doc.getRootElement();
-		elem.setLocalName(model.getClass().getSimpleName());
+		elem.setLocalName(modelName);
 
 		return doc.getRootElement();
 	}
 
-	public ModelInterface toObject(nu.xom.Element elem) {
+	public ModelInterface toObject(nu.xom.Element elem) {		
 		String className = "model." + elem.getLocalName();
 
 		try {

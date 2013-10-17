@@ -20,7 +20,7 @@ public abstract class Dao<T extends ModelInterface> implements DaoInterface<T> {
 	public Dao(Class<? extends ModelInterface> clazz) {
 		className = clazz.getSimpleName();
 		converter = new XmlModelConverter();
-		fileAccess = new FileAccess();
+		fileAccess = FileAccess.getInstance();
 	}
 
 	public Dao(Class<? extends ModelInterface> clazz, XmlModelConverter dto, 
@@ -37,26 +37,26 @@ public abstract class Dao<T extends ModelInterface> implements DaoInterface<T> {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public T getById(Long id) {
+	public T getById(Long id) throws PersistException {
 		Element model = fileAccess.getByID(id, className);
 
 		return (T) converter.toObject(model);
 	}
 
 	@Override
-	public void delete(T model) throws ConvertException {
+	public void delete(T model) throws ConvertException, PersistException {
 		Element elem = converter.toElement(model);
 		fileAccess.delete(elem);
 	}
 
 	@Override
-	public void deleteById(Long id) {
+	public void deleteById(Long id) throws PersistException {
 		fileAccess.delete(id, className);
 	}
 	
 	@Override	
 	@SuppressWarnings("unchecked")
-	public List<T> getAll() {
+	public List<T> getAll() throws PersistException {
 		List<T> models = new ArrayList<T>();		
 		for (Element elem : fileAccess.getAll(className)) {
 			models.add((T) converter.toObject(elem));

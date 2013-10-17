@@ -37,13 +37,13 @@ public class MatchFilterTest {
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);
-		MatchModel match0 =  new MatchModel(Sports.Football, Gender.M, 1, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
+		MatchModel match0 =  new MatchModel(Sports.Football, Gender.M, 1L, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch1);
 		cal.set(2013, 11, 11);
-		MatchModel match1 = new MatchModel(Sports.Football, Gender.M, 2, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
+		MatchModel match1 = new MatchModel(Sports.Football, Gender.M, 2L, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch1);
 		cal.set(2013, 11, 9);
-		MatchModel match2 = new MatchModel(Sports.Rugby, Gender.F, 3, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
+		MatchModel match2 = new MatchModel(Sports.Rugby, Gender.F, 3L, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
 		cal.set(2013, 11, 8);
-		MatchModel match3 = new MatchModel(Sports.Volleyball, Gender.F, 4, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
+		MatchModel match3 = new MatchModel(Sports.Volleyball, Gender.F, 4L, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
 		
 		populatedMatchList.add(match0);
 		populatedMatchList.add(match1);

@@ -19,13 +19,23 @@ import nu.xom.Serializer;
 import exceptions.PersistException;
 
 public class FileAccess implements DtoInterface {
+	
+	private static FileAccess fileAccess = new FileAccess();
 
-	private Hashtable<String, String> fileName = new Hashtable<String, String>();
+	private Hashtable<String, String> fileName = new Hashtable<String, String>();	
 
-	public FileAccess() {
+	private FileAccess() {
 		fileName.put("User", "user.xml");
 		fileName.put("Match", "match.xml");
 		fileName.put("", "association.xml");
+	}
+	
+	public static FileAccess getInstance() {
+		return fileAccess;
+	}
+	
+	public static void replace(FileAccess myFileAccess) {
+		fileAccess = myFileAccess;
 	}
 
 	public void save(Element elem, String objectName) throws PersistException {
@@ -166,9 +176,8 @@ public class FileAccess implements DtoInterface {
 		Path p = Paths.get(fileName.get(objectName));
 		Builder parser = new Builder();
 		Document doc;
-		Long id = 0L;
-		if(Files.exists(p))
-		{
+		Long id = 1L;
+		if(Files.exists(p)) {
 			try {
 				doc = parser.build(p.toFile());
 			} catch (ParsingException | IOException e) {

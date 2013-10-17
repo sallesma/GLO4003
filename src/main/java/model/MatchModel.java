@@ -11,11 +11,12 @@ public class MatchModel implements ModelInterface {
 	
 	private Sports sport;
 	private Gender gender;
-	private int matchID;
+	private Long matchID = 0L;
 	private Date date;
 	private String opponent;
 	private String city;
-	private String field;
+	private String field;	
+	
 	private List<AbstractTicketCategory> tickets;
 	
 	
@@ -29,7 +30,7 @@ public class MatchModel implements ModelInterface {
 		this.setTickets(new ArrayList<AbstractTicketCategory>());
 	}
 	
-	public MatchModel(Sports sport, Gender gender, int matchID, Date date,
+	public MatchModel(Sports sport, Gender gender, Long matchID, Date date,
 			String adversaire, String city, String terrain, List<AbstractTicketCategory> billets) {
 		super();
 		this.sport = sport;
@@ -55,10 +56,10 @@ public class MatchModel implements ModelInterface {
 	}
 	
 	// Getter and Setter
-	public int getMatchID() {
+	public Long getMatchID() {
 		return matchID;
 	}
-	public void setMatchID(int matchID) {
+	public void setMatchID(Long matchID) {
 		this.matchID = matchID;
 	}
 	public Date getDate() {
@@ -93,16 +94,13 @@ public class MatchModel implements ModelInterface {
 		return sport;
 	}
 
-
 	public void setSport(Sports sport) {
 		this.sport = sport;
 	}
 
-
 	public Gender getGender() {
 		return gender;
 	}
-
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
@@ -117,14 +115,12 @@ public class MatchModel implements ModelInterface {
 	}
 
 	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+	public Long getId() {		
+		return matchID;
 	}
 
 	@Override
 	public void setId(Long id) {
-		// TODO Auto-generated method stub
-		
+		matchID = id;		
 	}
 }

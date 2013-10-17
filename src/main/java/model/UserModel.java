@@ -11,7 +11,7 @@ public class UserModel implements ModelInterface {
 		isAdmin = false;
 	}
 	
-	private Long id;
+	private Long id = 0L;
 	private String lastName;
 	private String firstName;
 	private String username;

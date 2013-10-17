@@ -15,5 +15,5 @@ public interface DaoInterface<T> {
 	
 	public void deleteById(Long id) throws PersistException, ConvertException;	
 	
-	public List<T> getAll();	
+	public List<T> getAll() throws PersistException;	
 }

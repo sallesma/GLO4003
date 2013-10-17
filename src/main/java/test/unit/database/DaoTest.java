@@ -26,33 +26,34 @@ import static org.mockito.Mockito.*;
 
 public class DaoTest {
 	private XStream xstream;
-	private FileAccess fileHelper;
-	private XmlModelConverter converter;
-	
+	private FileAccess fileAccess;
+	private XmlModelConverter converter;	
 	private TestClass testedClass;
 	
 	@Before
-	public void bootStrap() {
-		xstream = spy(new XStream());
-		fileHelper = mock(FileAccess.class);
-		converter = spy(new XmlModelConverter(xstream));
+	public void bootStrap() throws PersistException {
+		xstream = spy(new XStream());		
+		fileAccess = mock(FileAccess.class);
+		FileAccess.replace(fileAccess);
+		converter = spy(new XmlModelConverter(xstream));		
+		testedClass = spy(new TestClass(converter, fileAccess));
 		
-		testedClass = spy(new TestClass(converter, fileHelper));
+		configureFileAccess();
 	}
 	
 	public DaoTest() {
 		xstream = spy(new XStream());
-		fileHelper = mock(FileAccess.class);
+		fileAccess = mock(FileAccess.class);
 		converter = spy(new XmlModelConverter(xstream));
 		
-		testedClass = spy(new TestClass(converter, fileHelper));
+		testedClass = spy(new TestClass(converter, fileAccess));
 	}
 	
 	@Test
 	public void canSave() throws PersistException, ConvertException, ValidityException, IOException, ParsingException {
 		testedClass.save(new TestClass2());
 		when(converter.toElement(any(TestClass2.class))).thenReturn(null);
-		verify(fileHelper, times(1)).save(any(Element.class), anyString());
+		verify(fileAccess, times(1)).save(any(Element.class), anyString());
 	}
 	
 	public static class TestClass extends Dao<TestClass2> {
@@ -79,4 +80,7 @@ public class DaoTest {
 		}	
 	}
 	
+	private void configureFileAccess() throws PersistException {
+		when(fileAccess.getNewId(anyString())).thenReturn(1L);
+	}	
 }

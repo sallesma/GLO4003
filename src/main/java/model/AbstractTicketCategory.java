@@ -1,7 +1,8 @@
 package model;
 
-public abstract class AbstractTicketCategory {
+public abstract class AbstractTicketCategory implements ModelInterface {
 	
+	private Long id;	
 	private String category;
 	private String name;
 	private float price;
@@ -25,6 +26,14 @@ public abstract class AbstractTicketCategory {
 	// Getters and Setters
 	public String getCategory() {
 		return category;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public void setCategory(String category) {

@@ -4,6 +4,7 @@ import model.UserModel;
 import nu.xom.Element;
 import database.XmlModelConverter;
 import database.dto.FileAccess;
+import exceptions.PersistException;
 
 public class UserModelDao extends Dao<UserModel> {
 
@@ -15,7 +16,7 @@ public class UserModelDao extends Dao<UserModel> {
 		super(UserModel.class);		
 	}	
 	
-	public UserModel getUserByUsername(String username) {
+	public UserModel getUserByUsername(String username) throws PersistException {
 		for (Element myUser : fileAccess.getAll(className)) {
 			UserModel model = (UserModel) converter.toObject(myUser);
 			if (model.getUsername().contentEquals(username)) {
@@ -26,7 +27,7 @@ public class UserModelDao extends Dao<UserModel> {
 		return null;
 	}
 	
-	public Boolean isLoginValid(String username, String password) {		
+	public Boolean isLoginValid(String username, String password) throws PersistException {		
 		for(Element user : fileAccess.getAll(className)) {
 			UserModel model = (UserModel) converter.toObject(user);
 			if(model.getUsername().contentEquals(username)) {

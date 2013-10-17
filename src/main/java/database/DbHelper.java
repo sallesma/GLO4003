@@ -1,5 +1,7 @@
 package database;
 
+import model.MatchModel;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -10,7 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import model.AbstractTicketCategory;
 import model.TicketCategoryFactory;
-import model.MatchModel;
 import model.UserModel;
 import config.ConfigManager;
 import config.ConfigManager.Gender;
@@ -94,11 +95,11 @@ public class DbHelper {
 		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
 		MatchModel match4 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.M, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
 		
-		matchs.put(match0.getMatchID(), match0);
-		matchs.put(match1.getMatchID(), match1);
-		matchs.put(match2.getMatchID(), match2);
-		matchs.put(match3.getMatchID(), match3);
-		matchs.put(match4.getMatchID(), match4);
+		matchs.put(match0.getId().intValue(), match0);
+		matchs.put(match1.getId().intValue(), match1);
+		matchs.put(match2.getId().intValue(), match2);
+		matchs.put(match3.getId().intValue(), match3);
+		matchs.put(match4.getId().intValue(), match4);
 	}
 	
 	// Users
@@ -177,7 +178,7 @@ public class DbHelper {
 	}
 	
 	private MatchModel createMatch(int matchId, Sports sport, Gender gender, Date date, String adversaire, String city, String terrain, ArrayList<AbstractTicketCategory> cat) {
-		MatchModel match = new MatchModel(sport, gender, matchId, date, adversaire, city, terrain, cat);
+		MatchModel match = new MatchModel(sport, gender, Long.valueOf(matchId), date, adversaire, city, terrain, cat);
 		return match;
 	}
  }

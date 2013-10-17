@@ -1,10 +1,11 @@
 package com.glo4003.project;
 
+import model.MatchModel;
+
 import javax.servlet.http.HttpServletRequest;
 
 import model.AbstractTicketCategory;
 import model.LoginViewModel;
-import model.MatchModel;
 import model.ReservedTicketCategory;
 import model.UserViewModel;
 

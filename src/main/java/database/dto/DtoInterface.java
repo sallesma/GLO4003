@@ -1,12 +1,9 @@
 package database.dto;
 
-import java.io.IOException;
 import java.util.List;
 
-import exceptions.PersistException;
 import nu.xom.Element;
-import nu.xom.ParsingException;
-import nu.xom.ValidityException;
+import exceptions.PersistException;
 
 public interface DtoInterface {
 

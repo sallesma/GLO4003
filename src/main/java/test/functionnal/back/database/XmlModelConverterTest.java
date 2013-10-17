@@ -2,36 +2,64 @@ package test.functionnal.back.database;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import static org.mockito.Mockito.*;
 import model.ModelInterface;
 import nu.xom.Element;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import test.unit.database.DaoTest.TestClass2;
+
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
+import config.ConfigManager.Gender;
 import converter.XmlObjectConverter;
 import database.XmlModelConverter;
+import database.dto.FileAccess;
+import exceptions.ConvertException;
+import exceptions.PersistException;
 
 public class XmlModelConverterTest {
 	
-	private XmlModelConverter dto = new XmlModelConverter();
+	private FileAccess fileAccess;
+	private XmlModelConverter converter;
 	
 	@Before
-	public void bootstrap() {
-		dto.registerModel(TestClass.class);
-		dto.registerModel(TestClass2.class);
+	public void bootstrap() throws PersistException {
+		converter = new XmlModelConverter();
+		fileAccess = mock(FileAccess.class);
+		
+		converter.registerModel(TestClass.class);
+		converter.registerModel(TestClass2.class);
+		converter.registerModel(TestClass4.class);
+		converter.registerModel(TestClass3.class);		
+		
+		FileAccess.replace(fileAccess);
+		configureFileAccess();
+	}
+	
+	@Test
+	public void canConvertToObject() throws ConvertException, PersistException {
+		TestClass4 testModel = new TestClass4();
+		Element elem = converter.toElement(testModel);
+		TestClass4 result = (TestClass4) converter.toObject(elem);
 	}
 	
 	@Test
 	public void canConvertToElementWithRightName() throws Exception {
-		TestClass test = new TestClass();
-		Element elem = dto.toElement(test);
+		TestClass test = new TestClass();		
+		Element elem = converter.toElement(test);
 		
 		assertThat(elem.getLocalName(), is("TestClass"));			
 	}
@@ -39,40 +67,39 @@ public class XmlModelConverterTest {
 	@Test
 	public void canConvertToElementRightchilds() throws Exception {
 		TestClass test = new TestClass();
-		Element elem = dto.toElement(test);
+		Element elem = converter.toElement(test);
 		
 		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));		
 		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));
 		assertThat(elem.getFirstChildElement("id").getValue(), is("1"));
 		assertThat(elem.getFirstChildElement("test2").getValue(), is("test2"));
-		assertThat(elem.getFirstChildElement("testClass2").getValue(), is("2"));		
+		assertThat(elem.getFirstChildElement("testClass2").getValue(), is("1"));		
 	}
 	
 	@Test
-	public void canConvertToObject() throws Exception {
-		TestClass test = new TestClass();
-		Element elem = dto.toElement(test);
-		
-		TestClass myClass = (TestClass) dto.toObject(elem);
-		
-		assertThat(myClass.test1, is("test1"));		
-		assertThat(myClass.test2, is("test2"));
-		assertThat(myClass.id, is(1L));
-		assertThat(myClass.testClass2.four, is(4L));
-		assertThat(myClass.testClass2.id, is(2L));		
-	}
-	
-	@Test
-	public void test() throws Exception {
+	public void canConvertWithListToXml() throws Exception {
 		TestClass3 test = new TestClass3();
-		Element elem = dto.toElement(test);
+		Element elem = converter.toElement(test);
 		
-		@SuppressWarnings("unused")
-		String result = elem.toXML();		
+		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));		
+		assertThat(elem.getFirstChildElement("test2").getValue(), is("test2"));		
+		assertThat(elem.getFirstChildElement("id").getValue(), is("1"));		
+		assertThat(elem.getChildElements("TestClass4").size(), is(2));		
+	}
+	
+	@Test
+	public void canConvertWithListToObject() throws Exception {
+		TestClass3 test = new TestClass3();
+		Element elem = converter.toElement(test);
+		
+		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));		
+		assertThat(elem.getFirstChildElement("test2").getValue(), is("test2"));		
+		assertThat(elem.getFirstChildElement("id").getValue(), is("1"));		
+		assertThat(elem.getChildElements("TestClass4").size(), is(2));		
 	}
 	
 	private static class TestClass3 implements ModelInterface {
-		Long id = 1L;
+		Long id = 0L;
 		String test1 = "test1";
 		String test2 = "test2";
 		
@@ -98,9 +125,11 @@ public class XmlModelConverterTest {
 	}
 	
 	private static class TestClass4 implements ModelInterface {
-		long id = 2;
+		Long id = 0L;
 		long four = 4;
-		
+		Date date = new Date();
+		Gender gender = Gender.F;
+				
 		public Long getId() {			
 			return id;
 		}	
@@ -113,9 +142,11 @@ public class XmlModelConverterTest {
 	}
 	
 	public static class TestClass implements ModelInterface {
-		long id = 1;
+		Long id = 0L;
 		String test1 = "test1";
 		String test2 = "test2";
+		Date date = new Date();
+		Gender gender = Gender.F;
 		
 		@XStreamConverter(XmlObjectConverter.class)
 		TestClass2 testClass2 = new TestClass2();		
@@ -126,23 +157,25 @@ public class XmlModelConverterTest {
 		
 		@Override
 		public void setId(Long id) {
-			this.id = id;
-			
+			this.id = id;			
 		}	
 	}
 	
 	public static class TestClass2 implements ModelInterface {
-		long id = 2;
+		long id = 0L;
 		long four = 4;
 		
 		public Long getId() {			
 			return id;
 		}
 		
-		@Override
 		public void setId(Long id) {
 			this.id = id;
 			
 		}	
+	}
+	
+	private void configureFileAccess() throws PersistException {
+		when(fileAccess.getNewId(anyString())).thenReturn(1L);
 	}
 }

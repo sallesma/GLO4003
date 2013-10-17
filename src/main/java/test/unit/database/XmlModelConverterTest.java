@@ -16,7 +16,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import converter.XmlObjectConverter;
 import database.XmlModelConverter;
 
-public class DtoTest {
+public class XmlModelConverterTest {
 	private XStream xstream;
 	private XmlModelConverter converter;
 	

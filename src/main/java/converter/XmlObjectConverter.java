@@ -16,16 +16,15 @@ import exceptions.PersistException;
 
 public class XmlObjectConverter implements Converter {
 	
-	private FileAccess fileAccess = new FileAccess();	
 	private XmlModelConverter dto = new XmlModelConverter();
 
     public void marshal(Object source, HierarchicalStreamWriter writer,
             MarshallingContext context) {    	
     	ModelInterface model = (ModelInterface) source;
     	String name = source.getClass().getSimpleName();
-    	if (model.getId() == null) {
+    	if (model.getId() == 0L) {
     		try {
-				model.setId(fileAccess.getNewId(name));
+				model.setId(FileAccess.getInstance().getNewId(name));
 			} catch (PersistException e) {
 				throw new ConversionException(e.getMessage());
 			}
@@ -39,7 +38,7 @@ public class XmlObjectConverter implements Converter {
     	Long id = Long.valueOf(reader.getValue());
     	Element elem;
 		try {
-			elem = fileAccess.getByID(id, reader.getNodeName());
+			elem = FileAccess.getInstance().getByID(id, reader.getNodeName());
 		} catch (PersistException e) {
 			throw new ConversionException(e.getMessage());
 		}  	

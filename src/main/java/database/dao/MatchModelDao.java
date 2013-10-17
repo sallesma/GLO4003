@@ -8,6 +8,7 @@ import model.UserModel;
 import config.ConfigManager.Sports;
 import database.XmlModelConverter;
 import database.dto.FileAccess;
+import exceptions.PersistException;
 
 public class MatchModelDao extends Dao<MatchModel> {
 
@@ -19,7 +20,7 @@ public class MatchModelDao extends Dao<MatchModel> {
 		super(MatchModel.class);		
 	}
 	
-	public List<MatchModel> getAllMatchsBySport(Sports sport) {
+	public List<MatchModel> getAllMatchsBySport(Sports sport) throws PersistException {
 		List<MatchModel> results = new ArrayList<MatchModel>();		
 		for (MatchModel myMatch : getAll()) {
 			if (myMatch.getSport() == sport) {

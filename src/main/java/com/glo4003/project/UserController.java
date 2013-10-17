@@ -29,7 +29,7 @@ public class UserController {
 	public static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private UserService userService;	
+	private UserService userService;
 	
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String newUser(Model model) {		
@@ -69,6 +69,16 @@ public class UserController {
 		viewModel.addWarning(warnings);
 		
 		return new ModelAndView("home", "entry", viewModel);
+	}
+	
+	
+	@RequestMapping(value = "/shoppingCart", method = RequestMethod.GET)
+	public String shoppingCard(Model model, HttpServletRequest request) {	
+		
+		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+		model.addAttribute("entry", new LoginViewModel());	
+		
+		return "shoppingCart";
 	}
 	
 	@RequestMapping(value = "/disconnect", method = RequestMethod.GET)

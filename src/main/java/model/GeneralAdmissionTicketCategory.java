@@ -9,7 +9,10 @@ public class GeneralAdmissionTicketCategory extends AbstractTicketCategory {
 		
 		
 	}
-
+	
+	public void remove(String placement, int nbPlace) {
+		this.setNumberSoldTickets(this.getNumberSoldTickets() + nbPlace);
+	}
 	
 
 }

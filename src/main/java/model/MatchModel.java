@@ -15,8 +15,7 @@ public class MatchModel implements ModelInterface {
 	private Date date;
 	private String opponent;
 	private String city;
-	private String field;	
-	
+	private String field;
 	private List<AbstractTicketCategory> tickets;
 	
 	

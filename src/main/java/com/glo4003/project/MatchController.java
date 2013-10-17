@@ -1,13 +1,18 @@
 package com.glo4003.project;
 
+import helper.UserConverter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import model.InstantiateTicketModel;
 import model.LoginViewModel;
 import model.MatchFilter;
 import model.MatchModel;
+import model.UserModel;
+import model.UserViewModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +30,8 @@ import database.DbHelper;
 public class MatchController {
 
 	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
-
+	private UserConverter uConverter;
+	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) {
 		DbHelper dbHelper = DbHelper.getInstance();
@@ -62,6 +68,35 @@ public class MatchController {
           model.addAttribute("match", match);
           model.addAttribute("entry", new LoginViewModel());
           return "match";
+      }
+	  
+	  @RequestMapping(value = "/add", method = RequestMethod.GET)
+      public String addTicketToShoppingCart(Model model, HttpServletRequest request) {
+		  // Retrieve Request parameters 
+          int matchId = Integer.valueOf(request.getParameter("matchID"));
+          int catId = Integer.valueOf(request.getParameter("catID"));
+          String numPlace = request.getParameter("place");
+          int nbPlace = (request.getParameter("nbPlace")) != null ? (Integer.valueOf(request.getParameter("nbPlace"))) : 1 ;
+          
+          // Retrieve selected match from Db
+          DbHelper dbHelper = DbHelper.getInstance();
+          MatchModel match = dbHelper.getMatchFromId(matchId);
+          
+          // Create the ticket for the specific match
+          InstantiateTicketModel ticket = new InstantiateTicketModel(match, catId, numPlace,nbPlace );
+          
+          //Get current logged user
+          UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
+          uConverter = new UserConverter();
+          UserModel userModel = uConverter.convert(userViewModel);
+
+          // Add the ticket to the user's shopping cart
+          userModel.addTicket(ticket);
+          userViewModel = uConverter.convert(userModel);
+       
+          model.addAttribute("user", userViewModel);
+          model.addAttribute("entry", new LoginViewModel());
+          return "shoppingCart";
       }
 
 }

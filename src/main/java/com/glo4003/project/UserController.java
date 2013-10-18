@@ -29,7 +29,7 @@ public class UserController {
 	public static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@Autowired
-	private UserService userService;	
+	private UserService userService;
 	
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String newUser(Model model) {		
@@ -71,10 +71,44 @@ public class UserController {
 		return new ModelAndView("home", "entry", viewModel);
 	}
 	
+	
+	@RequestMapping(value = "/shoppingCart", method = RequestMethod.GET)
+	public String shoppingCard(Model model, HttpServletRequest request) {	
+		
+		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+		model.addAttribute("entry", new LoginViewModel());	
+		
+		return "shoppingCart";
+	}
+	
 	@RequestMapping(value = "/disconnect", method = RequestMethod.GET)
 	public String disconnect(Model model, HttpServletRequest request, HttpServletResponse response) {		
 		request.getSession().setAttribute("loggedUser", null);
 		return "redirect:";
+	}
+	
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+	public String updateUser(Model model,HttpServletRequest request) {
+		model.addAttribute("userModel", request.getSession().getAttribute("loggedUser"));
+//		model.addAttribute("entry", new LoginViewModel());
+
+		return "updateUser";
+	}
+	
+	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+	public String modify(Model model, HttpServletRequest request, UserViewModel viewModel) {		
+		try {
+			userService. modify(viewModel);
+		} catch (SaveException e) {
+			viewModel.addWarning(e.getErrors());
+			model.addAttribute("userModel", viewModel);
+			model.addAttribute("entry", new LoginViewModel());
+			
+			return "updateUser";
+		}
+		
+		request.getSession().setAttribute("loggedUser", viewModel);
+		return "home";
 	}
 
 }

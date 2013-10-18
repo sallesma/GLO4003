@@ -28,9 +28,23 @@ public class UserService {
 		}
 		
 		dbHelper.addUser(converter.convert(user));			
+	}	
+
+	public void modify(UserViewModel user) throws SaveException {
+		DbHelper dbHelper = DbHelper.getInstance();
+		List<String> errors = validator.validate(user);
+		if (!dbHelper.userExist(user.getUsername())) {
+			errors.add("Le nom d'utilisateur n'existe pas");
+		}
+		
+		if (!errors.isEmpty()) {
+			throw new SaveException(errors);
+		}
+		
+		dbHelper.save(converter.convert(user), user.getId());			
 	}
-	
-	public List<String> validate(String username, String password) {		
+
+	public List<String> validate(String username, String password) {	
 		DbHelper dbHelper = DbHelper.getInstance();
 		List<String> warnings = new ArrayList<String>();
 		if (!dbHelper.userExist(username)) {

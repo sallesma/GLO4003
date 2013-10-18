@@ -83,6 +83,18 @@ public class DbHelper {
 		ArrayList<AbstractTicketCategory> billetsMatch1 = new ArrayList<AbstractTicketCategory>();
 		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 100, 0, 32));
 		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 200, 0, 10));
+		
+		ArrayList<AbstractTicketCategory> billetsMatch2 = new ArrayList<AbstractTicketCategory>();
+		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 50, 0, 25));
+		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 100, 0, 10));
+		
+		ArrayList<AbstractTicketCategory> billetsMatch3 = new ArrayList<AbstractTicketCategory>();
+		billetsMatch3.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 55, 0, 18));
+		billetsMatch3.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 150, 0, 10));
+		
+		ArrayList<AbstractTicketCategory> billetsMatch4 = new ArrayList<AbstractTicketCategory>();
+		billetsMatch4.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 30, 0, 34));
+		billetsMatch4.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 200, 0, 24));
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);
@@ -90,10 +102,11 @@ public class DbHelper {
 		cal.set(2013, 11, 11);
 		MatchModel match1 = createMatch(nextMatchId.incrementAndGet(), Sports.Football, Gender.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
 		cal.set(2013, 11, 9);
-		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Gender.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
+		MatchModel match2 = createMatch(nextMatchId.incrementAndGet(), Sports.Rugby, Gender.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch2);
 		cal.set(2013, 11, 8);
-		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
-		MatchModel match4 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.M, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
+		MatchModel match3 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch3);
+		cal.set(2013, 11, 23);
+		MatchModel match4 = createMatch(nextMatchId.incrementAndGet(), Sports.Volleyball, Gender.M, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch4);
 		
 		matchs.put(match0.getId().intValue(), match0);
 		matchs.put(match1.getId().intValue(), match1);
@@ -110,6 +123,11 @@ public class DbHelper {
 	
 	public void addUser(UserModel user) {
 		users.put(nextUserId.incrementAndGet(), user);
+	}
+	
+	public void save(UserModel user, Integer id){
+		users.remove(id);
+		users.put(id, user);
 	}
 	
 	public Boolean userExist(String username) {

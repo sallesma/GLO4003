@@ -78,7 +78,8 @@
 							<%= userModel.getFirstName() %> <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Paramètres du compte</a></li>
+								<li><a href="/updateUser">Paramètres du compte</a></li>
+								<li><a href="/shoppingCart">Panier d'achat (<%= userModel.getNbTicketsInCart() %>)</a></li>
 								<li class="divider"></li>
 								<li><a href="/disconnect">Se déconnecter</a></li>
 							</ul>

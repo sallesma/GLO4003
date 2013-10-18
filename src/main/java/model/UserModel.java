@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class UserModel implements ModelInterface {
 	public UserModel() {
 		lastName = "";
@@ -9,6 +11,7 @@ public class UserModel implements ModelInterface {
 		phoneNumber = "";
 		address = "";
 		isAdmin = false;
+		tickets = new ArrayList<InstantiateTicketModel>();
 	}
 	
 	private Long id = 0L;
@@ -19,6 +22,44 @@ public class UserModel implements ModelInterface {
 	private String phoneNumber;
 	private String address;
 	private boolean isAdmin;
+	private ArrayList<InstantiateTicketModel> tickets;
+	
+	
+	// Shopping cart methods
+	
+	public void addTicket(InstantiateTicketModel ticket) {
+		this.tickets.add(ticket);
+	}
+	
+	public void deleteTicket(int id) {
+		for (InstantiateTicketModel t : this.tickets) {
+			if(id == t.getTicketId()) {
+				this.tickets.remove(t);
+				return;
+			}
+		}
+	}
+	
+	public InstantiateTicketModel getTicketById(int id) {
+		InstantiateTicketModel res = null;
+		for (InstantiateTicketModel t : this.tickets) {
+			if(id == t.getTicketId())
+				res = t;
+		}
+		return res;
+	}
+	
+	public int getNbTicketsInCart() {
+		if (this.tickets != null) 
+			return this.tickets.size();
+		
+		else 
+			return 0;
+	}
+	
+	
+	
+	//Getters and Setters 
 	
 	public String getLastName() {
 		return lastName;
@@ -72,4 +113,15 @@ public class UserModel implements ModelInterface {
 	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
+	public ArrayList<InstantiateTicketModel> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(ArrayList<InstantiateTicketModel> tickets) {
+		this.tickets = tickets;
+	}
+	
+
+
 }

@@ -1,14 +1,15 @@
 package database.dto;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import model.MatchModel;
+import model.UserModel;
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -20,16 +21,8 @@ import exceptions.PersistException;
 
 public class FileAccess implements DtoInterface {
 	
-	private static FileAccess fileAccess = new FileAccess();
+	private static FileAccess fileAccess = new FileAccess();	
 
-	private Hashtable<String, String> fileName = new Hashtable<String, String>();	
-
-	private FileAccess() {
-		fileName.put("User", "user.xml");
-		fileName.put("Match", "match.xml");
-		fileName.put("", "association.xml");
-	}
-	
 	public static FileAccess getInstance() {
 		return fileAccess;
 	}
@@ -39,16 +32,16 @@ public class FileAccess implements DtoInterface {
 	}
 
 	public void save(Element elem, String objectName) throws PersistException {
-		try {
-			Path p = Paths.get(fileName.get(objectName));
+		try {			
+			File p = new File(objectName + ".xml");
 
 			Element elementId = elem.getFirstChildElement("ID");
 
 			Builder parser = new Builder();
 			Document doc = null;
-			if (Files.exists(p)) {
+			if (p.exists()) {
 
-				doc = parser.build(p.toFile());
+				doc = parser.build(p);
 
 				Elements nodes = doc.getRootElement().getChildElements();
 
@@ -63,7 +56,7 @@ public class FileAccess implements DtoInterface {
 				}
 				doc.getRootElement().appendChild(elem);
 
-				Files.delete(p);
+				p.delete();
 
 			} else {
 				Element root = new Element(objectName + "s");
@@ -71,11 +64,11 @@ public class FileAccess implements DtoInterface {
 				root.appendChild(elem);
 			}
 
-			Files.createFile(p);
+			p.createNewFile();
 
-			OutputStream out = Files.newOutputStream(p);
+			OutputStream out = new FileOutputStream(p);
 
-			Serializer serializer = new Serializer(out, "ISO-8859-1");
+			Serializer serializer = new Serializer(out, "UTF-8");
 			serializer.setIndent(4);
 			serializer.setMaxLength(64);
 			serializer.write(doc);
@@ -86,15 +79,15 @@ public class FileAccess implements DtoInterface {
 
 	@Override
 	public Element getByID(Long id, String objectName) throws PersistException {
-		Path p = Paths.get(fileName.get(objectName));
+		File p = new File(objectName + ".xml");
 		Builder parser = new Builder();
 		Document doc;
 		try {
-			doc = parser.build(p.toFile());
+			doc = parser.build(p);
 		} catch (ParsingException | IOException e) {
 			throw new PersistException(e.getMessage());
 		}
-		Nodes recherche = doc.query("//ID/" + String.valueOf(id));
+		Nodes recherche = doc.query("//" + objectName + "[ID =" + id.toString() + "]");
 		Element elem =  (Element) recherche.get(0);
 		
 		return elem;
@@ -108,12 +101,13 @@ public class FileAccess implements DtoInterface {
 	@Override
 	public void delete(Element elem) throws PersistException {
 		try {
-			Path p = Paths.get(fileName.get(elem.getLocalName()));
+			File p = new File(elem.getLocalName() + ".xml");
 
+			
 			Element elementId = elem.getFirstChildElement("ID");
 
 			Builder parser = new Builder();
-			Document doc = parser.build(p.toFile());
+			Document doc = parser.build(p);
 
 				Elements nodes = doc.getRootElement().getChildElements();
 
@@ -126,12 +120,12 @@ public class FileAccess implements DtoInterface {
 					}
 					i++;
 				}
-				Files.delete(p);
+				p.delete();
 
 
-			Files.createFile(p);
+			p.createNewFile();
 
-			OutputStream out = Files.newOutputStream(p);
+			OutputStream out = new FileOutputStream(p);
 
 			Serializer serializer = new Serializer(out, "ISO-8859-1");
 			serializer.setIndent(4);
@@ -152,12 +146,12 @@ public class FileAccess implements DtoInterface {
 	@Override
 	public List<Element> getAll(String objectName) throws PersistException {
 		
-		Path p = Paths.get(fileName.get(objectName));
+		File p = new File(objectName + ".xml");
 
 		Builder parser = new Builder();
 		Document doc;
 		try {
-			doc = parser.build(p.toFile());
+			doc = parser.build(p);
 		} catch (ParsingException | IOException e) {
 			throw new PersistException(e.getMessage());
 		}
@@ -173,19 +167,20 @@ public class FileAccess implements DtoInterface {
 	}
 
 	public Long getNewId(String objectName) throws PersistException {
-		Path p = Paths.get(fileName.get(objectName));
+		File p = new File(objectName + ".xml");
 		Builder parser = new Builder();
 		Document doc;
 		Long id = 1L;
-		if(Files.exists(p)) {
+		if(p.exists())
+		{
 			try {
-				doc = parser.build(p.toFile());
+				doc = parser.build(p);
 			} catch (ParsingException | IOException e) {
 				throw new PersistException(e.getMessage());
 			}
 			Elements nodes = doc.getRootElement().getChildElements();
 			
-			while (id < nodes.size() && nodes.get(id.intValue()).getChild(1).getValue().equals(id))
+			while (id.intValue() < nodes.size() && nodes.get(id.intValue()).getChild(1).getValue().equals(id.toString()))
 			{
 				id++;				
 			}

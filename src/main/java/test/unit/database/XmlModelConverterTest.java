@@ -32,15 +32,10 @@ public class XmlModelConverterTest {
 	@Test
 	public void canConvertToXml() throws Exception {		
 		TestClass test = new TestClass();
-		Element elem = converter.toElement(test);
+		converter.toElement(test);
 		
 		verify(xstream, times(1)).toXML(eq(test));
 	}
-	
-	@Test
-	public void canConvertToObject() throws Exception {
-		//TODO implement
-	}	
 	
 	private static class TestClass implements ModelInterface {
 		long id = 1;

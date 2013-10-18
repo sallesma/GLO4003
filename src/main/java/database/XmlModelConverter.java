@@ -9,7 +9,6 @@ import nu.xom.Element;
 import nu.xom.ParsingException;
 
 import com.thoughtworks.xstream.XStream;
-import static org.mockito.Mockito.*;
 
 import database.dto.FileAccess;
 import exceptions.ConvertException;

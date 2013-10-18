@@ -2,23 +2,19 @@ package test.functionnal.back.database;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
 import model.ModelInterface;
 import nu.xom.Element;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import test.unit.database.DaoTest.TestClass2;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
@@ -38,15 +34,12 @@ public class XmlModelConverterTest {
 	@Before
 	public void bootstrap() throws PersistException {
 		converter = new XmlModelConverter();
-		fileAccess = mock(FileAccess.class);
+		fileAccess = FileAccess.getInstance();
 		
 		converter.registerModel(TestClass.class);
 		converter.registerModel(TestClass2.class);
 		converter.registerModel(TestClass4.class);
-		converter.registerModel(TestClass3.class);		
-		
-		FileAccess.replace(fileAccess);
-		configureFileAccess();
+		converter.registerModel(TestClass3.class);				
 	}
 	
 	@Test
@@ -54,6 +47,10 @@ public class XmlModelConverterTest {
 		TestClass4 testModel = new TestClass4();
 		Element elem = converter.toElement(testModel);
 		TestClass4 result = (TestClass4) converter.toObject(elem);
+		
+		assertThat(result.date, is(testModel.date));		
+		assertThat(result.four, is(testModel.four));
+		assertThat(result.gender, is(testModel.gender));
 	}
 	
 	@Test
@@ -173,9 +170,5 @@ public class XmlModelConverterTest {
 			this.id = id;
 			
 		}	
-	}
-	
-	private void configureFileAccess() throws PersistException {
-		when(fileAccess.getNewId(anyString())).thenReturn(1L);
 	}
 }

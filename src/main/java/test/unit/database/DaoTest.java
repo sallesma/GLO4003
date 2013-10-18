@@ -1,7 +1,16 @@
 package test.unit.database;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.io.IOException;
 
+import model.ModelInterface;
 import nu.xom.Element;
 import nu.xom.ParsingException;
 import nu.xom.ValidityException;
@@ -9,20 +18,13 @@ import nu.xom.ValidityException;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.ModelInterface;
-import model.UserModel;
-import test.functionnal.back.database.XmlModelConverterTest.TestClass2;
-
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-import converter.XmlObjectConverter;
 import database.XmlModelConverter;
 import database.dao.Dao;
 import database.dto.FileAccess;
 import exceptions.ConvertException;
 import exceptions.PersistException;
-import static org.mockito.Mockito.*;
 
 public class DaoTest {
 	private XStream xstream;

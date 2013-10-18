@@ -11,7 +11,7 @@ public class MatchModel implements ModelInterface {
 	
 	private Sports sport;
 	private Gender gender;
-	private Long matchID = 0L;
+	private Long id = 0L;
 	private Date date;
 	private String opponent;
 	private String city;
@@ -34,7 +34,7 @@ public class MatchModel implements ModelInterface {
 		super();
 		this.sport = sport;
 		this.gender = gender;
-		this.matchID = matchID;
+		this.id = matchID;
 		this.date = date;
 		this.opponent = adversaire;
 		this.city = city;
@@ -56,10 +56,10 @@ public class MatchModel implements ModelInterface {
 	
 	// Getter and Setter
 	public Long getMatchID() {
-		return matchID;
+		return id;
 	}
 	public void setMatchID(Long matchID) {
-		this.matchID = matchID;
+		this.id = matchID;
 	}
 	public Date getDate() {
 		return date;
@@ -115,11 +115,11 @@ public class MatchModel implements ModelInterface {
 
 	@Override
 	public Long getId() {		
-		return matchID;
+		return id;
 	}
 
 	@Override
 	public void setId(Long id) {
-		matchID = id;		
+		id = id;		
 	}
 }

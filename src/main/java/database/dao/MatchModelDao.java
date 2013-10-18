@@ -13,7 +13,7 @@ import exceptions.PersistException;
 public class MatchModelDao extends Dao<MatchModel> {
 
 	public MatchModelDao(XmlModelConverter dto, FileAccess fileAccess) {
-		super(UserModel.class, dto, fileAccess);	
+		super(MatchModel.class, dto, fileAccess);	
 	}
 
 	public MatchModelDao() {
@@ -21,8 +21,8 @@ public class MatchModelDao extends Dao<MatchModel> {
 	}
 	
 	public List<MatchModel> getAllMatchsBySport(Sports sport) throws PersistException {
-		List<MatchModel> results = new ArrayList<MatchModel>();		
-		for (MatchModel myMatch : getAll()) {
+		List<MatchModel> results = getAll();		
+		for (MatchModel myMatch : results) {
 			if (myMatch.getSport() == sport) {
 				results.add(myMatch);		
 			}			

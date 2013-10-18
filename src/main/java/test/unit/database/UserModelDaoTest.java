@@ -1,16 +1,13 @@
 package test.unit.database;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import java.io.File;
 
 import model.UserModel;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,13 +21,8 @@ import database.dto.FileAccess;
 import exceptions.ConvertException;
 import exceptions.PersistException;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.Resource;
-
 public class UserModelDaoTest {
 
-	private TestClass testedClass;
 	private XStream xstream;
 	private FileAccess fileAccess;
 	private UserModelDao dao;
@@ -54,8 +46,20 @@ public class UserModelDaoTest {
 	}
 	
 	@Test
-	public void canGetUserByUsername() {
-		
+	public void canGetUserByUsername() throws PersistException {
+		UserModel model = dao.getUserByUsername("test 1");
+		String name = model.getFirstName();
+		assertTrue(model.getFirstName().contentEquals("1"));
+	}
+	
+	@Test
+	public void canReturnTrueIfLoginValid() throws PersistException {
+		Boolean result = dao.isLoginValid("user 3", "password");
+	}
+	
+	@Test
+	public void canReturnFalseIfLoginInvalid() throws PersistException {
+		Boolean result = dao.isLoginValid("userr 3", "password");
 	}
 	
 	private void fillBd() throws PersistException, ConvertException {
@@ -68,7 +72,7 @@ public class UserModelDaoTest {
 			model.setPassword("password");
 			model.setPhoneNumber("test");
 			model.setUsername("test " + i);
-			String elem = converter.toElement(model).toXML();
+			
 			fileAccess.save(converter.toElement(model));
 		}		
 	}

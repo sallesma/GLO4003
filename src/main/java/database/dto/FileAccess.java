@@ -34,8 +34,10 @@ public class FileAccess implements DtoInterface {
 	public void save(Element elem, String objectName) throws PersistException {
 		try {			
 			File p = new File(objectName + ".xml");
+			
+			Element elemToSave = new Element(elem);
 
-			Element elementId = elem.getFirstChildElement("ID");
+			Element elementId = elemToSave.getFirstChildElement("id");
 
 			Builder parser = new Builder();
 			Document doc = null;
@@ -47,21 +49,20 @@ public class FileAccess implements DtoInterface {
 
 				int i = 0;
 				while (i < nodes.size()) {
-					if (nodes.get(i).getChild(1).getValue()
-							.equals(elementId.getValue())) {
+					if (nodes.get(i).getFirstChildElement("id").getValue().equals(elementId.getValue())) {
 						nodes.get(i).detach();
 						break;
 					}
 					i++;
 				}
-				doc.getRootElement().appendChild(elem);
+				doc.getRootElement().appendChild(elemToSave);
 
 				p.delete();
 
 			} else {
 				Element root = new Element(objectName + "s");
 				doc = new Document(root);
-				root.appendChild(elem);
+				root.appendChild(elemToSave);
 			}
 
 			p.createNewFile();
@@ -87,7 +88,7 @@ public class FileAccess implements DtoInterface {
 		} catch (ParsingException | IOException e) {
 			throw new PersistException(e.getMessage());
 		}
-		Nodes recherche = doc.query("//" + objectName + "[ID =" + id.toString() + "]");
+		Nodes recherche = doc.query("//" + objectName + "[id =" + id.toString() + "]");
 		Element elem =  (Element) recherche.get(0);
 		
 		return elem;
@@ -104,7 +105,7 @@ public class FileAccess implements DtoInterface {
 			File p = new File(elem.getLocalName() + ".xml");
 
 			
-			Element elementId = elem.getFirstChildElement("ID");
+			Element elementId = elem.getFirstChildElement("id");
 
 			Builder parser = new Builder();
 			Document doc = parser.build(p);
@@ -113,8 +114,7 @@ public class FileAccess implements DtoInterface {
 
 				int i = 0;
 				while (i < nodes.size()) {
-					if (nodes.get(i).getChild(1).getValue()
-							.equals(elementId.getValue())) {
+					if (nodes.get(i).getFirstChildElement("id").getValue().equals(elementId.getValue())) {
 						nodes.get(i).detach();
 						break;
 					}
@@ -179,8 +179,13 @@ public class FileAccess implements DtoInterface {
 				throw new PersistException(e.getMessage());
 			}
 			Elements nodes = doc.getRootElement().getChildElements();
+			if(nodes.size() == 0) {
+				return id;
+			}
 			
-			while (id.intValue() < nodes.size() && nodes.get(id.intValue()).getChild(1).getValue().equals(id.toString()))
+			Boolean ee = nodes.get(id.intValue() - 1).getFirstChildElement("id").getValue().equals(id.toString());
+			
+			while ((id.intValue() - 1) < nodes.size() && ee)
 			{
 				id++;				
 			}

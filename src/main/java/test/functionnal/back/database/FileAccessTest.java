@@ -47,13 +47,13 @@ public class FileAccessTest {
 	}
 		
 	@Test
-	public void testGetByID() {
+	public void testGetByid() {
 		File p = new File("match.xml");
 		FileWriter write;
 		try {
 			p.createNewFile();
 			write = new FileWriter(p);
-			write.write("<Matchs><" + MatchModel.class.getSimpleName() + "><ID>1</ID></" + MatchModel.class.getSimpleName() + "><" + MatchModel.class.getSimpleName() + "><ID>2</ID></" + MatchModel.class.getSimpleName() + "></Matchs>");
+			write.write("<Matchs><" + MatchModel.class.getSimpleName() + "><id>1</id></" + MatchModel.class.getSimpleName() + "><" + MatchModel.class.getSimpleName() + "><id>2</id></" + MatchModel.class.getSimpleName() + "></Matchs>");
 	        write.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class FileAccessTest {
 		
 		
 		Element elem = new Element(MatchModel.class.getSimpleName());
-		Element elemid = new Element("ID");
+		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("1");
 		
@@ -81,7 +81,7 @@ public class FileAccessTest {
 		
 		
 		Element elem = new Element(MatchModel.class.getSimpleName());
-		Element elemid = new Element("ID");
+		Element elemid = new Element("id");
 		Element elemtest = new Element("test");
 		elem.appendChild(elemid);
 		elem.appendChild(elemtest);
@@ -98,7 +98,7 @@ public class FileAccessTest {
 		}
 		
 		Element elem2 = new Element(MatchModel.class.getSimpleName());
-		Element elemid2 = new Element("ID");
+		Element elemid2 = new Element("id");
 		Element elemtest2 = new Element("test");
 		elem2.appendChild(elemid2);
 		elem2.appendChild(elemtest2);
@@ -122,7 +122,7 @@ public class FileAccessTest {
 		
 		
 		Element elem = new Element(MatchModel.class.getSimpleName());
-		Element elemid = new Element("ID");
+		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("1");
 		
@@ -133,7 +133,7 @@ public class FileAccessTest {
 		}
 		
 		Element elem2 = new Element(MatchModel.class.getSimpleName());
-		Element elemid2 = new Element("ID");
+		Element elemid2 = new Element("id");
 		elem2.appendChild(elemid2);
 		elemid2.appendChild("2");
 		
@@ -170,7 +170,7 @@ public class FileAccessTest {
 		
 		
 		Element elem = new Element(MatchModel.class.getSimpleName());
-		Element elemid = new Element("ID");
+		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("1");
 		
@@ -181,7 +181,7 @@ public class FileAccessTest {
 		}
 		
 		Element elem2 = new Element(MatchModel.class.getSimpleName());
-		Element elemid2 = new Element("ID");
+		Element elemid2 = new Element("id");
 		elem2.appendChild(elemid2);
 		elemid2.appendChild("2");
 		
@@ -192,7 +192,7 @@ public class FileAccessTest {
 		}
 		
 		Element elem3 = new Element(MatchModel.class.getSimpleName());
-		Element elemid3 = new Element("ID");
+		Element elemid3 = new Element("id");
 		elem3.appendChild(elemid3);
 		elemid3.appendChild("3");
 		
@@ -231,7 +231,7 @@ public class FileAccessTest {
 	public void testGetNewId() {
 
 		Element elem = new Element(MatchModel.class.getSimpleName());
-		Element elemid = new Element("ID");
+		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("0");
 		
@@ -243,7 +243,7 @@ public class FileAccessTest {
 		
 		
 		Element elem2 = new Element(MatchModel.class.getSimpleName());
-		Element elemid2 = new Element("ID");
+		Element elemid2 = new Element("id");
 		elem2.appendChild(elemid2);
 		elemid2.appendChild("1");
 		
@@ -255,7 +255,7 @@ public class FileAccessTest {
 		
 		
 		Element elem3 = new Element(MatchModel.class.getSimpleName());
-		Element elemid3 = new Element("ID");
+		Element elemid3 = new Element("id");
 		elem3.appendChild(elemid3);
 		elemid3.appendChild("3");
 		

@@ -1,5 +1,7 @@
 package database.dao;
 
+import java.util.List;
+
 import model.UserModel;
 import nu.xom.Element;
 import database.XmlModelConverter;
@@ -17,7 +19,8 @@ public class UserModelDao extends Dao<UserModel> {
 	}	
 	
 	public UserModel getUserByUsername(String username) throws PersistException {
-		for (Element myUser : fileAccess.getAll(className)) {
+		List<Element> models = fileAccess.getAll(className);
+		for (Element myUser : models) {
 			UserModel model = (UserModel) converter.toObject(myUser);
 			if (model.getUsername().contentEquals(username)) {
 				return model;			

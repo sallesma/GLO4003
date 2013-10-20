@@ -1,4 +1,4 @@
-package test.functionnal.back.database;
+package test.functionnal.server.database;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -27,14 +27,12 @@ import exceptions.ConvertException;
 import exceptions.PersistException;
 
 public class XmlModelConverterTest {
-	
-	private FileAccess fileAccess;
+
 	private XmlModelConverter converter;
 	
 	@Before
 	public void bootstrap() throws PersistException {
 		converter = new XmlModelConverter();
-		fileAccess = FileAccess.getInstance();
 		
 		converter.registerModel(TestClass.class);
 		converter.registerModel(TestClass2.class);

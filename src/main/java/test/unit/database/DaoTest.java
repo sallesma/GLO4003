@@ -9,8 +9,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import model.AbstractTicketCategory;
 import model.ModelInterface;
+import model.ReservedTicketCategory;
+import model.TicketCategoryFactory;
 import nu.xom.Element;
 import nu.xom.ParsingException;
 import nu.xom.ValidityException;
@@ -80,6 +84,18 @@ public class DaoTest {
 		public void setId(Long id) {
 			this.id = id;
 		}	
+	}
+	
+	@Test
+	public void eeee() {
+		ReservedTicketCategory fct = new ReservedTicketCategory("test", "test", 1, 1, 0.9F);
+		ArrayList<String> rr= new ArrayList<String>();
+		rr.add("tttttt");
+		fct.setPlacements(rr);
+		AbstractTicketCategory rrr = (AbstractTicketCategory) fct;
+		ReservedTicketCategory ii = (ReservedTicketCategory) rrr;
+		String ttt = rrr.getClass().getSimpleName();
+		String yyy = "";
 	}
 	
 	private void configureFileAccess() throws PersistException {

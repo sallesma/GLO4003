@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-
 public class ReservedTicketCategory extends AbstractTicketCategory {
 
 	private ArrayList<String> placements;

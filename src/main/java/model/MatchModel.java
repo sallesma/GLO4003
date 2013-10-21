@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import converter.XmlObjectConverter;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
@@ -16,6 +19,8 @@ public class MatchModel implements ModelInterface {
 	private String opponent;
 	private String city;
 	private String field;
+	@XStreamImplicit(itemFieldName="AbstractTicketCategory")
+	@XStreamConverter(XmlObjectConverter.class)
 	private List<AbstractTicketCategory> tickets;
 	
 	
@@ -120,6 +125,6 @@ public class MatchModel implements ModelInterface {
 
 	@Override
 	public void setId(Long id) {
-		id = id;		
+		this.id = id;		
 	}
 }

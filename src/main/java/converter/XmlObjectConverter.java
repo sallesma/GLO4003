@@ -24,7 +24,8 @@ public class XmlObjectConverter implements Converter {
     	String name = source.getClass().getSimpleName();
     	if (model.getId() == 0L) {
     		try {
-				model.setId(FileAccess.getInstance().getNewId(name));
+    			Long id = FileAccess.getInstance().getNewId(name);
+				model.setId(id);				
 			} catch (PersistException e) {
 				throw new ConversionException(e.getMessage());
 			}

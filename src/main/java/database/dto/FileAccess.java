@@ -158,6 +158,7 @@ public class FileAccess implements DtoInterface {
 
 		Elements nodes = doc.getRootElement().getChildElements();
 		
+		
 		List<Element> elements = new ArrayList<Element>(nodes.size());
 		for(int i = 0; i < nodes.size(); i++) {
 			elements.add(nodes.get(i));
@@ -170,7 +171,7 @@ public class FileAccess implements DtoInterface {
 		File p = new File(objectName + ".xml");
 		Builder parser = new Builder();
 		Document doc;
-		Long id = 1L;
+		Long max = 0L;
 		if(p.exists())
 		{
 			try {
@@ -178,19 +179,25 @@ public class FileAccess implements DtoInterface {
 			} catch (ParsingException | IOException e) {
 				throw new PersistException(e.getMessage());
 			}
-			Elements nodes = doc.getRootElement().getChildElements();
+			
+			
+			Nodes nodes = doc.query("//id");
+			
+			
 			if(nodes.size() == 0) {
-				return id;
+				return ++max;
 			}
 			
-			Boolean ee = nodes.get(id.intValue() - 1).getFirstChildElement("id").getValue().equals(id.toString());
-			
-			while ((id.intValue() - 1) < nodes.size() && ee)
+			for(int i = 0; i < nodes.size(); i++)
 			{
-				id++;				
+				if(Long.valueOf(nodes.get(i).getValue()) > max )
+				{
+					
+					max = Long.valueOf(nodes.get(i).getValue());
+				}
 			}
 		}
 		
-		return id;
+		return ++max;
 	}
 }

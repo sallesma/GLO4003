@@ -2,7 +2,7 @@ package model;
 
 public abstract class AbstractTicketCategory implements ModelInterface {
 	
-	private Long id;	
+	private Long id = 0L;	
 	private String category;
 	private String name;
 	private float price;

@@ -6,6 +6,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,19 +40,24 @@ public class UserModelDaoTest {
 		fileAccess = mock(FileAccess.class);	
 		FileAccess.replace(fileAccess);
 		converter = spy(new XmlModelConverter(xstream));
-		dao = spy(new UserModelDao(converter, fileAccess));		
+		dao = spy(new UserModelDao(converter, fileAccess));				
 	}
 	
 	@Test
 	public void canGetUserByUsername() throws PersistException, ConvertException {
 		//Before
-		when(fileAccess.getAll(anyString())).thenReturn(getModels());
+		List<Element> models = getModels();
+		when(fileAccess.getNewId(anyString())).thenReturn(1L,2L,3L,4L,5L,6L,7L,8L,9L,10L,11L);
+		when(fileAccess.getAll(anyString())).thenReturn(models);
+		when(converter.toObject(any(Element.class))).thenReturn(getModel());
 		
 		//When
-		UserModel model = dao.getUserByUsername("test 1");
+		dao.getUserByUsername("test");
 		
 		//Then
-		assertTrue(model.getFirstName().contentEquals("1"));
+		for(Element elem: models) {
+			verify(converter.toObject(elem), times(1));
+		}		
 	}
 	
 	@Test
@@ -78,21 +84,27 @@ public class UserModelDaoTest {
 		assertFalse(result);
 	}
 	
-	private List<Element> getModels() throws PersistException, ConvertException {
+	private List<Element> getModels() {
 		List<Element> models = new ArrayList<Element>(20);
-		for(Integer i = 0;i<20;i++) {
-			UserModel model = new UserModel();
-			model.setAddress(i.toString());
-			model.setFirstName(i.toString());
-			model.setIsAdmin(false);
-			model.setLastName(i.toString());
-			model.setPassword("password");
-			model.setPhoneNumber("test");
-			model.setUsername("test " + i);
-			
-			models.add(converter.toElement(model));
+		for(Integer i = 0;i<10;i++) {
+			Element elem = mock(Element.class);
+			when(elem.getLocalName()).thenReturn("UserModel");
+			models.add(elem);
 		}		
 		
 		return models;
+	}
+	
+	private UserModel getModel() {
+		UserModel model = new UserModel();
+		model.setAddress("address");
+		model.setFirstName("firstname");
+		model.setIsAdmin(false);
+		model.setLastName("lastname");
+		model.setPassword("password");
+		model.setPhoneNumber("test");
+		model.setUsername("test");
+		
+		return model;
 	}
 }

@@ -6,6 +6,7 @@ import static org.mockito.Mockito.spy;
 import java.io.File;
 import java.util.List;
 
+import model.GeneralAdmissionTicketCategory;
 import model.MatchModel;
 
 import org.junit.After;
@@ -62,7 +63,8 @@ public class MatchModelDaoTest {
 			model.setField(i.toString());
 			model.setGender(Gender.M);
 			model.setOpponent("test");
-			model.setSport(Sports.Rugby);		
+			model.setSport(Sports.Rugby);	
+			model.addTicketCategory(new GeneralAdmissionTicketCategory("test", "test", 1,1,1));
 			
 			fileAccess.save(converter.toElement(model));
 		}		

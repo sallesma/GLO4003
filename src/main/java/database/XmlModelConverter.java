@@ -32,7 +32,8 @@ public class XmlModelConverter {
 			throws ConvertException, PersistException {
 		String modelName = model.getClass().getSimpleName();
 		if(model.getId() == 0L) {
-			model.setId(FileAccess.getInstance().getNewId(modelName));
+			Long id = FileAccess.getInstance().getNewId(modelName);
+			model.setId(id);
 		}
 		xstream.autodetectAnnotations(true);
 		nu.xom.Document doc;

@@ -2,13 +2,17 @@ package model;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+
 import config.ConfigManager;
+import converter.XmlObjectConverter;
 
 
 public class InstantiateTicketModel {
 	
 	private static AtomicInteger nextTicketId = new AtomicInteger(0);
 	private int ticketId;
+	@XStreamConverter(XmlObjectConverter.class)
 	private MatchModel match;
 	private String numPlace;
 	private int nbPlace;

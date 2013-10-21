@@ -1,5 +1,6 @@
 package com.glo4003.project;
 
+import helper.MatchFilter;
 import helper.UserConverter;
 
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import model.InstantiateTicketModel;
 import model.LoginViewModel;
-import model.MatchFilter;
 import model.MatchModel;
 import model.UserModel;
 import model.UserViewModel;

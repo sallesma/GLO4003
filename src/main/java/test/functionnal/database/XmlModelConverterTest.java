@@ -20,8 +20,8 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import config.ConfigManager.Gender;
-import converter.XmlObjectConverter;
 import database.XmlModelConverter;
+import database.converter.XmlObjectConverter;
 import database.dto.FileAccess;
 import exceptions.ConvertException;
 import exceptions.PersistException;

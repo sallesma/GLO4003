@@ -1,4 +1,4 @@
-package model;
+package helper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
+import model.MatchModel;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
 

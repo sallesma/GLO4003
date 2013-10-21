@@ -2,6 +2,7 @@ package test.unit.model;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
+import helper.MatchFilter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,9 +12,8 @@ import java.util.List;
 import java.util.Locale;
 
 import model.AbstractTicketCategory;
-import model.MatchFilter;
 import model.MatchModel;
-import model.TicketCategoryFactory;
+import model.factory.TicketCategoryFactory;
 
 import org.junit.Before;
 import org.junit.Test;

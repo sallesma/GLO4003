@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
-import converter.XmlObjectConverter;
+
+import database.converter.XmlObjectConverter;
 
 public class UserModel implements ModelInterface {
 	public UserModel() {

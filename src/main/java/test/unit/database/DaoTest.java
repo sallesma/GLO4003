@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import model.AbstractTicketCategory;
 import model.ModelInterface;
 import model.ReservedTicketCategory;
-import model.TicketCategoryFactory;
+import model.factory.TicketCategoryFactory;
 import nu.xom.Element;
 import nu.xom.ParsingException;
 import nu.xom.ValidityException;

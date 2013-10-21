@@ -1,5 +1,8 @@
-package model;
+package model.factory;
 
+import model.AbstractTicketCategory;
+import model.GeneralAdmissionTicketCategory;
+import model.ReservedTicketCategory;
 import config.ConfigManager;
 
 public class TicketCategoryFactory {

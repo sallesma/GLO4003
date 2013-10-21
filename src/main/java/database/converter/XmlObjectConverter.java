@@ -1,4 +1,4 @@
-package converter;
+package database.converter;
 
 import model.ModelInterface;
 import nu.xom.Element;

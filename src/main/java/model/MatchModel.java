@@ -3,12 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import converter.XmlObjectConverter;
+
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
+import database.converter.XmlObjectConverter;
 
 public class MatchModel implements ModelInterface {
 	

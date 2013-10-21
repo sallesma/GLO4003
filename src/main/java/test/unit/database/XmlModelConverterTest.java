@@ -13,8 +13,8 @@ import org.junit.Test;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-import converter.XmlObjectConverter;
 import database.XmlModelConverter;
+import database.converter.XmlObjectConverter;
 
 public class XmlModelConverterTest {
 	private XStream xstream;

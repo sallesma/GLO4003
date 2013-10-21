@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import config.ConfigManager;
-import converter.XmlObjectConverter;
+import database.converter.XmlObjectConverter;
 
 
 public class InstantiateTicketModel {

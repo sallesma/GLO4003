@@ -5,8 +5,8 @@ import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Matchers.anyInt;
 import model.GeneralAdmissionTicketCategory;
 import model.AbstractTicketCategory;
-import model.TicketCategoryFactory;
 import model.ReservedTicketCategory;
+import model.factory.TicketCategoryFactory;
 
 import org.junit.Test;
 import org.mockito.Mockito;

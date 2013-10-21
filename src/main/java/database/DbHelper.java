@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import model.AbstractTicketCategory;
-import model.TicketCategoryFactory;
 import model.UserModel;
+import model.factory.TicketCategoryFactory;
 import config.ConfigManager;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;

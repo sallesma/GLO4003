@@ -1,4 +1,4 @@
-package test.functionnal.server.helper;
+package test.functionnal.helper;
 
 import static org.mockito.Mockito.spy;
 import database.DbHelper;

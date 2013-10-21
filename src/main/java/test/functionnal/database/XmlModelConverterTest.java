@@ -1,4 +1,4 @@
-package test.functionnal.server.database;
+package test.functionnal.database;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -42,10 +42,14 @@ public class XmlModelConverterTest {
 	
 	@Test
 	public void canConvertToObject() throws ConvertException, PersistException {
+		//Before
 		TestClass4 testModel = new TestClass4();
 		Element elem = converter.toElement(testModel);
+		
+		//When
 		TestClass4 result = (TestClass4) converter.toObject(elem);
 		
+		//Then
 		assertThat(result.date, is(testModel.date));		
 		assertThat(result.four, is(testModel.four));
 		assertThat(result.gender, is(testModel.gender));
@@ -53,17 +57,25 @@ public class XmlModelConverterTest {
 	
 	@Test
 	public void canConvertToElementWithRightName() throws Exception {
-		TestClass test = new TestClass();		
+		//Before
+		TestClass test = new TestClass();	
+		
+		//When
 		Element elem = converter.toElement(test);
 		
+		//Then
 		assertThat(elem.getLocalName(), is("TestClass"));			
 	}
 	
 	@Test
 	public void canConvertToElementRightchilds() throws Exception {
+		//Before
 		TestClass test = new TestClass();
+		
+		//When
 		Element elem = converter.toElement(test);
 		
+		//Then
 		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));		
 		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));
 		assertThat(elem.getFirstChildElement("id").getValue(), is("1"));
@@ -73,9 +85,13 @@ public class XmlModelConverterTest {
 	
 	@Test
 	public void canConvertWithListToXml() throws Exception {
+		//Before
 		TestClass3 test = new TestClass3();
+		
+		//When
 		Element elem = converter.toElement(test);
 		
+		//Then
 		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));		
 		assertThat(elem.getFirstChildElement("test2").getValue(), is("test2"));		
 		assertThat(elem.getFirstChildElement("id").getValue(), is("1"));		
@@ -84,16 +100,20 @@ public class XmlModelConverterTest {
 	
 	@Test
 	public void canConvertWithListToObject() throws Exception {
+		//Before
 		TestClass3 test = new TestClass3();
+		
+		//When
 		Element elem = converter.toElement(test);
 		
+		//Then
 		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));		
 		assertThat(elem.getFirstChildElement("test2").getValue(), is("test2"));		
 		assertThat(elem.getFirstChildElement("id").getValue(), is("1"));		
 		assertThat(elem.getChildElements("TestClass4").size(), is(2));		
 	}
 	
-	private static class TestClass3 implements ModelInterface {
+	private static class TestClass3 implements ModelInterface {		
 		Long id = 0L;
 		String test1 = "test1";
 		String test2 = "test2";

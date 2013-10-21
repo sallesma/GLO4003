@@ -1,22 +1,18 @@
-package test.unit.database;
+package test.functionnal.database;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.UserModel;
-import nu.xom.Element;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import test.unit.database.DaoTest.TestClass;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -36,17 +32,22 @@ public class UserModelDaoTest {
 	@Before
 	public void bootStrap() throws PersistException, ConvertException {
 		xstream = spy(new XStream());
-		fileAccess = mock(FileAccess.class);	
-		FileAccess.replace(fileAccess);
+		fileAccess = FileAccess.getInstance();		
 		converter = spy(new XmlModelConverter(xstream));
-		dao = spy(new UserModelDao(converter, fileAccess));		
+		dao = spy(new UserModelDao(converter, fileAccess));
+		fillBd();
+	}
+	
+	@After
+	public void clean() throws Exception {
+		File p = new File("UserModel.xml");
+		 if (p.exists()) {
+				p.delete();
+	     }
 	}
 	
 	@Test
-	public void canGetUserByUsername() throws PersistException, ConvertException {
-		//Before
-		when(fileAccess.getAll(anyString())).thenReturn(getModels());
-		
+	public void canGetUserByUsername() throws PersistException {
 		//When
 		UserModel model = dao.getUserByUsername("test 1");
 		
@@ -55,10 +56,7 @@ public class UserModelDaoTest {
 	}
 	
 	@Test
-	public void canReturnTrueIfLoginValid() throws PersistException, ConvertException {
-		//Before
-		when(fileAccess.getAll(anyString())).thenReturn(getModels());
-		
+	public void canReturnTrueIfLoginValid() throws PersistException {
 		//When
 		Boolean result = dao.isLoginValid("test 3", "password");
 		
@@ -67,10 +65,7 @@ public class UserModelDaoTest {
 	}
 	
 	@Test
-	public void canReturnFalseIfLoginInvalid() throws PersistException, ConvertException {
-		//Before
-		when(fileAccess.getAll(anyString())).thenReturn(getModels());
-				
+	public void canReturnFalseIfLoginInvalid() throws PersistException {
 		//When
 		Boolean result = dao.isLoginValid("userr 3", "password");
 		
@@ -78,8 +73,7 @@ public class UserModelDaoTest {
 		assertFalse(result);
 	}
 	
-	private List<Element> getModels() throws PersistException, ConvertException {
-		List<Element> models = new ArrayList<Element>(20);
+	private void fillBd() throws PersistException, ConvertException {
 		for(Integer i = 0;i<20;i++) {
 			UserModel model = new UserModel();
 			model.setAddress(i.toString());
@@ -90,9 +84,7 @@ public class UserModelDaoTest {
 			model.setPhoneNumber("test");
 			model.setUsername("test " + i);
 			
-			models.add(converter.toElement(model));
+			fileAccess.save(converter.toElement(model));
 		}		
-		
-		return models;
 	}
 }

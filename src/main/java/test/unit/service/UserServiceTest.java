@@ -28,57 +28,74 @@ public class UserServiceTest {
 	
 	@Test
 	public void dontThrowExceptionOnSaveWellFormedUser() throws SaveException {
+		//Before
 		UserViewModel viewModel = getWellFormedUserModel();
 		
-		service.saveNew(viewModel);		
+		//When		
+		service.saveNew(viewModel);	
+		
+		//Then
+		//No exception found
 	}
 	
 	@Test
 	public void throwExceptionOnNotWellFormedUser() {
+		//Before
 		UserViewModel viewModel = getNotWellFormedUserModel();
 		SaveException ex = null;
 		try {
+			//When
 			service.saveNew(viewModel);	
 		} catch (SaveException e) {
 			ex = e;
 		}
 		
+		//Then
 		assertTrue(ex.getErrors().size() == 5);
 	}
 	
 	@Test
 	public void canSaveWellFormedUser() throws SaveException {
+		//Before
 		UserViewModel viewModel = getWellFormedUserModel();		
 		
+		//When
 		service.saveNew(viewModel);		
 		
+		//Then
 		verify(helper).addUser(any(UserModel.class));
 	}
 	
 	@Test
 	public void dontSaveNotWellFormedUser() throws SaveException {
+		//Before
 		UserViewModel viewModel = getNotWellFormedUserModel();		
 		
 		try {
+			//When
 			service.saveNew(viewModel);	
 		} catch(SaveException e) {			
 		}
 		
+		//Then
 		verify(helper, never()).addUser(any(UserModel.class));
 	}
 	
 	@Test
 	public void canThrowExceptionOnExistingUser() {
+		//Before
 		UserViewModel model = getWellFormedUserModel();
 		Mockito.when(helper.userExist(model.getUsername())).thenReturn(true);
 		
 		Boolean exceptionFound = false;
 		try {
+			//When
 			service.saveNew(model);	
 		} catch(SaveException e) {	
 			exceptionFound = true;
 		}
 		
+		//Then
 		assertTrue(exceptionFound);
 		verify(helper, never()).addUser(any(UserModel.class));
 	}

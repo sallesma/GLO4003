@@ -47,9 +47,11 @@ public class MatchModelDaoTest {
 	}
 	
 	@Test
-	public void canGetAllMatchsBySport() throws PersistException, ConvertException {		
+	public void canGetAllMatchsBySport() throws PersistException, ConvertException {
+		//When
 		List<MatchModel> models = dao.getAllMatchsBySport(Sports.Rugby);
-		int size = models.size();
+		
+		//Then
 		assertTrue(models.size() == 20);
 	}
 	

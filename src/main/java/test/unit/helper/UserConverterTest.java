@@ -3,6 +3,7 @@ package test.unit.helper;
 import static org.junit.Assert.*;
 import helper.UserConverter;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,22 +18,30 @@ import org.junit.Test;
 
 public class UserConverterTest {
 	
-	private UserConverter converter = spy(new UserConverter());
-	
+	private UserConverter converter = spy(new UserConverter());	
 	
 	@Test
 	public void canConvertUserModelList() {
+		//Before
 		Map<Integer, UserModel> users = populate();
 		
-		assertTrue(converter.convert(users).size() == 4);
+		//When
+		Collection<UserViewModel> models = converter.convert(users);
+		
+		//Then
+		assertTrue(models.size() == 4);
 		verify(converter, times(4)).convert(any(UserModel.class));		
 	}
 	
 	@Test
 	public void canConvertUserModel() {
+		//Before
 		UserModel model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
+		
+		//When
 		converter.convert(model);		
 		
+		//Then
 		verify(model, times(1)).getAddress();
 		verify(model, times(1)).getFirstName();
 		verify(model, times(1)).getLastName();
@@ -44,9 +53,13 @@ public class UserConverterTest {
 	
 	@Test
 	public void canConvertUserViewModel() {
+		//Before
 		UserViewModel model = spy(createUserViewModel("Matt", "Martin", "MM", "password", false));
+		
+		//When
 		converter.convert(model);		
 		
+		//Then
 		verify(model, times(1)).getAddress();
 		verify(model, times(1)).getFirstName();
 		verify(model, times(1)).getLastName();
@@ -55,7 +68,7 @@ public class UserConverterTest {
 		verify(model, times(1)).getUsername();		
 	}
 	
-	private Map<Integer, UserModel> populate() {		
+	private Map<Integer, UserModel> populate() {	
 		AtomicInteger nextId = new AtomicInteger(0);
 		Map<Integer, UserModel> users = new HashMap<Integer, UserModel>();
 		

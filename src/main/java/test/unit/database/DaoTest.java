@@ -37,7 +37,7 @@ public class DaoTest {
 	private TestClass testedClass;
 	
 	@Before
-	public void bootStrap() throws PersistException {
+	public void bootStrap() throws PersistException {		
 		xstream = spy(new XStream());		
 		fileAccess = mock(FileAccess.class);
 		FileAccess.replace(fileAccess);
@@ -57,8 +57,10 @@ public class DaoTest {
 	
 	@Test
 	public void canSave() throws PersistException, ConvertException, ValidityException, IOException, ParsingException {
+		//When
 		testedClass.save(new TestClass2());
-		when(converter.toElement(any(TestClass2.class))).thenReturn(null);
+		
+		//Then
 		verify(fileAccess, times(1)).save(any(Element.class), anyString());
 	}
 	

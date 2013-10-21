@@ -1,4 +1,4 @@
-package test.functionnal.server.database;
+package test.functionnal.database;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

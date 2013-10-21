@@ -22,51 +22,86 @@ public class UserModelTest {
     
     @Test
     public void PopulatedModelHasAddress() {
+    	//Before
     	UserModel model = getPopulatedUserModel();
     	
-    	assertTrue(model.getAddress().contentEquals("test"));
+    	//When
+    	String result = model.getAddress();
+    	
+    	//Then    	
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasFirstName() {
+    	//Before
     	UserModel model = getPopulatedUserModel();
     	
-    	assertTrue(model.getFirstName().contentEquals("test"));
+    	//When
+    	String result = model.getFirstName();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasLastName() {
+    	//Before
     	UserModel model = getPopulatedUserModel();
     	
-    	assertTrue(model.getLastName().contentEquals("test"));
+    	//When
+    	String result = model.getLastName();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasPhoneNumber() {
+    	//Before
     	UserModel model = getPopulatedUserModel();
     	
-    	assertTrue(model.getPhoneNumber().contentEquals("test"));
+    	//When
+    	String result = model.getPhoneNumber();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasUserName() {
+    	//Before
     	UserModel model = getPopulatedUserModel();
     	
-    	assertTrue(model.getUsername().contentEquals("test"));
+    	//When
+    	String result = model.getUsername();
+    	
+    	//Then    	
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasPassword() {
+    	//Before
     	UserModel model = getPopulatedUserModel();
     	
-    	assertTrue(model.getPassword().contentEquals("test"));
+    	//When
+    	String result = model.getPassword();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedUSerModelIsNotAdmin() {
+    	//Before
     	UserModel model = getPopulatedUserModel();
     	
-    	assertFalse(model.isAdmin());
+    	//When
+    	Boolean result = model.isAdmin();
+    	
+    	//Then
+    	assertFalse(result);
     }
     
     private UserModel getPopulatedUserModel() {

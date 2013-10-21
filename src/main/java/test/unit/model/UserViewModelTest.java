@@ -10,8 +10,10 @@ public class UserViewModelTest {
 
     @Test
     public void NewModelIsEmpty() {
+    	//When
     	UserViewModel model = getNewUserViewModel();
     	
+    	//Then
     	assertTrue(model.getAddress().isEmpty());
     	assertTrue(model.getFirstName().isEmpty());
     	assertTrue(model.getLastName().isEmpty());
@@ -23,6 +25,7 @@ public class UserViewModelTest {
     
     @Test
     public void PopulatedModelHasAddress() {
+    	//Before
     	UserViewModel model = getPopulatedUserViewModel();
     	
     	assertTrue(model.getAddress().contentEquals("test"));
@@ -30,37 +33,62 @@ public class UserViewModelTest {
     
     @Test
     public void PopulatedModelHasFirstName() {
+    	//Before
     	UserViewModel model = getPopulatedUserViewModel();
     	
-    	assertTrue(model.getFirstName().contentEquals("test"));
+    	//When
+    	String result = model.getFirstName();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasLastName() {
+    	//Before
     	UserViewModel model = getPopulatedUserViewModel();
     	
-    	assertTrue(model.getLastName().contentEquals("test"));
+    	//When
+    	String result = model.getLastName();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasPhoneNumber() {
+    	//Before
     	UserViewModel model = getPopulatedUserViewModel();
     	
-    	assertTrue(model.getPhoneNumber().contentEquals("test"));
+    	//When
+    	String result = model.getPhoneNumber();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasUserName() {
+    	//Before
     	UserViewModel model = getPopulatedUserViewModel();
     	
-    	assertTrue(model.getUsername().contentEquals("test"));
+    	//When
+    	String result = model.getUsername();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }
     
     @Test
     public void PopulatedModelHasPassword() {
+    	//Before
     	UserViewModel model = getPopulatedUserViewModel();
     	
-    	assertTrue(model.getPassword().contentEquals("test"));
+    	//When
+    	String result = model.getPassword();
+    	
+    	//Then
+    	assertTrue(result.contentEquals("test"));
     }    
     
     private UserViewModel getPopulatedUserViewModel() {

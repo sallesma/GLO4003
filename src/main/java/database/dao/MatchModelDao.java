@@ -21,8 +21,8 @@ public class MatchModelDao extends Dao<MatchModel> {
 	}
 	
 	public List<MatchModel> getAllMatchsBySport(Sports sport) throws PersistException {
-		List<MatchModel> results = getAll();		
-		for (MatchModel myMatch : results) {
+		List<MatchModel> results = new ArrayList<MatchModel>();		
+		for (MatchModel myMatch : getAll()) {
 			if (myMatch.getSport() == sport) {
 				results.add(myMatch);		
 			}			

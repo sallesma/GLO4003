@@ -34,8 +34,7 @@ public class UserModelDao extends Dao<UserModel> {
 	
 	public Boolean isLoginValid(String username, String password) throws PersistException {		
 		for(Element user : fileAccess.getAll(className)) {
-			UserModel model = (UserModel) converter.toObject(user);
-			UserController.logger.info(model.getUsername() + " : " + model.getPassword());
+			UserModel model = (UserModel) converter.toObject(user);			
 			if(model.getUsername().contentEquals(username)) {
 				if(model.getPassword().contentEquals(password)) {
 					return true;

@@ -1,11 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import database.converter.*;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-
-import database.converter.XmlObjectConverter;
 
 public class UserModel implements ModelInterface {
 	public UserModel() {
@@ -26,9 +24,8 @@ public class UserModel implements ModelInterface {
 	private String password;
 	private String phoneNumber;
 	private String address;
-	private boolean isAdmin;
-	@XStreamImplicit(itemFieldName="InstantiateTicketModel")
-	@XStreamConverter(XmlObjectConverter.class)
+	private boolean isAdmin;	
+	@XStreamConverter(XmlArrayListConverter.class)
 	private ArrayList<InstantiateTicketModel> tickets;
 	
 	
@@ -128,7 +125,4 @@ public class UserModel implements ModelInterface {
 	public void setTickets(ArrayList<InstantiateTicketModel> tickets) {
 		this.tickets = tickets;
 	}
-	
-
-
 }

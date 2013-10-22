@@ -6,8 +6,7 @@ public class ReservedTicketCategory extends AbstractTicketCategory {
 
 	private ArrayList<String> placements;
 	
-	public ReservedTicketCategory() {
-		
+	public ReservedTicketCategory() {		
 	}
 	
 	public ReservedTicketCategory(String cat, String name, int nbInitialTickets,

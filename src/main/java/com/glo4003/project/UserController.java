@@ -26,9 +26,7 @@ import exceptions.SaveException;
  * Handles requests for the User logic.
  */
 @Controller
-public class UserController {
-	
-	public static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+public class UserController {	
 	
 	@Autowired
 	private UserService userService;

@@ -20,8 +20,7 @@ public class MatchModel implements ModelInterface {
 	private Date date;
 	private String opponent;
 	private String city;
-	private String field;
-	//@XStreamImplicit(itemFieldName="AbstractTicketCategory")
+	private String field;	
 	@XStreamConverter(XmlArrayListConverter.class)
 	private List<AbstractTicketCategory> tickets;
 	

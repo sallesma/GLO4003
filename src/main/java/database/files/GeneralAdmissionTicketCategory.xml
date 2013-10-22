@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GeneralAdmissionTicketCategorys>
+    <GeneralAdmissionTicketCategory>
+        <id>1</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>10.0</price>
+        <numberInitialTickets>200</numberInitialTickets>
+        <numberSoldTickets>0</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
+        <id>2</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>10.0</price>
+        <numberInitialTickets>100</numberInitialTickets>
+        <numberSoldTickets>0</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
+        <id>3</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>10.0</price>
+        <numberInitialTickets>150</numberInitialTickets>
+        <numberSoldTickets>0</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
+        <id>4</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>24.0</price>
+        <numberInitialTickets>200</numberInitialTickets>
+        <numberSoldTickets>0</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+</GeneralAdmissionTicketCategorys>

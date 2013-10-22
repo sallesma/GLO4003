@@ -2,8 +2,6 @@ package database.dao;
 
 import java.util.List;
 
-import com.glo4003.project.UserController;
-
 import model.UserModel;
 import nu.xom.Element;
 import database.XmlModelConverter;

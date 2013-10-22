@@ -22,6 +22,8 @@ import exceptions.PersistException;
 public class FileAccess implements DtoInterface {
 	
 	private static FileAccess fileAccess = new FileAccess();	
+	
+	private final String path = "src/main/java/database/files/";
 
 	public static FileAccess getInstance() {
 		return fileAccess;
@@ -33,7 +35,7 @@ public class FileAccess implements DtoInterface {
 
 	public void save(Element elem, String objectName) throws PersistException {
 		try {			
-			File p = new File(objectName + ".xml");
+			File p = new File(path + objectName + ".xml");
 			
 			Element elemToSave = new Element(elem);
 
@@ -80,7 +82,7 @@ public class FileAccess implements DtoInterface {
 
 	@Override
 	public Element getByID(Long id, String objectName) throws PersistException {
-		File p = new File(objectName + ".xml");
+		File p = new File(path + objectName + ".xml");
 		Builder parser = new Builder();
 		Document doc;
 		try {
@@ -102,7 +104,7 @@ public class FileAccess implements DtoInterface {
 	@Override
 	public void delete(Element elem) throws PersistException {
 		try {
-			File p = new File(elem.getLocalName() + ".xml");
+			File p = new File(path + elem.getLocalName() + ".xml");
 
 			
 			Element elementId = elem.getFirstChildElement("id");
@@ -146,7 +148,7 @@ public class FileAccess implements DtoInterface {
 	@Override
 	public List<Element> getAll(String objectName) throws PersistException {
 		
-		File p = new File(objectName + ".xml");
+		File p = new File( path + objectName + ".xml");
 
 		Builder parser = new Builder();
 		Document doc;
@@ -168,7 +170,7 @@ public class FileAccess implements DtoInterface {
 	}
 
 	public Long getNewId(String objectName) throws PersistException {
-		File p = new File(objectName + ".xml");
+		File p = new File(path + objectName + ".xml");
 		Builder parser = new Builder();
 		Document doc;
 		Long max = 0L;

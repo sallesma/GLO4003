@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MatchModels>
+    <MatchModel>
+        <sport>Football</sport>
+        <gender>M</gender>
+        <id>1</id>
+        <date>2010-12-11 19:23:02.553 UTC</date>
+        <opponent>UQAM</opponent>
+        <city>Québec</city>
+        <field>ULaval</field>
+        <tickets>1:ReservedTicketCategory,1:GeneralAdmissionTicketCategory,</tickets>
+    </MatchModel>
+    <MatchModel>
+        <sport>Football</sport>
+        <gender>M</gender>
+        <id>2</id>
+        <date>2013-12-11 19:23:02.553 UTC</date>
+        <opponent>UQAM</opponent>
+        <city>Québec</city>
+        <field>ULaval</field>
+        <tickets>1:ReservedTicketCategory,1:GeneralAdmissionTicketCategory,</tickets>
+    </MatchModel>
+    <MatchModel>
+        <sport>Rugby</sport>
+        <gender>F</gender>
+        <id>3</id>
+        <date>2013-12-09 19:23:02.553 UTC</date>
+        <opponent>Vert et or</opponent>
+        <city>Sherbrooke</city>
+        <field>unknown</field>
+        <tickets>2:ReservedTicketCategory,2:GeneralAdmissionTicketCategory,</tickets>
+    </MatchModel>
+    <MatchModel>
+        <sport>Volleyball</sport>
+        <gender>F</gender>
+        <id>4</id>
+        <date>2013-12-08 19:23:02.553 UTC</date>
+        <opponent>Rimouski</opponent>
+        <city>Rimouski</city>
+        <field>Gymnase municipal</field>
+        <tickets>3:ReservedTicketCategory,3:GeneralAdmissionTicketCategory,</tickets>
+    </MatchModel>
+    <MatchModel>
+        <sport>Volleyball</sport>
+        <gender>M</gender>
+        <id>5</id>
+        <date>2013-12-23 19:23:02.553 UTC</date>
+        <opponent>Rimouski</opponent>
+        <city>Rimouski</city>
+        <field>Gymnase municipal</field>
+        <tickets>4:ReservedTicketCategory,4:GeneralAdmissionTicketCategory,</tickets>
+    </MatchModel>
+</MatchModels>

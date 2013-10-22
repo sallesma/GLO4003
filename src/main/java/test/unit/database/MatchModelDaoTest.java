@@ -44,7 +44,7 @@ public class MatchModelDaoTest {
 	public void clean() throws Exception {
 		File p = new File("MatchModel.xml");
 		 if (p.exists()) {
-		//	p.delete();
+			p.delete();
 	     }
 	}
 	

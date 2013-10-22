@@ -30,6 +30,8 @@ public class MatchModelDaoTest {
 	private FileAccess fileAccess;
 	private MatchModelDao dao;
 	private XmlModelConverter converter;
+	
+	private final String path = "src/main/java/database/files/";
 
 	@Before
 	public void bootStrap() throws PersistException, ConvertException {
@@ -42,7 +44,7 @@ public class MatchModelDaoTest {
 	
 	@After
 	public void clean() throws Exception {
-		File p = new File("MatchModel.xml");
+		File p = new File(path + "MatchModel.xml");
 		 if (p.exists()) {
 			p.delete();
 	     }

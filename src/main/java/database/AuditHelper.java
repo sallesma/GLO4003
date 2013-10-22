@@ -22,12 +22,12 @@ public class AuditHelper {
 	
 	UserModelDao userDao = new UserModelDao();
 	MatchModelDao matchDao = new MatchModelDao();
-
+	
 	public void CreateAudits() throws PersistException, ConvertException {
 		createUserAudits();
 		createMatchAudits();
 	}
-	
+	@Test	
 	public void createUserAudits() throws PersistException, ConvertException {
 		userDao.save(createUser("Matt", "Martin", "MM", "password", false));
 		userDao.save(createUser("Houde", "Louis-Jos??", "LH", "password", false));
@@ -38,11 +38,11 @@ public class AuditHelper {
 	
 	@Test
 	public void createMatchAudits() throws PersistException, ConvertException {
-		ArrayList<AbstractTicketCategory> billetsMatch1 = new ArrayList<AbstractTicketCategory>();
+		ArrayList<AbstractTicketCategory> billetsMatch1 = new ArrayList<AbstractTicketCategory>();		
 		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 100, 0, 32));
 		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 200, 0, 10));
 		
-		ArrayList<AbstractTicketCategory> billetsMatch2 = new ArrayList<AbstractTicketCategory>();
+		ArrayList<AbstractTicketCategory> billetsMatch2 = new ArrayList<AbstractTicketCategory>();		
 		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 50, 0, 25));
 		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 100, 0, 10));
 		

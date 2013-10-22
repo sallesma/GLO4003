@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import database.converter.XmlArrayListConverter;
 import java.util.Date;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class MatchModel implements ModelInterface {
 	private String opponent;
 	private String city;
 	private String field;
-	@XStreamImplicit(itemFieldName="AbstractTicketCategory")
-	@XStreamConverter(XmlObjectConverter.class)
+	//@XStreamImplicit(itemFieldName="AbstractTicketCategory")
+	@XStreamConverter(XmlArrayListConverter.class)
 	private List<AbstractTicketCategory> tickets;
 	
 	

@@ -1,6 +1,7 @@
 package database.converter;
 
 import model.ModelInterface;
+import nu.xom.Attribute;
 import nu.xom.Element;
 
 import com.thoughtworks.xstream.converters.ConversionException;
@@ -26,13 +27,17 @@ public class XmlObjectConverter implements Converter {
     	if (model.getId() == 0L) {
     		try {
     			Long id = FileAccess.getInstance().getNewId(name);
-				model.setId(id);			
+				model.setId(id);					
 				
-				FileAccess.getInstance().save(dto.toElement(model));
-			} catch (PersistException | ConvertException e) {
+			} catch (PersistException e) {
 				throw new ConversionException(e.getMessage());
-			}
-    	}    	
+			}    		
+    	} 
+    	try {
+			FileAccess.getInstance().save(dto.toElement(model));
+		} catch (PersistException | ConvertException e) {
+			throw new ConversionException(e.getMessage());
+		}
     	
         writer.setValue(model.getId().toString());
     }
@@ -42,13 +47,24 @@ public class XmlObjectConverter implements Converter {
     	Long id = Long.valueOf(reader.getValue());
     	Element elem;
 		try {
-			elem = FileAccess.getInstance().getByID(id, reader.getNodeName());
+			String name = reader.getNodeName();
+			String classname = getClassname(reader);
+			elem = FileAccess.getInstance().getByID(id, classname);
 		} catch (PersistException e) {
 			throw new ConversionException(e.getMessage());
 		}  	
     	ModelInterface rr = dto.toObject(elem);
         return dto.toObject(elem);
     }
+    
+    private String getClassname(HierarchicalStreamReader reader) {		
+		String attribute = reader.getAttribute("class");
+		if (attribute != null && !attribute.isEmpty()) {
+			return "model." + attribute;
+		} else {
+			return attribute;
+		}
+	}
 
     @SuppressWarnings("rawtypes")
 	public boolean canConvert(Class type) {

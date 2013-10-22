@@ -9,7 +9,10 @@ public abstract class AbstractTicketCategory implements ModelInterface {
 	private int numberInitialTickets;
 	private int numberSoldTickets;
 	
-
+	public AbstractTicketCategory() {
+		
+	}
+	
 	//Constructor 
 	public AbstractTicketCategory(String category, String name, int numberInitialTickets,
 			int numberSoldTickets, float price) {

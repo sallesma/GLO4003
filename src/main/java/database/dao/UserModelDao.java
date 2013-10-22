@@ -2,6 +2,8 @@ package database.dao;
 
 import java.util.List;
 
+import com.glo4003.project.UserController;
+
 import model.UserModel;
 import nu.xom.Element;
 import database.XmlModelConverter;
@@ -20,7 +22,7 @@ public class UserModelDao extends Dao<UserModel> {
 	
 	public UserModel getUserByUsername(String username) throws PersistException {
 		List<Element> models = fileAccess.getAll(className);
-		for (Element myUser : models) {
+		for (Element myUser : models) {			
 			UserModel model = (UserModel) converter.toObject(myUser);
 			if (model.getUsername().contentEquals(username)) {
 				return model;			
@@ -33,6 +35,7 @@ public class UserModelDao extends Dao<UserModel> {
 	public Boolean isLoginValid(String username, String password) throws PersistException {		
 		for(Element user : fileAccess.getAll(className)) {
 			UserModel model = (UserModel) converter.toObject(user);
+			UserController.logger.info(model.getUsername() + " : " + model.getPassword());
 			if(model.getUsername().contentEquals(username)) {
 				if(model.getPassword().contentEquals(password)) {
 					return true;

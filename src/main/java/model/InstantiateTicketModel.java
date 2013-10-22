@@ -28,7 +28,7 @@ public class InstantiateTicketModel {
 	private void removeFromMatch(MatchModel match, int categoryIndex, String placement, int nbPlace){
 		
 		AbstractTicketCategory cat = match.getTickets().get(categoryIndex);
-		cat.remove(placement, nbPlace);	
+		 cat.remove(placement, nbPlace);	
 	}
 
 	public int getTicketId() {

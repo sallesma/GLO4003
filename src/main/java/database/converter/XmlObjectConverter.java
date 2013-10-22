@@ -12,6 +12,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 import database.XmlModelConverter;
 import database.dto.FileAccess;
+import exceptions.ConvertException;
 import exceptions.PersistException;
 
 public class XmlObjectConverter implements Converter {
@@ -25,11 +26,13 @@ public class XmlObjectConverter implements Converter {
     	if (model.getId() == 0L) {
     		try {
     			Long id = FileAccess.getInstance().getNewId(name);
-				model.setId(id);				
-			} catch (PersistException e) {
+				model.setId(id);			
+				
+				FileAccess.getInstance().save(dto.toElement(model));
+			} catch (PersistException | ConvertException e) {
 				throw new ConversionException(e.getMessage());
 			}
-    	}
+    	}    	
     	
         writer.setValue(model.getId().toString());
     }
@@ -43,7 +46,7 @@ public class XmlObjectConverter implements Converter {
 		} catch (PersistException e) {
 			throw new ConversionException(e.getMessage());
 		}  	
-    	
+    	ModelInterface rr = dto.toObject(elem);
         return dto.toObject(elem);
     }
 

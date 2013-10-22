@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import service.UserService;
+import exceptions.ConvertException;
+import exceptions.PersistException;
 import exceptions.SaveException;
 
 /**
@@ -40,7 +42,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/newuser", method = RequestMethod.POST)
-	public String createUser(Model model, UserViewModel viewModel) {		
+	public String createUser(Model model, UserViewModel viewModel) throws PersistException, ConvertException {		
 		try {
 			userService.saveNew(viewModel);
 		} catch (SaveException e) {
@@ -56,7 +58,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ModelAndView login(Model model, LoginViewModel viewModel, HttpServletRequest request) { 
+	public ModelAndView login(Model model, LoginViewModel viewModel, HttpServletRequest request) throws PersistException { 
 		List<String> warnings = userService.validate(viewModel.getUsername(), viewModel.getPassword());
 		
 		if(warnings.isEmpty()) {
@@ -96,7 +98,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-	public String modify(Model model, HttpServletRequest request, UserViewModel viewModel) {		
+	public String modify(Model model, HttpServletRequest request, UserViewModel viewModel) throws PersistException, ConvertException {		
 		try {
 			userService. modify(viewModel);
 		} catch (SaveException e) {

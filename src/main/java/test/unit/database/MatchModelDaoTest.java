@@ -8,6 +8,7 @@ import java.util.List;
 
 import model.GeneralAdmissionTicketCategory;
 import model.MatchModel;
+import model.ReservedTicketCategory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -43,7 +44,7 @@ public class MatchModelDaoTest {
 	public void clean() throws Exception {
 		File p = new File("MatchModel.xml");
 		 if (p.exists()) {
-				p.delete();
+		//	p.delete();
 	     }
 	}
 	
@@ -65,6 +66,7 @@ public class MatchModelDaoTest {
 			model.setOpponent("test");
 			model.setSport(Sports.Rugby);	
 			model.addTicketCategory(new GeneralAdmissionTicketCategory("test", "test", 1,1,1));
+			model.addTicketCategory(new ReservedTicketCategory("test", "test", 1,1,1));
 			
 			fileAccess.save(converter.toElement(model));
 		}		

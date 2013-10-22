@@ -43,7 +43,7 @@ public class XmlModelConverter {
 			throw new ConvertException(e.getMessage());
 		}
 
-		Element elem = doc.getRootElement();
+		Element elem = doc.getRootElement();		
 		elem.setLocalName(modelName);
 
 		return doc.getRootElement();
@@ -58,8 +58,9 @@ public class XmlModelConverter {
 		} catch (Exception e) {
 			// TODO
 		}
+		ModelInterface myModel = (ModelInterface) xstream.fromXML(elem.toXML());
 
-		return (ModelInterface) xstream.fromXML(elem.toXML());
+		return myModel;
 	}
 
 	private void bootstrap() {

@@ -21,22 +21,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import database.DbHelper;
+import database.dao.MatchModelDao;
+import exceptions.PersistException;
 
 /**
  * Handles requests for the Match logic.
  */
 @Controller
 public class MatchController {
+	
+	private MatchModelDao matchDao = new MatchModelDao();
 
 	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	private UserConverter uConverter;
 	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
-	public String getMatchList(Model model, HttpServletRequest request) {
-		DbHelper dbHelper = DbHelper.getInstance();
+	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		List<MatchModel> matchList = new ArrayList<MatchModel>(dbHelper.getAllMatchs());
+		List<MatchModel> matchList = new ArrayList<MatchModel>(matchDao.getAll());
 		MatchFilter matchFilter = new MatchFilter(matchList);
 		model.addAttribute("filter", matchFilter);
 
@@ -45,10 +47,9 @@ public class MatchController {
 	}
 
 	@RequestMapping(value = "/matchsList", method = RequestMethod.POST)
-	public String getPostMatchList(Model model, HttpServletRequest request) {
-		DbHelper dbHelper = DbHelper.getInstance();
+	public String getPostMatchList(Model model, HttpServletRequest request) throws PersistException {	
 
-		List<MatchModel> matchList = new ArrayList<MatchModel>(dbHelper.getAllMatchs());
+		List<MatchModel> matchList = new ArrayList<MatchModel>(matchDao.getAll());
 		MatchFilter matchFilter = new MatchFilter(matchList, request.getParameter("sport"), request.getParameter("gender"),
 				request.getParameter("opponent"), request.getParameter("fromDate"), request.getParameter("toDate"));
 
@@ -61,26 +62,24 @@ public class MatchController {
 	}
 
 	  @RequestMapping(value = "/match", method = RequestMethod.GET)
-      public String getMatch(Model model, HttpServletRequest request) {
-		  DbHelper dbHelper = DbHelper.getInstance();
-          int id = Integer.valueOf(request.getParameter("matchID"));
-          MatchModel match = dbHelper.getMatchFromId(id);
+      public String getMatch(Model model, HttpServletRequest request) throws PersistException {		  
+          Long id = Long.valueOf(request.getParameter("matchID"));
+          MatchModel match = matchDao.getById(id);
           model.addAttribute("match", match);
           model.addAttribute("entry", new LoginViewModel());
           return "match";
       }
 	  
 	  @RequestMapping(value = "/add", method = RequestMethod.GET)
-      public String addTicketToShoppingCart(Model model, HttpServletRequest request) {
+      public String addTicketToShoppingCart(Model model, HttpServletRequest request) throws PersistException {
 		  // Retrieve Request parameters 
-          int matchId = Integer.valueOf(request.getParameter("matchID"));
+          Long matchId = Long.valueOf(request.getParameter("matchID"));
           int catId = Integer.valueOf(request.getParameter("catID"));
           String numPlace = request.getParameter("place");
           int nbPlace = (request.getParameter("nbPlace")) != null ? (Integer.valueOf(request.getParameter("nbPlace"))) : 1 ;
           
-          // Retrieve selected match from Db
-          DbHelper dbHelper = DbHelper.getInstance();
-          MatchModel match = dbHelper.getMatchFromId(matchId);
+          // Retrieve selected match from Db          
+          MatchModel match = matchDao.getById(matchId);
           
           // Create the ticket for the specific match
           InstantiateTicketModel ticket = new InstantiateTicketModel(match, catId, numPlace,nbPlace );

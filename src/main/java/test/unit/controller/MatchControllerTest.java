@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 
 import com.glo4003.project.MatchController;
 
+import exceptions.PersistException;
+
 public class MatchControllerTest {
-	MatchController controller;
+	private MatchController controller;
 	
 	@Before
 	public void initialize() {
@@ -20,7 +22,7 @@ public class MatchControllerTest {
 	}
 	
 	@Test
-	public void OnGetMatchListCanNavigateToMatchListView() {
+	public void OnGetMatchListCanNavigateToMatchListView() throws PersistException {
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		String returned = controller.getMatchList(model, mockRequest);
@@ -29,7 +31,7 @@ public class MatchControllerTest {
 	}
 	
 	@Test
-	public void OnGetMatchCanNavigateToMatchView() {
+	public void OnGetMatchCanNavigateToMatchView() throws PersistException {
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		when(mockRequest.getParameter("matchID")).thenReturn("1");

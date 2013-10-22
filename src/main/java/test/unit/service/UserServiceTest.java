@@ -1,33 +1,38 @@
 package test.unit.service;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-import model.UserViewModel;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import model.UserModel;
+import model.UserViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import service.UserService;
-import database.DbHelper;
+import database.dao.UserModelDao;
+import exceptions.ConvertException;
+import exceptions.PersistException;
 import exceptions.SaveException;
 
 public class UserServiceTest {	
 	
-	private DbHelper helper;
+	private UserModelDao dao;
 	
 	private UserService service;
 	
 	@Before
 	public void initialize() {
 		service = spy(new UserService());
-		helper = mock(DbHelper.class);
-		DbHelper.replaceDb(helper);
+		dao = mock(UserModelDao.class);		
 	}
 	
 	@Test
-	public void dontThrowExceptionOnSaveWellFormedUser() throws SaveException {
+	public void dontThrowExceptionOnSaveWellFormedUser() throws SaveException, PersistException, ConvertException {
 		//Before
 		UserViewModel viewModel = getWellFormedUserModel();
 		
@@ -39,7 +44,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void throwExceptionOnNotWellFormedUser() {
+	public void throwExceptionOnNotWellFormedUser() throws PersistException, ConvertException {
 		//Before
 		UserViewModel viewModel = getNotWellFormedUserModel();
 		SaveException ex = null;
@@ -55,7 +60,7 @@ public class UserServiceTest {
 	}
 	
 	@Test
-	public void canSaveWellFormedUser() throws SaveException {
+	public void canSaveWellFormedUser() throws SaveException, PersistException, ConvertException {
 		//Before
 		UserViewModel viewModel = getWellFormedUserModel();		
 		
@@ -63,11 +68,11 @@ public class UserServiceTest {
 		service.saveNew(viewModel);		
 		
 		//Then
-		verify(helper).addUser(any(UserModel.class));
+		verify(dao).save(any(UserModel.class));
 	}
 	
 	@Test
-	public void dontSaveNotWellFormedUser() throws SaveException {
+	public void dontSaveNotWellFormedUser() throws SaveException, PersistException, ConvertException {
 		//Before
 		UserViewModel viewModel = getNotWellFormedUserModel();		
 		
@@ -78,14 +83,14 @@ public class UserServiceTest {
 		}
 		
 		//Then
-		verify(helper, never()).addUser(any(UserModel.class));
+		verify(dao, never()).save(any(UserModel.class));
 	}
 	
 	@Test
-	public void canThrowExceptionOnExistingUser() {
+	public void canThrowExceptionOnExistingUser() throws PersistException, ConvertException {
 		//Before
 		UserViewModel model = getWellFormedUserModel();
-		Mockito.when(helper.userExist(model.getUsername())).thenReturn(true);
+		Mockito.when(dao.getUserByUsername(model.getUsername())).thenReturn(new UserModel());
 		
 		Boolean exceptionFound = false;
 		try {
@@ -97,7 +102,7 @@ public class UserServiceTest {
 		
 		//Then
 		assertTrue(exceptionFound);
-		verify(helper, never()).addUser(any(UserModel.class));
+		verify(dao, never()).save(any(UserModel.class));
 	}
 	
 	private UserViewModel getWellFormedUserModel() {

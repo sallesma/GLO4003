@@ -6,6 +6,7 @@ import database.converter.*;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 public class UserModel implements ModelInterface {
+	
 	public UserModel() {
 		lastName = "";
 		firstName = "";
@@ -36,12 +37,7 @@ public class UserModel implements ModelInterface {
 	}
 	
 	public void deleteTicket(int id) {
-		for (InstantiateTicketModel t : this.tickets) {
-			if(id == t.getTicketId()) {
-				this.tickets.remove(t);
-				return;
-			}
-		}
+		this.tickets.remove(id);
 	}
 	
 	public InstantiateTicketModel getTicketById(int id) {

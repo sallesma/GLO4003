@@ -54,4 +54,8 @@ public class AdminController {
 		model.addAttribute("match", match);
 		return "match";
 	}
+	
+	public void replaceMatchDAO(MatchModelDao dao) {
+		this.matchDao = dao;
+	}
 }

@@ -55,6 +55,7 @@ public class XmlModelConverter {
 
 	public ModelInterface toObject(nu.xom.Element elem) {		
 		String className = getClassname(elem);
+		xstream.autodetectAnnotations(true);
 		try {
 			Class<?> clazz = Class.forName(className);
 			registerModel(clazz);

@@ -7,6 +7,7 @@ import java.util.List;
 import nu.xom.Element;
 import model.ModelInterface;
 
+import com.glo4003.project.MatchController;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
@@ -14,6 +15,7 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+
 import database.XmlModelConverter;
 import database.dto.FileAccess;
 import exceptions.ConvertException;
@@ -69,12 +71,13 @@ public final class XmlArrayListConverter implements Converter {
 	private ModelInterface getModel(String id, String classname) {		
     	Element elem;
 		try {						
-			elem = FileAccess.getInstance().getByID(Long.getLong(id), classname);
+			Long myId = Long.parseLong(id);
+			elem = FileAccess.getInstance().getByID(myId, classname);
 		} catch (PersistException e) {
 			throw new ConversionException(e.getMessage());
 		}  	
-		
-    	return dto.toObject(elem);
+		ModelInterface myint = dto.toObject(elem);		
+    	return myint;
 	}
 
 	public boolean canConvert(Class type) {

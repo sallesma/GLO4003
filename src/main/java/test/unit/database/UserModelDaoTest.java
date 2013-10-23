@@ -3,9 +3,6 @@ package test.unit.database;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.*;
 
 import java.io.File;
@@ -19,6 +16,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import test.unit.database.DaoTest.TestClass;
+
 import com.thoughtworks.xstream.XStream;
 
 import database.XmlModelConverter;
@@ -29,18 +28,18 @@ import exceptions.PersistException;
 
 public class UserModelDaoTest {
 
-	private XStream xstream;
 	private FileAccess fileAccess;
+	private XmlModelConverter converter;	
 	private UserModelDao dao;
-	private XmlModelConverter converter;
-
+	
 	@Before
-	public void bootStrap() throws PersistException, ConvertException {
-		xstream = spy(new XStream());
-		fileAccess = mock(FileAccess.class);	
+	public void bootStrap() throws PersistException {				
+		fileAccess = mock(FileAccess.class);
 		FileAccess.replace(fileAccess);
-		converter = spy(new XmlModelConverter(xstream));
-		dao = spy(new UserModelDao(converter, fileAccess));				
+		converter = mock(XmlModelConverter.class);		
+		dao = spy(new UserModelDao(converter, fileAccess));		
+		
+		configureFileAccess();
 	}
 	
 	@Test
@@ -55,15 +54,14 @@ public class UserModelDaoTest {
 		dao.getUserByUsername("test");
 		
 		//Then
-		for(Element elem: models) {
-			verify(converter.toObject(elem), times(1));
-		}		
+		verify(converter, times(10)).toObject(any(Element.class));
 	}
 	
 	@Test
 	public void canReturnTrueIfLoginValid() throws PersistException, ConvertException {
 		//Before
 		when(fileAccess.getAll(anyString())).thenReturn(getModels());
+		when(converter.toObject(any(Element.class))).thenReturn(getModel());
 		
 		//When
 		Boolean result = dao.isLoginValid("test 3", "password");
@@ -76,6 +74,7 @@ public class UserModelDaoTest {
 	public void canReturnFalseIfLoginInvalid() throws PersistException, ConvertException {
 		//Before
 		when(fileAccess.getAll(anyString())).thenReturn(getModels());
+		when(converter.toObject(any(Element.class))).thenReturn(getModel());
 				
 		//When
 		Boolean result = dao.isLoginValid("userr 3", "password");
@@ -87,8 +86,7 @@ public class UserModelDaoTest {
 	private List<Element> getModels() {
 		List<Element> models = new ArrayList<Element>(20);
 		for(Integer i = 0;i<10;i++) {
-			Element elem = mock(Element.class);
-			when(elem.getLocalName()).thenReturn("UserModel");
+			Element elem = mock(Element.class);			
 			models.add(elem);
 		}		
 		
@@ -103,8 +101,12 @@ public class UserModelDaoTest {
 		model.setLastName("lastname");
 		model.setPassword("password");
 		model.setPhoneNumber("test");
-		model.setUsername("test");
+		model.setUsername("test 3");
 		
 		return model;
 	}
+	
+	private void configureFileAccess() throws PersistException {
+		when(fileAccess.getNewId(anyString())).thenReturn(1L);
+	}	
 }

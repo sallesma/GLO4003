@@ -32,13 +32,13 @@ public class MatchController {
 	
 	private MatchModelDao matchDao = new MatchModelDao();
 
-	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
+	//public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	private UserConverter uConverter;
 	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		List<MatchModel> matchList = new ArrayList<MatchModel>(matchDao.getAll());
+		List<MatchModel> matchList = new ArrayList<MatchModel>(matchDao.getAll());		
 		MatchFilter matchFilter = new MatchFilter(matchList);
 		model.addAttribute("filter", matchFilter);
 

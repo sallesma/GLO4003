@@ -34,7 +34,7 @@ public class UserService {
 
 	public void modify(UserViewModel user) throws SaveException, PersistException, ConvertException {		
 		List<String> errors = validator.validate(user);
-		if (userDao.getUserByUsername(user.getUsername()) != null) {
+		if (userDao.getUserByUsername(user.getUsername()) == null) {
 			errors.add("Le nom d'utilisateur n'existe pas");
 		}
 		

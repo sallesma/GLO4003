@@ -44,6 +44,18 @@ public class UserServiceTest {
 	}
 	
 	@Test
+	public void dontThrowExceptionOnModifyWellFormedUser() throws SaveException, PersistException, ConvertException {
+		//Before
+		UserViewModel viewModel = getWellFormedUserModel();
+		
+		//When		
+		service.modify(viewModel);	
+		
+		//Then
+		//No exception found
+	}
+	
+	@Test
 	public void throwExceptionOnNotWellFormedUser() throws PersistException, ConvertException {
 		//Before
 		UserViewModel viewModel = getNotWellFormedUserModel();
@@ -51,6 +63,22 @@ public class UserServiceTest {
 		try {
 			//When
 			service.saveNew(viewModel);	
+		} catch (SaveException e) {
+			ex = e;
+		}
+		
+		//Then
+		assertTrue(ex.getErrors().size() == 5);
+	}
+	
+	@Test
+	public void throwExceptionOnModifyNotWellFormedUser() throws PersistException, ConvertException {
+		//Before
+		UserViewModel viewModel = getNotWellFormedUserModel();
+		SaveException ex = null;
+		try {
+			//When
+			service.modify(viewModel);	
 		} catch (SaveException e) {
 			ex = e;
 		}
@@ -72,6 +100,18 @@ public class UserServiceTest {
 	}
 	
 	@Test
+	public void canModifyWellFormedUser() throws SaveException, PersistException, ConvertException {
+		//Before
+		UserViewModel viewModel = getWellFormedUserModel();		
+		
+		//When
+		service.modify(viewModel);		
+		
+		//Then
+		verify(dao).save(any(UserModel.class));
+	}	
+	
+	@Test
 	public void dontSaveNotWellFormedUser() throws SaveException, PersistException, ConvertException {
 		//Before
 		UserViewModel viewModel = getNotWellFormedUserModel();		
@@ -79,6 +119,21 @@ public class UserServiceTest {
 		try {
 			//When
 			service.saveNew(viewModel);	
+		} catch(SaveException e) {			
+		}
+		
+		//Then
+		verify(dao, never()).save(any(UserModel.class));
+	}
+	
+	@Test
+	public void dontModifyNotWellFormedUser() throws SaveException, PersistException, ConvertException {
+		//Before
+		UserViewModel viewModel = getNotWellFormedUserModel();		
+		
+		try {
+			//When
+			service.modify(viewModel);	
 		} catch(SaveException e) {			
 		}
 		
@@ -105,6 +160,25 @@ public class UserServiceTest {
 		verify(dao, never()).save(any(UserModel.class));
 	}
 	
+	@Test
+	public void canThrowExceptionOnNotExistingUser() throws PersistException, ConvertException {
+		//Before
+		UserViewModel model = getWellFormedUserModel();
+		Mockito.when(dao.getUserByUsername(model.getUsername())).thenReturn(getWellFormedUserModelDifferentUsername());
+		
+		Boolean exceptionFound = false;
+		try {
+			//When
+			service.modify(model);	
+		} catch(SaveException e) {	
+			exceptionFound = true;
+		}
+		
+		//Then
+		assertTrue(exceptionFound);
+		verify(dao, never()).save(any(UserModel.class));
+	}
+	
 	private UserViewModel getWellFormedUserModel() {
 		UserViewModel model = new UserViewModel();
     	model.setAddress("test");
@@ -116,6 +190,19 @@ public class UserServiceTest {
     	
     	return model;
 	}
+	
+	private UserModel getWellFormedUserModelDifferentUsername() {
+		UserModel model = new UserModel();
+    	model.setAddress("test");
+    	model.setFirstName("test");
+    	model.setLastName("test");
+    	model.setPassword("test");
+    	model.setPhoneNumber("418-465-2430");
+    	model.setUsername("test_diff");    	
+    	
+    	return model;
+	}
+
 	
 	private UserViewModel getNotWellFormedUserModel() {
 		UserViewModel model = new UserViewModel();

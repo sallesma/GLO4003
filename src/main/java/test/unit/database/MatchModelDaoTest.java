@@ -1,18 +1,30 @@
 package test.unit.database;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.spy;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.GeneralAdmissionTicketCategory;
 import model.MatchModel;
 import model.ReservedTicketCategory;
+import nu.xom.Element;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import test.unit.database.DaoTest.TestClass;
+import test.unit.database.DaoTest.TestClass2;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -26,51 +38,40 @@ import exceptions.PersistException;
 
 public class MatchModelDaoTest {
 
-	private XStream xstream;
-	private FileAccess fileAccess;
 	private MatchModelDao dao;
-	private XmlModelConverter converter;
+	private FileAccess fileAccess;
+	private XmlModelConverter converter;	
 	
-	private final String path = "src/main/java/database/files/";
-
 	@Before
-	public void bootStrap() throws PersistException, ConvertException {
-		xstream = spy(new XStream());
-		fileAccess = FileAccess.getInstance();		
-		converter = spy(new XmlModelConverter(xstream));
-		dao = spy(new MatchModelDao(converter, fileAccess));
-		fillBd();
-	}
-	
-	@After
-	public void clean() throws Exception {
-		File p = new File(path + "MatchModel.xml");
-		 if (p.exists()) {
-			p.delete();
-	     }
+	public void bootStrap() throws PersistException {	
+		List<MatchModel> models = new ArrayList<MatchModel>();
+		models.add(new MatchModel());
+		fileAccess = mock(FileAccess.class);
+		FileAccess.replace(fileAccess);
+		converter = mock(XmlModelConverter.class);		
+		dao = spy(new MatchModelDao(converter, fileAccess));		
+		
+		configureFileAccess();
 	}
 	
 	@Test
 	public void canGetAllMatchsBySport() throws PersistException, ConvertException {
+		//Before
+		List<Element> list = new ArrayList<Element>();
+		list.add(mock(Element.class));
+		list.add(mock(Element.class));
+		when(converter.toObject(any(Element.class))).thenReturn(new MatchModel());
+		when(fileAccess.getAll(anyString())).thenReturn(list);
+		
 		//When
 		List<MatchModel> models = dao.getAllMatchsBySport(Sports.Rugby);
 		
 		//Then
-		assertTrue(models.size() == 20);
+		verify(dao, times(1)).getAll();
+		assertTrue(models.size() == 0);
 	}
 	
-	private void fillBd() throws PersistException, ConvertException {
-		for(Integer i = 0;i<20;i++) {
-			MatchModel model = new MatchModel();
-			model.setCity("test");
-			model.setField(i.toString());
-			model.setGender(Gender.M);
-			model.setOpponent("test");
-			model.setSport(Sports.Rugby);	
-			model.addTicketCategory(new GeneralAdmissionTicketCategory("test", "test", 1,1,1));
-			model.addTicketCategory(new ReservedTicketCategory("test", "test", 1,1,1));
-			
-			fileAccess.save(converter.toElement(model));
-		}		
+	private void configureFileAccess() throws PersistException {
+		when(fileAccess.getNewId(anyString())).thenReturn(1L);
 	}
 }

@@ -3,6 +3,9 @@ package database.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.glo4003.project.MatchController;
+
+import model.MatchModel;
 import model.ModelInterface;
 import nu.xom.Element;
 import database.XmlModelConverter;
@@ -59,9 +62,17 @@ public abstract class Dao<T extends ModelInterface> implements DaoInterface<T> {
 	public List<T> getAll() throws PersistException {
 		List<T> models = new ArrayList<T>();		
 		for (Element elem : fileAccess.getAll(className)) {
-			models.add((T) converter.toObject(elem));
+			models.add((T) converter.toObject(elem));			
 		}
 		
 		return models;
+	}
+	
+	public void setDao(FileAccess dao) {
+		this.fileAccess = dao;
+	}
+	
+	public void setConverter(XmlModelConverter converter) {
+		this.converter = converter;
 	}
 }

@@ -23,10 +23,12 @@ public class AuditHelper {
 	UserModelDao userDao = new UserModelDao();
 	MatchModelDao matchDao = new MatchModelDao();
 	
+	@Test
 	public void CreateAudits() throws PersistException, ConvertException {
 		createUserAudits();
 		createMatchAudits();
 	}
+	
 	@Test	
 	public void createUserAudits() throws PersistException, ConvertException {
 		userDao.save(createUser("Matt", "Martin", "MM", "password", false));

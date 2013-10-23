@@ -89,7 +89,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
 	public String updateUser(Model model,HttpServletRequest request) {
-		model.addAttribute("userModel", request.getSession().getAttribute("loggedUser"));
+	    model.addAttribute("userModel", request.getSession().getAttribute("loggedUser"));
 //		model.addAttribute("entry", new LoginViewModel());
 
 		return "updateUser";

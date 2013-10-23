@@ -40,6 +40,7 @@ public class MatchController {
 
 		List<MatchModel> matchList = new ArrayList<MatchModel>(matchDao.getAll());
 		MatchFilter matchFilter = new MatchFilter(matchList);
+		matchFilter.filterMatchList();
 		model.addAttribute("filter", matchFilter);
 
 		model.addAttribute("entry", new LoginViewModel());
@@ -53,9 +54,11 @@ public class MatchController {
 		MatchFilter matchFilter = new MatchFilter(matchList, request.getParameter("sport"), request.getParameter("gender"),
 				request.getParameter("opponent"), request.getParameter("fromDate"), request.getParameter("toDate"));
 
+		matchFilter.filterMatchList();
 		if (matchFilter.getMatchList().isEmpty())
 			model.addAttribute("noMatch", "Il n'y a pas de matchs proposés selon les filtres choisis");
 
+		
 		model.addAttribute("filter", matchFilter);
 		model.addAttribute("entry", new LoginViewModel());
 		return "matchsList";

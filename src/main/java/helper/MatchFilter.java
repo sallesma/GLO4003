@@ -40,8 +40,6 @@ public class MatchFilter {
 		Date oneYearLater = cal.getTime();
 		toDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).format(oneYearLater);
 		
-		FilterFromDate();
-		
 	}
 
 	public MatchFilter(List<MatchModel> matchList, String sport, String gender, String opponent, String fromDate, String toDate) {
@@ -56,10 +54,9 @@ public class MatchFilter {
 			opponentsList.add(match.getOpponent());
 		}
 		this.matchList = matchList;
-		FilterMatchList();
 	}
 	
-	public List<MatchModel> FilterMatchList() {
+	public List<MatchModel> filterMatchList() {
 		FilterFromSport();
 		FilterFromGender();
 		FilterFromOpponent();
@@ -105,8 +102,8 @@ public class MatchFilter {
 			Date startDate = null;
 			Date endDate = null;
 			try {
-				startDate = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH).parse(fromDate);
-				endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH).parse(toDate);
+				startDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).parse(fromDate);
+				endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).parse(toDate);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}

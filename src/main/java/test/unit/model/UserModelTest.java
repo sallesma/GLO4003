@@ -1,6 +1,6 @@
 package test.unit.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -18,6 +18,8 @@ import org.junit.Test;
 import config.ConfigManager;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
+import exceptions.ConvertException;
+import exceptions.PersistException;
 
 public class UserModelTest {
 
@@ -35,7 +37,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedModelHasAddress() {
+	public void PopulatedModelHasAddress() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -47,7 +49,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedModelHasFirstName() {
+	public void PopulatedModelHasFirstName() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -59,7 +61,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedModelHasLastName() {
+	public void PopulatedModelHasLastName() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -71,7 +73,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedModelHasPhoneNumber() {
+	public void PopulatedModelHasPhoneNumber() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -83,7 +85,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedModelHasUserName() {
+	public void PopulatedModelHasUserName() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -95,7 +97,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedModelHasPassword() {
+	public void PopulatedModelHasPassword() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -107,7 +109,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedUSerModelIsNotAdmin() {
+	public void PopulatedUSerModelIsNotAdmin() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -121,7 +123,7 @@ public class UserModelTest {
 
 
 	@Test
-	public void PopulatedUserModelGetTicket() {
+	public void PopulatedUserModelGetTicket() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 		InstantiateTicketModel ticket = model.getTickets().get(0);
@@ -140,7 +142,7 @@ public class UserModelTest {
 
 
 	@Test
-	public void PopulatedUserModelAddTicket() {
+	public void PopulatedUserModelAddTicket() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -161,7 +163,7 @@ public class UserModelTest {
 
 
 	@Test
-	public void PopulatedUserModelDeleteTicket() {
+	public void PopulatedUserModelDeleteTicket() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 		InstantiateTicketModel ticket = model.getTickets().get(0);
@@ -174,7 +176,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedUserModelNbTicketsWhenTickets(){
+	public void PopulatedUserModelNbTicketsWhenTickets() throws PersistException, ConvertException{
 		//Before
 		UserModel model = getPopulatedUserModel();
 
@@ -186,7 +188,7 @@ public class UserModelTest {
 	}
 
 	@Test
-	public void PopulatedUserModelNbTicketsWhenNoTicket() {
+	public void PopulatedUserModelNbTicketsWhenNoTicket() throws PersistException, ConvertException {
 		//Before
 		UserModel model = getPopulatedUserModel();
 		model.setTickets(null);
@@ -200,7 +202,7 @@ public class UserModelTest {
 	}
 
 
-	private UserModel getPopulatedUserModel() {
+	private UserModel getPopulatedUserModel() throws PersistException, ConvertException {
 		UserModel model = new UserModel();
 		model.setAddress("test");
 		model.setFirstName("test");

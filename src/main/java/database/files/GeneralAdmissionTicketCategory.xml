@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GeneralAdmissionTicketCategorys>
-    <GeneralAdmissionTicketCategory>
-        <id>1</id>
-        <category>test</category>
-        <name>test</name>
-        <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-    </GeneralAdmissionTicketCategory>
+<GeneralAdmissionTicketCategorys> 
     <GeneralAdmissionTicketCategory>
         <id>2</id>
         <category>test</category>
@@ -154,6 +146,14 @@
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>20</id>
+        <category>test</category>
+        <name>test</name>
+        <price>1.0</price>
+        <numberInitialTickets>1</numberInitialTickets>
+        <numberSoldTickets>1</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
+        <id>1</id>
         <category>test</category>
         <name>test</name>
         <price>1.0</price>

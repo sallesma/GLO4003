@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.MatchModel;
-import model.UserModel;
 import config.ConfigManager.Sports;
 import database.XmlModelConverter;
 import database.dto.FileAccess;
@@ -25,7 +24,7 @@ public class MatchModelDao extends Dao<MatchModel> {
 		for (MatchModel myMatch : getAll()) {
 			if (myMatch.getSport() == sport) {
 				results.add(myMatch);		
-			}			
+			}
 		}
 		
 		return results;

@@ -8,27 +8,16 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.spy;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.GeneralAdmissionTicketCategory;
 import model.MatchModel;
-import model.ReservedTicketCategory;
 import nu.xom.Element;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import test.unit.database.DaoTest.TestClass;
-import test.unit.database.DaoTest.TestClass2;
-
-import com.thoughtworks.xstream.XStream;
-
-import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
 import database.XmlModelConverter;
 import database.dao.MatchModelDao;

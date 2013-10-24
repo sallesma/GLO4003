@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MatchModels>
-    <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>1</id>
-        <date>2013-10-23 21:53:17.483 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>0</field>
-        <tickets>1:GeneralAdmissionTicketCategory,1:ReservedTicketCategory,</tickets>
-    </MatchModel>
+<MatchModels> 
     <MatchModel>
         <sport>Rugby</sport>
         <gender>M</gender>
@@ -199,5 +189,15 @@
         <city>test</city>
         <field>19</field>
         <tickets>20:GeneralAdmissionTicketCategory,20:ReservedTicketCategory,</tickets>
+    </MatchModel>
+    <MatchModel>
+        <sport>Rugby</sport>
+        <gender>M</gender>
+        <id>1</id>
+        <date>2013-10-23 21:53:17.483 UTC</date>
+        <opponent>test</opponent>
+        <city>test</city>
+        <field>0</field>
+        <tickets>1:GeneralAdmissionTicketCategory,1:ReservedTicketCategory,</tickets>
     </MatchModel>
 </MatchModels>

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import database.dao.MatchModelDao;
+import exceptions.ConvertException;
 import exceptions.PersistException;
 
 /**
@@ -74,7 +75,7 @@ public class MatchController {
       }
 	  
 	  @RequestMapping(value = "/add", method = RequestMethod.GET)
-      public String addTicketToShoppingCart(Model model, HttpServletRequest request) throws PersistException {
+      public String addTicketToShoppingCart(Model model, HttpServletRequest request) throws PersistException, ConvertException {
 		  // Retrieve Request parameters 
           Long matchId = Long.valueOf(request.getParameter("matchID"));
           int catId = Integer.valueOf(request.getParameter("catID"));

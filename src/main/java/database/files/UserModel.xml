@@ -9,6 +9,7 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>false</isAdmin>
+        <tickets></tickets>
     </UserModel>
     <UserModel>
         <id>2</id>
@@ -29,6 +30,7 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>false</isAdmin>
+        <tickets></tickets>
     </UserModel>
     <UserModel>
         <id>4</id>
@@ -39,6 +41,7 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>false</isAdmin>
+        <tickets></tickets>
     </UserModel>
     <UserModel>
         <id>5</id>
@@ -49,5 +52,6 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>true</isAdmin>
+        <tickets></tickets>
     </UserModel>
 </UserModels>

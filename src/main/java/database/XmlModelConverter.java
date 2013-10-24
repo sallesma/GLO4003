@@ -2,10 +2,7 @@ package database;
 
 import java.io.IOException;
 
-import model.GeneralAdmissionTicketCategory;
 import model.ModelInterface;
-import model.ReservedTicketCategory;
-import model.UserModel;
 import nu.xom.Attribute;
 import nu.xom.Builder;
 import nu.xom.Element;
@@ -13,7 +10,6 @@ import nu.xom.ParsingException;
 
 import com.thoughtworks.xstream.XStream;
 
-import database.converter.XmlObjectConverter;
 import database.dto.FileAccess;
 import exceptions.ConvertException;
 import exceptions.PersistException;
@@ -39,7 +35,7 @@ public class XmlModelConverter {
 			Long id = FileAccess.getInstance().getNewId(modelName);
 			model.setId(id);
 		}
-		xstream.autodetectAnnotations(true);
+		
 		nu.xom.Document doc;
 		try {
 			doc = new Builder().build(xstream.toXML(model), null);
@@ -54,15 +50,13 @@ public class XmlModelConverter {
 	}
 
 	public ModelInterface toObject(nu.xom.Element elem) {		
-		String className = getClassname(elem);
-		xstream.autodetectAnnotations(true);
+		String className = getClassname(elem);		
 		try {
 			Class<?> clazz = Class.forName(className);
 			registerModel(clazz);
 		} catch (Exception e) {
-			// TODO
-		}
-		String xml = elem.toXML();
+			//if an error is thrown, the model is not into the model folder and have been registered before.
+		}		
 		ModelInterface myModel = (ModelInterface) xstream.fromXML(elem.toXML());
 
 		return myModel;
@@ -78,10 +72,7 @@ public class XmlModelConverter {
 	}
 
 	private void bootstrap() {
-		registerModel(UserModel.class);
-		//xstream.registerConverter(new XmlObjectConverter());
-		//xstream.registerLocalConverter(ReservedTicketCategory.class, "AbstractTicketCategory", new XmlObjectConverter());
-		//xstream.registerLocalConverter(GeneralAdmissionTicketCategory.class, "AbstractTicketCategory", new XmlObjectConverter());
+		xstream.autodetectAnnotations(true);		
 	}
 
 	public void registerModel(Class<?> clazz) {

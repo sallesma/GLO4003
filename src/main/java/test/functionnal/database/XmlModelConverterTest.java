@@ -80,7 +80,7 @@ public class XmlModelConverterTest {
 		assertThat(elem.getFirstChildElement("test1").getValue(), is("test1"));
 		assertThat(elem.getFirstChildElement("id").getValue(), is("1"));
 		assertThat(elem.getFirstChildElement("test2").getValue(), is("test2"));
-		assertThat(elem.getFirstChildElement("testClass2").getValue(), is("1"));		
+		assertThat(elem.getFirstChildElement("testClass2").getValue(), is("2"));		
 	}
 	
 	@Test

@@ -63,4 +63,16 @@ public class UserService {
 	public UserViewModel convert(UserModel model) {
 		return converter.convert(model);
 	}
+	
+	public void replaceConverter(UserConverter converter) {
+		this.converter = converter;
+	}
+	
+	public void replaceValidator(ModelValidator validator) {
+		this.validator = validator;
+	}
+	
+	public void replaceDao(UserModelDao userDao) {
+		this.userDao = userDao;		
+	}
 }

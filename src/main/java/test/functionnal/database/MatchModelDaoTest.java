@@ -11,7 +11,6 @@ import model.GeneralAdmissionTicketCategory;
 import model.MatchModel;
 import model.ReservedTicketCategory;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,7 +39,7 @@ public class MatchModelDaoTest {
 		fileAccess = FileAccess.getInstance();		
 		converter = spy(new XmlModelConverter(xstream));
 		dao = spy(new MatchModelDao(converter, fileAccess));
-		//fillBd();
+		fillBd();
 	}
 	
 

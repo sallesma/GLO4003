@@ -1,7 +1,6 @@
 package database.converter;
 
 import model.ModelInterface;
-import nu.xom.Attribute;
 import nu.xom.Element;
 
 import com.thoughtworks.xstream.converters.ConversionException;
@@ -46,14 +45,12 @@ public class XmlObjectConverter implements Converter {
             UnmarshallingContext context) {   	    	
     	Long id = Long.valueOf(reader.getValue());
     	Element elem;
-		try {
-			String name = reader.getNodeName();
+		try {			
 			String classname = getClassname(reader);
 			elem = FileAccess.getInstance().getByID(id, classname);
 		} catch (PersistException e) {
 			throw new ConversionException(e.getMessage());
-		}  	
-    	ModelInterface rr = dto.toObject(elem);
+		}  	    	
         return dto.toObject(elem);
     }
     

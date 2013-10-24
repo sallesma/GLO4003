@@ -3,20 +3,10 @@
     <MatchModel>
         <sport>Rugby</sport>
         <gender>M</gender>
-        <id>2</id>
-        <date>2013-10-23 21:53:17.726 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>1</field>
-        <tickets>2:GeneralAdmissionTicketCategory,2:ReservedTicketCategory,</tickets>
-    </MatchModel>
-    <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
         <id>3</id>
         <date>2013-10-23 21:53:17.816 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <opponent>UQAM</opponent>
+        <city>Québec</city>
         <field>2</field>
         <tickets>3:GeneralAdmissionTicketCategory,3:ReservedTicketCategory,</tickets>
     </MatchModel>
@@ -24,39 +14,39 @@
         <sport>Rugby</sport>
         <gender>M</gender>
         <id>4</id>
-        <date>2013-10-23 21:53:17.838 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-10-29 21:53:17.838 UTC</date>
+        <opponent>Rimouski</opponent>
+        <city>Québec</city>
         <field>3</field>
         <tickets>4:GeneralAdmissionTicketCategory,4:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
         <sport>Rugby</sport>
-        <gender>M</gender>
+        <gender>F</gender>
         <id>5</id>
-        <date>2013-10-23 21:53:17.870 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-11-27 20:35:17.870 UTC</date>
+        <opponent>UQAM</opponent>
+        <city>Québec</city>
         <field>4</field>
         <tickets>5:GeneralAdmissionTicketCategory,5:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
+        <sport>Football</sport>
+        <gender>F</gender>
         <id>6</id>
-        <date>2013-10-23 21:53:17.909 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-11-12 21:53:17.909 UTC</date>
+        <opponent>Concordia</opponent>
+        <city>Montréal</city>
         <field>5</field>
         <tickets>6:GeneralAdmissionTicketCategory,6:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
+        <sport>Volleyball</sport>
+        <gender>F</gender>
         <id>7</id>
-        <date>2013-10-23 21:53:17.951 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-11-23 21:53:17.951 UTC</date>
+        <opponent>UQAM</opponent>
+        <city>Montréal</city>
         <field>6</field>
         <tickets>7:GeneralAdmissionTicketCategory,7:ReservedTicketCategory,</tickets>
     </MatchModel>
@@ -71,17 +61,17 @@
         <tickets>8:GeneralAdmissionTicketCategory,8:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
-        <sport>Rugby</sport>
+        <sport>Soccer</sport>
         <gender>M</gender>
         <id>9</id>
-        <date>2013-10-23 21:53:18.41 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-12-12 17:00:00.41 UTC</date>
+        <opponent>Alifax</opponent>
+        <city>Alifax</city>
         <field>8</field>
         <tickets>9:GeneralAdmissionTicketCategory,9:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
-        <sport>Rugby</sport>
+        <sport>Basketball</sport>
         <gender>M</gender>
         <id>10</id>
         <date>2013-10-23 21:53:18.79 UTC</date>
@@ -121,52 +111,42 @@
         <tickets>13:GeneralAdmissionTicketCategory,13:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
+        <sport>Basketball</sport>
+        <gender>F</gender>
         <id>14</id>
-        <date>2013-10-23 21:53:18.268 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-12-23 21:53:18.268 UTC</date>
+        <opponent>Université</opponent>
+        <city>Rimouski</city>
         <field>13</field>
         <tickets>14:GeneralAdmissionTicketCategory,14:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>15</id>
-        <date>2013-10-23 21:53:18.315 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>14</field>
-        <tickets>15:GeneralAdmissionTicketCategory,15:ReservedTicketCategory,</tickets>
-    </MatchModel>
-    <MatchModel>
-        <sport>Rugby</sport>
+        <sport>Basketball</sport>
         <gender>M</gender>
         <id>16</id>
-        <date>2013-10-23 21:53:18.364 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-10-29 18:30:18.364 UTC</date>
+        <opponent>ETS</opponent>
+        <city>Montréal</city>
         <field>15</field>
         <tickets>16:GeneralAdmissionTicketCategory,16:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
-        <sport>Rugby</sport>
+        <sport>Soccer</sport>
         <gender>M</gender>
         <id>17</id>
-        <date>2013-10-23 21:53:18.415 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2013-12-23 15:53:18.415 UTC</date>
+        <opponent>UQAM</opponent>
+        <city>Montréal</city>
         <field>16</field>
         <tickets>17:GeneralAdmissionTicketCategory,17:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
         <sport>Rugby</sport>
-        <gender>M</gender>
+        <gender>F</gender>
         <id>18</id>
         <date>2013-10-23 21:53:18.466 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <opponent>UQAM</opponent>
+        <city>Montréal</city>
         <field>17</field>
         <tickets>18:GeneralAdmissionTicketCategory,18:ReservedTicketCategory,</tickets>
     </MatchModel>
@@ -179,25 +159,5 @@
         <city>test</city>
         <field>18</field>
         <tickets>19:GeneralAdmissionTicketCategory,19:ReservedTicketCategory,</tickets>
-    </MatchModel>
-    <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>20</id>
-        <date>2013-10-23 21:53:18.581 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>19</field>
-        <tickets>20:GeneralAdmissionTicketCategory,20:ReservedTicketCategory,</tickets>
-    </MatchModel>
-    <MatchModel>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>1</id>
-        <date>2013-10-23 21:53:17.483 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>0</field>
-        <tickets>1:GeneralAdmissionTicketCategory,1:ReservedTicketCategory,</tickets>
     </MatchModel>
 </MatchModels>

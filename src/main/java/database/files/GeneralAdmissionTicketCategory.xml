@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GeneralAdmissionTicketCategorys> 
     <GeneralAdmissionTicketCategory>
-        <id>2</id>
-        <category>test</category>
-        <name>test</name>
-        <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-    </GeneralAdmissionTicketCategory>
-    <GeneralAdmissionTicketCategory>
         <id>3</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>4</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>5</id>
-        <category>test</category>
+        <category>libre</category>
         <name>test</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
@@ -34,130 +26,138 @@
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>6</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>7</id>
-        <category>test</category>
-        <name>test</name>
-        <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>12.0</price>
+        <numberInitialTickets>12</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>8</id>
-        <category>test</category>
-        <name>test</name>
-        <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>11.0</price>
+        <numberInitialTickets>11</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>9</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>10</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>11</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>12</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>13</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>100</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>14</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-    </GeneralAdmissionTicketCategory>
-    <GeneralAdmissionTicketCategory>
-        <id>15</id>
-        <category>test</category>
-        <name>test</name>
-        <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>50</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>16</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>100</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>17</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>15</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>18</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>10</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>19</id>
-        <category>test</category>
+        <category>libre</category>
         <name>test</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>100</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>20</id>
-        <category>test</category>
+        <category>libre</category>
         <name>test</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>15</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>1</id>
-        <category>test</category>
-        <name>test</name>
+        <category>libre</category>
+        <name>Debout</name>
         <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
+        <numberInitialTickets>10</numberInitialTickets>
         <numberSoldTickets>1</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
+        <id>15</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>1.0</price>
+        <numberInitialTickets>100</numberInitialTickets>
+        <numberSoldTickets>3</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
+        <id>2</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>10.0</price>
+        <numberInitialTickets>10</numberInitialTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
 </GeneralAdmissionTicketCategorys>

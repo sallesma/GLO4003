@@ -41,7 +41,7 @@ public class UserService {
 		if (!errors.isEmpty()) {
 			throw new SaveException(errors);
 		}
-		
+		userDao.delete(userDao.getUserByUsername(user.getUsername()));
 		userDao.save(converter.convert(user));			
 	}
 

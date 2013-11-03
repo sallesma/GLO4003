@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import database.dao.MatchModelDao;
+import exceptions.ConvertException;
 import exceptions.PersistException;
 
 @Controller
@@ -32,8 +33,13 @@ public class AdminController {
 					cat.setNumberInitialTickets(cat.getNumberInitialTickets()+1);
 				}
 		}
-		
 		model.addAttribute("match", match);
+		MatchModelDao matchModelDao = new MatchModelDao();
+		try {
+			matchModelDao.save(match);
+		} catch (ConvertException e) {
+			e.printStackTrace();
+		}
 		return "match";
 	}
 	
@@ -52,6 +58,12 @@ public class AdminController {
 				}
 		}
 		model.addAttribute("match", match);
+		MatchModelDao matchModelDao = new MatchModelDao();
+		try {
+			matchModelDao.save(match);
+		} catch (ConvertException e) {
+			e.printStackTrace();
+		}
 		return "match";
 	}
 	

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ReservedTicketCategorys> 
+<ReservedTicketCategorys>
     <ReservedTicketCategory>
         <id>3</id>
         <category>réservé</category>
@@ -39,25 +39,6 @@
         </placements>
     </ReservedTicketCategory>
     <ReservedTicketCategory>
-        <id>5</id>
-        <category>réservé</category>
-        <name>Place assises</name>
-        <price>1.0</price>
-        <numberInitialTickets>10</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-        <placements>
-            <string>1</string>
-            <string>2</string>
-            <string>3</string>
-            <string>4</string>
-            <string>5</string>
-            <string>6</string>
-            <string>7</string>
-            <string>8</string>
-            <string>9</string>
-        </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
         <id>6</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -77,45 +58,7 @@
         </placements>
     </ReservedTicketCategory>
     <ReservedTicketCategory>
-        <id>7</id>
-        <category>réservé</category>
-        <name>Place assises</name>
-        <price>1.0</price>
-        <numberInitialTickets>10</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-        <placements>
-            <string>1</string>
-            <string>2</string>
-            <string>3</string>
-            <string>4</string>
-            <string>5</string>
-            <string>6</string>
-            <string>7</string>
-            <string>8</string>
-            <string>9</string>
-        </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
         <id>8</id>
-        <category>réservé</category>
-        <name>Place assises</name>
-        <price>1.0</price>
-        <numberInitialTickets>10</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-        <placements>
-            <string>1</string>
-            <string>2</string>
-            <string>3</string>
-            <string>4</string>
-            <string>5</string>
-            <string>6</string>
-            <string>7</string>
-            <string>8</string>
-            <string>9</string>
-        </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
-        <id>9</id>
         <category>réservé</category>
         <name>Place assises</name>
         <price>1.0</price>
@@ -210,45 +153,7 @@
         </placements>
     </ReservedTicketCategory>
     <ReservedTicketCategory>
-        <id>14</id>
-        <category>réservé</category>
-        <name>Place assises</name>
-        <price>1.0</price>
-        <numberInitialTickets>10</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-        <placements>
-            <string>1</string>
-            <string>2</string>
-            <string>3</string>
-            <string>4</string>
-            <string>5</string>
-            <string>6</string>
-            <string>7</string>
-            <string>8</string>
-            <string>9</string>
-        </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
         <id>16</id>
-        <category>réservé</category>
-        <name>Place assises</name>
-        <price>1.0</price>
-        <numberInitialTickets>10</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-        <placements>
-            <string>1</string>
-            <string>2</string>
-            <string>3</string>
-            <string>4</string>
-            <string>5</string>
-            <string>6</string>
-            <string>7</string>
-            <string>8</string>
-            <string>9</string>
-        </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
-        <id>17</id>
         <category>réservé</category>
         <name>Place assises</name>
         <price>1.0</price>
@@ -373,6 +278,101 @@
             <string>2</string>
             <string>3</string>
             <string>4</string>
+            <string>6</string>
+            <string>7</string>
+            <string>8</string>
+            <string>9</string>
+        </placements>
+    </ReservedTicketCategory> 
+    <ReservedTicketCategory>
+        <id>7</id>
+        <category>réservé</category>
+        <name>Place assises</name>
+        <price>1.0</price>
+        <numberInitialTickets>10</numberInitialTickets>
+        <numberSoldTickets>1</numberSoldTickets>
+        <placements>
+            <string>1</string>
+            <string>2</string>
+            <string>3</string>
+            <string>4</string>
+            <string>5</string>
+            <string>6</string>
+            <string>7</string>
+            <string>8</string>
+            <string>9</string>
+        </placements>
+    </ReservedTicketCategory>
+    <ReservedTicketCategory>
+        <id>14</id>
+        <category>réservé</category>
+        <name>Place assises</name>
+        <price>1.0</price>
+        <numberInitialTickets>10</numberInitialTickets>
+        <numberSoldTickets>1</numberSoldTickets>
+        <placements>
+            <string>1</string>
+            <string>2</string>
+            <string>3</string>
+            <string>4</string>
+            <string>5</string>
+            <string>6</string>
+            <string>7</string>
+            <string>8</string>
+            <string>9</string>
+        </placements>
+    </ReservedTicketCategory>
+    <ReservedTicketCategory>
+        <id>5</id>
+        <category>réservé</category>
+        <name>Place assises</name>
+        <price>1.0</price>
+        <numberInitialTickets>10</numberInitialTickets>
+        <numberSoldTickets>8</numberSoldTickets>
+        <placements>
+            <string>1</string>
+            <string>2</string>
+            <string>3</string>
+            <string>4</string>
+            <string>5</string>
+            <string>6</string>
+            <string>7</string>
+            <string>8</string>
+            <string>9</string>
+        </placements>
+    </ReservedTicketCategory>
+    <ReservedTicketCategory>
+        <id>17</id>
+        <category>réservé</category>
+        <name>Place assises</name>
+        <price>1.0</price>
+        <numberInitialTickets>10</numberInitialTickets>
+        <numberSoldTickets>12</numberSoldTickets>
+        <placements>
+            <string>1</string>
+            <string>2</string>
+            <string>3</string>
+            <string>4</string>
+            <string>5</string>
+            <string>6</string>
+            <string>7</string>
+            <string>8</string>
+            <string>9</string>
+        </placements>
+    </ReservedTicketCategory>
+    <ReservedTicketCategory>
+        <id>9</id>
+        <category>réservé</category>
+        <name>Place assises</name>
+        <price>1.0</price>
+        <numberInitialTickets>10</numberInitialTickets>
+        <numberSoldTickets>3</numberSoldTickets>
+        <placements>
+            <string>1</string>
+            <string>2</string>
+            <string>3</string>
+            <string>4</string>
+            <string>5</string>
             <string>6</string>
             <string>7</string>
             <string>8</string>

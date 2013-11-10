@@ -32,7 +32,7 @@
         		</c:forEach>
         </table>
         
-        <button type="button" class="btn btn-primary"> Acheter</button>
+        <a href="/bill"><button type="button" class="btn btn-primary" > Acheter</button></a>
       </div>
 
     

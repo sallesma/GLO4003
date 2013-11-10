@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchCriteriaModels>
+    <SearchCriteriaModel>
+        <id>1</id>
+        <opponent/>
+        <city/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>2</id>
+        <opponent/>
+        <city/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>ttttt</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>3</id>
+        <opponent/>
+        <city/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>yyyy</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>4</id>
+        <sport>Football</sport>
+        <gender>M</gender>
+        <opponent>Alifax</opponent>
+        <city>Montr?l</city>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>rrrr</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>5</id>
+        <sport>Basketball</sport>
+        <gender>F</gender>
+        <opponent>Concordia</opponent>
+        <category>General</category>
+        <city>Montr?l</city>
+        <fromDate>2013-11-20 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-21 05:00:00.0 UTC</toDate>
+        <searchName>trrtrtr</searchName>
+    </SearchCriteriaModel>
+</SearchCriteriaModels>

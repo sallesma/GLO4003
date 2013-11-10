@@ -6,18 +6,24 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import config.ConfigManager;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
+import model.AbstractTicketCategory;
+import model.GeneralAdmissionTicketCategory;
 import model.MatchModel;
+import model.ReservedTicketCategory;
 import model.SearchCriteriaModel;
 import database.dao.MatchModelDao;
 import exceptions.PersistException;
 
 public class MatchFilterV2 {
 	
+	private final List<String> ticketCategory;	
 	private MatchModelDao matchDao = new MatchModelDao();	
 	private List<Sports> sportsList = new ArrayList<Sports>(Arrays.asList(Sports.values()));
 	private List<Gender> genderList = new ArrayList<Gender>(Arrays.asList(Gender.values()));
+	private Set<String> cityList = null;
 	private Set<String> opponentsList = null;
 	private List<MatchModel> matchList = null;
 	private SearchCriteriaModel criterias = null;	
@@ -25,10 +31,16 @@ public class MatchFilterV2 {
 
 	public MatchFilterV2() {		
 		criterias = new SearchCriteriaModel();
+		ticketCategory = new ArrayList<String>(2);
+		ticketCategory.add("Reserve");
+		ticketCategory.add("General");		
 	}
 
 	public MatchFilterV2(SearchCriteriaModel model) throws PersistException {		
-		criterias = model;		
+		criterias = model;	
+		ticketCategory = new ArrayList<String>(2);
+		ticketCategory.add("Reserve");
+		ticketCategory.add("General");	
 	}
 	
 	public List<MatchModel> filterMatchList() throws PersistException {		
@@ -37,13 +49,50 @@ public class MatchFilterV2 {
 		for ( MatchModel match : matchList ) {
 			opponentsList.add(match.getOpponent());
 		}
+		this.cityList = new TreeSet<String>();
+		for ( MatchModel match : matchList ) {
+			cityList.add(match.getCity().trim());		
+		}
 		
 		FilterFromSport();
 		FilterFromGender();
 		FilterFromOpponent();
-		FilterFromDate();		
+		FilterFromDate();
+		filterByCity();
+		filterByTicketType();
 		
 		return matchList;
+	}
+	
+	private void filterByCity() {
+		if (!criterias.isCityEmpty()) {
+			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
+			for (MatchModel match : matchList) {
+				if (criterias.getCity().equals(match.getCity())) {
+					newMatchList.add(match);
+				}
+			}
+			matchList = newMatchList;
+		}
+	}
+	
+	private void filterByTicketType() {
+		if (!criterias.isCategoryEmpty()) {
+			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
+			for (MatchModel match : matchList) {				
+				for (AbstractTicketCategory ticket : match.getTickets())
+					if (criterias.getCategory().contentEquals("Reserve")) {
+						if (ticket instanceof ReservedTicketCategory) {
+							newMatchList.add(match);							
+						}						
+					} else if (criterias.getCategory().contentEquals("General")){
+						if (ticket instanceof GeneralAdmissionTicketCategory) {
+							newMatchList.add(match);
+						}						
+					}
+			}
+			matchList = newMatchList;
+		}
 	}
 
 	private void FilterFromSport() {
@@ -98,6 +147,10 @@ public class MatchFilterV2 {
 		return matchList;
 	}
 
+	public List<String> getTicketCategory() {
+		return ticketCategory;
+	}
+
 	public void setMatchList(List<MatchModel> matchList) {
 		this.matchList = matchList;
 	}
@@ -140,5 +193,13 @@ public class MatchFilterV2 {
 
 	public void setCustomCriteria(String criteria) {
 		this.customCriteria = criteria;
+	}
+
+	public Set<String> getCityList() {
+		return cityList;
+	}
+
+	public void setCityList(Set<String> cityList) {
+		this.cityList = cityList;
 	}
 }

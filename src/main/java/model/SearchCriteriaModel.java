@@ -9,6 +9,7 @@ import java.util.Locale;
 import com.glo4003.project.MatchController;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import config.ConfigManager;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
 
@@ -21,6 +22,8 @@ public class SearchCriteriaModel implements ModelInterface {
 	private Sports sport = null;
 	private Gender gender = null;
 	private String opponent = null;
+	private String category = null;
+	private String city = null;
 	private Date fromDate = null;
 	private Date toDate = null;
 	private String searchName = "";
@@ -32,12 +35,14 @@ public class SearchCriteriaModel implements ModelInterface {
 		toDate = cal.getTime();		
 	}
 	
-	public SearchCriteriaModel(String sport, String gender, String opponent, String fromDate, String toDate) throws ParseException {
+	public SearchCriteriaModel(String sport, String gender, String opponent, String category, String city, String fromDate, String toDate) throws ParseException {
 		setSport(sport);	
 		setGender(gender);				
 		setFromDate(fromDate);
 		setToDate(toDate);
 		setOpponent(opponent);	
+		setCity(city);
+		setCategory(category);
 	}
 	
 	public Long getId() {
@@ -101,6 +106,28 @@ public class SearchCriteriaModel implements ModelInterface {
 		this.opponent = opponent;
 	}
 	
+	public Boolean isCategoryEmpty() {
+		if (category == null || category.equals("")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+	
+	public Boolean isCityEmpty() {
+		if (city == null || city.equals("")) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void setCity(String city) {
+		this.city = city;
+	}
+	
 	public String getFromDate() {
 		try {
 			return dateFormat.format(fromDate);
@@ -161,5 +188,13 @@ public class SearchCriteriaModel implements ModelInterface {
 
 	public void setSearchName(String searchName) {
 		this.searchName = searchName;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}	
 }

@@ -66,10 +66,12 @@ public class MatchController {
 		SearchCriteriaModel criterias = new SearchCriteriaModel(
 				request.getParameter("criterias.sport"),
 				request.getParameter("criterias.gender"), 
-				request.getParameter("criterias.opponent"), 
-				request.getParameter("criterias.fromDate"), 
+				request.getParameter("criterias.opponent"),
+				request.getParameter("criterias.category"),
+				request.getParameter("criterias.city"),
+				request.getParameter("criterias.fromDate"),				
 				request.getParameter("criterias.toDate"));		
-		
+		logger.info(request.getParameterMap() + "");
 		String criteria = request.getParameter("customCriteria");
 		if ((criteria != null) && (!criteria.isEmpty())) {			
 			for (SearchCriteriaModel oneCriteria : user.getSearchCriteria()) {

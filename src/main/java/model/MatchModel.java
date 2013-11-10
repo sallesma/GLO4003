@@ -1,16 +1,14 @@
 package model;
 
 import java.util.ArrayList;
-import database.converter.XmlArrayListConverter;
 import java.util.Date;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
-import database.converter.XmlObjectConverter;
+import database.converter.XmlArrayListConverter;
 
 public class MatchModel implements ModelInterface {
 	
@@ -64,12 +62,15 @@ public class MatchModel implements ModelInterface {
 	public Long getMatchID() {
 		return id;
 	}
+	
 	public void setMatchID(Long matchID) {
 		this.id = matchID;
 	}
+	
 	public Date getDate() {
 		return date;
 	}
+	
 	public void setDate(Date date) {
 		this.date = date;
 	}

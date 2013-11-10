@@ -1,22 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import database.converter.*;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-public class UserModel implements ModelInterface {
-	
-	public UserModel() {
-		lastName = "";
-		firstName = "";
-		username = "";
-		password = "";
-		phoneNumber = "";
-		address = "";
-		isAdmin = false;
-		tickets = new ArrayList<InstantiateTicketModel>();
-	}
+public class UserModel implements ModelInterface {	
 	
 	private Long id = 0L;
 	private String lastName;
@@ -28,8 +19,20 @@ public class UserModel implements ModelInterface {
 	private boolean isAdmin;	
 	@XStreamConverter(XmlArrayListConverter.class)
 	private ArrayList<InstantiateTicketModel> tickets;
+	@XStreamConverter(XmlArrayListConverter.class)
+	private ArrayList<SearchCriteriaModel> searchCriteria;
 	
-	
+	public UserModel() {
+		lastName = "";
+		firstName = "";
+		username = "";
+		password = "";
+		phoneNumber = "";
+		address = "";
+		isAdmin = false;
+		tickets = new ArrayList<InstantiateTicketModel>();		
+		searchCriteria = new ArrayList<SearchCriteriaModel>();
+	}
 	// Shopping cart methods
 	
 	public void addTicket(InstantiateTicketModel ticket) {
@@ -120,5 +123,17 @@ public class UserModel implements ModelInterface {
 
 	public void setTickets(ArrayList<InstantiateTicketModel> tickets) {
 		this.tickets = tickets;
+	}
+
+	public ArrayList<SearchCriteriaModel> getSearchCriteria() {
+		return searchCriteria;
+	}
+
+	public void setSearchCriterias(ArrayList<SearchCriteriaModel> searchCriteria) {
+		this.searchCriteria = searchCriteria;
+	}
+	
+	public void addSearchCriteria(SearchCriteriaModel model) {
+		searchCriteria.add(model);
 	}
 }

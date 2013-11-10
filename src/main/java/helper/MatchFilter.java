@@ -43,7 +43,7 @@ public class MatchFilter {
 	}
 
 	public MatchFilter(List<MatchModel> matchList, String sport, String gender, String opponent, String fromDate, String toDate) {
-		super();
+		super();//Pourquoi appeler le constructeur de Object?
 		this.sport = sport;
 		this.gender = gender;
 		this.opponent = opponent;
@@ -186,7 +186,4 @@ public class MatchFilter {
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
-
-	
-	
 }

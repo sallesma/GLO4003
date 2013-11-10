@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -15,10 +16,11 @@ public class UserViewModel extends HasWarning {
 		phoneNumber = "";
 		address = "";
 		isAdmin = false;
-		tickets=new ArrayList<InstantiateTicketModel>();
+		tickets = new ArrayList<InstantiateTicketModel>();
+		searchCriteria = new ArrayList<SearchCriteriaModel>();
 	}
 	
-	private Integer id;
+	private Long id;
 	@Size(min=1, message = "Entrez un nom de famille")
 	private String lastName;
 	@Size(min=1, message = "entrez un prenon")
@@ -34,6 +36,7 @@ public class UserViewModel extends HasWarning {
 	
 	private boolean isAdmin;
 	private ArrayList<InstantiateTicketModel> tickets;
+	private ArrayList<SearchCriteriaModel> searchCriteria;
 	
 	public int getNbTicketsInCart() {
 		if (this.tickets != null) 
@@ -43,11 +46,11 @@ public class UserViewModel extends HasWarning {
 			return 0;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -99,5 +102,13 @@ public class UserViewModel extends HasWarning {
 
 	public void setTickets(ArrayList<InstantiateTicketModel> tickets) {
 		this.tickets = tickets;
+	}
+
+	public ArrayList<SearchCriteriaModel> getSearchCriteria() {
+		return searchCriteria;
+	}
+
+	public void setSearchCriteria(ArrayList<SearchCriteriaModel> searchCriteria) {
+		this.searchCriteria = searchCriteria;
 	}
 }

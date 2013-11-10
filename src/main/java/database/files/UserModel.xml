@@ -9,7 +9,7 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>false</isAdmin>
-        <tickets></tickets>
+        <tickets/>
     </UserModel>
     <UserModel>
         <id>2</id>
@@ -20,17 +20,7 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>false</isAdmin>
-    </UserModel>
-    <UserModel>
-        <id>3</id>
-        <lastName>Baddouri</lastName>
-        <firstName>Rachid</firstName>
-        <username>RB</username>
-        <password>password</password>
-        <phoneNumber>(444) 444-4444</phoneNumber>
-        <address>Address</address>
-        <isAdmin>false</isAdmin>
-        <tickets></tickets>
+        <tickets/>
     </UserModel>
     <UserModel>
         <id>4</id>
@@ -41,7 +31,7 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>false</isAdmin>
-        <tickets></tickets>
+        <tickets/>
     </UserModel>
     <UserModel>
         <id>5</id>
@@ -52,6 +42,18 @@
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>true</isAdmin>
-        <tickets></tickets>
+        <tickets/>
+    </UserModel> 
+    <UserModel>
+        <id>3</id>
+        <lastName>Baddouri</lastName>
+        <firstName>Rachid</firstName>
+        <username>RB</username>
+        <password>password</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>false</isAdmin>
+        <tickets/>
+        <searchCriteria>11:SearchCriteriaModel,12:SearchCriteriaModel,13:SearchCriteriaModel,14:SearchCriteriaModel,15:SearchCriteriaModel,</searchCriteria>
     </UserModel>
 </UserModels>

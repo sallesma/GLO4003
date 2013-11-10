@@ -11,13 +11,13 @@
 	<h1>Matchs à venir</h1>
 	<div class="row">
 		<div class="col-md-3">
-			<h2>Filtre</h2>
-			<p>Sélectionner vos critères de recherche :</p>
+			<h2>Filtre</h2>		
+			<p>Sélectionnez vos critères de recherche :</p>
 			<form:form action="/matchsList" method="POST" class="form-horizontal" modelAttribute="filter" id="filterForm">
 				
 				<c:choose>
-					<c:when test="${empty filter.sport}">
-						<form:select path="sport" name="sport" class="form-control filterSelect">
+					<c:when test="${empty filter.criterias.sport}">
+						<form:select path="criterias.sport" name="criterias.sport" class="form-control filterSelect">
 							<form:option value="">Tous les sports</form:option>
 							<c:forEach var="sport" items="${filter.sportsList}">
 								<form:option value="${sport}">${sport}</form:option>
@@ -26,17 +26,17 @@
 					</c:when>
 					<c:otherwise>
 						<div class="btn-group">
-  							<button type="button" class="btn btn-primary" disabled="disabled">Sport : ${filter.sport}</button>
+  							<button type="button" class="btn btn-primary" disabled="disabled">Sport : ${filter.criterias.sport}</button>
   							<button type="button" class="btn btn-primary removeFilter">x</button>
   						</div>
-  						<input type="hidden" name="sport" value="${filter.sport}">
+  						<input type="hidden" name="criterias.sport" value="${filter.criterias.sport}">
   						<br>
 					</c:otherwise>
 				</c:choose>
 				<br/>
 				<c:choose>
-					<c:when test="${empty filter.gender}">
-						<form:select path="gender" name="gender" class="form-control filterSelect">
+					<c:when test="${empty filter.criterias.gender}">
+						<form:select path="criterias.gender" name="criterias.gender" class="form-control filterSelect">
 							<form:option value="">Tous les genres</form:option>
 							<c:forEach var="gender" items="${filter.genderList}">
 								<form:option value="${gender}">${gender}</form:option>
@@ -45,17 +45,17 @@
 					</c:when>
 					<c:otherwise>
 						<div class="btn-group">
-  							<button type="button" class="btn btn-primary" disabled="disabled">Genre : ${filter.gender}</button>
+  							<button type="button" class="btn btn-primary" disabled="disabled">Genre : ${filter.criterias.gender}</button>
   							<button type="button" class="btn btn-primary removeFilter">x</button>
   						</div>
-  						<input type="hidden" name="gender" value="${filter.gender}">
+  						<input type="hidden" name="criterias.gender" value="${filter.criterias.gender}">
   						<br>
 					</c:otherwise>
 				</c:choose>
 				<br/>
 				<c:choose>
-					<c:when test="${empty filter.opponent}">
-						<form:select path="opponent" name="opponent" class="form-control filterSelect">
+					<c:when test="${empty filter.criterias.opponent}">
+						<form:select path="criterias.opponent" name="criterias.opponent" class="form-control filterSelect">
 							<form:option value="">Tous les adversaires</form:option>
 							<c:forEach var="opponent" items="${filter.opponentsList}">
 								<form:option value="${opponent}">${opponent}</form:option>
@@ -64,24 +64,40 @@
 					</c:when>
 					<c:otherwise>
 						<div class="btn-group">
-  							<button type="button" class="btn btn-primary" disabled="disabled">Adversaire : ${filter.opponent}</button>
+  							<button type="button" class="btn btn-primary" disabled="disabled">Adversaire : ${filter.criterias.opponent}</button>
   							<button type="button" class="btn btn-primary removeFilter">x</button>
   						</div>
-  						<input type="hidden" name="opponent" value="${filter.opponent}">
+  						<input type="hidden" name="criterias.opponent" value="${filter.criterias.opponent}">
   						<br>
 					</c:otherwise>
 				</c:choose>
 				<br />
 				<div class="input-group">
 					<span class="input-group-addon">Du</span>
-					<form:input id="fromDate" path="fromDate" type="text" class="form-control filterSelect" value="${filter.fromDate}"/>
+					<form:input id="fromDate" path="criterias.fromDate" type="text" class="form-control filterSelect" value="${filter.criterias.fromDate}"/>
 				</div>
 				<br />
 				<div class="input-group">
 					<span class="input-group-addon">Au</span>
-					<form:input id="toDate" path="toDate" type="text" class="form-control filterSelect"/>
+					<form:input id="toDate" path="criterias.toDate" type="text" class="form-control filterSelect"/>
 				</div>
-				<br />
+				<br />				
+					<% if (userModel != null) { %>
+					<hr style="width:200px;" /> 
+					<div class="input-group">					
+						<span class="input-group-addon">Sauvegarder la recherche</span>
+					 	<input id="mustSave" name="mustSave" type="text" class="form-control filterSelect"/>					 	 	
+					</div>					
+					<div class="input-group">					
+						<form:select path="customCriteria" name="customCriteria" class="form-control filterSelect">
+								<form:option value="">Mes recherches sauvegardés</form:option>
+									<c:forEach var="criteria" items="${customCriterias}">
+										<form:option value="${criteria.searchName}">${criteria.searchName}</form:option>
+									</c:forEach>
+						</form:select>									
+					</div>	
+					
+					<% } %> 				
 			</form:form>
 		</div>
 

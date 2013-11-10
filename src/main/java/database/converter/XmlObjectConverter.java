@@ -54,8 +54,12 @@ public class XmlObjectConverter implements Converter {
         return dto.toObject(elem);
     }
     
-    private String getClassname(HierarchicalStreamReader reader) {		
-		String attribute = reader.getAttribute("class");
+    private String getClassname(HierarchicalStreamReader reader) {
+    	String attribute = "";
+    	try {
+    		attribute = reader.getAttribute("class");
+    	} catch (IndexOutOfBoundsException e) {    		
+    	}
 		if (attribute != null && !attribute.isEmpty()) {
 			return "model." + attribute;
 		} else {

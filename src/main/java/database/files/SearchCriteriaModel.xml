@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchCriteriaModels>
+    <SearchCriteriaModel>
+        <id>1</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>2</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>3</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>4</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>5</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>6</id>
+        <gender>M</gender>
+        <opponent>Alifax</opponent>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>ttt</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>7</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>kl</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>8</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>9</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>erer</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>10</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>11</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>ttt</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>12</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>13</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test2</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>14</id>
+        <opponent/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>ggg</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>15</id>
+        <sport>Rugby</sport>
+        <gender>F</gender>
+        <opponent>Concordia</opponent>
+        <searchName>elele</searchName>
+    </SearchCriteriaModel>
+</SearchCriteriaModels>

@@ -1,8 +1,10 @@
 package com.glo4003.project;
 
 import helper.MatchFilter;
+import helper.MatchFilterV2;
 import helper.UserConverter;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import model.InstantiateTicketModel;
 import model.LoginViewModel;
 import model.MatchModel;
+import model.SearchCriteriaModel;
 import model.UserModel;
 import model.UserViewModel;
 
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import database.dao.MatchModelDao;
+import database.dao.UserModelDao;
 import exceptions.ConvertException;
 import exceptions.PersistException;
 
@@ -32,40 +36,86 @@ import exceptions.PersistException;
 public class MatchController {
 	
 	private MatchModelDao matchDao = new MatchModelDao();
+	private UserModelDao userDao = new UserModelDao();
 
-	//public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
+	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	private UserConverter uConverter;
 	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		List<MatchModel> matchList = new ArrayList<MatchModel>(matchDao.getAll());		
-		MatchFilter matchFilter = new MatchFilter(matchList);
+		MatchFilterV2 matchFilter = new MatchFilterV2();
 		matchFilter.filterMatchList();
 		model.addAttribute("filter", matchFilter);
+		
+		List<SearchCriteriaModel> customCriterias = getUserCriterias(request);
+		model.addAttribute("customCriterias",customCriterias);
+		model.addAttribute("customCriteria","");
 
 		model.addAttribute("entry", new LoginViewModel());
+		
 		return "matchsList";
 	}
 
 	@RequestMapping(value = "/matchsList", method = RequestMethod.POST)
-	public String getPostMatchList(Model model, HttpServletRequest request) throws PersistException {	
-
-		List<MatchModel> matchList = new ArrayList<MatchModel>(matchDao.getAll());
-		MatchFilter matchFilter = new MatchFilter(matchList, request.getParameter("sport"), request.getParameter("gender"),
-				request.getParameter("opponent"), request.getParameter("fromDate"), request.getParameter("toDate"));
+	public String getPostMatchList(Model model, HttpServletRequest request) 
+			throws PersistException, ParseException {		
+		UserModel user = getUser(request);
+		
+		
+		SearchCriteriaModel criterias = new SearchCriteriaModel(
+				request.getParameter("criterias.sport"),
+				request.getParameter("criterias.gender"), 
+				request.getParameter("criterias.opponent"), 
+				request.getParameter("criterias.fromDate"), 
+				request.getParameter("criterias.toDate"));		
+		
+		String criteria = request.getParameter("customCriteria");
+		if ((criteria != null) && (!criteria.isEmpty())) {			
+			for (SearchCriteriaModel oneCriteria : user.getSearchCriteria()) {
+				if (oneCriteria.getSearchName().contentEquals(criteria)) {
+					criterias = oneCriteria;
+				}
+			}
+		}
+		MatchFilterV2 matchFilter = new MatchFilterV2(criterias);
+		String mustSave = request.getParameter("mustSave");			
+		if((mustSave != null) && !mustSave.isEmpty()) {		
+			
+			criterias.setSearchName(mustSave);
+			user.addSearchCriteria(criterias);
+			try {			
+				userDao.save(user);				
+			} catch (ConvertException e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("loggedUser", user);			
+			//model.addAttribute("customCriteria","");
+		}		
 
 		matchFilter.filterMatchList();
 		if (matchFilter.getMatchList().isEmpty())
 			model.addAttribute("noMatch", "Il n'y a pas de matchs proposés selon les filtres choisis");
-
 		
 		model.addAttribute("filter", matchFilter);
 		model.addAttribute("entry", new LoginViewModel());
+		if (user != null) {
+			model.addAttribute("customCriterias",user.getSearchCriteria());
+		}
+		
 		return "matchsList";
 	}
 
-	  @RequestMapping(value = "/match", method = RequestMethod.GET)
+	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) {
+		UserModel user = getUser(request);
+		if (user == null) {
+			return new ArrayList<SearchCriteriaModel>(0);
+		}
+		
+		return user.getSearchCriteria();
+	}
+
+	@RequestMapping(value = "/match", method = RequestMethod.GET)
       public String getMatch(Model model, HttpServletRequest request) throws PersistException {		  
           Long id = Long.valueOf(request.getParameter("matchID"));
           MatchModel match = matchDao.getById(id);
@@ -101,5 +151,15 @@ public class MatchController {
           model.addAttribute("entry", new LoginViewModel());
           return "shoppingCart";
       }
+	  
+	  private UserModel getUser(HttpServletRequest request) {
+		  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
+		  if(userViewModel == null) {
+			  return null;
+		  }
+          uConverter = new UserConverter();
+          
+          return uConverter.convert(userViewModel);
+	  }
 
 }

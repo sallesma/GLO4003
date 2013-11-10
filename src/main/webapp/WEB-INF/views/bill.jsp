@@ -18,7 +18,7 @@
 					<th>Place</th>
 				</tr>
 				
-        		<c:forEach var="ticket" items="${user.tickets}">
+        		<c:forEach var="ticket" items="${billTickets}">
         			<tr>
         				<td>${ticket.ticketId}</td>
         				<td>${ticket.match.sport}</td>
@@ -31,8 +31,11 @@
         			</tr>
         		</c:forEach>
         </table>
+        <p class="text-danger">
+				<c:out value="${noTicket}" />
+		</p>
         
-        <a href="/payment"><button type="button" class="btn btn-primary"> Valider</button></a>
+        <a href="/payment"><button type="button" class="btn btn-primary">Valider et payer</button></a>
       </div>
 
     

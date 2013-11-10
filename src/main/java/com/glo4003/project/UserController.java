@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import model.LoginViewModel;
 import model.UserViewModel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,7 +71,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "/shoppingCart", method = RequestMethod.GET)
-	public String shoppingCard(Model model, HttpServletRequest request) {	
+	public String shoppingCart(Model model, HttpServletRequest request) {	
 		
 		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 		model.addAttribute("entry", new LoginViewModel());	

@@ -1,11 +1,10 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import database.converter.*;
 
 import com.thoughtworks.xstream.annotations.XStreamConverter;
+
+import database.converter.XmlArrayListConverter;
 
 public class UserModel implements ModelInterface {	
 	
@@ -18,7 +17,7 @@ public class UserModel implements ModelInterface {
 	private String address;
 	private boolean isAdmin;	
 	@XStreamConverter(XmlArrayListConverter.class)
-	private ArrayList<InstantiateTicketModel> tickets;
+	private ArrayList<InstantiateAbstractTicket> tickets;
 	@XStreamConverter(XmlArrayListConverter.class)
 	private ArrayList<SearchCriteriaModel> searchCriteria;
 	
@@ -30,12 +29,17 @@ public class UserModel implements ModelInterface {
 		phoneNumber = "";
 		address = "";
 		isAdmin = false;
-		tickets = new ArrayList<InstantiateTicketModel>();		
+		tickets = new ArrayList<InstantiateAbstractTicket>();		
 		searchCriteria = new ArrayList<SearchCriteriaModel>();
 	}
 	// Shopping cart methods
-	
+	/*
 	public void addTicket(InstantiateTicketModel ticket) {
+		this.tickets.add(ticket);
+	}
+	*/
+	
+	public void addTicket(InstantiateAbstractTicket ticket) {
 		this.tickets.add(ticket);
 	}
 	
@@ -43,9 +47,9 @@ public class UserModel implements ModelInterface {
 		this.tickets.remove(id);
 	}
 	
-	public InstantiateTicketModel getTicketById(int id) {
-		InstantiateTicketModel res = null;
-		for (InstantiateTicketModel t : this.tickets) {
+	public InstantiateAbstractTicket getTicketById(int id) {
+		InstantiateAbstractTicket res = null;
+		for (InstantiateAbstractTicket t : this.tickets) {
 			if(id == t.getTicketId())
 				res = t;
 		}
@@ -117,11 +121,11 @@ public class UserModel implements ModelInterface {
 		this.isAdmin = isAdmin;
 	}
 	
-	public ArrayList<InstantiateTicketModel> getTickets() {
+	public ArrayList<InstantiateAbstractTicket> getTickets() {
 		return tickets;
 	}
 
-	public void setTickets(ArrayList<InstantiateTicketModel> tickets) {
+	public void setTickets(ArrayList<InstantiateAbstractTicket> tickets) {
 		this.tickets = tickets;
 	}
 

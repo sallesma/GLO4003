@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import model.InstantiateAbstractTicket;
 import model.InstantiateTicketModel;
 import model.LoginViewModel;
 import model.UserModel;
@@ -29,7 +30,7 @@ public class PaymentController {
         userConverter = new UserConverter();
         UserModel userModel = userConverter.convert(userViewModel);
         
-        List<InstantiateTicketModel> billTickets = new ArrayList<InstantiateTicketModel>();
+        List<InstantiateAbstractTicket> billTickets = new ArrayList<InstantiateAbstractTicket>();
         
         String[] selectedTickets =  request.getParameterValues("ticketId");
         if (selectedTickets == null) {

@@ -28,11 +28,20 @@ public class ReservedTicketCategory extends AbstractTicketCategory {
 		this.placements = placements;
 	}
 	
-	public void remove(String placement, int nbPlace) {
+	public void remove(String placement) {
 		// Now, User can select only one reserved ticket at time
 		// nbPlace is always 1;
-		this.placements.remove(placement);
-		this.setNumberSoldTickets(this.getNumberSoldTickets() + nbPlace);
+			this.placements.remove(placement);
+			this.setNumberSoldTickets(this.getNumberSoldTickets() + 1);
+
+	}
+
+	@Override
+	public boolean isTicketInstanciable(String placement, int nbPlace) {
+		if (this.getNumberRemainingTickets() >= 1 && this.getPlacements().contains(placement)){
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -6,7 +6,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>4</id>
@@ -14,15 +14,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
-    </GeneralAdmissionTicketCategory>
-    <GeneralAdmissionTicketCategory>
-        <id>6</id>
-        <category>libre</category>
-        <name>Debout</name>
-        <price>1.0</price>
-        <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>8</id>
@@ -30,7 +22,7 @@
         <name>Debout</name>
         <price>11.0</price>
         <numberInitialTickets>11</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>10</id>
@@ -38,7 +30,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>11</id>
@@ -46,7 +38,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>12</id>
@@ -54,7 +46,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>13</id>
@@ -62,7 +54,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>100</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>16</id>
@@ -70,7 +62,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>100</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>18</id>
@@ -78,7 +70,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>10</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>19</id>
@@ -86,7 +78,7 @@
         <name>test</name>
         <price>1.0</price>
         <numberInitialTickets>100</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>20</id>
@@ -94,7 +86,7 @@
         <name>test</name>
         <price>1.0</price>
         <numberInitialTickets>15</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>1</id>
@@ -102,7 +94,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>10</numberInitialTickets>
-        <numberSoldTickets>1</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>15</id>
@@ -110,7 +102,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>100</numberInitialTickets>
-        <numberSoldTickets>3</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>2</id>
@@ -121,20 +113,20 @@
         <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategory> 
     <GeneralAdmissionTicketCategory>
+        <id>6</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>1.0</price>
+        <numberInitialTickets>1</numberInitialTickets>
+        <numberSoldTickets>1</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
         <id>7</id>
         <category>libre</category>
         <name>Debout</name>
         <price>12.0</price>
         <numberInitialTickets>12</numberInitialTickets>
-        <numberSoldTickets>6</numberSoldTickets>
-    </GeneralAdmissionTicketCategory>
-    <GeneralAdmissionTicketCategory>
-        <id>14</id>
-        <category>libre</category>
-        <name>Debout</name>
-        <price>1.0</price>
-        <numberInitialTickets>50</numberInitialTickets>
-        <numberSoldTickets>30</numberSoldTickets>
+        <numberSoldTickets>11</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>5</id>
@@ -142,7 +134,15 @@
         <name>test</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>5</numberSoldTickets>
+        <numberSoldTickets>0</numberSoldTickets>
+    </GeneralAdmissionTicketCategory>
+    <GeneralAdmissionTicketCategory>
+        <id>14</id>
+        <category>libre</category>
+        <name>Debout</name>
+        <price>1.0</price>
+        <numberInitialTickets>50</numberInitialTickets>
+        <numberSoldTickets>20</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>17</id>
@@ -150,7 +150,7 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>15</numberInitialTickets>
-        <numberSoldTickets>16</numberSoldTickets>
+        <numberSoldTickets>10</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
     <GeneralAdmissionTicketCategory>
         <id>9</id>
@@ -158,6 +158,6 @@
         <name>Debout</name>
         <price>1.0</price>
         <numberInitialTickets>1</numberInitialTickets>
-        <numberSoldTickets>9</numberSoldTickets>
+        <numberSoldTickets>1</numberSoldTickets>
     </GeneralAdmissionTicketCategory>
 </GeneralAdmissionTicketCategorys>

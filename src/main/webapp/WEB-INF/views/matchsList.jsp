@@ -124,7 +124,7 @@
 						<td>${match.city}</td>
 						<td>${match.field}</td>
 						<td>${match.numberRemainingTickets}</td>
-						<td><a href="match?matchID=${match.matchID }">
+						<td><a href="match?matchID=${match.matchID}">
 								<button type="button" class="btn btn-primary">Info</button>
 						</a></td>
 					</tr>

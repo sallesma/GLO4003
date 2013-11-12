@@ -5,6 +5,10 @@
 	
 
       <div class="container">
+      	<br>
+     	 <p class="text-danger">
+				<c:out value="${nullTicket}" />
+		</p>
         <h1>Panier d'achat</h1>
         <form:form action="/bill" method="POST" class="form-horizontal" id="shoppingCartForm">
 	        <table class="table table-hover">
@@ -29,8 +33,19 @@
 	        				<td>${ticket.match.opponent}</td>
 	        				<td>${ticket.match.city}</td>
 	        				<td>${ticket.match.field}</td>
-	        				<td>${ticket.nbPlace}</td>
-	        				<td>${ticket.numPlace}</td>
+	        				
+	        				<c:choose>
+		        				<c:when test="${ticket.class.simpleName=='InstantiateGeneralAdmissionTicket'}">
+		        					<td>${ticket.nbPlaces}</td>
+		        					<td>Libre</td>
+		        				</c:when>
+		        				<c:when test="${ticket.class.simpleName=='InstantiateReservedTicket'}">
+		        					<td>1</td>
+		        					<td>${ticket.numPlace}</td>
+		        				</c:when>
+		        			</c:choose>
+	        				
+	 
 	        			</tr>
 	        		</c:forEach>
 	        </table>

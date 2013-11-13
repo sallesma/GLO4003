@@ -3,9 +3,6 @@ package database.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.glo4003.project.MatchController;
-
-import model.MatchModel;
 import model.ModelInterface;
 import nu.xom.Element;
 import database.XmlModelConverter;

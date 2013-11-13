@@ -8,7 +8,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.InstantiateAbstractTicket;
-import model.InstantiateTicketModel;
 import model.LoginViewModel;
 import model.UserModel;
 import model.UserViewModel;

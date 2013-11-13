@@ -9,7 +9,6 @@ import java.util.Calendar;
 
 import model.AbstractTicketCategory;
 import model.InstantiateAbstractTicket;
-import model.InstantiateTicketModel;
 import model.MatchModel;
 import model.UserModel;
 import model.factory.InstantiateTicketFactory;

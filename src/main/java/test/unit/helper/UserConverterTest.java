@@ -1,14 +1,12 @@
 package test.unit.helper;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import helper.UserConverter;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.mockito.Mockito.*;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 import model.UserModel;

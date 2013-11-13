@@ -12,8 +12,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import test.unit.database.DaoTest.TestClass;
-
 import com.thoughtworks.xstream.XStream;
 
 import database.XmlModelConverter;

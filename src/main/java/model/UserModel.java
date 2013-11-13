@@ -43,8 +43,18 @@ public class UserModel implements ModelInterface {
 		this.tickets.add(ticket);
 	}
 	
-	public void deleteTicket(int id) {
-		this.tickets.remove(id);
+	public void deleteTicket(int ticketId) {
+		for (InstantiateAbstractTicket t : this.tickets) {
+			if (t.getTicketId() == ticketId) {
+				this.tickets.remove(t);
+				return;
+			}
+		}
+	}
+	
+	public void emptyCart() {
+		this.tickets.clear();
+		
 	}
 	
 	public InstantiateAbstractTicket getTicketById(int id) {
@@ -140,4 +150,6 @@ public class UserModel implements ModelInterface {
 	public void addSearchCriteria(SearchCriteriaModel model) {
 		searchCriteria.add(model);
 	}
+
+	
 }

@@ -9,8 +9,11 @@
      	 <p class="text-danger">
 				<c:out value="${nullTicket}" />
 		</p>
+		<p class="text-danger">
+				<c:out value="${noTicket}" />
+		</p>
         <h1>Panier d'achat</h1>
-        <form:form action="/bill" method="POST" class="form-horizontal" id="shoppingCartForm">
+        <form:form action="/selectedTicketsAction" method="POST" class="form-horizontal" id="shoppingCartForm">
 	        <table class="table table-hover">
 					<tr>
 						<th></th>
@@ -49,9 +52,12 @@
 	        			</tr>
 	        		</c:forEach>
 	        </table>
-		<button type="submit" class="btn btn-primary">Acheter</button>
+		<button type="submit" class="btn btn-primary" name ="action" value="buy">Acheter</button>
+		<button type="submit" class="btn btn-danger" name="action" value="delete">Supprimer les tickets séléctionner</button>
 	    </form:form>
-        
+	    <br>
+	    
+        <a href="/emptyCart"><button class="btn btn-danger">Vider le panier au complet</button></a>
       </div>
 
     

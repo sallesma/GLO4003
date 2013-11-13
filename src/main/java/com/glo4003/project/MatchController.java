@@ -163,6 +163,7 @@ public class MatchController {
           return "shoppingCart";
       }
 	  
+	  
 	  private UserModel getUser(HttpServletRequest request) {
 		  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		  if(userViewModel == null) {

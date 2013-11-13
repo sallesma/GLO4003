@@ -2,7 +2,6 @@ package test.unit.model;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.spy;
-import helper.MatchFilter;
 import helper.MatchFilterV2;
 
 import java.text.DateFormat;

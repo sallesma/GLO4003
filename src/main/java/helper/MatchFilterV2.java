@@ -146,3 +146,5 @@ public class MatchFilterV2 {
 	public void setMatchDao(MatchModelDaoInterface matchDao) {
 		this.matchDao = matchDao;
 	}
+
+}

@@ -36,16 +36,29 @@
 	        				<td>${ticket.match.opponent}</td>
 	        				<td>${ticket.match.city}</td>
 	        				<td>${ticket.match.field}</td>
-	        				
+	        			
 	        				<c:choose>
 		        				<c:when test="${ticket.class.simpleName=='InstantiateGeneralAdmissionTicket'}">
 		        					<td>${ticket.nbPlaces}</td>
 		        					<td>Libre</td>
+		        					<td><a href="#" class="btn btn-success choosePlace" data-toggle="popover"
+                                                                title="modifier nombre de tickets" data-html="true"
+                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal"><input type="hidden" name="id" value="${ticket.ticketId}"></input><br>
+                                                                
+                                <button type="submit" class="btn btn-primary">Valider</button>
+                        </form:form>'>Modifier</a></td>   
 		        				</c:when>
 		        				<c:when test="${ticket.class.simpleName=='InstantiateReservedTicket'}">
 		        					<td>1</td>
 		        					<td>${ticket.numPlace}</td>
+		        					<td><a href="#" class="btn btn-success choosePlace" data-toggle="popover"
+                                                                title="changer la place " data-html="true"
+                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal"><input type="hidden" name="id" value="${ticket.ticketId}"></input><br>
+                                                                
+                                <button type="submit" class="btn btn-primary">Valider</button>
+                        </form:form>'>Modifier</a></td>
 		        				</c:when>
+		        				    
 		        			</c:choose>
 	        				
 	 
@@ -62,3 +75,7 @@
 
     
     <%@ include file="footer.jsp" %>
+  <script type="text/javascript">        
+
+$(".choosePlace").popover();
+</script>

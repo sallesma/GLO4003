@@ -47,6 +47,10 @@ public class UserModel implements ModelInterface {
 		this.tickets.remove(id);
 	}
 	
+	public void deleteTicket(InstantiateAbstractTicket ticket) {
+		this.tickets.remove(ticket);
+	}
+	
 	public InstantiateAbstractTicket getTicketById(int id) {
 		InstantiateAbstractTicket res = null;
 		for (InstantiateAbstractTicket t : this.tickets) {

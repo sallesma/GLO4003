@@ -4,7 +4,7 @@
 	<%@ include file="header.jsp" %>
 <div class="container">
         <h1>Mode de paiement</h1>
-        <form method="POST" action="/">
+        <form method="POST">
 
         
         <!-- -------------------------------------------------------------------------------------- -->

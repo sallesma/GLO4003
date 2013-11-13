@@ -35,6 +35,11 @@ public class ReservedTicketCategory extends AbstractTicketCategory {
 			this.setNumberSoldTickets(this.getNumberSoldTickets() + 1);
 
 	}
+	
+	public void replace (String placement) {
+		this.placements.add(placement);
+		this.setNumberSoldTickets(this.getNumberSoldTickets() - 1);
+	}
 
 	@Override
 	public boolean isTicketInstanciable(String placement, int nbPlace) {

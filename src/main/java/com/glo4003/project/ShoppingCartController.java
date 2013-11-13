@@ -8,8 +8,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.InstantiateAbstractTicket;
-import model.InstantiateTicketModel;
 import model.LoginViewModel;
+import model.MatchModel;
 import model.UserModel;
 import model.UserViewModel;
 
@@ -19,13 +19,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import database.dao.MatchModelDao;
+import exceptions.ConvertException;
+import exceptions.PersistException;
+
 @Controller
 public class ShoppingCartController {
 	private UserConverter userConverter;
-
+	private MatchModelDao matchDao = new MatchModelDao();
 
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
-	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) {	
+	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws NumberFormatException, PersistException, ConvertException {	
 
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		userConverter = new UserConverter();
@@ -54,10 +58,13 @@ public class ShoppingCartController {
 
 			String[] selectedTickets =  request.getParameterValues("ticketId");
 			if (selectedTickets == null) {
-				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés, d");
+				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés");
 			} else {
 				for ( String selectedTicket : selectedTickets ) {
-					userModel.deleteTicket(Integer.valueOf(selectedTicket));
+					Long matchId = userModel.getTicketById(Integer.valueOf(selectedTicket)).getMatch().getId();
+					MatchModel match = matchDao.getById(matchId);
+					userModel.deleteTicketAndReplaceInMatch(Integer.valueOf(selectedTicket), match);
+					matchDao.save(match);
 				}
 			}
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
@@ -80,12 +87,12 @@ public class ShoppingCartController {
 	}
 
 	  @RequestMapping(value = "/emptyCart", method = RequestMethod.GET)
-			public String emptyCart(Model model, HttpServletRequest request) {
+			public String emptyCart(Model model, HttpServletRequest request) throws PersistException, ConvertException {
 			  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 			  userConverter = new UserConverter();
 	          UserModel userModel = userConverter.convert(userViewModel);
 	          
-	          userModel.emptyCart();
+	          userModel.emptyCartAndReplaceTickets(matchDao);
 	          
 	          return "redirect:/";
 	}

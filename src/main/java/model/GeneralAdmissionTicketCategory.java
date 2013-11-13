@@ -15,6 +15,10 @@ public class GeneralAdmissionTicketCategory extends AbstractTicketCategory {
 		this.setNumberSoldTickets(this.getNumberSoldTickets() + nbPlace);
 	}
 	
+	public void replace(int nbPlace) {
+		this.setNumberSoldTickets(this.getNumberSoldTickets() - nbPlace);
+	}
+	
 	@Override
 	public boolean isTicketInstanciable(String placement, int nbPlace) {
 		

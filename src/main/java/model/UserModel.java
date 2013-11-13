@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 import database.converter.XmlArrayListConverter;
+import database.dao.MatchModelDao;
+import exceptions.ConvertException;
+import exceptions.PersistException;
 
 public class UserModel implements ModelInterface {	
-	
+
 	private Long id = 0L;
 	private String lastName;
 	private String firstName;
@@ -20,7 +23,7 @@ public class UserModel implements ModelInterface {
 	private ArrayList<InstantiateAbstractTicket> tickets;
 	@XStreamConverter(XmlArrayListConverter.class)
 	private ArrayList<SearchCriteriaModel> searchCriteria;
-	
+
 	public UserModel() {
 		lastName = "";
 		firstName = "";
@@ -32,31 +35,61 @@ public class UserModel implements ModelInterface {
 		tickets = new ArrayList<InstantiateAbstractTicket>();		
 		searchCriteria = new ArrayList<SearchCriteriaModel>();
 	}
-	// Shopping cart methods
-	/*
-	public void addTicket(InstantiateTicketModel ticket) {
-		this.tickets.add(ticket);
-	}
-	*/
 	
+	// Shopping cart methods
 	public void addTicket(InstantiateAbstractTicket ticket) {
 		this.tickets.add(ticket);
 	}
+
+	public void deleteTicketAndReplaceInMatch(int ticketId, MatchModel match) {
+
+		InstantiateAbstractTicket t = this.getTicketById(ticketId);
+		AbstractTicketCategory tCat = match.getTickets().get(t.getCatIndex());
 	
-	public void deleteTicket(int ticketId) {
-		for (InstantiateAbstractTicket t : this.tickets) {
-			if (t.getTicketId() == ticketId) {
-				this.tickets.remove(t);
-				return;
-			}
+		if (tCat instanceof GeneralAdmissionTicketCategory) {
+			//General Admission Ticket
+			GeneralAdmissionTicketCategory tGATCat = (GeneralAdmissionTicketCategory)tCat;
+			InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
+			tGATCat.replace(tGAT.getNbPlaces());
+			this.tickets.remove(t);
 		}
-	}
-	
-	public void emptyCart() {
-		this.tickets.clear();
+		else {
+			//Reserved Ticket
+			ReservedTicketCategory tRTCat = (ReservedTicketCategory)tCat;
+			InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
+			tRTCat.replace(tRT.getNumPlace());
+			this.tickets.remove(t);
+		}
 		
 	}
-	
+
+
+	public void emptyCartAndReplaceTickets(MatchModelDao matchDao) throws PersistException, ConvertException {
+
+		for (InstantiateAbstractTicket t : this.getTickets()) {
+			Long matchId = t.getMatch().getId();
+			MatchModel match = matchDao.getById(matchId);
+			AbstractTicketCategory tCat = match.getTickets().get(t.getCatIndex());
+			
+			if (tCat instanceof GeneralAdmissionTicketCategory) {
+				//General Admission Ticket
+				GeneralAdmissionTicketCategory tGATCat = (GeneralAdmissionTicketCategory)tCat;
+				InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
+				tGATCat.replace(tGAT.getNbPlaces());
+			}
+			else {
+				//Reserved Ticket
+				ReservedTicketCategory tRTCat = (ReservedTicketCategory)tCat;
+				InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
+				tRTCat.replace(tRT.getNumPlace());
+			}
+			matchDao.save(match);
+		}
+
+		this.tickets.clear();
+
+	}
+
 	public InstantiateAbstractTicket getTicketById(int id) {
 		InstantiateAbstractTicket res = null;
 		for (InstantiateAbstractTicket t : this.tickets) {
@@ -65,19 +98,19 @@ public class UserModel implements ModelInterface {
 		}
 		return res;
 	}
-	
+
 	public int getNbTicketsInCart() {
 		if (this.tickets != null) 
 			return this.tickets.size();
-		
+
 		else 
 			return 0;
 	}
-	
-	
-	
+
+
+
 	//Getters and Setters 
-	
+
 	public String getLastName() {
 		return lastName;
 	}
@@ -130,7 +163,7 @@ public class UserModel implements ModelInterface {
 	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
+
 	public ArrayList<InstantiateAbstractTicket> getTickets() {
 		return tickets;
 	}
@@ -146,10 +179,10 @@ public class UserModel implements ModelInterface {
 	public void setSearchCriterias(ArrayList<SearchCriteriaModel> searchCriteria) {
 		this.searchCriteria = searchCriteria;
 	}
-	
+
 	public void addSearchCriteria(SearchCriteriaModel model) {
 		searchCriteria.add(model);
 	}
 
-	
+
 }

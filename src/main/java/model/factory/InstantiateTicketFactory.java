@@ -19,7 +19,7 @@ public class InstantiateTicketFactory {
 		if (type.contains(ConfigManager.RESERVED_TICKET)) {
 			// Instantiate a reserved ticket
 			
-			InstantiateReservedTicket instantiateRTC = new InstantiateReservedTicket(match, place);
+			InstantiateReservedTicket instantiateRTC = new InstantiateReservedTicket(match, catIndex, place);
 			
 			if (ticketCategory.isTicketInstanciable(place, nbPlaces)) {
 				ReservedTicketCategory tCategory = (ReservedTicketCategory)ticketCategory;
@@ -31,7 +31,7 @@ public class InstantiateTicketFactory {
 		}
 		else{
 			// Instantiate a general admission ticket
-			InstantiateGeneralAdmissionTicket instantiateGAT = new InstantiateGeneralAdmissionTicket(match, nbPlaces);
+			InstantiateGeneralAdmissionTicket instantiateGAT = new InstantiateGeneralAdmissionTicket(match, catIndex, nbPlaces);
 		
 			if (ticketCategory.isTicketInstanciable(place, nbPlaces)) {
 				GeneralAdmissionTicketCategory tCategory = (GeneralAdmissionTicketCategory)ticketCategory;

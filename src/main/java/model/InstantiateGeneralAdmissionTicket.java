@@ -4,8 +4,8 @@ public class InstantiateGeneralAdmissionTicket extends InstantiateAbstractTicket
 
 	private int nbPlaces;
 	
-	public InstantiateGeneralAdmissionTicket(MatchModel match, int nbPlaces) {
-		super(match);
+	public InstantiateGeneralAdmissionTicket(MatchModel match, int catIndex, int nbPlaces) {
+		super(match, catIndex);
 		this.nbPlaces = nbPlaces;
 	}
 

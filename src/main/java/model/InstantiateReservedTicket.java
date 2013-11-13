@@ -3,8 +3,8 @@ package model;
 public class InstantiateReservedTicket extends InstantiateAbstractTicket {
 
 	private String numPlace;
-	public InstantiateReservedTicket(MatchModel match, String numPlace) {
-		super(match);
+	public InstantiateReservedTicket(MatchModel match,int catIndex, String numPlace) {
+		super(match, catIndex);
 		this.numPlace = numPlace;
 	}
 	

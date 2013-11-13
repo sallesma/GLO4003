@@ -27,7 +27,8 @@ public abstract class AbstractTicketCategory implements ModelInterface {
 		return this.numberInitialTickets - this.numberSoldTickets;
 	}
 	
-	public abstract void remove(String placement, int nbPlace);
+	public abstract boolean isTicketInstanciable (String placement, int nbPlace);
+	
 	
 	// Getters and Setters
 	public String getCategory() {

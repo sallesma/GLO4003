@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import com.glo4003.project.MatchController;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import config.ConfigManager;

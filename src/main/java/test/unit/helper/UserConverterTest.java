@@ -18,6 +18,21 @@ public class UserConverterTest {
 	
 	private UserConverter converter = spy(new UserConverter());	
 	
+	
+	/*
+	@Test
+	public void canConvertUserModelList() {
+		//Before
+		Map<Integer, UserModel> users = populate();
+		
+		//When
+		Collection<UserViewModel> models = converter.convert(users);
+		
+		//Then
+		assertTrue(models.size() == 4);
+		verify(converter, times(4)).convert(any(UserModel.class));		
+	}
+	*/
 	@Test
 	public void canConvertUserModel() {
 		//Before

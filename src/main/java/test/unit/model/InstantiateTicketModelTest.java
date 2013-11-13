@@ -1,17 +1,13 @@
 package test.unit.model;
 
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import service.UserService;
-import database.dao.UserModelDao;
-import exceptions.ConvertException;
-import exceptions.PersistException;
 import model.InstantiateTicketModel;
 import model.MatchModel;
+
+import org.junit.Before;
+
+import exceptions.ConvertException;
+import exceptions.PersistException;
 
 public class InstantiateTicketModelTest {
 	

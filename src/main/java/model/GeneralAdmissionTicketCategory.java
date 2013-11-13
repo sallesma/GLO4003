@@ -11,8 +11,17 @@ public class GeneralAdmissionTicketCategory extends AbstractTicketCategory {
 		super(category, name, nbInitialTickets, nbSoldTickets, price);		
 	}
 	
-	public void remove(String placement, int nbPlace) {
+	public void remove(int nbPlace) {
 		this.setNumberSoldTickets(this.getNumberSoldTickets() + nbPlace);
+	}
+	
+	@Override
+	public boolean isTicketInstanciable(String placement, int nbPlace) {
+		
+		if (this.getNumberRemainingTickets() >= nbPlace) {
+			return true;
+		}
+		return false;
 	}
 	
 

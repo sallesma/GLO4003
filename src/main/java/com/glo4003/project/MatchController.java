@@ -9,12 +9,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.InstantiateTicketModel;
+import model.InstantiateAbstractTicket;
 import model.LoginViewModel;
 import model.MatchModel;
 import model.SearchCriteriaModel;
 import model.UserModel;
 import model.UserViewModel;
+import model.factory.InstantiateTicketFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +71,7 @@ public class MatchController {
 				request.getParameter("criterias.city"),
 				request.getParameter("criterias.fromDate"),				
 				request.getParameter("criterias.toDate"));		
-		logger.info(request.getParameterMap() + "");
+		
 		String criteria = request.getParameter("customCriteria");
 		if ((criteria != null) && (!criteria.isEmpty())) {			
 			for (SearchCriteriaModel oneCriteria : user.getSearchCriteria()) {
@@ -96,7 +97,7 @@ public class MatchController {
 
 		matchFilter.filterMatchList();
 		if (matchFilter.getMatchList().isEmpty())
-			model.addAttribute("noMatch", "Il n'y a pas de matchs proposés selon les filtres choisis");
+			model.addAttribute("noMatch", "Il n'y a pas de match disponible selon les filtres choisis");
 		
 		model.addAttribute("filter", matchFilter);
 		model.addAttribute("entry", new LoginViewModel());
@@ -137,21 +138,31 @@ public class MatchController {
           MatchModel match = matchDao.getById(matchId);
           
           // Create the ticket for the specific match
-          InstantiateTicketModel ticket = new InstantiateTicketModel(match, catId, numPlace,nbPlace );
+          InstantiateAbstractTicket ticket = InstantiateTicketFactory.getInstanciateTickets(catId, match, numPlace, nbPlace);
           
-          //Get current logged user
-          UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-          uConverter = new UserConverter();
-          UserModel userModel = uConverter.convert(userViewModel);
+          if (ticket == null) {
+        	  model.addAttribute("nullTicket", "Il ne reste pas assez de tickets disponibles");
+          }
+          
+          else {
+        	  // Save the match in the database
+              matchDao.save(match);
+              
+              //Get current logged user
+              UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
+              uConverter = new UserConverter();
+              UserModel userModel = uConverter.convert(userViewModel);
 
-          // Add the ticket to the user's shopping cart
-          userModel.addTicket(ticket);
-          userViewModel = uConverter.convert(userModel);
-       
-          model.addAttribute("user", userViewModel);
-          model.addAttribute("entry", new LoginViewModel());
+              // Add the ticket to the user's shopping cart
+              userModel.addTicket(ticket);
+              userViewModel = uConverter.convert(userModel);
+           
+              model.addAttribute("user", userViewModel);
+              model.addAttribute("entry", new LoginViewModel());
+          }
           return "shoppingCart";
       }
+	  
 	  
 	  private UserModel getUser(HttpServletRequest request) {
 		  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");

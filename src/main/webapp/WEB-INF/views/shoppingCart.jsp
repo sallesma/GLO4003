@@ -5,8 +5,15 @@
 	
 
       <div class="container">
+      	<br>
+     	 <p class="text-danger">
+				<c:out value="${nullTicket}" />
+		</p>
+		<p class="text-danger">
+				<c:out value="${noTicket}" />
+		</p>
         <h1>Panier d'achat</h1>
-        <form:form action="/bill" method="POST" class="form-horizontal" id="shoppingCartForm">
+        <form:form action="/selectedTicketsAction" method="POST" class="form-horizontal" id="shoppingCartForm">
 	        <table class="table table-hover">
 					<tr>
 						<th></th>
@@ -29,14 +36,28 @@
 	        				<td>${ticket.match.opponent}</td>
 	        				<td>${ticket.match.city}</td>
 	        				<td>${ticket.match.field}</td>
-	        				<td>${ticket.nbPlace}</td>
-	        				<td>${ticket.numPlace}</td>
+	        				
+	        				<c:choose>
+		        				<c:when test="${ticket.class.simpleName=='InstantiateGeneralAdmissionTicket'}">
+		        					<td>${ticket.nbPlaces}</td>
+		        					<td>Libre</td>
+		        				</c:when>
+		        				<c:when test="${ticket.class.simpleName=='InstantiateReservedTicket'}">
+		        					<td>1</td>
+		        					<td>${ticket.numPlace}</td>
+		        				</c:when>
+		        			</c:choose>
+	        				
+	 
 	        			</tr>
 	        		</c:forEach>
 	        </table>
-		<button type="submit" class="btn btn-primary">Acheter</button>
+		<button type="submit" class="btn btn-primary" name ="action" value="buy">Acheter</button>
+		<button type="submit" class="btn btn-danger" name="action" value="delete">Supprimer les tickets séléctionner</button>
 	    </form:form>
-        
+	    <br>
+	    
+        <a href="/emptyCart"><button class="btn btn-danger">Vider le panier au complet</button></a>
       </div>
 
     

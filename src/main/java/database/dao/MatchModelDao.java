@@ -9,7 +9,7 @@ import database.XmlModelConverter;
 import database.dto.FileAccess;
 import exceptions.PersistException;
 
-public class MatchModelDao extends Dao<MatchModel> {
+public class MatchModelDao extends Dao<MatchModel> implements MatchModelDaoInterface {
 
 	public MatchModelDao(XmlModelConverter dto, FileAccess fileAccess) {
 		super(MatchModel.class, dto, fileAccess);	

@@ -11,11 +11,12 @@ import config.ConfigManager.Sports;
 import model.MatchModel;
 import model.SearchCriteriaModel;
 import database.dao.MatchModelDao;
+import database.dao.MatchModelDaoInterface;
 import exceptions.PersistException;
 
 public class MatchFilterV2 {
 	
-	private MatchModelDao matchDao = new MatchModelDao();	
+	private MatchModelDaoInterface matchDao = new MatchModelDao();
 	private List<Sports> sportsList = new ArrayList<Sports>(Arrays.asList(Sports.values()));
 	private List<Gender> genderList = new ArrayList<Gender>(Arrays.asList(Gender.values()));
 	private Set<String> opponentsList = null;
@@ -141,4 +142,7 @@ public class MatchFilterV2 {
 	public void setCustomCriteria(String criteria) {
 		this.customCriteria = criteria;
 	}
-}
+
+	public void setMatchDao(MatchModelDaoInterface matchDao) {
+		this.matchDao = matchDao;
+	}

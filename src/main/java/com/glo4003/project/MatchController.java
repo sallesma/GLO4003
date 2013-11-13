@@ -1,7 +1,6 @@
 package com.glo4003.project;
 
 import helper.MatchFilter;
-import helper.MatchFilterV2;
 import helper.UserConverter;
 
 import java.text.ParseException;
@@ -44,7 +43,7 @@ public class MatchController {
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		MatchFilterV2 matchFilter = new MatchFilterV2();
+		MatchFilter matchFilter = new MatchFilter();
 		matchFilter.filterMatchList();
 		model.addAttribute("filter", matchFilter);
 		
@@ -80,7 +79,7 @@ public class MatchController {
 				}
 			}
 		}
-		MatchFilterV2 matchFilter = new MatchFilterV2(criterias);
+		MatchFilter matchFilter = new MatchFilter(criterias);
 		String mustSave = request.getParameter("mustSave");			
 		if((mustSave != null) && !mustSave.isEmpty()) {		
 			

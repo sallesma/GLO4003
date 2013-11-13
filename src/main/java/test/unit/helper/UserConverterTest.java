@@ -1,14 +1,12 @@
 package test.unit.helper;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import helper.UserConverter;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.mockito.Mockito.*;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
 import model.UserModel;
@@ -19,19 +17,6 @@ import org.junit.Test;
 public class UserConverterTest {
 	
 	private UserConverter converter = spy(new UserConverter());	
-	
-	@Test
-	public void canConvertUserModelList() {
-		//Before
-		Map<Integer, UserModel> users = populate();
-		
-		//When
-		Collection<UserViewModel> models = converter.convert(users);
-		
-		//Then
-		assertTrue(models.size() == 4);
-		verify(converter, times(4)).convert(any(UserModel.class));		
-	}
 	
 	@Test
 	public void canConvertUserModel() {

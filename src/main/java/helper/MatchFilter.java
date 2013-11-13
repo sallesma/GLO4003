@@ -13,13 +13,15 @@ import model.ReservedTicketCategory;
 import model.SearchCriteriaModel;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
+import database.dao.DaoInterface;
 import database.dao.MatchModelDao;
+import database.dao.MatchModelDaoInterface;
 import exceptions.PersistException;
 
 public class MatchFilter {
 	
 	private final List<String> ticketCategory;	
-	private MatchModelDao matchDao = new MatchModelDao();	
+	private DaoInterface matchDao = new MatchModelDao();	
 	private List<Sports> sportsList = new ArrayList<Sports>(Arrays.asList(Sports.values()));
 	private List<Gender> genderList = new ArrayList<Gender>(Arrays.asList(Gender.values()));
 	private Set<String> cityList = null;
@@ -200,5 +202,9 @@ public class MatchFilter {
 
 	public void setCityList(Set<String> cityList) {
 		this.cityList = cityList;
+	}
+
+	public void setMatchDao(MatchModelDaoInterface emptyMatchModelDao) {
+		matchDao = emptyMatchModelDao;		
 	}
 }

@@ -2,6 +2,7 @@ package test.unit.model;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.spy;
+import helper.MatchFilter;
 import helper.MatchFilterV2;
 
 import java.text.DateFormat;
@@ -29,7 +30,7 @@ import exceptions.PersistException;
 
 public class MatchFilterTest {
 
-	private MatchFilterV2 matchFilter = null;
+	private MatchFilter matchFilter = null;
 	private SearchCriteriaModel searchCriteria;
 	private MatchModelDaoInterface populateMatchModelDao;
 	private MatchModelDaoInterface emptyMatchModelDao;
@@ -74,7 +75,7 @@ public class MatchFilterTest {
 	@Test
 	public void testFilterEmptyMatchList() {
 		//Before
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		matchFilter.setMatchDao(emptyMatchModelDao);
 		
 		//then
@@ -134,7 +135,7 @@ public class MatchFilterTest {
 	@Test
 	public void testSportFilter() {
 		//Before
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
 			searchCriteria = new SearchCriteriaModel(Sports.Football.toString(), "", "", "", "");
 		} catch (ParseException e) {
@@ -170,7 +171,7 @@ public class MatchFilterTest {
 	@Test
 	public void testGenreFilter() {
 		//Before
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
 			searchCriteria = new SearchCriteriaModel("", Gender.F.toString(), "", "", "");
 		} catch (ParseException e) {
@@ -208,7 +209,7 @@ public class MatchFilterTest {
 	public void testOpponentFilter() {
 		//Before
 		String opp = matchFilter.getMatchList().get(0).getOpponent();		
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
 			searchCriteria = new SearchCriteriaModel("", "", opp, "", "");
 		} catch (ParseException e) {
@@ -258,7 +259,7 @@ public class MatchFilterTest {
 		cal.add(Calendar.YEAR, 1);
 		Date toDate = cal.getTime();
 		
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
 			searchCriteria = new SearchCriteriaModel("", "", "", dateFormatter.format(fromDate), dateFormatter.format(toDate));
 		} catch (ParseException e) {

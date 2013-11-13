@@ -1,118 +1,159 @@
 package helper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
+import model.AbstractTicketCategory;
+import model.GeneralAdmissionTicketCategory;
 import model.MatchModel;
+import model.ReservedTicketCategory;
+import model.SearchCriteriaModel;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
+import database.dao.DaoInterface;
+import database.dao.MatchModelDao;
+import database.dao.MatchModelDaoInterface;
+import exceptions.PersistException;
 
 public class MatchFilter {
+	
+	private final List<String> ticketCategory;	
+	private DaoInterface matchDao = new MatchModelDao();	
 	private List<Sports> sportsList = new ArrayList<Sports>(Arrays.asList(Sports.values()));
 	private List<Gender> genderList = new ArrayList<Gender>(Arrays.asList(Gender.values()));
+	private Set<String> cityList = null;
 	private Set<String> opponentsList = null;
-	
 	private List<MatchModel> matchList = null;
-	private String sport = null;
-	private String gender = null;
-	private String opponent = null;
-	private String fromDate = null;
-	private String toDate = null;
+	private SearchCriteriaModel criterias = null;	
+	private String customCriteria = "";
 
-	public MatchFilter(List<MatchModel> matchList) {
-		this.matchList = matchList;
-		this.opponentsList = new TreeSet<String>();
-		for ( MatchModel match : matchList ) {
-			opponentsList.add(match.getOpponent());
-		}
-		
-		fromDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).format(new Date());
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.YEAR, 1);
-		Date oneYearLater = cal.getTime();
-		toDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).format(oneYearLater);
-		
+	public MatchFilter() {		
+		criterias = new SearchCriteriaModel();
+		ticketCategory = new ArrayList<String>(2);
+		ticketCategory.add("Reserve");
+		ticketCategory.add("General");		
 	}
 
-	public MatchFilter(List<MatchModel> matchList, String sport, String gender, String opponent, String fromDate, String toDate) {
-		super();//Pourquoi appeler le constructeur de Object?
-		this.sport = sport;
-		this.gender = gender;
-		this.opponent = opponent;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-		this.opponentsList = new TreeSet<String>();
-		for ( MatchModel match : matchList ) {
-			opponentsList.add(match.getOpponent());
-		}
-		this.matchList = matchList;
+	public MatchFilter(SearchCriteriaModel model) throws PersistException {		
+		criterias = model;	
+		ticketCategory = new ArrayList<String>(2);
+		ticketCategory.add("Reserve");
+		ticketCategory.add("General");	
 	}
 	
-	public List<MatchModel> filterMatchList() {
+	public List<MatchModel> filterMatchList() throws PersistException {		
+		matchList = matchDao.getAll();
+		this.opponentsList = new TreeSet<String>();
+		for ( MatchModel match : matchList ) {
+			opponentsList.add(match.getOpponent());
+		}
+		this.cityList = new TreeSet<String>();
+		for ( MatchModel match : matchList ) {
+			cityList.add(match.getCity().trim());		
+		}
+		
 		FilterFromSport();
 		FilterFromGender();
 		FilterFromOpponent();
 		FilterFromDate();
+		filterByCity();
+		filterByTicketType();
+		
 		return matchList;
+	}
+	
+	private void filterByCity() {
+		if (!criterias.isCityEmpty()) {
+			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
+			for (MatchModel match : matchList) {
+				if (criterias.getCity().equals(match.getCity())) {
+					newMatchList.add(match);
+				}
+			}
+			matchList = newMatchList;
+		}
+	}
+	
+	private void filterByTicketType() {
+		if (!criterias.isCategoryEmpty()) {
+			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
+			for (MatchModel match : matchList) {				
+				for (AbstractTicketCategory ticket : match.getTickets())
+					if (criterias.getCategory().contentEquals("Reserve")) {
+						if (ticket instanceof ReservedTicketCategory) {
+							newMatchList.add(match);							
+						}						
+					} else if (criterias.getCategory().contentEquals("General")){
+						if (ticket instanceof GeneralAdmissionTicketCategory) {
+							newMatchList.add(match);
+						}						
+					}
+			}
+			matchList = newMatchList;
+		}
 	}
 
 	private void FilterFromSport() {
-		if (sport != null && !sport.equals("")) {
+		if (!criterias.isSportEmpty()) {
 			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
 			for (MatchModel match : matchList) {
-				if (sport.equals(match.getSport().toString()))
+				if (criterias.getSport().equals(match.getSport())) {
 					newMatchList.add(match);
+				}
 			}
 			matchList = newMatchList;
 		}
 	}
 	
 	private void FilterFromGender() {
-		if (gender != null && !gender.equals("")) {
+		if (!criterias.isGenderEmpty()) {
 			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
 			for( MatchModel match : matchList) {
-				if ( gender.equals(match.getGender().toString()) )
+				if (criterias.getGender().equals(match.getGender()) ) {
 					newMatchList.add(match);
+				}
 			}
 			matchList = newMatchList;
 		}
 	}
 	
 	private void FilterFromOpponent() {
-		if (opponent != null && !opponent.equals("")) {
+		if (!criterias.isOpponentEmpty()) {
 			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
 			for( MatchModel match : matchList) {
-				if ( opponent.equals(match.getOpponent()) )
+				if (criterias.getOpponent().contentEquals(match.getOpponent())) {
 					newMatchList.add(match);
+				}
 			}
 			matchList = newMatchList;
 		}
 	}
 	private void FilterFromDate() {
-		if (fromDate != null && !fromDate.equals("")) {
+		if (!criterias.isFromDateEmpty() && !criterias.isToDateEmpty()) {
 			List<MatchModel> newMatchList = new ArrayList<MatchModel>();
-			Date startDate = null;
-			Date endDate = null;
-			try {
-				startDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).parse(fromDate);
-				endDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).parse(toDate);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+			
 			for( MatchModel match : matchList) {
-				if ( match.getDate().after(startDate) && match.getDate().before(endDate) )
+				if ( match.getDate().after(criterias.getFromDateObject()) 
+						&& match.getDate().before(criterias.getToDateObject()))
 					newMatchList.add(match);
 			}
 			matchList = newMatchList;
 		}
+	}
+
+	public List<MatchModel> getMatchList() {
+		return matchList;
+	}
+
+	public List<String> getTicketCategory() {
+		return ticketCategory;
+	}
+
+	public void setMatchList(List<MatchModel> matchList) {
+		this.matchList = matchList;
 	}
 
 	public List<Sports> getSportsList() {
@@ -131,6 +172,14 @@ public class MatchFilter {
 		this.genderList = genderList;
 	}
 
+	public SearchCriteriaModel getCriterias() {
+		return criterias;
+	}
+
+	public void setCriterias(SearchCriteriaModel criterias) {
+		this.criterias = criterias;
+	}
+
 	public Set<String> getOpponentsList() {
 		return opponentsList;
 	}
@@ -139,51 +188,23 @@ public class MatchFilter {
 		this.opponentsList = opponentsList;
 	}
 
-	public List<MatchModel> getMatchList() {
-		return matchList;
+	public String getCustomCriteria() {
+		return customCriteria;
 	}
 
-	public void setMatchList(List<MatchModel> matchList) {
-		this.matchList = matchList;
+	public void setCustomCriteria(String criteria) {
+		this.customCriteria = criteria;
 	}
 
-	public String getSport() {
-		return sport;
+	public Set<String> getCityList() {
+		return cityList;
 	}
 
-	public void setSport(String sport) {
-		this.sport = sport;
+	public void setCityList(Set<String> cityList) {
+		this.cityList = cityList;
 	}
 
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public String getOpponent() {
-		return opponent;
-	}
-
-	public void setOpponent(String opponent) {
-		this.opponent = opponent;
-	}
-
-	public String getFromDate() {
-		return fromDate;
-	}
-
-	public void setFromDate(String fromDate) {
-		this.fromDate = fromDate;
-	}
-
-	public String getToDate() {
-		return toDate;
-	}
-
-	public void setToDate(String toDate) {
-		this.toDate = toDate;
+	public void setMatchDao(MatchModelDaoInterface emptyMatchModelDao) {
+		matchDao = emptyMatchModelDao;		
 	}
 }

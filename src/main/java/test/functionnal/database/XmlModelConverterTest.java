@@ -2,9 +2,6 @@ package test.functionnal.database;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +19,6 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import config.ConfigManager.Gender;
 import database.XmlModelConverter;
 import database.converter.XmlObjectConverter;
-import database.dto.FileAccess;
 import exceptions.ConvertException;
 import exceptions.PersistException;
 

@@ -42,19 +42,19 @@ public class AuditHelper {
 	public void createMatchAudits() throws PersistException, ConvertException {
 		ArrayList<AbstractTicketCategory> billetsMatch1 = new ArrayList<AbstractTicketCategory>();		
 		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 100, 0, 32));
-		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 200, 0, 10));
+		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Admission générale", 200, 0, 10));
 		
 		ArrayList<AbstractTicketCategory> billetsMatch2 = new ArrayList<AbstractTicketCategory>();		
 		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 50, 0, 25));
-		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 100, 0, 10));
+		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Admission générale", 100, 0, 10));
 		
 		ArrayList<AbstractTicketCategory> billetsMatch3 = new ArrayList<AbstractTicketCategory>();
 		billetsMatch3.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 55, 0, 18));
-		billetsMatch3.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 150, 0, 10));
+		billetsMatch3.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Admission générale", 150, 0, 10));
 		
 		ArrayList<AbstractTicketCategory> billetsMatch4 = new ArrayList<AbstractTicketCategory>();
 		billetsMatch4.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 30, 0, 34));
-		billetsMatch4.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 200, 0, 24));
+		billetsMatch4.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Admission générale", 200, 0, 24));
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);

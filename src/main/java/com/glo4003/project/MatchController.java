@@ -1,7 +1,6 @@
 package com.glo4003.project;
 
 import helper.MatchFilter;
-import helper.MatchFilterV2;
 import helper.UserConverter;
 
 import java.text.ParseException;
@@ -11,7 +10,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import model.InstantiateAbstractTicket;
-import model.InstantiateTicketModel;
 import model.LoginViewModel;
 import model.MatchModel;
 import model.SearchCriteriaModel;
@@ -46,7 +44,7 @@ public class MatchController {
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		MatchFilterV2 matchFilter = new MatchFilterV2();
+		MatchFilter matchFilter = new MatchFilter();
 		matchFilter.filterMatchList();
 		model.addAttribute("filter", matchFilter);
 		
@@ -68,8 +66,10 @@ public class MatchController {
 		SearchCriteriaModel criterias = new SearchCriteriaModel(
 				request.getParameter("criterias.sport"),
 				request.getParameter("criterias.gender"), 
-				request.getParameter("criterias.opponent"), 
-				request.getParameter("criterias.fromDate"), 
+				request.getParameter("criterias.opponent"),
+				request.getParameter("criterias.category"),
+				request.getParameter("criterias.city"),
+				request.getParameter("criterias.fromDate"),				
 				request.getParameter("criterias.toDate"));		
 		
 		String criteria = request.getParameter("customCriteria");
@@ -80,7 +80,7 @@ public class MatchController {
 				}
 			}
 		}
-		MatchFilterV2 matchFilter = new MatchFilterV2(criterias);
+		MatchFilter matchFilter = new MatchFilter(criterias);
 		String mustSave = request.getParameter("mustSave");			
 		if((mustSave != null) && !mustSave.isEmpty()) {		
 			

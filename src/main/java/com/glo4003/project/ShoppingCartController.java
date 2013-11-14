@@ -13,6 +13,7 @@ import model.MatchModel;
 import model.UserModel;
 import model.UserViewModel;
 
+import org.openqa.selenium.internal.seleniumemulation.GetSelectOptions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ import exceptions.PersistException;
 public class ShoppingCartController {
 	private UserConverter userConverter;
 	private MatchModelDao matchDao = new MatchModelDao();
+	private List<InstantiateAbstractTicket> billTickets;
 
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
 	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws NumberFormatException, PersistException, ConvertException {	
@@ -37,8 +39,7 @@ public class ShoppingCartController {
 
 		if( action.equals("buy") ){
 
-
-			List<InstantiateAbstractTicket> billTickets = new ArrayList<InstantiateAbstractTicket>();
+			/*List<InstantiateAbstractTicket>*/ billTickets = new ArrayList<InstantiateAbstractTicket>();
 
 			String[] selectedTickets =  request.getParameterValues("ticketId");
 			if (selectedTickets == null) {
@@ -85,7 +86,29 @@ public class ShoppingCartController {
 
 		return "payment";
 	}
-
+	
+	@RequestMapping(value = "/payment", method = RequestMethod.POST)
+	public String payment_done(Model model, HttpServletRequest request) throws PersistException, ConvertException {
+		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
+		userConverter = new UserConverter();
+		UserModel userModel = userConverter.convert(userViewModel);
+		
+//		List<InstantiateAbstractTicket> billTickets = new ArrayList<InstantiateAbstractTicket>();
+//		billTickets = (List<InstantiateAbstractTicket>) request.getSession().getAttribute("billTickets");
+		if(billTickets == null) System.out.println("\nEmpty list\n");
+		else for(InstantiateAbstractTicket ticket : billTickets){
+			Long matchId = ticket.getMatch().getId();
+			MatchModel match = matchDao.getById(matchId);
+			userModel.deleteTicketAndReplaceInMatch(ticket.getTicketId(), match);
+			matchDao.save(match);
+		}
+		
+		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+		model.addAttribute("entry", new LoginViewModel());
+		
+		return "redirect:/";
+	}
+	
 	  @RequestMapping(value = "/emptyCart", method = RequestMethod.GET)
 			public String emptyCart(Model model, HttpServletRequest request) throws PersistException, ConvertException {
 			  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");

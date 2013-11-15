@@ -97,10 +97,7 @@ public class ShoppingCartController {
 //		billTickets = (List<InstantiateAbstractTicket>) request.getSession().getAttribute("billTickets");
 		if(billTickets == null) System.out.println("\nEmpty list\n");
 		else for(InstantiateAbstractTicket ticket : billTickets){
-			Long matchId = ticket.getMatch().getId();
-			MatchModel match = matchDao.getById(matchId);
-			userModel.deleteTicketAndReplaceInMatch(ticket.getTicketId(), match);
-			matchDao.save(match);
+			userModel.deleteTicket(ticket);
 		}
 		
 		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));

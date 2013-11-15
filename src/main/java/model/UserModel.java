@@ -62,6 +62,24 @@ public class UserModel implements ModelInterface {
 		}
 		
 	}
+	
+	public void deleteTicketById(int ticketId) {
+
+		InstantiateAbstractTicket t = this.getTicketById(ticketId);
+	
+		if (t != null) {
+			this.tickets.remove(t);
+		}
+		
+	}
+	
+	public void deleteTicket(InstantiateAbstractTicket t) {
+	
+		if (t != null) {
+			this.tickets.remove(t);
+		}
+		
+	}
 
 
 	public void emptyCartAndReplaceTickets(MatchModelDao matchDao) throws PersistException, ConvertException {

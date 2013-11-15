@@ -13,12 +13,16 @@ public abstract class InstantiateAbstractTicket {
      @XStreamConverter(XmlObjectConverter.class)
      private MatchModel match;
      private int catIndex;
+     private AbstractTicketCategory correspondingCat;
+     
      
      public InstantiateAbstractTicket(MatchModel match, int catIndex) {
     	 this.ticketId = nextTicketId.incrementAndGet();
          this.match = match;
          this.setCatIndex(catIndex);
+         this.correspondingCat = match.getTickets().get(catIndex);
      }
+     
      
      public int getTicketId() {
          return ticketId;
@@ -38,5 +42,17 @@ public abstract class InstantiateAbstractTicket {
 	public void setCatIndex(int catIndex) {
 		this.catIndex = catIndex;
 	}
+
+	public AbstractTicketCategory getCorrespondingCat() {
+		return correspondingCat;
+	}
+
+	public void setCorrespondingCat(AbstractTicketCategory correspondingCat) {
+		this.correspondingCat = correspondingCat;
+	}
+
+
+
+	
      
 }

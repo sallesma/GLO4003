@@ -11,7 +11,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import model.AbstractTicketCategory;
+import model.GeneralAdmissionTicketCategory;
 import model.InstantiateAbstractTicket;
+import model.InstantiateGeneralAdmissionTicket;
+import model.InstantiateReservedTicket;
 import model.LoginViewModel;
 import model.MatchModel;
 import model.UserModel;
@@ -24,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import database.dao.MatchModelDao;
+import exceptions.ConvertException;
+import exceptions.PersistException;
 
 @Controller
 public class ShoppingCartController {
@@ -32,7 +38,7 @@ public class ShoppingCartController {
 	private List<InstantiateAbstractTicket> billTickets;
 
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
-	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) {	
+	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws NumberFormatException, PersistException {	
 
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserModel userModel = userConverter.convert(userViewModel);
@@ -133,6 +139,43 @@ public class ShoppingCartController {
 		model.addAttribute("entry", new LoginViewModel());
 		
 		return "shoppingCart";
+	}
+	
+	
+	@RequestMapping(value = "/modifyTicket", method = RequestMethod.GET)
+	public String modifyTicket(Model model, HttpServletRequest request) throws PersistException, ConvertException {
+		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
+		UserModel userModel = userConverter.convert(userViewModel);
+		int ticketId = Integer.valueOf(request.getParameter("id"));
+		
+		InstantiateAbstractTicket t = userModel.getTicketById(ticketId);
+		if (t instanceof InstantiateGeneralAdmissionTicket ) {
+			int newNbPlaces = Integer.valueOf(request.getParameter("nbPlaceInput"));
+			InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
+			MatchModel match = matchDao.getById(tGAT.getMatch().getId());
+			
+			if (!tGAT.changeNbPlaces(newNbPlaces, match)) {
+				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");
+			}
+			matchDao.save(match);
+			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+			model.addAttribute("entry", new LoginViewModel());
+			return "shoppingCart";
+		}
+		else {
+			String newPlacement = request.getParameter("placement");
+			InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
+			MatchModel match = matchDao.getById(tRT.getMatch().getId());
+			
+			if (!tRT.changePlace(newPlacement, match)) {
+				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");
+			}
+			matchDao.save(match);
+			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+			model.addAttribute("entry", new LoginViewModel());
+			return "shoppingCart";
+		}
+		
 	}
 	
 	@RequestMapping(value = "/emptyCart", method = RequestMethod.GET)

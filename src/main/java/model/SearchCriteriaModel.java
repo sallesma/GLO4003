@@ -8,7 +8,6 @@ import java.util.Locale;
 
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import config.ConfigManager;
 import config.ConfigManager.Gender;
 import config.ConfigManager.Sports;
 

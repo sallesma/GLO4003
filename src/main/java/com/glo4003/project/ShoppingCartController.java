@@ -24,27 +24,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import database.dao.MatchModelDao;
-import exceptions.ConvertException;
-import exceptions.PersistException;
 
 @Controller
 public class ShoppingCartController {
-	private UserConverter userConverter;
+	private UserConverter userConverter = new UserConverter();
 	private MatchModelDao matchDao = new MatchModelDao();
 	private List<InstantiateAbstractTicket> billTickets;
 
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
-	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws NumberFormatException, PersistException, ConvertException {	
+	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) {	
 
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-		userConverter = new UserConverter();
 		UserModel userModel = userConverter.convert(userViewModel);
 
+		String[] selectedTickets =  request.getParameterValues("ticketId");
 		if( action.equals("buy") ){
 
 			billTickets = new ArrayList<InstantiateAbstractTicket>();
 
-			String[] selectedTickets =  request.getParameterValues("ticketId");
 			if (selectedTickets == null) {
 				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés, la facture n'a pas pu être éditée.");
 				model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
@@ -63,15 +60,19 @@ public class ShoppingCartController {
 		}
 		else if( action.equals("delete") ){
 
-			String[] selectedTickets =  request.getParameterValues("ticketId");
 			if (selectedTickets == null) {
 				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés");
 			} else {
 				for ( String selectedTicket : selectedTickets ) {
 					Long matchId = userModel.getTicketById(Integer.valueOf(selectedTicket)).getMatch().getId();
-					MatchModel match = matchDao.getById(matchId);
-					userModel.deleteTicketAndReplaceInMatch(Integer.valueOf(selectedTicket), match);
-					matchDao.save(match);
+					MatchModel match;
+					try {
+						match = matchDao.getById(matchId);
+						userModel.deleteTicketAndReplaceInMatch(Integer.valueOf(selectedTicket), match);
+						matchDao.save(match);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
@@ -94,9 +95,8 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public String payment_done(Model model, HttpServletRequest request) throws PersistException, ConvertException {
+	public String payment_done(Model model, HttpServletRequest request) {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-		userConverter = new UserConverter();
 		UserModel userModel = userConverter.convert(userViewModel);
 		
 		String cardType = (String) request.getParameter("cardType");
@@ -118,32 +118,41 @@ public class ShoppingCartController {
 			validator = new AmericanExpressoValidation(cardType, cardOwner, cardNumber, expirationMonth, expirationYear, cardCode);
 			break;
 		default:
+			return "redirect:/shoppingCart";
 		}
 		
 		if (validator.isValid()) {
-			for (InstantiateAbstractTicket ticket : billTickets) {
-				userModel.deleteTicket(ticket);
+			if(billTickets != null) {
+				for (InstantiateAbstractTicket ticket : billTickets) {
+					userModel.deleteTicket(ticket);
+				}
 			}
 		}
 		
 		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 		model.addAttribute("entry", new LoginViewModel());
 		
-		return "/shoppingCart";
+		return "shoppingCart";
 	}
 	
-	  @RequestMapping(value = "/emptyCart", method = RequestMethod.GET)
-			public String emptyCart(Model model, HttpServletRequest request) throws PersistException, ConvertException {
-			  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-			  userConverter = new UserConverter();
-	          UserModel userModel = userConverter.convert(userViewModel);
-	          
-	          userModel.emptyCartAndReplaceTickets(matchDao);
-	          
-	          return "redirect:/";
+	@RequestMapping(value = "/emptyCart", method = RequestMethod.GET)
+	public String emptyCart(Model model, HttpServletRequest request) {
+		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
+		UserModel userModel = userConverter.convert(userViewModel);
+
+		try {
+			userModel.emptyCartAndReplaceTickets(matchDao);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "shoppingCart";
 	}
 	  
-	public void replaceUSerConverter(UserConverter converter) {
+	public void replaceUserConverter(UserConverter converter) {
 		this.userConverter = converter;
+	}
+	public void replaceMatchDAO(MatchModelDao dao) {
+		this.matchDao = dao;
 	}
 }

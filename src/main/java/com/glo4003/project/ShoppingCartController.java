@@ -1,6 +1,10 @@
 package com.glo4003.project;
 
+import helper.AbstractCreditCardValidation;
+import helper.AmericanExpressoValidation;
+import helper.MistercardValidation;
 import helper.UserConverter;
+import helper.VasiValidation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +17,6 @@ import model.MatchModel;
 import model.UserModel;
 import model.UserViewModel;
 
-import org.openqa.selenium.internal.seleniumemulation.GetSelectOptions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,21 +42,24 @@ public class ShoppingCartController {
 
 		if( action.equals("buy") ){
 
-			/*List<InstantiateAbstractTicket>*/ billTickets = new ArrayList<InstantiateAbstractTicket>();
+			billTickets = new ArrayList<InstantiateAbstractTicket>();
 
 			String[] selectedTickets =  request.getParameterValues("ticketId");
 			if (selectedTickets == null) {
 				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés, la facture n'a pas pu être éditée.");
+				model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+				model.addAttribute("entry", new LoginViewModel());	
+				return "shoppingCart";
 			} else {
 				for ( String selectedTicket : selectedTickets ) {
 					billTickets.add( userModel.getTicketById(Integer.valueOf(selectedTicket)) );
 				}
 				model.addAttribute("billTickets", billTickets);
+				model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+				model.addAttribute("entry", new LoginViewModel());	
+				
+				return "bill";
 			}
-			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
-			model.addAttribute("entry", new LoginViewModel());	
-
-			return "bill";
 		}
 		else if( action.equals("delete") ){
 
@@ -93,17 +99,37 @@ public class ShoppingCartController {
 		userConverter = new UserConverter();
 		UserModel userModel = userConverter.convert(userViewModel);
 		
-//		List<InstantiateAbstractTicket> billTickets = new ArrayList<InstantiateAbstractTicket>();
-//		billTickets = (List<InstantiateAbstractTicket>) request.getSession().getAttribute("billTickets");
-		if(billTickets == null) System.out.println("\nEmpty list\n");
-		else for(InstantiateAbstractTicket ticket : billTickets){
-			userModel.deleteTicket(ticket);
+		String cardType = (String) request.getParameter("cardType");
+		String cardOwner = (String) request.getParameter("cardOwner");
+		String cardNumber = (String) request.getParameter("cardNumber");
+		String expirationMonth = (String) request.getParameter("expirationMonth");
+		String expirationYear = (String) request.getParameter("expirationYear");
+		String cardCode = (String) request.getParameter("cardCode");
+		
+		AbstractCreditCardValidation validator = null;
+		switch (cardType) {
+		case "Vasi":
+			validator = new VasiValidation(cardType, cardOwner, cardNumber, expirationMonth, expirationYear, cardCode);
+			break;
+		case "Mistercard":
+			validator = new MistercardValidation(cardType, cardOwner, cardNumber, expirationMonth, expirationYear, cardCode);
+			break;
+		case "AmericanExpresso":
+			validator = new AmericanExpressoValidation(cardType, cardOwner, cardNumber, expirationMonth, expirationYear, cardCode);
+			break;
+		default:
+		}
+		
+		if (validator.isValid()) {
+			for (InstantiateAbstractTicket ticket : billTickets) {
+				userModel.deleteTicket(ticket);
+			}
 		}
 		
 		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 		model.addAttribute("entry", new LoginViewModel());
 		
-		return "redirect:/";
+		return "/shoppingCart";
 	}
 	
 	  @RequestMapping(value = "/emptyCart", method = RequestMethod.GET)

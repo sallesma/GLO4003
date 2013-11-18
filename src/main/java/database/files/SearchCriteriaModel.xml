@@ -45,4 +45,43 @@
         <toDate>2014-11-21 05:00:00.0 UTC</toDate>
         <searchName>trrtrtr</searchName>
     </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>6</id>
+        <sport>Basketball</sport>
+        <opponent/>
+        <category/>
+        <city>Montr?l</city>
+        <fromDate>2013-11-15 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-15 05:00:00.0 UTC</toDate>
+        <searchName>ghg</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>7</id>
+        <opponent>ETS</opponent>
+        <category/>
+        <city>Alifax</city>
+        <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-18 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>8</id>
+        <gender>F</gender>
+        <opponent/>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-18 05:00:00.0 UTC</toDate>
+        <searchName>uuu</searchName>
+    </SearchCriteriaModel>
+    <SearchCriteriaModel>
+        <id>9</id>
+        <gender>F</gender>
+        <opponent>Rimouski</opponent>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-18 05:00:00.0 UTC</toDate>
+        <searchName>lklkl</searchName>
+    </SearchCriteriaModel>
 </SearchCriteriaModels>

@@ -25,10 +25,10 @@
         <searchCriteria/>
     </UserModel>
     <UserModel>
-        <id>4</id>
-        <lastName>Petit</lastName>
-        <firstName>Martin</firstName>
-        <username>MP</username>
+        <id>3</id>
+        <lastName>Baddouri</lastName>
+        <firstName>Rachid</firstName>
+        <username>RB</username>
         <password>password</password>
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
@@ -49,15 +49,15 @@
         <searchCriteria/>
     </UserModel> 
     <UserModel>
-        <id>3</id>
-        <lastName>Baddouri</lastName>
-        <firstName>Rachid</firstName>
-        <username>RB</username>
+        <id>4</id>
+        <lastName>Petit</lastName>
+        <firstName>Martin</firstName>
+        <username>MP</username>
         <password>password</password>
         <phoneNumber>(444) 444-4444</phoneNumber>
         <address>Address</address>
         <isAdmin>false</isAdmin>
         <tickets/>
-        <searchCriteria>1:SearchCriteriaModel,2:SearchCriteriaModel,3:SearchCriteriaModel,4:SearchCriteriaModel,5:SearchCriteriaModel,</searchCriteria>
+        <searchCriteria>8:SearchCriteriaModel,9:SearchCriteriaModel,</searchCriteria>
     </UserModel>
 </UserModels>

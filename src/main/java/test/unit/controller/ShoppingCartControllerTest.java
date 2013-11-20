@@ -4,25 +4,23 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
-import helper.UserConverter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import model.InstantiateAbstractTicket;
-import model.MatchModel;
-import model.UserModel;
-import model.UserViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.ui.Model;
 
-import com.glo4003.project.ShoppingCartController;
-
-import database.dao.MatchModelDao;
-import exceptions.PersistException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
+import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.view.UserViewModel;
 
 public class ShoppingCartControllerTest {
 	private ShoppingCartController controller;

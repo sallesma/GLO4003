@@ -9,9 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
-import com.glo4003.project.MatchController;
-
-import exceptions.PersistException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.match.controller.MatchController;
 
 public class MatchControllerTest {
 	private MatchController controller;

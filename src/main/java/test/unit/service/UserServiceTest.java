@@ -6,18 +6,18 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import model.UserModel;
-import model.UserViewModel;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import service.UserService;
-import database.dao.UserModelDao;
-import exceptions.ConvertException;
-import exceptions.PersistException;
-import exceptions.SaveException;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.exception.SaveException;
+import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.user.dao.UserModelDao;
+import com.glo4003.project.user.model.view.UserViewModel;
+import com.glo4003.project.user.service.UserService;
 
 public class UserServiceTest {	
 	

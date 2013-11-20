@@ -1,12 +1,11 @@
 package test.unit.model;
 
 import static org.junit.Assert.*;
-import model.SearchCriteriaModel;
 
 import org.junit.Test;
 
-import config.ConfigManager.Gender;
-import config.ConfigManager.Sports;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.model.SearchCriteriaModel;
 
 public class SearchCriteriaModelTest {
 	
@@ -23,7 +22,7 @@ public class SearchCriteriaModelTest {
 		testClass.setSport("");
 		assertTrue(testClass.isSportEmpty());
 
-		testClass.setSport(Sports.Football.toString());
+		testClass.setSport(MatchModel.Sports.Football.toString());
 		assertTrue(!(testClass.isSportEmpty()));
 
 	}
@@ -38,7 +37,7 @@ public class SearchCriteriaModelTest {
 		testClass.setGender("");
 		assertTrue(testClass.isGenderEmpty());
 
-		testClass.setGender(Gender.F.toString());
+		testClass.setGender(MatchModel.Gender.F.toString());
 		assertTrue(!(testClass.isGenderEmpty()));
 	}
 

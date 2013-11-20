@@ -1,5 +1,9 @@
 package model;
 
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+
 public class InstantiateReservedTicket extends InstantiateAbstractTicket {
 
 	private String numPlace;

@@ -2,8 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false"%>
-<%@ page import="model.UserViewModel"%>
-<%@ page import="database.DbHelper"%>
+<%@ page import="com.glo4003.project.user.model.view.UserViewModel"%>
+<%@ page import="com.glo4003.project.database.model.MatchModel"%>
 
 <!DOCTYPE html>
 <html lang="en">

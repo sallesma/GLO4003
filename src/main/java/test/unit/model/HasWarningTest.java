@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.HasWarning;
-
 import org.junit.Test;
+
+import com.glo4003.project.global.HasWarning;
 
 public class HasWarningTest {
 

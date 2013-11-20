@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
-import com.glo4003.project.UserController;
+import com.glo4003.project.user.controller.UserController;
 
 public class UserControllerTest {
 	

@@ -7,22 +7,18 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
-import model.GeneralAdmissionTicketCategory;
-import model.MatchModel;
-import model.ReservedTicketCategory;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import com.glo4003.project.database.converter.XmlModelConverter;
+import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.match.dao.MatchModelDao;
 import com.thoughtworks.xstream.XStream;
-
-import config.ConfigManager.Gender;
-import config.ConfigManager.Sports;
-import database.XmlModelConverter;
-import database.dao.MatchModelDao;
-import database.dto.FileAccess;
-import exceptions.ConvertException;
-import exceptions.PersistException;
 
 public class MatchModelDaoTest {
 
@@ -63,7 +59,7 @@ public class MatchModelDaoTest {
 	@Test
 	public void canGetAllMatchsBySport() throws PersistException, ConvertException {
 		//When
-		List<MatchModel> models = dao.getAllMatchsBySport(Sports.Rugby);
+		List<MatchModel> models = dao.getAllMatchsBySport(MatchModel.Sports.Rugby);
 		
 		//Then
 		assertTrue(models.size() == 20);
@@ -74,9 +70,9 @@ public class MatchModelDaoTest {
 			MatchModel model = new MatchModel();
 			model.setCity("test");
 			model.setField(i.toString());
-			model.setGender(Gender.M);
+			model.setGender(MatchModel.Gender.M);
 			model.setOpponent("test");
-			model.setSport(Sports.Rugby);	
+			model.setSport(MatchModel.Sports.Rugby);	
 			model.setDate(new Date());
 			model.addTicketCategory(new GeneralAdmissionTicketCategory("test", "test", 1,1,1));
 			model.addTicketCategory(new ReservedTicketCategory("test", "test", 10,1,1));

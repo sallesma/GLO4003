@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="model.UserViewModel"%>
+<%@ page import="com.glo4003.project.user.model.view.UserViewModel"%>
 
 <%@ include file="header.jsp"%>
 

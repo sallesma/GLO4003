@@ -7,20 +7,17 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import model.AbstractTicketCategory;
-import model.InstantiateAbstractTicket;
-import model.MatchModel;
-import model.UserModel;
 import model.factory.InstantiateTicketFactory;
-import model.factory.TicketCategoryFactory;
 
 import org.junit.Test;
 
-import config.ConfigManager;
-import config.ConfigManager.Gender;
-import config.ConfigManager.Sports;
-import exceptions.ConvertException;
-import exceptions.PersistException;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.AbstractTicketCategory;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
+import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 
 public class UserModelTest {
 
@@ -214,11 +211,11 @@ public class UserModelTest {
 		model.setIsAdmin(false);
 
 		ArrayList<AbstractTicketCategory> billetsMatch = new ArrayList<AbstractTicketCategory>();
-		billetsMatch.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 100, 0, 32));
+		billetsMatch.add(TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.RESERVED_TICKET,"Billet loges", 100, 0, 32));
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);
-		MatchModel match = new MatchModel(Sports.Football, Gender.M, (long) 0, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch);
+		MatchModel match = new MatchModel(MatchModel.Sports.Football, MatchModel.Gender.M, (long) 0, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch);
 		InstantiateAbstractTicket ticket = InstantiateTicketFactory.getInstanciateTickets(0, match,"32", 1);
 
 		model.addTicket(ticket);

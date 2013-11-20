@@ -3,11 +3,10 @@ package test.unit.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MatchModel;
-import config.ConfigManager.Sports;
-import database.dao.MatchModelDaoInterface;
-import exceptions.ConvertException;
-import exceptions.PersistException;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.match.dao.MatchModelDaoInterface;
 
 public class MockMatchModelDao implements MatchModelDaoInterface {
 
@@ -53,7 +52,7 @@ public class MockMatchModelDao implements MatchModelDaoInterface {
 	}
 
 	@Override
-	public List<MatchModel> getAllMatchsBySport(Sports sport)
+	public List<MatchModel> getAllMatchsBySport(MatchModel.Sports sport)
 			throws PersistException {
 		// TODO Auto-generated method stub
 		return null;

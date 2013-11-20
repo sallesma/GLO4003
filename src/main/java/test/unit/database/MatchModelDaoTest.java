@@ -12,18 +12,17 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MatchModel;
 import nu.xom.Element;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import config.ConfigManager.Sports;
-import database.XmlModelConverter;
-import database.dao.MatchModelDao;
-import database.dto.FileAccess;
-import exceptions.ConvertException;
-import exceptions.PersistException;
+import com.glo4003.project.database.converter.XmlModelConverter;
+import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.match.dao.MatchModelDao;
 
 public class MatchModelDaoTest {
 
@@ -53,7 +52,7 @@ public class MatchModelDaoTest {
 		when(fileAccess.getAll(anyString())).thenReturn(list);
 		
 		//When
-		List<MatchModel> models = dao.getAllMatchsBySport(Sports.Rugby);
+		List<MatchModel> models = dao.getAllMatchsBySport(MatchModel.Sports.Rugby);
 		
 		//Then
 		verify(dao, times(1)).getAll();

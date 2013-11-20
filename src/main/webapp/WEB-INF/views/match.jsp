@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="model.UserViewModel"%>
-<%@ page import="config.ConfigManager"%>
+<%@ page import="com.glo4003.project.user.model.view.UserViewModel"%>
+<%@ page import="com.glo4003.project.database.model.AbstractTicketCategory"%>
 <%@ include file="header.jsp"%>
 
 <div class="container">
@@ -75,7 +75,7 @@
                                 <td>${billet.category}</td>                                
                                 <td>${billet.price} $</td>
                                 <td>${billet.numberRemainingTickets}</td>
-                                <td><c:set var="billetReserve" value="<%=ConfigManager.RESERVED_TICKET%>" />
+                                <td><c:set var="billetReserve" value="<%=AbstractTicketCategory.RESERVED_TICKET%>" />
                                 <c:choose>
                                                 <c:when test="${billet.category == billetReserve}">
                                                         <a href="#" class="btn btn-success choosePlace" data-toggle="popover"

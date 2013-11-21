@@ -1,7 +1,6 @@
 package com.glo4003.project.database.converter;
 
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import nu.xom.Attribute;
 import nu.xom.Builder;
@@ -18,7 +17,7 @@ public class XmlModelConverter {
 
 	private XStream xstream;
 	
-	private final String path = "src.main.java.com.glo4003.project.database.model.";
+	private final String path = "com.glo4003.project.database.model.";
 
 	public XmlModelConverter() {
 		xstream = new XStream();		

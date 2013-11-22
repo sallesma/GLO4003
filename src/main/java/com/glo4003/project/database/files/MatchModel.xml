@@ -109,7 +109,7 @@
         <city>test</city>
         <field>18</field>
         <tickets>19:GeneralAdmissionTicketCategory,19:ReservedTicketCategory,</tickets>
-    </MatchModel> 
+    </MatchModel>
     <MatchModel>
         <sport>Volleyball</sport>
         <gender>F</gender>
@@ -119,26 +119,6 @@
         <city>Montréal</city>
         <field>6</field>
         <tickets>7:GeneralAdmissionTicketCategory,7:ReservedTicketCategory,</tickets>
-    </MatchModel>
-    <MatchModel>
-        <sport>Basketball</sport>
-        <gender>F</gender>
-        <id>14</id>
-        <date>2013-12-23 21:53:18.268 UTC</date>
-        <opponent>Université</opponent>
-        <city>Rimouski</city>
-        <field>13</field>
-        <tickets>14:GeneralAdmissionTicketCategory,14:ReservedTicketCategory,</tickets>
-    </MatchModel>
-    <MatchModel>
-        <sport>Rugby</sport>
-        <gender>F</gender>
-        <id>5</id>
-        <date>2013-11-27 20:35:17.870 UTC</date>
-        <opponent>UQAM</opponent>
-        <city>Québec</city>
-        <field>4</field>
-        <tickets>5:GeneralAdmissionTicketCategory,5:ReservedTicketCategory,</tickets>
     </MatchModel>
     <MatchModel>
         <sport>Soccer</sport>
@@ -159,5 +139,25 @@
         <city>Alifax</city>
         <field>8</field>
         <tickets>9:GeneralAdmissionTicketCategory,9:ReservedTicketCategory,</tickets>
+    </MatchModel>
+    <MatchModel>
+        <sport>Basketball</sport>
+        <gender>F</gender>
+        <id>14</id>
+        <date>2013-12-23 21:53:18.268 UTC</date>
+        <opponent>Université</opponent>
+        <city>Rimouski</city>
+        <field>13</field>
+        <tickets>14:GeneralAdmissionTicketCategory,14:ReservedTicketCategory,</tickets>
+    </MatchModel> 
+    <MatchModel>
+        <sport>Rugby</sport>
+        <gender>F</gender>
+        <id>5</id>
+        <date>2013-11-27 20:35:17.870 UTC</date>
+        <opponent>UQAM</opponent>
+        <city>Québec</city>
+        <field>4</field>
+        <tickets>5:GeneralAdmissionTicketCategory,5:ReservedTicketCategory,</tickets>
     </MatchModel>
 </MatchModels>

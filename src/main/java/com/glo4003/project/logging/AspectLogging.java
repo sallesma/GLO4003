@@ -1,4 +1,4 @@
-package com.glo4003.project.aspect;
+package com.glo4003.project.logging;
 
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
@@ -10,7 +10,7 @@ public class AspectLogging {
 	
 	private Logger logger;
 	
-	public AspectLogging(String fileName) {
+	public AspectLogging(String fileName, Class clazz) {
 		FileAppender fileAppender = new FileAppender();
         fileAppender.setName("FileLogger");
         fileAppender.setFile("src/main/java/com/glo4003/project/aspect/" + fileName);
@@ -19,7 +19,7 @@ public class AspectLogging {
         fileAppender.setAppend(true);
         fileAppender.activateOptions();
 
-        logger = Logger.getLogger("com.glo4003.project");
+        logger = Logger.getLogger(clazz);
         logger.addAppender(fileAppender);
 	}
     protected void LogName(JoinPoint joinPoint) {

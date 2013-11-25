@@ -1,10 +1,10 @@
-package com.glo4003.project.aspect;
+package com.glo4003.project.logging;
 
 
 public aspect AdminLoggingAspect extends AspectLogging {
 	
 	public AdminLoggingAspect() {
-		super("admin.log");
+		super("admin.log", AdminLoggingAspect.class);
 	}
 
 	private pointcut adminControllerAddPlacementTicket():

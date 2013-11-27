@@ -4,7 +4,19 @@ GLO4003
 Website of the Rouge et Or sports teams of Laval University (Québec City).
 This project is part of GLO-4003 class.
 
-### How to start the application with fake informations
+### How to start the application
+
+#### Installing the project
+
+The project is developped as a Spring Project. However, we use some Aspects, which means you have to convert the project to an AspectJ project.
+
+To do so, right click on your project in Eclipse explorer, then "configure" and "convert to AspectJ project.
+
+#### Running the application
+
+You need to run the project as a Java Application. We have a main method which is in charge of starting the web server and everything for you.
+
+#### Using fake informations
 
 When you start the application, the files situated into the folder
 

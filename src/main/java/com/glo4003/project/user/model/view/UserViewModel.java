@@ -23,7 +23,7 @@ public class UserViewModel extends HasWarning {
 		searchCriteria = new ArrayList<SearchCriteriaModel>();
 	}
 	
-	private Long id;
+	private Long id = 0L;
 	@Size(min=1, message = "Entrez un nom de famille")
 	private String lastName;
 	@Size(min=1, message = "entrez un prenon")
@@ -113,5 +113,9 @@ public class UserViewModel extends HasWarning {
 
 	public void setSearchCriteria(ArrayList<SearchCriteriaModel> searchCriteria) {
 		this.searchCriteria = searchCriteria;
+	}
+	
+	public String toString(){
+		return this.firstName + " " + this.lastName;
 	}
 }

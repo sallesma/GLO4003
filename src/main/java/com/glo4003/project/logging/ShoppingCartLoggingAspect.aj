@@ -1,5 +1,7 @@
 package com.glo4003.project.logging;
 
+import javax.servlet.http.HttpServletRequest;
+
 public aspect ShoppingCartLoggingAspect extends AspectLogging {
 	
 	public ShoppingCartLoggingAspect() {
@@ -9,7 +11,14 @@ public aspect ShoppingCartLoggingAspect extends AspectLogging {
 	private pointcut shoppingCartPaymentDone():
 		execution ( * *..ShoppingCartController.payment_done(..) );
 	
+	
 	after() : shoppingCartPaymentDone() {
-		LogName(thisJoinPoint);
+		for (Object arg : thisJoinPoint.getArgs()) {
+			if(arg instanceof HttpServletRequest)
+			{
+				HttpServletRequest request = (HttpServletRequest) arg;
+				logInfo(thisJoinPoint, request.getParameterMap());
+			}
+		}
 	}
 }

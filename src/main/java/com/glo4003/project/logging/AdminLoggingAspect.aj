@@ -1,5 +1,7 @@
 package com.glo4003.project.logging;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 public aspect AdminLoggingAspect extends AspectLogging {
 	
@@ -13,7 +15,13 @@ public aspect AdminLoggingAspect extends AspectLogging {
 	private pointcut adminControllerAddGeneralTicket():
 		execution ( * com.glo4003.project.user.controller.AdminController.addGeneralTickets(..) );
 	
-	after() : adminControllerAddPlacementTicket() || adminControllerAddGeneralTicket() {
-		LogName(thisJoinPoint);
+	after() : adminControllerAddPlacementTicket() || adminControllerAddGeneralTicket() {		
+		for (Object arg : thisJoinPoint.getArgs()) {
+			if(arg instanceof HttpServletRequest)
+			{
+				HttpServletRequest request = (HttpServletRequest) arg;
+				logInfo(thisJoinPoint, request.getParameterMap());
+			}
+		}
 	}
 }

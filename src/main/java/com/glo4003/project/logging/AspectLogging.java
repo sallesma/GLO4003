@@ -1,5 +1,7 @@
 package com.glo4003.project.logging;
 
+import java.util.Map;
+
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
@@ -13,7 +15,7 @@ public class AspectLogging {
 	public AspectLogging(String fileName, Class clazz) {
 		FileAppender fileAppender = new FileAppender();
         fileAppender.setName("FileLogger");
-        fileAppender.setFile("src/main/java/com/glo4003/project/aspect/" + fileName);
+        fileAppender.setFile("src/main/java/com/glo4003/project/logging/" + fileName);
         fileAppender.setLayout(new PatternLayout("%d %-5p [%c{1}] %m%n"));
         fileAppender.setThreshold(Priority.INFO);
         fileAppender.setAppend(true);
@@ -22,10 +24,10 @@ public class AspectLogging {
         logger = Logger.getLogger(clazz);
         logger.addAppender(fileAppender);
 	}
-    protected void LogName(JoinPoint joinPoint) {
-        final String methodName = joinPoint.getTarget().getClass()
-                + "." + joinPoint.getSignature().getName();
+    protected void logInfo(JoinPoint joinPoint, Map<String, String[]> args) {
+        final String logInfo = joinPoint.getTarget().getClass()
+                + "." + joinPoint.getSignature().getName() + " " + args;
         
-        logger.log(Priority.INFO, methodName);
+        logger.log(Priority.INFO, logInfo);
     }
 }

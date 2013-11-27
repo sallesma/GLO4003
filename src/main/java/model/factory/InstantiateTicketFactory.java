@@ -1,13 +1,13 @@
 package model.factory;
 
-import config.ConfigManager;
-import model.AbstractTicketCategory;
-import model.GeneralAdmissionTicketCategory;
-import model.InstantiateAbstractTicket;
+import com.glo4003.project.database.model.AbstractTicketCategory;
+import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+
 import model.InstantiateGeneralAdmissionTicket;
 import model.InstantiateReservedTicket;
-import model.MatchModel;
-import model.ReservedTicketCategory;
 
 public class InstantiateTicketFactory {
 
@@ -16,10 +16,10 @@ public class InstantiateTicketFactory {
 		AbstractTicketCategory ticketCategory = match.getTickets().get(catIndex);
 		String type = ticketCategory.getCategory();
 		
-		if (type.contains(ConfigManager.RESERVED_TICKET)) {
+		if (type.contains(AbstractTicketCategory.RESERVED_TICKET)) {
 			// Instantiate a reserved ticket
 			
-			InstantiateReservedTicket instantiateRTC = new InstantiateReservedTicket(match, place);
+			InstantiateReservedTicket instantiateRTC = new InstantiateReservedTicket(match, catIndex, place);
 			
 			if (ticketCategory.isTicketInstanciable(place, nbPlaces)) {
 				ReservedTicketCategory tCategory = (ReservedTicketCategory)ticketCategory;
@@ -31,7 +31,7 @@ public class InstantiateTicketFactory {
 		}
 		else{
 			// Instantiate a general admission ticket
-			InstantiateGeneralAdmissionTicket instantiateGAT = new InstantiateGeneralAdmissionTicket(match, nbPlaces);
+			InstantiateGeneralAdmissionTicket instantiateGAT = new InstantiateGeneralAdmissionTicket(match, catIndex, nbPlaces);
 		
 			if (ticketCategory.isTicketInstanciable(place, nbPlaces)) {
 				GeneralAdmissionTicketCategory tCategory = (GeneralAdmissionTicketCategory)ticketCategory;

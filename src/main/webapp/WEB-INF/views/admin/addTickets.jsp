@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="config.ConfigManager"%>
+<%@ page import="com.glo4003.project.database.model.AbstractTicketCategory"%>
 
 <td>
-	<c:set var="billetReserve" value="<%=ConfigManager.RESERVED_TICKET%>" />
+	<c:set var="billetReserve" value="<%=AbstractTicketCategory.RESERVED_TICKET%>" />
 	<c:choose>
 		<c:when test="${billet.category == billetReserve}">
 			<a href="#" class="btn btn-danger addPlace" data-toggle="popover"

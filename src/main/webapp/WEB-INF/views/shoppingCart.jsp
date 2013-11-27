@@ -9,8 +9,15 @@
      	 <p class="text-danger">
 				<c:out value="${nullTicket}" />
 		</p>
+		<p class="text-danger">
+				<c:out value="${noTicket}" />
+		</p>
+		<p class="text-danger">
+				<c:out value="${impossibleChange}" />
+		</p>
+		
         <h1>Panier d'achat</h1>
-        <form:form action="/bill" method="POST" class="form-horizontal" id="shoppingCartForm">
+        <form:form action="/selectedTicketsAction" method="POST" class="form-horizontal" id="shoppingCartForm">
 	        <table class="table table-hover">
 					<tr>
 						<th></th>
@@ -33,26 +40,50 @@
 	        				<td>${ticket.match.opponent}</td>
 	        				<td>${ticket.match.city}</td>
 	        				<td>${ticket.match.field}</td>
-	        				
+	        			
 	        				<c:choose>
 		        				<c:when test="${ticket.class.simpleName=='InstantiateGeneralAdmissionTicket'}">
 		        					<td>${ticket.nbPlaces}</td>
 		        					<td>Libre</td>
+		        					<td><a href="#" class="btn btn-success choosePlace" data-toggle="popover" data-placement="left"
+                                                                title="Modifier le nombre de tickets" data-html="true"
+                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal" modelAttribute="user"><input type="hidden" name="id" value="${ticket.ticketId}"></input><br>
+                                 <input type="text" name="nbPlaceInput" value="${ticket.nbPlaces}"></input>                     
+                                <button type="submit" class="btn btn-primary">Valider</button>
+                        </form:form>'>Modifier</a></td>   
 		        				</c:when>
 		        				<c:when test="${ticket.class.simpleName=='InstantiateReservedTicket'}">
 		        					<td>1</td>
 		        					<td>${ticket.numPlace}</td>
+		        					<td><a href="#" class="btn btn-success choosePlace" data-toggle="popover" data-placement="left"
+                                                                title="Changer de place" data-html="true"
+                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal" modelAttribute="user"><input type="hidden" name="id" value="${ticket.ticketId}"></input><br>
+                                 <form:select path="" name="placement" class="form-control">
+                                        <form:options items="${ticket.correspondingCat.placements}"/>
+                                </form:select>
+                                <br>                        
+                                <button type="submit" class="btn btn-primary">Valider</button>
+                                
+                        </form:form>'>Modifier</a></td>
 		        				</c:when>
+		        				    
 		        			</c:choose>
 	        				
 	 
 	        			</tr>
 	        		</c:forEach>
 	        </table>
-		<button type="submit" class="btn btn-primary">Acheter</button>
+		<button type="submit" class="btn btn-primary" name ="action" value="buy">Acheter</button>
+		<button type="submit" class="btn btn-danger" name="action" value="delete">Supprimer les tickets séléctionner</button>
 	    </form:form>
-        
+	    <br>
+	    
+        <a href="/emptyCart"><button class="btn btn-danger">Vider le panier au complet</button></a>
       </div>
 
     
     <%@ include file="footer.jsp" %>
+  <script type="text/javascript">        
+
+$(".choosePlace").popover();
+</script>

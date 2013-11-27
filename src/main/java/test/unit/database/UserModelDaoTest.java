@@ -2,29 +2,28 @@ package test.unit.database;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.UserModel;
 import nu.xom.Element;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import test.unit.database.DaoTest.TestClass;
-
-import com.thoughtworks.xstream.XStream;
-
-import database.XmlModelConverter;
-import database.dao.UserModelDao;
-import database.dto.FileAccess;
-import exceptions.ConvertException;
-import exceptions.PersistException;
+import com.glo4003.project.database.converter.XmlModelConverter;
+import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.user.dao.UserModelDao;
 
 public class UserModelDaoTest {
 

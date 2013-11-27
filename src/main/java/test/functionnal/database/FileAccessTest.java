@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MatchModel;
 import nu.xom.Element;
 
 import org.junit.AfterClass;
@@ -17,8 +16,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import database.dto.FileAccess;
-import exceptions.PersistException;
+import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.MatchModel;
 
 public class FileAccessTest {
 	

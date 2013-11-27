@@ -1,9 +1,10 @@
 package test.unit.model;
 
 import static org.junit.Assert.*;
-import model.UserViewModel;
 
 import org.junit.Test;
+
+import com.glo4003.project.user.model.view.UserViewModel;
 
 public class UserViewModelTest {
 	

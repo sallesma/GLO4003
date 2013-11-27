@@ -1,8 +1,8 @@
 package test.unit.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.spy;
-import helper.MatchFilterV2;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,23 +13,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import model.AbstractTicketCategory;
-import model.MatchModel;
-import model.SearchCriteriaModel;
-import model.factory.TicketCategoryFactory;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import config.ConfigManager;
-import config.ConfigManager.Gender;
-import config.ConfigManager.Sports;
-import database.dao.MatchModelDaoInterface;
-import exceptions.PersistException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.AbstractTicketCategory;
+import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.model.SearchCriteriaModel;
+import com.glo4003.project.match.dao.MatchModelDaoInterface;
+import com.glo4003.project.match.helper.MatchFilter;
+import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 
 public class MatchFilterTest {
 
-	private MatchFilterV2 matchFilter = null;
+	private MatchFilter matchFilter = null;
 	private SearchCriteriaModel searchCriteria;
 	private MatchModelDaoInterface populateMatchModelDao;
 	private MatchModelDaoInterface emptyMatchModelDao;
@@ -38,24 +36,28 @@ public class MatchFilterTest {
 	
 	@Before
 	public void populate() {
-		List<MatchModel> populatedMatchList =  new ArrayList<MatchModel>();
-		List<MatchModel> emptyMatchList = new ArrayList<MatchModel>();
+		populatedMatchList =  new ArrayList<MatchModel>();
+		emptyMatchList = new ArrayList<MatchModel>();
 		
 		ArrayList<AbstractTicketCategory> billetsMatch1 = new ArrayList<AbstractTicketCategory>();
-		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.RESERVED_TICKET,"Billet loges", 100, 0, 32));
-		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET, "Debout", 200, 0, 10));
+		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.FREE_TICKET, "Debout", 200, 0, 10));
+		billetsMatch1.add(TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.RESERVED_TICKET,"Billet loges", 100, 0, 32));
+		
+		ArrayList<AbstractTicketCategory> billetsMatch2 = new ArrayList<AbstractTicketCategory>();
+		billetsMatch2.add(TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.RESERVED_TICKET,"Billet loges", 100, 0, 32));
+		
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);
-		MatchModel match0 =  new MatchModel(Sports.Football, Gender.M, 1L, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch1);
+		MatchModel match0 =  new MatchModel(MatchModel.Sports.Football, MatchModel.Gender.M, 1L, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch1);
 		cal.set(2013, 11, 11);
-		MatchModel match1 = new MatchModel(Sports.Football, Gender.M, 2L, cal.getTime(), "UQAM", "Montréal", "ULaval", billetsMatch1);
+		MatchModel match1 = new MatchModel(MatchModel.Sports.Football, MatchModel.Gender.M, 2L, cal.getTime(), "UQAM", "Montréal", "ULaval", billetsMatch2);
 		cal.set(2013, 11, 9);
-		MatchModel match2 = new MatchModel(Sports.Rugby, Gender.F, 3L, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
+		MatchModel match2 = new MatchModel(MatchModel.Sports.Rugby, MatchModel.Gender.F, 3L, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch1);
 		cal.set(2013, 11, 8);
-		MatchModel match3 = new MatchModel(Sports.Volleyball, Gender.F, 4L, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
+		MatchModel match3 = new MatchModel(MatchModel.Sports.Volleyball, MatchModel.Gender.F, 4L, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch1);
 		
-		MatchModel match4 =  new MatchModel(Sports.Football, Gender.M, 1L, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch1);
+		MatchModel match4 =  new MatchModel(MatchModel.Sports.Football, MatchModel.Gender.M, 1L, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch2);
 		
 		
 		populatedMatchList.add(match0);
@@ -74,8 +76,16 @@ public class MatchFilterTest {
 	@Test
 	public void testFilterEmptyMatchList() {
 		//Before
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		matchFilter.setMatchDao(emptyMatchModelDao);
+		
+		//When
+		try {
+			matchFilter.filterMatchList();
+		} catch (PersistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//then
 		assertTrue(matchFilter.getMatchList().isEmpty());
@@ -85,9 +95,9 @@ public class MatchFilterTest {
 	@Test
 	public void testFilterMatchNoFilters() {
 		//Before
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
-			searchCriteria = new SearchCriteriaModel("", "", "", "", "");
+			searchCriteria = new SearchCriteriaModel("", "", "", "", "", "", "");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,40 +113,18 @@ public class MatchFilterTest {
 			e.printStackTrace();
 		}
 		
+				
 		//then
 		assertTrue(matchFilter.getMatchList().equals(populatedMatchList));
 	}
 	
-	/*@Test
-	public void testDefaultDateFromTodayToNextYear() {
-		//Before
-		matchFilter = spy(new MatchFilterV2());
-		try {
-			searchCriteria = new SearchCriteriaModel("", "", "", "", "");
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		matchFilter.setCriterias(searchCriteria);
-		matchFilter.setMatchDao(populateMatchModelDao);
-
-		String fromDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).format(new Date());
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.YEAR, 1);
-		Date oneYearLater = cal.getTime();
-		String toDate = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH).format(oneYearLater);
-		
-		//then
-		assertTrue(matchFilter.getFromDate().equals(fromDate));
-		assertTrue(matchFilter.getToDate().equals(toDate));
-	}*/
 	
 	@Test
 	public void testSportFilter() {
 		//Before
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
-			searchCriteria = new SearchCriteriaModel(Sports.Football.toString(), "", "", "", "");
+			searchCriteria = new SearchCriteriaModel(MatchModel.Sports.Football.toString(), "", "", "", "", "", "");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -145,8 +133,8 @@ public class MatchFilterTest {
 		matchFilter.setMatchDao(populateMatchModelDao);
 		
 		int nbFootballMatchs = 0;
-		for (MatchModel m : matchFilter.getMatchList()) {
-			if (m.getSport().equals(Sports.Football))
+		for (MatchModel m : populatedMatchList) {
+			if (m.getSport().equals(MatchModel.Sports.Football))
 				nbFootballMatchs++;
 		}
 		
@@ -162,7 +150,7 @@ public class MatchFilterTest {
 		//Then
 		assertEquals(matchsList.size(), nbFootballMatchs);
 		for (MatchModel m : matchsList) {
-			assertEquals(m.getSport(), Sports.Football);
+			assertEquals(m.getSport(), MatchModel.Sports.Football);
 		}
 		
 	}
@@ -170,9 +158,9 @@ public class MatchFilterTest {
 	@Test
 	public void testGenreFilter() {
 		//Before
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
-			searchCriteria = new SearchCriteriaModel("", Gender.F.toString(), "", "", "");
+			searchCriteria = new SearchCriteriaModel("", MatchModel.Gender.F.toString(), "", "", "", "", "");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -182,8 +170,8 @@ public class MatchFilterTest {
 		
 		
 		int nbChicksMatchs = 0;
-		for (MatchModel m : matchFilter.getMatchList()) {
-			if (m.getGender().equals(Gender.F))
+		for (MatchModel m : populatedMatchList) {
+			if (m.getGender().equals(MatchModel.Gender.F))
 				nbChicksMatchs++;
 		}
 		
@@ -199,7 +187,7 @@ public class MatchFilterTest {
 		//Then
 		assertEquals(matchsList.size(), nbChicksMatchs);
 		for (MatchModel m : matchsList) {
-			assertEquals(m.getGender(), Gender.F);
+			assertEquals(m.getGender(), MatchModel.Gender.F);
 		}
 		
 	}
@@ -207,10 +195,10 @@ public class MatchFilterTest {
 	@Test
 	public void testOpponentFilter() {
 		//Before
-		String opp = matchFilter.getMatchList().get(0).getOpponent();		
-		matchFilter = spy(new MatchFilterV2());
+		String opp = populatedMatchList.get(0).getOpponent();		
+		matchFilter = spy(new MatchFilter());
 		try {
-			searchCriteria = new SearchCriteriaModel("", "", opp, "", "");
+			searchCriteria = new SearchCriteriaModel("", "", opp, "", "", "", "");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -221,7 +209,7 @@ public class MatchFilterTest {
 		
 		
 		int nbOpponentMatchs = 0;
-		for (MatchModel m : matchFilter.getMatchList()) {
+		for (MatchModel m : populatedMatchList) {
 			if (m.getOpponent().equals(opp))
 				nbOpponentMatchs++;
 		}
@@ -244,11 +232,81 @@ public class MatchFilterTest {
 	}
 	
 	@Test
+	public void testFilterByTicketType() {
+		matchFilter = spy(new MatchFilter());
+		try {
+			searchCriteria = new SearchCriteriaModel("", "", "", "General", "", "", "");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		matchFilter.setCriterias(searchCriteria);
+		matchFilter.setMatchDao(populateMatchModelDao);
+
+		int nbTicketTypeMatchs = 0;
+		for (MatchModel m : populatedMatchList) {
+			for (AbstractTicketCategory ticket : m.getTickets())
+				if (ticket instanceof GeneralAdmissionTicketCategory)
+				nbTicketTypeMatchs++;
+		}
+		
+		//When
+		List<MatchModel> matchsList = null;
+		try {
+			matchsList = matchFilter.filterMatchList();
+		} catch (PersistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Then
+		assertEquals(matchsList.size(), nbTicketTypeMatchs);
+		for (MatchModel m : matchsList) {
+			assertEquals(m.getTickets().get(0).getClass(), GeneralAdmissionTicketCategory.class);
+		}
+	}
+	
+	@Test
+	public void testFilterByCity() {
+		//Before
+		String city = populatedMatchList.get(0).getCity();
+		
+		matchFilter = spy(new MatchFilter());
+		try {
+			searchCriteria = new SearchCriteriaModel("", "", "", "", city, "", "");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		matchFilter.setCriterias(searchCriteria);
+		matchFilter.setMatchDao(populateMatchModelDao);
+		
+		int nbCityMatchs = 0;
+		for (MatchModel m : populatedMatchList) {
+			if (m.getCity().equals(city))
+				nbCityMatchs++;
+		}
+		
+		//When
+		List<MatchModel> matchsList = null;
+		try {
+			matchsList = matchFilter.filterMatchList();
+		} catch (PersistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//Then
+		assertEquals(matchsList.size(), nbCityMatchs);
+		for (MatchModel m : matchsList) {
+			assertEquals(m.getCity(), city);
+		}
+	}
+	
+	@Test
 	public void testFromDateFilter() {
 		//Before
-		
-		
-		Date exempleDate = matchFilter.getMatchList().get(0).getDate();
+		Date exempleDate = populatedMatchList.get(0).getDate();
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(exempleDate);
@@ -258,9 +316,9 @@ public class MatchFilterTest {
 		cal.add(Calendar.YEAR, 1);
 		Date toDate = cal.getTime();
 		
-		matchFilter = spy(new MatchFilterV2());
+		matchFilter = spy(new MatchFilter());
 		try {
-			searchCriteria = new SearchCriteriaModel("", "", "", dateFormatter.format(fromDate), dateFormatter.format(toDate));
+			searchCriteria = new SearchCriteriaModel("", "", "", "", "", dateFormatter.format(fromDate), dateFormatter.format(toDate));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -269,7 +327,7 @@ public class MatchFilterTest {
 		matchFilter.setMatchDao(populateMatchModelDao);
 		
 		int nbBetweenDatesMatchs = 0;
-		for (MatchModel m : matchFilter.getMatchList()) {
+		for (MatchModel m : populatedMatchList) {
 			if (m.getDate().after(fromDate) && m.getDate().before(toDate))
 				nbBetweenDatesMatchs++;
 		}

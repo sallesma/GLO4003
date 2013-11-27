@@ -2,29 +2,24 @@ package test.functionnal.database;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.ModelInterface;
 import nu.xom.Element;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.glo4003.project.database.converter.XmlModelConverter;
+import com.glo4003.project.database.converter.XmlObjectConverter;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.global.ModelInterface;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
-
-import config.ConfigManager.Gender;
-import database.XmlModelConverter;
-import database.converter.XmlObjectConverter;
-import database.dto.FileAccess;
-import exceptions.ConvertException;
-import exceptions.PersistException;
 
 public class XmlModelConverterTest {
 
@@ -143,7 +138,7 @@ public class XmlModelConverterTest {
 		Long id = 0L;
 		long four = 4;
 		Date date = new Date();
-		Gender gender = Gender.F;
+		MatchModel.Gender gender = MatchModel.Gender.F;
 				
 		public Long getId() {			
 			return id;
@@ -161,7 +156,7 @@ public class XmlModelConverterTest {
 		String test1 = "test1";
 		String test2 = "test2";
 		Date date = new Date();
-		Gender gender = Gender.F;
+		MatchModel.Gender gender = MatchModel.Gender.F;
 		
 		@XStreamConverter(XmlObjectConverter.class)
 		TestClass2 testClass2 = new TestClass2();		

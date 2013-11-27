@@ -6,21 +6,17 @@ import static org.mockito.Mockito.spy;
 
 import java.io.File;
 
-import model.UserModel;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import test.unit.database.DaoTest.TestClass;
-
+import com.glo4003.project.database.converter.XmlModelConverter;
+import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.user.dao.UserModelDao;
 import com.thoughtworks.xstream.XStream;
-
-import database.XmlModelConverter;
-import database.dao.UserModelDao;
-import database.dto.FileAccess;
-import exceptions.ConvertException;
-import exceptions.PersistException;
 
 public class UserModelDaoTest {
 

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="model.UserViewModel"%>
+<%@ page import="com.glo4003.project.user.model.view.UserViewModel"%>
 
 <%@ include file="header.jsp"%>
 
@@ -49,6 +49,44 @@
   							<button type="button" class="btn btn-primary removeFilter">x</button>
   						</div>
   						<input type="hidden" name="criterias.gender" value="${filter.criterias.gender}">
+  						<br>
+					</c:otherwise>
+				</c:choose>
+				<br/>
+				<c:choose>
+					<c:when test="${empty filter.criterias.city}">
+						<form:select path="criterias.city" name="criterias.city" class="form-control filterSelect">
+							<form:option value="">Toutes les villes</form:option>
+							<c:forEach var="city" items="${filter.cityList}">
+								<form:option value="${city}">${city}</form:option>
+							</c:forEach>
+						</form:select>
+					</c:when>
+					<c:otherwise>
+						<div class="btn-group">
+  							<button type="button" class="btn btn-primary" disabled="disabled">Genre : ${filter.criterias.city}</button>
+  							<button type="button" class="btn btn-primary removeFilter">x</button>
+  						</div>
+  						<input type="hidden" name="criterias.city" value="${filter.criterias.city}">
+  						<br>
+					</c:otherwise>
+				</c:choose>
+				<br/>
+				<c:choose>
+					<c:when test="${empty filter.criterias.category}">
+						<form:select path="criterias.category" name="criterias.category" class="form-control filterSelect">
+							<form:option value="">Toutes les catégories</form:option>
+							<c:forEach var="category" items="${filter.ticketCategory}">
+								<form:option value="${category}">${category}</form:option>
+							</c:forEach>
+						</form:select>
+					</c:when>
+					<c:otherwise>
+						<div class="btn-group">
+  							<button type="button" class="btn btn-primary" disabled="disabled">Genre : ${filter.criterias.category}</button>
+  							<button type="button" class="btn btn-primary removeFilter">x</button>
+  						</div>
+  						<input type="hidden" name="criterias.category" value="${filter.criterias.category}">
   						<br>
 					</c:otherwise>
 				</c:choose>

@@ -1,20 +1,18 @@
 package test.unit.helper;
 
-import static org.junit.Assert.*;
-import helper.UserConverter;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.mockito.Mockito.*;
-
 import java.util.concurrent.atomic.AtomicInteger;
 
-import model.UserModel;
-import model.UserViewModel;
-
 import org.junit.Test;
+
+import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.view.UserViewModel;
 
 public class UserConverterTest {
 	

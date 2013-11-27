@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.ModelInterface;
 import nu.xom.Element;
 import nu.xom.ParsingException;
 import nu.xom.ValidityException;
@@ -20,11 +19,12 @@ import nu.xom.ValidityException;
 import org.junit.Before;
 import org.junit.Test;
 
-import database.XmlModelConverter;
-import database.dao.Dao;
-import database.dto.FileAccess;
-import exceptions.ConvertException;
-import exceptions.PersistException;
+import com.glo4003.project.database.converter.XmlModelConverter;
+import com.glo4003.project.database.dao.Dao;
+import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.exception.ConvertException;
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.global.ModelInterface;
 
 public class DaoTest {
 	private FileAccess fileAccess;

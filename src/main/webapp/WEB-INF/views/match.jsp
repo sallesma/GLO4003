@@ -84,7 +84,7 @@
                                 <form:select path="" name="place" class="form-control">
                                         <form:options items="${billet.placements}" />
                                 </form:select>
-                                <input type="hidden" name="matchID" value="${match.matchID }"></input>
+                                <input type="hidden" name="matchID" value="${match.id }"></input>
                                 <input type="hidden" name="catID" value="${status.index}"></input>
                                 <br>
                                 <button type="submit" class="btn btn-primary">Choisir</button>
@@ -98,7 +98,7 @@
                                                                 data-content='<form:form action="/add" method="get" class="form-horizontal" modelAttribute="match">
                                 <input type="text" name ="nbPlace" placeholder="Nombre de place"></input>
                                 <br><br>
-                                <input type="hidden" name="matchID" value="${match.matchID }"></input>
+                                <input type="hidden" name="matchID" value="${match.id }"></input>
                                 <input type="hidden" name="catID" value="${status.index}"></input>
                                 
                                 <button type="submit" class="btn btn-primary">Choisir</button>

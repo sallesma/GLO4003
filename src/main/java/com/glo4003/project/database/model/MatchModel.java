@@ -65,12 +65,14 @@ public class MatchModel implements ModelInterface {
 	}
 	
 	// Getter and Setter
-	public Long getMatchID() {
+	@Override
+	public Long getId() {		
 		return id;
 	}
-	
-	public void setMatchID(Long matchID) {
-		this.id = matchID;
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;		
 	}
 	
 	public Date getDate() {
@@ -126,13 +128,5 @@ public class MatchModel implements ModelInterface {
 		this.tickets = tickets;
 	}
 
-	@Override
-	public Long getId() {		
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;		
-	}
+	
 }

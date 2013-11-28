@@ -22,6 +22,8 @@ import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.match.helper.MatchFilter;
+import com.glo4003.project.match.helper.MatchViewModel;
+import com.glo4003.project.match.viewModel.MatchConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
@@ -36,14 +38,25 @@ public class MatchController {
 	
 	private MatchModelDao matchDao = new MatchModelDao();
 	private UserModelDao userDao = new UserModelDao();
-
+	
 	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	private UserConverter uConverter;
+	private MatchConverter mConverter;
 	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		MatchFilter matchFilter = new MatchFilter();
+		if(mConverter == null) {
+			mConverter = new MatchConverter ();
+		}
+		
+		List<MatchModel> matchModelList = matchDao.getAll();
+		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
+		for (MatchModel m : matchModelList) {
+			matchList.add(mConverter.convert(m));
+		}
+		
+		MatchFilter matchFilter = new MatchFilter(matchList);
 		matchFilter.filterMatchList();
 		model.addAttribute("filter", matchFilter);
 		
@@ -79,7 +92,18 @@ public class MatchController {
 				}
 			}
 		}
-		MatchFilter matchFilter = new MatchFilter(criterias);
+		
+		if(mConverter == null) {
+			mConverter = new MatchConverter ();
+		}
+		
+		List<MatchModel> matchModelList = matchDao.getAll();
+		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
+		for (MatchModel m : matchModelList) {
+			matchList.add(mConverter.convert(m));
+		}
+		
+		MatchFilter matchFilter = new MatchFilter(matchList, criterias);
 		String mustSave = request.getParameter("mustSave");			
 		if((mustSave != null) && !mustSave.isEmpty()) {		
 			
@@ -120,7 +144,12 @@ public class MatchController {
       public String getMatch(Model model, HttpServletRequest request) throws PersistException {		  
           Long id = Long.valueOf(request.getParameter("matchID"));
           MatchModel match = matchDao.getById(id);
-          model.addAttribute("match", match);
+          if (mConverter == null) {
+        	  mConverter = new MatchConverter();
+          }
+          MatchViewModel mViewModel = mConverter.convert(match);
+          
+          model.addAttribute("match", mViewModel);
           model.addAttribute("entry", new LoginViewModel());
           return "match";
       }

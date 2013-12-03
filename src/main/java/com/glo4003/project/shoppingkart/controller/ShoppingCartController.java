@@ -24,16 +24,23 @@ import com.glo4003.project.shoppingkart.cardValidation.AmericanExpressoValidatio
 import com.glo4003.project.shoppingkart.cardValidation.MistercardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.VasiValidation;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 
 @Controller
 public class ShoppingCartController {
-	private UserConverter userConverter = new UserConverter();
-	private MatchModelDao matchDao = new MatchModelDao();
+	private UserConverter userConverter;
+	private MatchModelDao matchDao;
 	private List<InstantiateAbstractTicket> billTickets;
 
+	public void dependanciesInjection(MatchModelDao matchDao, UserConverter userConverter)
+	{
+		this.matchDao = matchDao;
+		this.userConverter = userConverter;
+	}
+	
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
 	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) {	
 

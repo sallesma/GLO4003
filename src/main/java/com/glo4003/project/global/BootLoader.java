@@ -9,7 +9,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
 
 import com.glo4003.project.match.controller.MatchController;
 import com.glo4003.project.match.dao.MatchModelDao;
-import com.glo4003.project.match.viewModel.MatchConverter;
+import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
 import com.glo4003.project.user.controller.AdminController;
 import com.glo4003.project.user.dao.UserModelDao;

@@ -18,8 +18,8 @@ import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
 import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.match.model.MatchConcreteModel;
-import com.glo4003.project.match.viewModel.MatchConverter;
 import com.thoughtworks.xstream.XStream;
 
 public class MatchModelDaoTest {

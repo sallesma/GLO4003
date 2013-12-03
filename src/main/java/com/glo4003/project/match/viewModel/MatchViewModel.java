@@ -1,4 +1,4 @@
-package com.glo4003.project.match.helper;
+package com.glo4003.project.match.viewModel;
 
 import java.util.ArrayList;
 import java.util.Date;

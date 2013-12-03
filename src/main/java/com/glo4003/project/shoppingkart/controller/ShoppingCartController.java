@@ -17,15 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.shoppingkart.cardValidation.AbstractCreditCardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.AmericanExpressoValidation;
 import com.glo4003.project.shoppingkart.cardValidation.MistercardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.VasiValidation;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
-import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 
@@ -45,7 +44,7 @@ public class ShoppingCartController {
 	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) {	
 
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-		UserModel userModel = userConverter.convert(userViewModel);
+		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
 
 		String[] selectedTickets =  request.getParameterValues("ticketId");
 		if( action.equals("buy") ){
@@ -107,7 +106,7 @@ public class ShoppingCartController {
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
 	public String payment_done(Model model, HttpServletRequest request) {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-		UserModel userModel = userConverter.convert(userViewModel);
+		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
 		
 		String cardType = (String) request.getParameter("cardType");
 		String cardOwner = (String) request.getParameter("cardOwner");
@@ -149,7 +148,7 @@ public class ShoppingCartController {
 	@RequestMapping(value = "/modifyTicket", method = RequestMethod.GET)
 	public String modifyTicket(Model model, HttpServletRequest request) throws PersistException, ConvertException {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-		UserModel userModel = userConverter.convert(userViewModel);
+		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
 		int ticketId = Integer.valueOf(request.getParameter("id"));
 		
 		InstantiateAbstractTicket t = userModel.getTicketById(ticketId);
@@ -185,7 +184,7 @@ public class ShoppingCartController {
 	@RequestMapping(value = "/emptyCart", method = RequestMethod.GET)
 	public String emptyCart(Model model, HttpServletRequest request) {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-		UserModel userModel = userConverter.convert(userViewModel);
+		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
 
 		try {
 			userModel.emptyCartAndReplaceTickets(matchDao);

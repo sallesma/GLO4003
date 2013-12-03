@@ -1,6 +1,7 @@
 package com.glo4003.project.shoppingkart.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,8 +36,9 @@ import com.glo4003.project.user.model.view.UserViewModel;
 public class ShoppingCartController {
 	private UserConverter userConverter;
 	private MatchModelDao matchDao;
-	private List<InstantiateAbstractTicket> billTickets;
-
+	private List<InstantiateTicketViewModel> billTickets;
+	private InstantiateTicketConverter tConverter = new InstantiateTicketConverter();
+	
 	public void dependanciesInjection(MatchModelDao matchDao, UserConverter userConverter)
 	{
 		this.matchDao = matchDao;
@@ -101,7 +103,7 @@ public class ShoppingCartController {
 					}
 				}
 			}
-			userViewModel = userConverter.convert(userModel);
+			userViewModel = userConverter.convertToView(userModel);
 			request.getSession().setAttribute("loggedUser", userViewModel);
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 			model.addAttribute("entry", new LoginViewModel());
@@ -180,7 +182,7 @@ public class ShoppingCartController {
 				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");
 			}
 			matchDao.save(match);
-			userViewModel = userConverter.convert(userModel);
+			userViewModel = userConverter.convertToView(userModel);
 			request.getSession().setAttribute("loggedUser", userViewModel);
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 			model.addAttribute("entry", new LoginViewModel());
@@ -195,7 +197,7 @@ public class ShoppingCartController {
 				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");
 			}
 			matchDao.save(match);
-			userViewModel = userConverter.convert(userModel);
+			userViewModel = userConverter.convertToView(userModel);
 			request.getSession().setAttribute("loggedUser", userViewModel);
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 			model.addAttribute("entry", new LoginViewModel());
@@ -214,7 +216,7 @@ public class ShoppingCartController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		userViewModel = userConverter.convert(userModel);
+		userViewModel = userConverter.convertToView(userModel);
 		request.getSession().setAttribute("loggedUser", userViewModel);
 		return "shoppingCart";
 	}

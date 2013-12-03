@@ -3,32 +3,25 @@ package com.glo4003.project.user.helper;
 import model.InstantiateGeneralAdmissionTicket;
 import model.InstantiateReservedTicket;
 
-import org.hamcrest.core.IsInstanceOf;
 import org.springframework.stereotype.Component;
 
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.UserModel;
-<<<<<<< HEAD
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
-=======
 import com.glo4003.project.user.model.UserConcreteModel;
->>>>>>> b85866e0198235267c0516beb1e74ad751749991
 import com.glo4003.project.user.model.view.UserViewModel;
 
 @Component
 public class UserConverter {
 	
-<<<<<<< HEAD
 	private InstantiateTicketConverter tConverter = new InstantiateTicketConverter();
 	
-	public UserViewModel convert(UserModel entry) {
-=======
 	public UserViewModel convertToView(UserConcreteModel entry) {
->>>>>>> b85866e0198235267c0516beb1e74ad751749991
+
 		UserViewModel viewModel = new UserViewModel();
 		viewModel.setId(entry.getId());
 		viewModel.setAddress(entry.getAddress());
@@ -63,9 +56,9 @@ public class UserConverter {
 		return viewModel;
 	}
 	
-<<<<<<< HEAD
-	public UserModel convert(UserViewModel userViewModel) throws PersistException {
-		UserModel userModel = new UserModel();
+
+	public UserConcreteModel convertFromView(UserViewModel userViewModel) throws PersistException {
+		UserConcreteModel userModel = new UserConcreteModel();
 		userModel.setId(userViewModel.getId());
 		userModel.setAddress(userViewModel.getAddress());
 		userModel.setFirstName(userViewModel.getFirstName());
@@ -87,21 +80,10 @@ public class UserConverter {
 			userModel.getTickets().add(ticket);
 		}
 		userModel.setSearchCriterias(userViewModel.getSearchCriteria());
-=======
-	public UserConcreteModel convertFromView(UserViewModel userViewModel) {
-		UserConcreteModel userConcreteModel = new UserConcreteModel();
-		userConcreteModel.setId(userViewModel.getId());
-		userConcreteModel.setAddress(userViewModel.getAddress());
-		userConcreteModel.setFirstName(userViewModel.getFirstName());
-		userConcreteModel.setLastName(userViewModel.getLastName());
-		userConcreteModel.setPassword(userViewModel.getPassword());
-		userConcreteModel.setPhoneNumber(userViewModel.getPhoneNumber());
-		userConcreteModel.setUsername(userViewModel.getUsername());
-		userConcreteModel.setIsAdmin(userViewModel.isAdmin());
-		userConcreteModel.setTickets(userViewModel.getTickets());
-		userConcreteModel.setSearchCriterias(userViewModel.getSearchCriteria());
-		return userConcreteModel;
-	}
+		
+		return userModel;
+}
+
 	
 	public UserConcreteModel convertFromDB(UserModel entry) {
 		UserConcreteModel userConcreteModel = new UserConcreteModel();
@@ -130,7 +112,6 @@ public class UserConverter {
 		userModel.setIsAdmin(userConcreteModel.isAdmin());
 		userModel.setTickets(userConcreteModel.getTickets());
 		userModel.setSearchCriterias(userConcreteModel.getSearchCriteria());
->>>>>>> b85866e0198235267c0516beb1e74ad751749991
 		return userModel;
 	}
 }

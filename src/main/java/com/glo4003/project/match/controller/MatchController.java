@@ -19,7 +19,6 @@ import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.SearchCriteriaModel;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.match.helper.MatchFilter;
@@ -151,7 +150,7 @@ public class MatchController {
 		return "matchsList";
 	}
 
-	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) {
+	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) throws PersistException {
 		UserConcreteModel user = getUser(request);
 		if (user == null) {
 			return new ArrayList<SearchCriteriaModel>(0);
@@ -215,7 +214,7 @@ public class MatchController {
       }
 	  
 	  
-	  private UserConcreteModel getUser(HttpServletRequest request) {
+	  private UserConcreteModel getUser(HttpServletRequest request) throws PersistException {
 		  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		  if(userViewModel == null) {
 			  return null;

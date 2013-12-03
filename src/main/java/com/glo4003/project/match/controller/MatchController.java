@@ -23,10 +23,12 @@ import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.match.helper.MatchFilter;
+import com.glo4003.project.match.model.MatchConcreteModel;
 import com.glo4003.project.match.viewModel.MatchViewModel;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 
@@ -36,24 +38,37 @@ import com.glo4003.project.user.model.view.UserViewModel;
 @Controller
 public class MatchController {
 	
-	private MatchModelDao matchDao = new MatchModelDao();
-	private UserModelDao userDao = new UserModelDao();
+	private MatchModelDao matchDao;
+	private UserModelDao userDao;
 	
 	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	private UserConverter uConverter;
 	private MatchConverter mConverter;
 	
+	public void dependanciesInjection(MatchModelDao matchDao, UserModelDao userDao, MatchConverter mConverter, UserConverter uConverter)
+	{
+		this.matchDao = matchDao;
+		this.userDao = userDao;
+		this.uConverter = uConverter;
+		this.mConverter = mConverter;
+	}
+	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		if(mConverter == null) {
+		/*if(mConverter == null) {
 			mConverter = new MatchConverter ();
+		}*/
+		
+		List<MatchModel> matchModelDBList = matchDao.getAll();
+		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
+		for (MatchModel m : matchModelDBList){
+			matchModelList.add(mConverter.convertFromDB(m));
 		}
 		
-		List<MatchModel> matchModelList = matchDao.getAll();
 		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
-		for (MatchModel m : matchModelList) {
-			matchList.add(mConverter.convert(m));
+		for (MatchConcreteModel m : matchModelList) {
+			matchList.add(mConverter.convertToView(m));
 		}
 		
 		MatchFilter matchFilter = new MatchFilter(matchList);
@@ -72,7 +87,7 @@ public class MatchController {
 	@RequestMapping(value = "/matchsList", method = RequestMethod.POST)
 	public String getPostMatchList(Model model, HttpServletRequest request) 
 			throws PersistException, ParseException {		
-		UserModel user = getUser(request);
+		UserConcreteModel user = getUser(request);
 		
 		
 		SearchCriteriaModel criterias = new SearchCriteriaModel(
@@ -93,14 +108,19 @@ public class MatchController {
 			}
 		}
 		
-		if(mConverter == null) {
+		/*if(mConverter == null) {
 			mConverter = new MatchConverter ();
+		}*/
+		
+		List<MatchModel> matchModelDBList = matchDao.getAll();
+		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
+		for(MatchModel m : matchModelDBList){
+			matchModelList.add(mConverter.convertFromDB(m));
 		}
 		
-		List<MatchModel> matchModelList = matchDao.getAll();
 		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
-		for (MatchModel m : matchModelList) {
-			matchList.add(mConverter.convert(m));
+		for (MatchConcreteModel m : matchModelList) {
+			matchList.add(mConverter.convertToView(m));
 		}
 		
 		MatchFilter matchFilter = new MatchFilter(matchList, criterias);
@@ -110,7 +130,7 @@ public class MatchController {
 			criterias.setSearchName(mustSave);
 			user.addSearchCriteria(criterias);
 			try {			
-				userDao.save(user);				
+				userDao.save(uConverter.convertToDB(user));				
 			} catch (ConvertException e) {
 				e.printStackTrace();
 			}
@@ -131,8 +151,8 @@ public class MatchController {
 		return "matchsList";
 	}
 
-	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) throws PersistException {
-		UserModel user = getUser(request);
+	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) {
+		UserConcreteModel user = getUser(request);
 		if (user == null) {
 			return new ArrayList<SearchCriteriaModel>(0);
 		}
@@ -143,11 +163,13 @@ public class MatchController {
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
       public String getMatch(Model model, HttpServletRequest request) throws PersistException {		  
           Long id = Long.valueOf(request.getParameter("matchID"));
-          MatchModel match = matchDao.getById(id);
-          if (mConverter == null) {
+          MatchModel matchDB = matchDao.getById(id);
+          MatchConcreteModel match = mConverter.convertFromDB(matchDB);
+          
+          /*if (mConverter == null) {
         	  mConverter = new MatchConverter();
-          }
-          MatchViewModel mViewModel = mConverter.convert(match);
+          }*/
+          MatchViewModel mViewModel = mConverter.convertToView(match);
           
           model.addAttribute("match", mViewModel);
           model.addAttribute("entry", new LoginViewModel());
@@ -178,12 +200,12 @@ public class MatchController {
               
               //Get current logged user
               UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-              uConverter = new UserConverter();
-              UserModel userModel = uConverter.convert(userViewModel);
+              //uConverter = new UserConverter();
+              UserConcreteModel userModel = uConverter.convertFromView(userViewModel);
 
               // Add the ticket to the user's shopping cart
               userModel.addTicket(ticket);
-              userViewModel = uConverter.convert(userModel);
+              userViewModel = uConverter.convertToView(userModel);
            
               request.getSession().setAttribute("loggedUser", userViewModel);
               model.addAttribute("user", userViewModel);
@@ -193,14 +215,13 @@ public class MatchController {
       }
 	  
 	  
-	  private UserModel getUser(HttpServletRequest request) throws PersistException {
+	  private UserConcreteModel getUser(HttpServletRequest request) {
 		  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		  if(userViewModel == null) {
 			  return null;
 		  }
-          uConverter = new UserConverter();
           
-          return uConverter.convert(userViewModel);
+          return uConverter.convertFromView(userViewModel);
 	  }
 
 }

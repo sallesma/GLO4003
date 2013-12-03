@@ -9,10 +9,10 @@ import java.util.TreeSet;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.AbstractTicketCategory;
 import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
-import com.glo4003.project.database.model.ReservedTicketCategory;
-import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.database.model.MatchModel.Gender;
 import com.glo4003.project.database.model.MatchModel.Sports;
+import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.match.viewModel.MatchViewModel;
 
 public class MatchFilter {

@@ -18,6 +18,8 @@ import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
 import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.match.helper.MatchConverter;
+import com.glo4003.project.match.model.MatchConcreteModel;
 import com.thoughtworks.xstream.XStream;
 
 public class MatchModelDaoTest {
@@ -26,6 +28,7 @@ public class MatchModelDaoTest {
 	private FileAccess fileAccess;
 	private MatchModelDao dao;
 	private XmlModelConverter converter;
+	private MatchConverter mConverter;
 	
 	private final String path = "src/main/java/database/files/";
 
@@ -34,6 +37,7 @@ public class MatchModelDaoTest {
 		xstream = spy(new XStream());
 		fileAccess = FileAccess.getInstance();		
 		converter = spy(new XmlModelConverter(xstream));
+		mConverter = spy(new MatchConverter());
 		dao = spy(new MatchModelDao(converter, fileAccess));
 		fillBd();
 	}
@@ -68,15 +72,18 @@ public class MatchModelDaoTest {
 	private void fillBd() throws PersistException, ConvertException {
 		for(Integer i = 0;i<20;i++) {
 			MatchModel model = new MatchModel();
-			model.setCity("test");
-			model.setField(i.toString());
-			model.setGender(MatchModel.Gender.M);
-			model.setOpponent("test");
-			model.setSport(MatchModel.Sports.Rugby);	
-			model.setDate(new Date());
-			model.addTicketCategory(new GeneralAdmissionTicketCategory("test", "test", 1,1,1));
-			model.addTicketCategory(new ReservedTicketCategory("test", "test", 10,1,1));
+			MatchConcreteModel concreteModel = new MatchConcreteModel();
+			concreteModel.setCity("test");
+			concreteModel.setField(i.toString());
+			concreteModel.setGender(MatchModel.Gender.M);
+			concreteModel.setOpponent("test");
+			concreteModel.setSport(MatchModel.Sports.Rugby);	
+			concreteModel.setDate(new Date());
+			concreteModel.addTicketCategory(new GeneralAdmissionTicketCategory("test", "test", 1,1,1));
+			concreteModel.addTicketCategory(new ReservedTicketCategory("test", "test", 10,1,1));
 			
+			model = mConverter.convertToDB(concreteModel);
+					
 			fileAccess.save(converter.toElement(model));
 		}		
 	}

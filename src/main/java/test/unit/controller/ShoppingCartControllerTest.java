@@ -20,6 +20,7 @@ import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 
 public class ShoppingCartControllerTest {
@@ -46,7 +47,7 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		when(userConverter.convert( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserModel.class));
+		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserConcreteModel.class));
 		
 		when(mockRequest.getParameterValues("ticketId")).thenReturn(null);
 		
@@ -68,7 +69,7 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		when(userConverter.convert( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserModel.class));
+		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserConcreteModel.class));
 		
 		Mockito.doReturn( new String[]{"1"} ).when(mockRequest).getParameterValues("ticketId");
 		
@@ -90,8 +91,8 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		UserModel user = mock(UserModel.class);
-		when(userConverter.convert( (UserViewModel) org.mockito.Matchers.any())).thenReturn(user);
+		UserConcreteModel user = mock(UserConcreteModel.class);
+		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(user);
 		
 		Mockito.doReturn( new String[]{"1"} ).when(mockRequest).getParameterValues("ticketId");
 		
@@ -127,7 +128,7 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		when(userConverter.convert( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserModel.class));
+		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserConcreteModel.class));
 		
 		Mockito.doReturn( new String[]{"1"} ).when(mockRequest).getParameterValues("ticketId");
 		
@@ -164,7 +165,7 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		when(userConverter.convert( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserModel.class));
+		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserConcreteModel.class));
 		
 		when(mockRequest.getParameter("cardType")).thenReturn("Vasi");
 		when(mockRequest.getParameter("cardOwner")).thenReturn("Martin");
@@ -190,7 +191,7 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		when(userConverter.convert( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserModel.class));
+		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserConcreteModel.class));
 		
 		//When
 		String returned = controller.emptyCart(model, mockRequest);

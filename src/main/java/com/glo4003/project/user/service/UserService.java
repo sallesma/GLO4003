@@ -6,10 +6,10 @@ import java.util.List;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.exception.SaveException;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.global.ModelValidator;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 
 public class UserService {	
@@ -28,7 +28,7 @@ public class UserService {
 			throw new SaveException(errors);
 		}
 		
-		userDao.save(converter.convert(user));			
+		userDao.save(converter.convertToDB(converter.convertFromView(user)));			
 	}	
 
 	public void modify(UserViewModel user) throws SaveException, PersistException, ConvertException {		
@@ -41,7 +41,7 @@ public class UserService {
 			throw new SaveException(errors);
 		}
 		userDao.delete(userDao.getUserByUsername(user.getUsername()));
-		userDao.save(converter.convert(user));			
+		userDao.save(converter.convertToDB(converter.convertFromView(user)));			
 	}
 
 	public List<String> validate(String username, String password) throws PersistException {			
@@ -55,12 +55,12 @@ public class UserService {
 		return warnings;		
 	}
 	
-	public UserModel getUser(String username) throws PersistException {
-		return userDao.getUserByUsername(username);
+	public UserConcreteModel getUser(String username) throws PersistException {
+		return converter.convertFromDB(userDao.getUserByUsername(username));
 	}
 	
-	public UserViewModel convert(UserModel model) {
-		return converter.convert(model);
+	public UserViewModel convert(UserConcreteModel model) {
+		return converter.convertToView(model);
 	}
 	
 	public void replaceConverter(UserConverter converter) {

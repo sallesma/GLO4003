@@ -10,8 +10,8 @@
 		<c:when test="${billet.category == billetReserve}">
 			<a href="#" class="btn btn-danger addPlace" data-toggle="popover"
 				title="Ajouter une place" data-html="true"
-				data-content='<form:form action="/addPlacementTickets?matchID=${match.matchID}" method="get" class="form-horizontal" modelAttribute="match">
-				<form:input path="" type="hidden" name="matchID" class="form-control" value="${match.matchID}"/>
+				data-content='<form:form action="/addPlacementTickets?matchID=${match.id}" method="get" class="form-horizontal" modelAttribute="match">
+				<form:input path="" type="hidden" name="matchID" class="form-control" value="${match.id}"/>
 				<form:input path="" type="hidden" name="category" class="form-control" value="${billet.name}"/>  
 				<label name="existingTickets">Billets existant</label>
 				<form:select path="" name="existingTickets" class="form-control">
@@ -32,7 +32,7 @@
 			<a href="#" class="btn btn-danger addPlace" data-toggle="popover"
 				title="Ajouter des places" data-html="true"
 				data-content='<form:form action="/addGeneralTickets" method="get" class="form-horizontal" modelAttribute="match">
-				<form:input path="" type="hidden" name="matchID" class="form-control" value="${match.matchID}"/>
+				<form:input path="" type="hidden" name="matchID" class="form-control" value="${match.id}"/>
 				<form:input path="" type="hidden" name="category" class="form-control" value="${billet.name}"/>
 				<form:input path="" name="ticketNumber" class="form-control" placeholder="Nombre"/>
 				<br>

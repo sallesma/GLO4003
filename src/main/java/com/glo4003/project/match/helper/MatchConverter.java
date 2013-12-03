@@ -1,7 +1,7 @@
-package com.glo4003.project.match.viewModel;
+package com.glo4003.project.match.helper;
 
 import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.match.helper.MatchViewModel;
+import com.glo4003.project.match.viewModel.MatchViewModel;
 
 public class MatchConverter {
 

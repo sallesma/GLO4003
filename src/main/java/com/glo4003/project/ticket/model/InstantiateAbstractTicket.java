@@ -11,25 +11,26 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 public abstract class InstantiateAbstractTicket implements ModelInterface {
 	
 	 private static AtomicInteger nextTicketId = new AtomicInteger(0);
-     private int ticketId;
+   
      private Long id;
      @XStreamConverter(XmlObjectConverter.class)
      private MatchModel match;
      private int catIndex;
      private AbstractTicketCategory correspondingCat;
      
+     public InstantiateAbstractTicket() {
+    	 this.setMatch(null);
+    	 this.setCorrespondingCat(null);
+     }
      
      public InstantiateAbstractTicket(MatchModel match, int catIndex) {
-    	 this.ticketId = nextTicketId.incrementAndGet();
+    	 this.id = (long) nextTicketId.incrementAndGet();
          this.match = match;
          this.setCatIndex(catIndex);
          this.correspondingCat = match.getTickets().get(catIndex);
      }
      
      
-     public int getTicketId() {
-         return ticketId;
-     }
 
 	 public MatchModel getMatch() {
 	         return match;

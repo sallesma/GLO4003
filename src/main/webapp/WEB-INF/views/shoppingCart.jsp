@@ -33,33 +33,33 @@
 					
 	        		<c:forEach var="ticket" items="${user.tickets}">
 	        			<tr>
-	        				<td><input type="checkbox" name="ticketId" value="${ticket.ticketId}"></td>
-	        				<td>${ticket.ticketId}</td>
-	        				<td>${ticket.match.sport}</td>
-	        				<td>${ticket.match.date}</td>
-	        				<td>${ticket.match.opponent}</td>
-	        				<td>${ticket.match.city}</td>
-	        				<td>${ticket.match.field}</td>
+	        				<td><input type="checkbox" name="ticketId" value="${ticket.id}"></td>
+	        				<td>${ticket.id}</td>
+	        				<td>${ticket.sport}</td>
+	        				<td>${ticket.date}</td>
+	        				<td>${ticket.opponent}</td>
+	        				<td>${ticket.city}</td>
+	        				<td>${ticket.field}</td>
 	        			
 	        				<c:choose>
-		        				<c:when test="${ticket.class.simpleName=='InstantiateGeneralAdmissionTicket'}">
+		        				<c:when test="${ticket.class.simpleName=='InstantiateGeneralAdmissionTicketViewModel'}">
 		        					<td>${ticket.nbPlaces}</td>
 		        					<td>Libre</td>
 		        					<td><a href="#" class="btn btn-success choosePlace" data-toggle="popover" data-placement="left"
                                                                 title="Modifier le nombre de tickets" data-html="true"
-                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal" modelAttribute="user"><input type="hidden" name="id" value="${ticket.ticketId}"></input><br>
+                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal" modelAttribute="user"><input type="hidden" name="id" value="${ticket.id}"></input><br>
                                  <input type="text" name="nbPlaceInput" value="${ticket.nbPlaces}"></input>                     
                                 <button type="submit" class="btn btn-primary">Valider</button>
                         </form:form>'>Modifier</a></td>   
 		        				</c:when>
-		        				<c:when test="${ticket.class.simpleName=='InstantiateReservedTicket'}">
+		        				<c:when test="${ticket.class.simpleName=='InstantiateReservedTicketViewModel'}">
 		        					<td>1</td>
-		        					<td>${ticket.numPlace}</td>
+		        					<td>${ticket.placement}</td>
 		        					<td><a href="#" class="btn btn-success choosePlace" data-toggle="popover" data-placement="left"
                                                                 title="Changer de place" data-html="true"
-                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal" modelAttribute="user"><input type="hidden" name="id" value="${ticket.ticketId}"></input><br>
+                                                                data-content='<form:form action="/modifyTicket" method="get" class="form-horizontal" modelAttribute="user"><input type="hidden" name="id" value="${ticket.id}"></input><br>
                                  <form:select path="" name="placement" class="form-control">
-                                        <form:options items="${ticket.correspondingCat.placements}"/>
+                                        <form:options items="${ticket.placements}"/>
                                 </form:select>
                                 <br>                        
                                 <button type="submit" class="btn btn-primary">Valider</button>

@@ -1,7 +1,6 @@
 package com.glo4003.project.shoppingkart.controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +22,11 @@ import com.glo4003.project.shoppingkart.cardValidation.AbstractCreditCardValidat
 import com.glo4003.project.shoppingkart.cardValidation.AmericanExpressoValidation;
 import com.glo4003.project.shoppingkart.cardValidation.MistercardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.VasiValidation;
+import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
+import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
+import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
@@ -31,11 +34,11 @@ import com.glo4003.project.user.model.view.UserViewModel;
 @Controller
 public class ShoppingCartController {
 	private UserConverter userConverter = new UserConverter();
+	private InstantiateTicketConverter tConverter = new InstantiateTicketConverter();
 	private MatchModelDao matchDao = new MatchModelDao();
-	private List<InstantiateAbstractTicket> billTickets;
-
+	private ArrayList<InstantiateTicketViewModel> billTickets;
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
-	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) {	
+	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws PersistException {	
 
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserModel userModel = userConverter.convert(userViewModel);
@@ -43,17 +46,31 @@ public class ShoppingCartController {
 		String[] selectedTickets =  request.getParameterValues("ticketId");
 		if( action.equals("buy") ){
 
-			billTickets = new ArrayList<InstantiateAbstractTicket>();
-
+			 
+			 billTickets = new ArrayList<InstantiateTicketViewModel>();
+			
 			if (selectedTickets == null) {
 				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés, la facture n'a pas pu être éditée.");
-				model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+				model.addAttribute("user", userViewModel);
 				model.addAttribute("entry", new LoginViewModel());	
 				return "shoppingCart";
 			} else {
+				
 				for ( String selectedTicket : selectedTickets ) {
-					billTickets.add( userModel.getTicketById(Integer.valueOf(selectedTicket)) );
+					InstantiateAbstractTicket aTicket = userModel.getTicketById(Integer.valueOf(selectedTicket));
+					if (aTicket instanceof InstantiateGeneralAdmissionTicket) {
+						InstantiateGeneralAdmissionTicket tGA = (InstantiateGeneralAdmissionTicket) aTicket;
+						InstantiateGeneralAdmissionTicketViewModel tVM = tConverter.convert(tGA);
+						billTickets.add(tVM);
+					}
+					else if (aTicket instanceof InstantiateReservedTicket) {
+						InstantiateReservedTicket tRes = (InstantiateReservedTicket) aTicket;
+						InstantiateReservedTicketViewModel tVM = tConverter.convert(tRes);
+						billTickets.add(tVM);
+					}
+					
 				}
+				
 				model.addAttribute("billTickets", billTickets);
 				model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 				model.addAttribute("entry", new LoginViewModel());	
@@ -78,6 +95,8 @@ public class ShoppingCartController {
 					}
 				}
 			}
+			userViewModel = userConverter.convert(userModel);
+			request.getSession().setAttribute("loggedUser", userViewModel);
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 			model.addAttribute("entry", new LoginViewModel());
 
@@ -98,7 +117,7 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public String payment_done(Model model, HttpServletRequest request) {
+	public String payment_done(Model model, HttpServletRequest request) throws PersistException {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserModel userModel = userConverter.convert(userViewModel);
 		
@@ -126,8 +145,8 @@ public class ShoppingCartController {
 		
 		if (validator.isValid()) {
 			if(billTickets != null) {
-				for (InstantiateAbstractTicket ticket : billTickets) {
-					userModel.deleteTicket(ticket);
+				for (InstantiateTicketViewModel ticket : billTickets) {
+					//userModel.deleteTicket(ticket);
 				}
 			}
 		}
@@ -155,6 +174,8 @@ public class ShoppingCartController {
 				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");
 			}
 			matchDao.save(match);
+			userViewModel = userConverter.convert(userModel);
+			request.getSession().setAttribute("loggedUser", userViewModel);
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 			model.addAttribute("entry", new LoginViewModel());
 			return "shoppingCart";
@@ -168,6 +189,8 @@ public class ShoppingCartController {
 				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");
 			}
 			matchDao.save(match);
+			userViewModel = userConverter.convert(userModel);
+			request.getSession().setAttribute("loggedUser", userViewModel);
 			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 			model.addAttribute("entry", new LoginViewModel());
 			return "shoppingCart";
@@ -176,7 +199,7 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping(value = "/emptyCart", method = RequestMethod.GET)
-	public String emptyCart(Model model, HttpServletRequest request) {
+	public String emptyCart(Model model, HttpServletRequest request) throws PersistException {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserModel userModel = userConverter.convert(userViewModel);
 
@@ -185,7 +208,8 @@ public class ShoppingCartController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		userViewModel = userConverter.convert(userModel);
+		request.getSession().setAttribute("loggedUser", userViewModel);
 		return "shoppingCart";
 	}
 	  

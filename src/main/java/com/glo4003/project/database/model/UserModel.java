@@ -115,7 +115,7 @@ public class UserModel implements ModelInterface {
 	public InstantiateAbstractTicket getTicketById(int id) {
 		InstantiateAbstractTicket res = null;
 		for (InstantiateAbstractTicket t : this.tickets) {
-			if(id == t.getTicketId())
+			if(id == t.getId())
 				res = t;
 		}
 		return res;

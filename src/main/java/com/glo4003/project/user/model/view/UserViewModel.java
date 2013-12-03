@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.global.HasWarning;
-import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 
 public class UserViewModel extends HasWarning {
 	
@@ -19,8 +19,9 @@ public class UserViewModel extends HasWarning {
 		phoneNumber = "";
 		address = "";
 		isAdmin = false;
-		tickets = new ArrayList<InstantiateAbstractTicket>();
+		tickets = new ArrayList<InstantiateTicketViewModel>();
 		searchCriteria = new ArrayList<SearchCriteriaModel>();
+		nbTickets = 0;
 	}
 	
 	private Long id = 0L;
@@ -36,18 +37,12 @@ public class UserViewModel extends HasWarning {
 	@Pattern(regexp="(?s)^[2-9]\\d{2}-\\d{3}-\\d{4}$", message = "le numero de telephone doit etre de la forme 999-999-9999")
 	private String phoneNumber;
 	private String address;
-	
+	private int nbTickets;
 	private boolean isAdmin;
-	private ArrayList<InstantiateAbstractTicket> tickets;
+	private ArrayList<InstantiateTicketViewModel> tickets;
 	private ArrayList<SearchCriteriaModel> searchCriteria;
 	
-	public int getNbTicketsInCart() {
-		if (this.tickets != null) 
-			return this.tickets.size();
-		
-		else 
-			return 0;
-	}
+
 
 	public Long getId() {
 		return id;
@@ -99,11 +94,11 @@ public class UserViewModel extends HasWarning {
 	public void setIsAdmin(boolean isAdmin){
 		this.isAdmin = isAdmin;
 	}
-	public ArrayList<InstantiateAbstractTicket> getTickets() {
+	public ArrayList<InstantiateTicketViewModel> getTickets() {
 		return tickets;
 	}
 
-	public void setTickets(ArrayList<InstantiateAbstractTicket> tickets) {
+	public void setTickets(ArrayList<InstantiateTicketViewModel> tickets) {
 		this.tickets = tickets;
 	}
 
@@ -118,4 +113,14 @@ public class UserViewModel extends HasWarning {
 	public String toString(){
 		return this.firstName + " " + this.lastName;
 	}
+
+	public int getNbTickets() {
+		return nbTickets;
+	}
+
+	public void setNbTickets(int nbTickets) {
+		this.nbTickets = nbTickets;
+	}
+	
+	
 }

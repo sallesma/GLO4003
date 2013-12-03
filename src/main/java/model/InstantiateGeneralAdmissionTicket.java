@@ -7,7 +7,9 @@ import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 public class InstantiateGeneralAdmissionTicket extends InstantiateAbstractTicket {
 
 	private int nbPlaces;
-	
+	public InstantiateGeneralAdmissionTicket() {
+		super();
+	}
 	public InstantiateGeneralAdmissionTicket(MatchModel match, int catIndex, int nbPlaces) {
 		super(match, catIndex);
 		this.nbPlaces = nbPlaces;

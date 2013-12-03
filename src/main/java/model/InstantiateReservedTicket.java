@@ -7,6 +7,12 @@ import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 public class InstantiateReservedTicket extends InstantiateAbstractTicket {
 
 	private String numPlace;
+	
+	public InstantiateReservedTicket() {
+		super();
+		this.setNumPlace("");
+	}
+	
 	public InstantiateReservedTicket(MatchModel match,int catIndex, String numPlace) {
 		super(match, catIndex);
 		this.numPlace = numPlace;

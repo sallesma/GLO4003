@@ -21,9 +21,9 @@ import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.match.helper.MatchFilter;
-import com.glo4003.project.match.helper.MatchViewModel;
-import com.glo4003.project.match.viewModel.MatchConverter;
+import com.glo4003.project.match.viewModel.MatchViewModel;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
@@ -131,7 +131,7 @@ public class MatchController {
 		return "matchsList";
 	}
 
-	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) {
+	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) throws PersistException {
 		UserModel user = getUser(request);
 		if (user == null) {
 			return new ArrayList<SearchCriteriaModel>(0);
@@ -185,6 +185,7 @@ public class MatchController {
               userModel.addTicket(ticket);
               userViewModel = uConverter.convert(userModel);
            
+              request.getSession().setAttribute("loggedUser", userViewModel);
               model.addAttribute("user", userViewModel);
               model.addAttribute("entry", new LoginViewModel());
           }
@@ -192,7 +193,7 @@ public class MatchController {
       }
 	  
 	  
-	  private UserModel getUser(HttpServletRequest request) {
+	  private UserModel getUser(HttpServletRequest request) throws PersistException {
 		  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		  if(userViewModel == null) {
 			  return null;

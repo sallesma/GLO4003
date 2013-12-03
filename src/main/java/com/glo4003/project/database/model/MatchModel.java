@@ -64,7 +64,6 @@ public class MatchModel implements ModelInterface {
 		return amount;
 	}
 	
-	// Getter and Setter
 	@Override
 	public Long getId() {		
 		return id;

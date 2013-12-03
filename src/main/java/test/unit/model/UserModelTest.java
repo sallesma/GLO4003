@@ -18,6 +18,7 @@ import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.user.model.UserConcreteModel;
 
 public class UserModelTest {
 
@@ -37,7 +38,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedModelHasAddress() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		String result = model.getAddress();
@@ -49,7 +50,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedModelHasFirstName() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		String result = model.getFirstName();
@@ -61,7 +62,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedModelHasLastName() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		String result = model.getLastName();
@@ -73,7 +74,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedModelHasPhoneNumber() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		String result = model.getPhoneNumber();
@@ -85,7 +86,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedModelHasUserName() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		String result = model.getUsername();
@@ -97,7 +98,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedModelHasPassword() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		String result = model.getPassword();
@@ -109,7 +110,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedUSerModelIsNotAdmin() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		Boolean result = model.isAdmin();
@@ -176,7 +177,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedUserModelNbTicketsWhenTickets() throws PersistException, ConvertException{
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 
 		//When
 		int nbTicket = model.getNbTicketsInCart();
@@ -188,7 +189,7 @@ public class UserModelTest {
 	@Test
 	public void PopulatedUserModelNbTicketsWhenNoTicket() throws PersistException, ConvertException {
 		//Before
-		UserModel model = getPopulatedUserModel();
+		UserConcreteModel model = getPopulatedUserModel();
 		model.setTickets(null);
 
 		//When
@@ -200,8 +201,8 @@ public class UserModelTest {
 	}
 
 
-	private UserModel getPopulatedUserModel() throws PersistException, ConvertException {
-		UserModel model = new UserModel();
+	private UserConcreteModel getPopulatedUserModel() throws PersistException, ConvertException {
+		UserConcreteModel model = new UserConcreteModel();
 		model.setAddress("test");
 		model.setFirstName("test");
 		model.setLastName("test");

@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 
 public class UserConverterTest {
@@ -34,12 +35,30 @@ public class UserConverterTest {
 	}
 	*/
 	@Test
-	public void canConvertUserModel() {
+	public void canConvertUserModelToDB() {
 		//Before
-		UserModel model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
+		UserConcreteModel model = spy(createUserConcreteModel("Matt", "Martin", "MM", "password", false));
 		
 		//When
-		converter.convert(model);		
+		converter.convertToDB(model);		
+		
+		//Then
+		verify(model, times(1)).getAddress();
+		verify(model, times(1)).getFirstName();
+		verify(model, times(1)).getLastName();
+		verify(model, times(1)).getPassword();
+		verify(model, times(1)).getPhoneNumber();
+		verify(model, times(1)).getUsername();
+		verify(model, times(1)).isAdmin();
+	}
+	
+	@Test
+	public void canConvertUserModelToView() {
+		//Before
+		UserConcreteModel model = spy(createUserConcreteModel("Matt", "Martin", "MM", "password", false));
+		
+		//When
+		converter.convertToView(model);		
 		
 		//Then
 		verify(model, times(1)).getAddress();
@@ -57,7 +76,24 @@ public class UserConverterTest {
 		UserViewModel model = spy(createUserViewModel("Matt", "Martin", "MM", "password", false));
 		
 		//When
-		converter.convert(model);		
+		converter.convertFromView(model);		
+		
+		//Then
+		verify(model, times(1)).getAddress();
+		verify(model, times(1)).getFirstName();
+		verify(model, times(1)).getLastName();
+		verify(model, times(1)).getPassword();
+		verify(model, times(1)).getPhoneNumber();
+		verify(model, times(1)).getUsername();		
+	}
+	
+	@Test
+	public void canConvertUserDBModel() {
+		//Before
+		UserModel model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
+		
+		//When
+		converter.convertFromDB(model);		
 		
 		//Then
 		verify(model, times(1)).getAddress();
@@ -85,8 +121,8 @@ public class UserConverterTest {
 		return users;
 	}
 	
-	private UserModel createUserModel(String lastName, String firstName, String username, String password, boolean isAdmin) {
-		UserModel user= new UserModel();
+	private UserConcreteModel createUserConcreteModel(String lastName, String firstName, String username, String password, boolean isAdmin) {
+		UserConcreteModel user= new UserConcreteModel();
 		user.setAddress("Address");
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
@@ -108,5 +144,18 @@ public class UserConverterTest {
 		user.setIsAdmin(isAdmin);
 		
 		return user;
-	}	
+	}
+	
+	private UserModel createUserModel(String lastName, String firstName, String username, String password, boolean isAdmin) {
+		UserModel user= new UserModel();
+		user.setAddress("Address");
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setPassword(password);
+		user.setPhoneNumber("(444) 444-4444");
+		user.setUsername(username);	
+		user.setIsAdmin(isAdmin);
+		
+		return user;
+	}
 }

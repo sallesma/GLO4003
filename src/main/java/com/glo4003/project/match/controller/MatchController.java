@@ -23,6 +23,7 @@ import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.match.helper.MatchFilter;
 import com.glo4003.project.match.helper.MatchViewModel;
+import com.glo4003.project.match.model.MatchConcreteModel;
 import com.glo4003.project.match.viewModel.MatchConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.user.dao.UserModelDao;
@@ -50,10 +51,15 @@ public class MatchController {
 			mConverter = new MatchConverter ();
 		}
 		
-		List<MatchModel> matchModelList = matchDao.getAll();
+		List<MatchModel> matchModelDBList = matchDao.getAll();
+		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
+		for (MatchModel m : matchModelDBList){
+			matchModelList.add(mConverter.convertFromDB(m));
+		}
+		
 		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
-		for (MatchModel m : matchModelList) {
-			matchList.add(mConverter.convert(m));
+		for (MatchConcreteModel m : matchModelList) {
+			matchList.add(mConverter.convertToView(m));
 		}
 		
 		MatchFilter matchFilter = new MatchFilter(matchList);
@@ -97,10 +103,15 @@ public class MatchController {
 			mConverter = new MatchConverter ();
 		}
 		
-		List<MatchModel> matchModelList = matchDao.getAll();
+		List<MatchModel> matchModelDBList = matchDao.getAll();
+		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
+		for(MatchModel m : matchModelDBList){
+			matchModelList.add(mConverter.convertFromDB(m));
+		}
+		
 		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
-		for (MatchModel m : matchModelList) {
-			matchList.add(mConverter.convert(m));
+		for (MatchConcreteModel m : matchModelList) {
+			matchList.add(mConverter.convertToView(m));
 		}
 		
 		MatchFilter matchFilter = new MatchFilter(matchList, criterias);
@@ -143,11 +154,13 @@ public class MatchController {
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
       public String getMatch(Model model, HttpServletRequest request) throws PersistException {		  
           Long id = Long.valueOf(request.getParameter("matchID"));
-          MatchModel match = matchDao.getById(id);
+          MatchModel matchDB = matchDao.getById(id);
+          MatchConcreteModel match = mConverter.convertFromDB(matchDB);
+          
           if (mConverter == null) {
         	  mConverter = new MatchConverter();
           }
-          MatchViewModel mViewModel = mConverter.convert(match);
+          MatchViewModel mViewModel = mConverter.convertToView(match);
           
           model.addAttribute("match", mViewModel);
           model.addAttribute("entry", new LoginViewModel());

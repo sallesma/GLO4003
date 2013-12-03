@@ -37,19 +37,27 @@ import com.glo4003.project.user.model.view.UserViewModel;
 @Controller
 public class MatchController {
 	
-	private MatchModelDao matchDao = new MatchModelDao();
-	private UserModelDao userDao = new UserModelDao();
+	private MatchModelDao matchDao;
+	private UserModelDao userDao;
 	
 	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	private UserConverter uConverter;
 	private MatchConverter mConverter;
 	
+	public void dependanciesInjection(MatchModelDao matchDao, UserModelDao userDao, MatchConverter mConverter, UserConverter uConverter)
+	{
+		this.matchDao = matchDao;
+		this.userDao = userDao;
+		this.uConverter = uConverter;
+		this.mConverter = mConverter;
+	}
+	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 
-		if(mConverter == null) {
+		/*if(mConverter == null) {
 			mConverter = new MatchConverter ();
-		}
+		}*/
 		
 		List<MatchModel> matchModelDBList = matchDao.getAll();
 		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
@@ -99,9 +107,9 @@ public class MatchController {
 			}
 		}
 		
-		if(mConverter == null) {
+		/*if(mConverter == null) {
 			mConverter = new MatchConverter ();
-		}
+		}*/
 		
 		List<MatchModel> matchModelDBList = matchDao.getAll();
 		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
@@ -157,9 +165,9 @@ public class MatchController {
           MatchModel matchDB = matchDao.getById(id);
           MatchConcreteModel match = mConverter.convertFromDB(matchDB);
           
-          if (mConverter == null) {
+          /*if (mConverter == null) {
         	  mConverter = new MatchConverter();
-          }
+          }*/
           MatchViewModel mViewModel = mConverter.convertToView(match);
           
           model.addAttribute("match", mViewModel);
@@ -191,7 +199,7 @@ public class MatchController {
               
               //Get current logged user
               UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-              uConverter = new UserConverter();
+              //uConverter = new UserConverter();
               UserModel userModel = uConverter.convert(userViewModel);
 
               // Add the ticket to the user's shopping cart
@@ -210,7 +218,7 @@ public class MatchController {
 		  if(userViewModel == null) {
 			  return null;
 		  }
-          uConverter = new UserConverter();
+          //uConverter = new UserConverter();
           
           return uConverter.convert(userViewModel);
 	  }

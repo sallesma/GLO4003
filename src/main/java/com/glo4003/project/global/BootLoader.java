@@ -1,6 +1,7 @@
 package com.glo4003.project.global;
 
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.eclipse.jetty.server.Server;
@@ -11,6 +12,8 @@ import com.glo4003.project.match.controller.MatchController;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
+import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
+import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 import com.glo4003.project.user.controller.AdminController;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
@@ -41,7 +44,7 @@ public class BootLoader {
 	    Map<String, Object> controllers = ContextProvider.getApplicationControllers();
 	    
 	    ((MatchController)controllers.get("matchController")).dependanciesInjection(new MatchModelDao(), new UserModelDao(), new MatchConverter(), new UserConverter());
-	    ((ShoppingCartController)controllers.get("shoppingCartController")).dependanciesInjection(new MatchModelDao(), new UserConverter());
+	    ((ShoppingCartController)controllers.get("shoppingCartController")).dependanciesInjection(new MatchModelDao(), new UserConverter(), new InstantiateTicketConverter(), new ArrayList<InstantiateTicketViewModel>());
 	    ((AdminController)controllers.get("adminController")).dependanciesInjection(new MatchModelDao());
 	    
 	    

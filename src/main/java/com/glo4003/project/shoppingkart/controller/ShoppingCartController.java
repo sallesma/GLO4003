@@ -36,26 +36,25 @@ import com.glo4003.project.user.model.view.UserViewModel;
 public class ShoppingCartController {
 	private UserConverter userConverter;
 	private MatchModelDao matchDao;
+	private InstantiateTicketConverter ticketConverter;
 	private List<InstantiateTicketViewModel> billTickets;
-	private InstantiateTicketConverter tConverter = new InstantiateTicketConverter();
 	
-	public void dependanciesInjection(MatchModelDao matchDao, UserConverter userConverter)
+	
+	public void dependanciesInjection(MatchModelDao matchDao, UserConverter userConverter, InstantiateTicketConverter ticketConverter, ArrayList<InstantiateTicketViewModel> billTickets)
 	{
 		this.matchDao = matchDao;
 		this.userConverter = userConverter;
+		this.ticketConverter = ticketConverter;
+		this.billTickets = billTickets;
 	}
 	
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
 	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws PersistException {	
-
+		String[] selectedTickets =  request.getParameterValues("ticketId");
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
-
-		String[] selectedTickets =  request.getParameterValues("ticketId");
+		
 		if( action.equals("buy") ){
-
-			 
-			 billTickets = new ArrayList<InstantiateTicketViewModel>();
 			
 			if (selectedTickets == null) {
 				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés, la facture n'a pas pu être éditée.");
@@ -63,22 +62,19 @@ public class ShoppingCartController {
 				model.addAttribute("entry", new LoginViewModel());	
 				return "shoppingCart";
 			} else {
-				
 				for ( String selectedTicket : selectedTickets ) {
 					InstantiateAbstractTicket aTicket = userModel.getTicketById(Integer.valueOf(selectedTicket));
 					if (aTicket instanceof InstantiateGeneralAdmissionTicket) {
 						InstantiateGeneralAdmissionTicket tGA = (InstantiateGeneralAdmissionTicket) aTicket;
-						InstantiateGeneralAdmissionTicketViewModel tVM = tConverter.convert(tGA);
+						InstantiateGeneralAdmissionTicketViewModel tVM = ticketConverter.convert(tGA);
 						billTickets.add(tVM);
 					}
 					else if (aTicket instanceof InstantiateReservedTicket) {
 						InstantiateReservedTicket tRes = (InstantiateReservedTicket) aTicket;
-						InstantiateReservedTicketViewModel tVM = tConverter.convert(tRes);
+						InstantiateReservedTicketViewModel tVM = ticketConverter.convert(tRes);
 						billTickets.add(tVM);
 					}
-					
 				}
-				
 				model.addAttribute("billTickets", billTickets);
 				model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
 				model.addAttribute("entry", new LoginViewModel());	
@@ -105,7 +101,7 @@ public class ShoppingCartController {
 			}
 			userViewModel = userConverter.convertToView(userModel);
 			request.getSession().setAttribute("loggedUser", userViewModel);
-			model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+			model.addAttribute("user", userViewModel);
 			model.addAttribute("entry", new LoginViewModel());
 
 			return "redirect:/shoppingCart";
@@ -154,12 +150,23 @@ public class ShoppingCartController {
 		if (validator.isValid()) {
 			if(billTickets != null) {
 				for (InstantiateTicketViewModel ticket : billTickets) {
-					//userModel.deleteTicket(ticket);
+					if (ticket instanceof InstantiateGeneralAdmissionTicketViewModel) {
+						InstantiateGeneralAdmissionTicketViewModel tGAVM = (InstantiateGeneralAdmissionTicketViewModel)ticket;
+						InstantiateGeneralAdmissionTicket tGA = ticketConverter.convert(tGAVM);
+						userModel.deleteTicket(tGA);
+					}
+					else if (ticket instanceof InstantiateReservedTicketViewModel) {
+						InstantiateReservedTicketViewModel tRVM = (InstantiateReservedTicketViewModel)ticket;
+						InstantiateReservedTicket tR = ticketConverter.convert(tRVM);
+						userModel.deleteTicket(tR);
+					}	
 				}
 			}
 		}
 		
-		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
+		userViewModel = userConverter.convertToView(userModel);
+		request.getSession().setAttribute("loggedUser", userViewModel);
+		model.addAttribute("user", userViewModel);
 		model.addAttribute("entry", new LoginViewModel());
 		
 		return "shoppingCart";
@@ -170,6 +177,7 @@ public class ShoppingCartController {
 	public String modifyTicket(Model model, HttpServletRequest request) throws PersistException, ConvertException {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
+		
 		int ticketId = Integer.valueOf(request.getParameter("id"));
 		
 		InstantiateAbstractTicket t = userModel.getTicketById(ticketId);
@@ -219,12 +227,5 @@ public class ShoppingCartController {
 		userViewModel = userConverter.convertToView(userModel);
 		request.getSession().setAttribute("loggedUser", userViewModel);
 		return "shoppingCart";
-	}
-	  
-	public void replaceUserConverter(UserConverter converter) {
-		this.userConverter = converter;
-	}
-	public void replaceMatchDAO(MatchModelDao dao) {
-		this.matchDao = dao;
 	}
 }

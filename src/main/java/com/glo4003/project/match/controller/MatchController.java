@@ -39,10 +39,11 @@ public class MatchController {
 	
 	private MatchModelDao matchDao;
 	private UserModelDao userDao;
-	
-	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 	private UserConverter uConverter;
 	private MatchConverter mConverter;
+	
+	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
+	
 	
 	public void dependanciesInjection(MatchModelDao matchDao, UserModelDao userDao, MatchConverter mConverter, UserConverter uConverter)
 	{
@@ -54,10 +55,6 @@ public class MatchController {
 	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
-
-		/*if(mConverter == null) {
-			mConverter = new MatchConverter ();
-		}*/
 		
 		List<MatchModel> matchModelDBList = matchDao.getAll();
 		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
@@ -65,12 +62,12 @@ public class MatchController {
 			matchModelList.add(mConverter.convertFromDB(m));
 		}
 		
-		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
+		ArrayList<MatchViewModel> matchViewModelList = new ArrayList<MatchViewModel>();
 		for (MatchConcreteModel m : matchModelList) {
-			matchList.add(mConverter.convertToView(m));
+			matchViewModelList.add(mConverter.convertToView(m));
 		}
 		
-		MatchFilter matchFilter = new MatchFilter(matchList);
+		MatchFilter matchFilter = new MatchFilter(matchViewModelList);
 		matchFilter.filterMatchList();
 		model.addAttribute("filter", matchFilter);
 		
@@ -107,22 +104,18 @@ public class MatchController {
 			}
 		}
 		
-		/*if(mConverter == null) {
-			mConverter = new MatchConverter ();
-		}*/
-		
 		List<MatchModel> matchModelDBList = matchDao.getAll();
 		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
 		for(MatchModel m : matchModelDBList){
 			matchModelList.add(mConverter.convertFromDB(m));
 		}
 		
-		ArrayList<MatchViewModel> matchList = new ArrayList<MatchViewModel>();
+		ArrayList<MatchViewModel> matchViewModelList = new ArrayList<MatchViewModel>();
 		for (MatchConcreteModel m : matchModelList) {
-			matchList.add(mConverter.convertToView(m));
+			matchViewModelList.add(mConverter.convertToView(m));
 		}
 		
-		MatchFilter matchFilter = new MatchFilter(matchList, criterias);
+		MatchFilter matchFilter = new MatchFilter(matchViewModelList, criterias);
 		String mustSave = request.getParameter("mustSave");			
 		if((mustSave != null) && !mustSave.isEmpty()) {		
 			
@@ -162,12 +155,9 @@ public class MatchController {
 	@RequestMapping(value = "/match", method = RequestMethod.GET)
       public String getMatch(Model model, HttpServletRequest request) throws PersistException {		  
           Long id = Long.valueOf(request.getParameter("matchID"));
+          
           MatchModel matchDB = matchDao.getById(id);
           MatchConcreteModel match = mConverter.convertFromDB(matchDB);
-          
-          /*if (mConverter == null) {
-        	  mConverter = new MatchConverter();
-          }*/
           MatchViewModel mViewModel = mConverter.convertToView(match);
           
           model.addAttribute("match", mViewModel);
@@ -181,6 +171,7 @@ public class MatchController {
           Long matchId = Long.valueOf(request.getParameter("matchID"));
           int catId = Integer.valueOf(request.getParameter("catID"));
           String numPlace = request.getParameter("place");
+          
           int nbPlace = (request.getParameter("nbPlace")) != null ? (Integer.valueOf(request.getParameter("nbPlace"))) : 1 ;
           
           // Retrieve selected match from Db          
@@ -199,12 +190,11 @@ public class MatchController {
               
               //Get current logged user
               UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
-              //uConverter = new UserConverter();
-              UserConcreteModel userModel = uConverter.convertFromView(userViewModel);
+              UserConcreteModel userConcreteModel = uConverter.convertFromView(userViewModel);
 
               // Add the ticket to the user's shopping cart
-              userModel.addTicket(ticket);
-              userViewModel = uConverter.convertToView(userModel);
+              userConcreteModel.addTicket(ticket);
+              userViewModel = uConverter.convertToView(userConcreteModel);
            
               request.getSession().setAttribute("loggedUser", userViewModel);
               model.addAttribute("user", userViewModel);

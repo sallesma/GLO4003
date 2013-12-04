@@ -26,6 +26,7 @@ public class UserConverter {
 		UserViewModel viewModel = new UserViewModel();
 		viewModel.setId(entry.getId());
 		viewModel.setAddress(entry.getAddress());
+		viewModel.setEmail(entry.getEmail());
 		viewModel.setFirstName(entry.getFirstName());
 		viewModel.setLastName(entry.getLastName());
 		viewModel.setPassword(entry.getPassword());
@@ -62,6 +63,7 @@ public class UserConverter {
 		userModel.setAddress(userViewModel.getAddress());
 		userModel.setFirstName(userViewModel.getFirstName());
 		userModel.setLastName(userViewModel.getLastName());
+		userModel.setEmail(userViewModel.getEmail());
 		userModel.setPassword(userViewModel.getPassword());
 		userModel.setPhoneNumber(userViewModel.getPhoneNumber());
 		userModel.setUsername(userViewModel.getUsername());
@@ -90,6 +92,7 @@ public class UserConverter {
 		userConcreteModel.setAddress(entry.getAddress());
 		userConcreteModel.setFirstName(entry.getFirstName());
 		userConcreteModel.setLastName(entry.getLastName());
+		userConcreteModel.setEmail(entry.getEmail());
 		userConcreteModel.setPassword(entry.getPassword());
 		userConcreteModel.setPhoneNumber(entry.getPhoneNumber());
 		userConcreteModel.setUsername(entry.getUsername());
@@ -105,6 +108,7 @@ public class UserConverter {
 		userModel.setAddress(userConcreteModel.getAddress());
 		userModel.setFirstName(userConcreteModel.getFirstName());
 		userModel.setLastName(userConcreteModel.getLastName());
+		userModel.setEmail(userConcreteModel.getEmail());
 		userModel.setPassword(userConcreteModel.getPassword());
 		userModel.setPhoneNumber(userConcreteModel.getPhoneNumber());
 		userModel.setUsername(userConcreteModel.getUsername());

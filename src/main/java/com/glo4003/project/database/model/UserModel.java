@@ -20,6 +20,7 @@ public class UserModel implements ModelInterface {
 	private String firstName;
 	private String username;
 	private String password;
+	private String email;
 	private String phoneNumber;
 	private String address;
 	private boolean isAdmin;	
@@ -33,105 +34,13 @@ public class UserModel implements ModelInterface {
 		firstName = "";
 		username = "";
 		password = "";
+		email = "";
 		phoneNumber = "";
 		address = "";
 		isAdmin = false;
 		tickets = new ArrayList<InstantiateAbstractTicket>();		
 		searchCriteria = new ArrayList<SearchCriteriaModel>();
 	}
-	
-//	// Shopping cart methods
-//	public void addTicket(InstantiateAbstractTicket ticket) {
-//		this.tickets.add(ticket);
-//	}
-//
-//	public void deleteTicketAndReplaceInMatch(int ticketId, MatchModel match) {
-//
-//		InstantiateAbstractTicket t = this.getTicketById(ticketId);
-//		AbstractTicketCategory tCat = match.getTickets().get(t.getCatIndex());
-//	
-//		if (tCat instanceof GeneralAdmissionTicketCategory) {
-//			//General Admission Ticket
-//			GeneralAdmissionTicketCategory tGATCat = (GeneralAdmissionTicketCategory)tCat;
-//			InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
-//			tGATCat.replace(tGAT.getNbPlaces());
-//			this.tickets.remove(t);
-//		}
-//		else {
-//			//Reserved Ticket
-//			ReservedTicketCategory tRTCat = (ReservedTicketCategory)tCat;
-//			InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
-//			tRTCat.replace(tRT.getNumPlace());
-//			this.tickets.remove(t);
-//		}
-//		
-//	}
-//	
-//	public void deleteTicketById(int ticketId) {
-//
-//		InstantiateAbstractTicket t = this.getTicketById(ticketId);
-//	
-//		if (t != null) {
-//			this.tickets.remove(t);
-//		}
-//		
-//	}
-//	
-//	public void deleteTicket(InstantiateAbstractTicket t) {
-//	
-//		if (t != null) {
-//			this.tickets.remove(t);
-//		}
-//		
-//	}
-//
-//
-//	public void emptyCartAndReplaceTickets(MatchModelDao matchDao) throws PersistException, ConvertException {
-//
-//		for (InstantiateAbstractTicket t : this.getTickets()) {
-//			Long matchId = t.getMatch().getId();
-//			MatchModel match = matchDao.getById(matchId);
-//			AbstractTicketCategory tCat = match.getTickets().get(t.getCatIndex());
-//			
-//			if (tCat instanceof GeneralAdmissionTicketCategory) {
-//				//General Admission Ticket
-//				GeneralAdmissionTicketCategory tGATCat = (GeneralAdmissionTicketCategory)tCat;
-//				InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
-//				tGATCat.replace(tGAT.getNbPlaces());
-//			}
-//			else {
-//				//Reserved Ticket
-//				ReservedTicketCategory tRTCat = (ReservedTicketCategory)tCat;
-//				InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
-//				tRTCat.replace(tRT.getNumPlace());
-//			}
-//			matchDao.save(match);
-//		}
-//
-//		this.tickets.clear();
-//
-//	}
-//
-//	public InstantiateAbstractTicket getTicketById(int id) {
-//		InstantiateAbstractTicket res = null;
-//		for (InstantiateAbstractTicket t : this.tickets) {
-//			if(id == t.getTicketId())
-//				res = t;
-//		}
-//		return res;
-//	}
-//
-//	public int getNbTicketsInCart() {
-//		if (this.tickets != null) 
-//			return this.tickets.size();
-//
-//		else 
-//			return 0;
-//	}
-
-
-
-	//Getters and Setters 
 
 	public String getLastName() {
 		return lastName;
@@ -153,6 +62,15 @@ public class UserModel implements ModelInterface {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -201,10 +119,6 @@ public class UserModel implements ModelInterface {
 	public void setSearchCriterias(ArrayList<SearchCriteriaModel> searchCriteria) {
 		this.searchCriteria = searchCriteria;
 	}
-
-//	public void addSearchCriteria(SearchCriteriaModel model) {
-//		searchCriteria.add(model);
-//	}
 
 
 }

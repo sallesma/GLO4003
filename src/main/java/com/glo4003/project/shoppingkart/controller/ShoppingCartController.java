@@ -31,22 +31,17 @@ import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
+import com.google.inject.Inject;
 
 @Controller
 public class ShoppingCartController {
+	@Inject
 	private UserConverter userConverter;
+	@Inject
 	private MatchModelDao matchDao;
-	private InstantiateTicketConverter ticketConverter;
-	private List<InstantiateTicketViewModel> billTickets;
-	
-	
-	public void dependanciesInjection(MatchModelDao matchDao, UserConverter userConverter, InstantiateTicketConverter ticketConverter, ArrayList<InstantiateTicketViewModel> billTickets)
-	{
-		this.matchDao = matchDao;
-		this.userConverter = userConverter;
-		this.ticketConverter = ticketConverter;
-		this.billTickets = billTickets;
-	}
+	@Inject
+	private InstantiateTicketConverter ticketConverter;	
+	private List<InstantiateTicketViewModel> billTickets = new ArrayList<>();	
 	
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
 	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws PersistException {	
@@ -54,10 +49,10 @@ public class ShoppingCartController {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
 		
-		if( action.equals("buy") ){
+		if(action.equals("buy")){
 			
 			if (selectedTickets == null) {
-				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés, la facture n'a pas pu être éditée.");
+				model.addAttribute("noTicket", "Il n'y a pas de billets s��lectionn��s, la facture n'a pas pu ��tre ��dit��e.");
 				model.addAttribute("user", userViewModel);
 				model.addAttribute("entry", new LoginViewModel());	
 				return "shoppingCart";
@@ -85,7 +80,7 @@ public class ShoppingCartController {
 		else if( action.equals("delete") ){
 
 			if (selectedTickets == null) {
-				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés");
+				model.addAttribute("noTicket", "Il n'y a pas de billets s��lectionn��s");
 			} else {
 				for ( String selectedTicket : selectedTickets ) {
 					Long matchId = userModel.getTicketById(Integer.valueOf(selectedTicket)).getMatch().getId();

@@ -8,6 +8,7 @@ import com.glo4003.project.database.dto.FileAccess;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ModelInterface;
+import com.google.inject.Inject;
 
 import nu.xom.Element;
 
@@ -15,12 +16,13 @@ public abstract class Dao<T extends ModelInterface> implements DaoInterface<T> {
 
 	protected final String className;
 
-	protected XmlModelConverter converter;
+	@Inject
+	protected XmlModelConverter converter;	
 	protected FileAccess fileAccess;
 
 	public Dao(Class<? extends ModelInterface> clazz) {
 		className = clazz.getSimpleName();
-		converter = new XmlModelConverter();
+		
 		fileAccess = FileAccess.getInstance();
 	}
 

@@ -1,7 +1,5 @@
 package com.glo4003.project.database.model;
 
-
-
 public class GeneralAdmissionTicketCategory extends AbstractTicketCategory {
 
 	public GeneralAdmissionTicketCategory() {

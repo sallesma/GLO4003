@@ -7,8 +7,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.glo4003.project.database.exception.PersistException;
-
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -17,9 +15,12 @@ import nu.xom.Nodes;
 import nu.xom.ParsingException;
 import nu.xom.Serializer;
 
-public class FileAccess implements DtoInterface {
+import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.injection.Resolver;
+
+public class FileAccess implements DtoInterface {	
 	
-	private static FileAccess fileAccess = new FileAccess();	
+	private static FileAccess fileAccess = Resolver.getInjectedInstance(FileAccess.class);	
 	
 	private final String path = "src/main/java/com/glo4003/project/database/files/";
 

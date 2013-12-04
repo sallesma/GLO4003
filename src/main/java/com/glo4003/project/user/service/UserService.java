@@ -11,19 +11,16 @@ import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
+import com.google.inject.Inject;
 
 public class UserService {	
 	
+	@Inject
 	private UserModelDao userDao;
+	@Inject	
 	private UserConverter converter;
+	@Inject
 	private ModelValidator validator;
-	
-	public UserService (UserModelDao userDao, UserConverter converter, ModelValidator validator)
-	{
-		this.userDao = userDao;
-		this.converter = converter;
-		this.validator = validator;
-	}
 	
 	public void saveNew(UserViewModel user) throws SaveException, PersistException, ConvertException {		
 		List<String> errors = validator.validate(user);

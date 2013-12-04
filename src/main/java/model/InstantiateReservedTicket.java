@@ -36,6 +36,5 @@ public class InstantiateReservedTicket extends InstantiateAbstractTicket {
 	}
 	public void setNumPlace(String numPlace) {
 		this.numPlace = numPlace;
-	}
-	
+	}	
 }

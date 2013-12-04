@@ -14,17 +14,13 @@ import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.user.helper.UserConverter;
+import com.google.inject.Inject;
 
 @Controller
 public class AdminController {
 	
-	private MatchModelDao matchDao = new MatchModelDao();
-  
-	
-	public void dependanciesInjection(MatchModelDao matchDao)
-	{
-		this.matchDao = matchDao;
-	}
+	@Inject
+	private MatchModelDao matchDao;  
 	
 	@RequestMapping(value = "/addPlacementTickets", method = RequestMethod.GET)
 	public String addPlacementTickets(Model model,HttpServletRequest request) throws PersistException {		
@@ -39,9 +35,8 @@ public class AdminController {
 					cat.setNumberInitialTickets(cat.getNumberInitialTickets()+1);
 				}
 		}
-		model.addAttribute("match", match);
+		model.addAttribute("match", match);		
 		
-		//MatchModelDao matchModelDao = new MatchModelDao();
 		try {
 			matchDao.save(match);
 		} catch (ConvertException e) {
@@ -64,9 +59,8 @@ public class AdminController {
 					cat.setNumberInitialTickets(cat.getNumberInitialTickets()+ticketNumber);
 				}
 		}
-		model.addAttribute("match", match);
+		model.addAttribute("match", match);		
 		
-		//MatchModelDao matchModelDao = new MatchModelDao();
 		try {
 			matchDao.save(match);
 		} catch (ConvertException e) {

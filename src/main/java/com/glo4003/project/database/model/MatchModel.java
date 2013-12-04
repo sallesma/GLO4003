@@ -26,8 +26,7 @@ public class MatchModel implements ModelInterface {
 	private String city;
 	private String field;	
 	@XStreamConverter(XmlArrayListConverter.class)
-	private List<AbstractTicketCategory> tickets;
-	
+	private List<AbstractTicketCategory> tickets;	
 	
 	public MatchModel () {
 		this.setSport(null);
@@ -125,7 +124,5 @@ public class MatchModel implements ModelInterface {
 
 	public void setTickets(List<AbstractTicketCategory> tickets) {
 		this.tickets = tickets;
-	}
-
-	
+	}	
 }

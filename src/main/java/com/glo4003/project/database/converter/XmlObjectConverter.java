@@ -6,6 +6,7 @@ import com.glo4003.project.database.dto.FileAccess;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ModelInterface;
+import com.google.inject.Inject;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -15,7 +16,8 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 public class XmlObjectConverter implements Converter {
 	
-	private XmlModelConverter dto = new XmlModelConverter();
+	@Inject
+	private XmlModelConverter dto;
 
     public void marshal(Object source, HierarchicalStreamWriter writer,
             MarshallingContext context) {    	

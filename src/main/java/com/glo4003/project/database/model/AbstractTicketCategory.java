@@ -4,7 +4,7 @@ import com.glo4003.project.global.ModelInterface;
 
 public abstract class AbstractTicketCategory implements ModelInterface {
 	
-	public static final String RESERVED_TICKET = "réservé";
+	public static final String RESERVED_TICKET = "r��serv��";
 	public static final String FREE_TICKET = "libre";
 	
 	private Long id = 0L;	
@@ -14,8 +14,7 @@ public abstract class AbstractTicketCategory implements ModelInterface {
 	private int numberInitialTickets;
 	private int numberSoldTickets;
 	
-	public AbstractTicketCategory() {
-		
+	public AbstractTicketCategory() {		
 	}
 	
 	//Constructor 

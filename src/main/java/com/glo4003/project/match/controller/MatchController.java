@@ -30,28 +30,23 @@ import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
+import com.google.inject.Inject;
 
 /**
  * Handles requests for the Match logic.
  */
 @Controller
 public class MatchController {
-	
+	@Inject
 	private MatchModelDao matchDao;
+	@Inject
 	private UserModelDao userDao;
+	@Inject
 	private UserConverter uConverter;
+	@Inject
 	private MatchConverter mConverter;
 	
-	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
-	
-	
-	public void dependanciesInjection(MatchModelDao matchDao, UserModelDao userDao, MatchConverter mConverter, UserConverter uConverter)
-	{
-		this.matchDao = matchDao;
-		this.userDao = userDao;
-		this.uConverter = uConverter;
-		this.mConverter = mConverter;
-	}
+	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);	
 	
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
@@ -127,7 +122,6 @@ public class MatchController {
 				e.printStackTrace();
 			}
 			model.addAttribute("loggedUser", user);			
-			//model.addAttribute("customCriteria","");
 		}		
 
 		matchFilter.filterMatchList();

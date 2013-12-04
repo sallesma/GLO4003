@@ -40,7 +40,6 @@ public class InstantiateTicketFactory {
 			}
 			
 			return null;
-		}
-		
+		}		
 	}
 }

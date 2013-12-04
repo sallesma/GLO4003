@@ -66,26 +66,20 @@ public class UserConcreteModel {
 			InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
 			tRTCat.replace(tRT.getNumPlace());
 			this.tickets.remove(t);
-		}
-		
+		}		
 	}
 	
 	public void deleteTicketById(int ticketId) {
-
-		InstantiateAbstractTicket t = this.getTicketById(ticketId);
-	
+		InstantiateAbstractTicket t = this.getTicketById(ticketId);	
 		if (t != null) {
 			this.tickets.remove(t);
-		}
-		
+		}		
 	}
 	
-	public void deleteTicket(InstantiateAbstractTicket t) {
-	
+	public void deleteTicket(InstantiateAbstractTicket t) {	
 		if (t != null) {
 			this.tickets.remove(t);
-		}
-		
+		}		
 	}
 
 
@@ -112,7 +106,6 @@ public class UserConcreteModel {
 		}
 
 		this.tickets.clear();
-
 	}
 
 	public InstantiateAbstractTicket getTicketById(int id) {
@@ -127,14 +120,9 @@ public class UserConcreteModel {
 	public int getNbTicketsInCart() {
 		if (this.tickets != null) 
 			return this.tickets.size();
-
 		else 
 			return 0;
 	}
-
-
-
-	//Getters and Setters 
 
 	public String getLastName() {
 		return lastName;

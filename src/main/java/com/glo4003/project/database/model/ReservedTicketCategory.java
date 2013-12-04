@@ -32,7 +32,6 @@ public class ReservedTicketCategory extends AbstractTicketCategory {
 		// nbPlace is always 1;
 			this.placements.remove(placement);
 			this.setNumberSoldTickets(this.getNumberSoldTickets() + 1);
-
 	}
 	
 	public void replace (String placement) {
@@ -47,5 +46,4 @@ public class ReservedTicketCategory extends AbstractTicketCategory {
 		}
 		return false;
 	}
-
 }

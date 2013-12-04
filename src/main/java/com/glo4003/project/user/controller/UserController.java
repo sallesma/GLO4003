@@ -19,24 +19,25 @@ import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 import com.glo4003.project.user.service.UserService;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Handles requests for the User logic.
  */
 @Controller
 public class UserController {	
-	
+	@Inject
 	private UserService userService;
-	
-	public void dependanciesInjection(UserService userService)
-	{
-		this.userService = userService;
-	}
+	@Inject
+	private Provider<LoginViewModel> loginViewModelProvider;
+	@Inject
+	private Provider<UserViewModel> userViewModelProvider;
 	
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String newUser(Model model) {		
-		model.addAttribute("userModel", new UserViewModel());
-		model.addAttribute("entry", new LoginViewModel());	
+		model.addAttribute("userModel", userViewModelProvider.get());
+		model.addAttribute("entry", loginViewModelProvider.get());	
 		
 		return "newuser";
 	}
@@ -48,12 +49,12 @@ public class UserController {
 		} catch (SaveException e) {
 			viewModel.addWarning(e.getErrors());
 			model.addAttribute("userModel", viewModel);
-			model.addAttribute("entry", new LoginViewModel());
+			model.addAttribute("entry", loginViewModelProvider.get());
 			
 			return "newuser";
 		}
 		
-		model.addAttribute("entry", new LoginViewModel());
+		model.addAttribute("entry", loginViewModelProvider.get());
 		return "home";
 	}
 	
@@ -78,7 +79,7 @@ public class UserController {
 	public String shoppingCart(Model model, HttpServletRequest request) {	
 		
 		model.addAttribute("user", request.getSession().getAttribute("loggedUser"));
-		model.addAttribute("entry", new LoginViewModel());	
+		model.addAttribute("entry", loginViewModelProvider.get());	
 		
 		return "shoppingCart";
 	}
@@ -92,7 +93,6 @@ public class UserController {
 	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
 	public String updateUser(Model model,HttpServletRequest request) {
 	    model.addAttribute("userModel", request.getSession().getAttribute("loggedUser"));
-//		model.addAttribute("entry", new LoginViewModel());
 
 		return "updateUser";
 	}
@@ -104,7 +104,7 @@ public class UserController {
 		} catch (SaveException e) {
 			viewModel.addWarning(e.getErrors());
 			model.addAttribute("userModel", viewModel);
-			model.addAttribute("entry", new LoginViewModel());
+			model.addAttribute("entry", loginViewModelProvider.get());
 			
 			return "updateUser";
 		}

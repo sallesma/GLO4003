@@ -6,12 +6,13 @@ import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
+import com.google.inject.Inject;
 
 import model.InstantiateGeneralAdmissionTicket;
 import model.InstantiateReservedTicket;
 
 public class InstantiateTicketConverter {
-
+	@Inject
 	private MatchModelDao mDao;
 	
 	
@@ -21,10 +22,7 @@ public class InstantiateTicketConverter {
 		instantiateTicketModel.setId(instantiateGAVM.getId());
 		instantiateTicketModel.setCatIndex(instantiateGAVM.getCatIndex());
 		
-		if (this.mDao == null ) {
-			this.mDao = new MatchModelDao();
-		}
-		instantiateTicketModel.setMatch(this.mDao.getById(instantiateGAVM.getMatchId()));
+		instantiateTicketModel.setMatch(mDao.getById(instantiateGAVM.getMatchId()));
 		instantiateTicketModel.setNbPlaces(instantiateGAVM.getNbPlaces());
 		
 		return instantiateTicketModel;
@@ -52,11 +50,6 @@ public InstantiateReservedTicket convert(InstantiateReservedTicketViewModel inst
 		InstantiateReservedTicket instantiateTicketModel = new InstantiateReservedTicket();
 		instantiateTicketModel.setId(instantiateRVM.getId());
 		instantiateTicketModel.setCatIndex(instantiateRVM.getCatIndex());
-		
-		
-		if (this.mDao == null ) {
-			this.mDao = new MatchModelDao();
-		}
 		instantiateTicketModel.setMatch(this.mDao.getById(instantiateRVM.getMatchId()));
 		instantiateTicketModel.setCorrespondingCat(this.mDao.getById(instantiateRVM.getMatchId()).getTickets().get(instantiateTicketModel.getCatIndex()));
 		instantiateTicketModel.setNumPlace(instantiateRVM.getPlacement());

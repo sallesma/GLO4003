@@ -88,9 +88,5 @@ public abstract class InstantiateTicketViewModel {
 
 	public void setSport(Sports sport) {
 		this.sport = sport;
-	}
-	
-	
-	
-	
+	}	
 }

@@ -26,8 +26,7 @@ public class InstantiateGeneralAdmissionTicket extends InstantiateAbstractTicket
 		else {
 			return false;
 		}	
-	}
-	
+	}	
 	
 	public int getNbPlaces() {
 		return nbPlaces;
@@ -35,6 +34,5 @@ public class InstantiateGeneralAdmissionTicket extends InstantiateAbstractTicket
 
 	public void setNbPlaces(int nbPlaces) {
 		this.nbPlaces = nbPlaces;
-	}
-	
+	}	
 }

@@ -14,11 +14,12 @@ import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
+import com.google.inject.Inject;
 
 @Component
 public class UserConverter {
-	
-	private InstantiateTicketConverter tConverter = new InstantiateTicketConverter();
+	@Inject
+	private InstantiateTicketConverter tConverter;
 	
 	public UserViewModel convertToView(UserConcreteModel entry) {
 
@@ -46,13 +47,11 @@ public class UserConverter {
 				tVM = tConverter.convert(tR);
 				viewModel.getTickets().add(tVM);
 				System.out.println("Convert ticket UVM => UM R : " + tVM.getId());
-			}
-			
-			
-			
+			}			
 		}
 		viewModel.setNbTickets(entry.getTickets().size());
 		viewModel.setSearchCriteria(entry.getSearchCriteria());
+		
 		return viewModel;
 	}
 	

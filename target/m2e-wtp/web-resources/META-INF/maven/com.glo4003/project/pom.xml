@@ -55,7 +55,7 @@
 					<groupId>com.google.inject</groupId>
 					<artifactId>guice</artifactId>
 					<version>3.0</version>
-				</dependency>                
+				</dependency>       
         
                 <!-- XML -->
                 <dependency>
@@ -183,6 +183,7 @@
                         <artifactId>jstl</artifactId>
                         <version>1.2</version>
                 </dependency>
+     
         
                 <!-- Test -->
                 <dependency>

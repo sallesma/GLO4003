@@ -34,7 +34,6 @@ public class BootLoader {
 	    controllers.put("adminController", Resolver.getInjectedInstance(AdminController.class));
 	    controllers.put("userController", Resolver.getInjectedInstance(UserController.class));	    
 	    
-	    //server.addBean(home);
 	    server.join();	    
 	  }
 

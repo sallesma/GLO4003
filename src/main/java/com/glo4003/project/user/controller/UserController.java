@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.exception.SaveException;
+import com.glo4003.project.global.ControllerInterface;
+import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
@@ -26,13 +28,17 @@ import com.google.inject.Provider;
  * Handles requests for the User logic.
  */
 @Controller
-public class UserController {	
-	@Inject
+public class UserController implements ControllerInterface {	
+	
 	private UserService userService;
-	@Inject
 	private Provider<LoginViewModel> loginViewModelProvider;
-	@Inject
 	private Provider<UserViewModel> userViewModelProvider;
+	
+	public void dependanciesInjection() {
+		this.userService = Resolver.getInjectedInstance(UserService.class);
+		this.loginViewModelProvider = Resolver.getInjectedInstance(Provider.class);
+		this.userViewModelProvider = Resolver.getInjectedInstance(Provider.class);
+	}
 	
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String newUser(Model model) {		

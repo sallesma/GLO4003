@@ -19,6 +19,8 @@ import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.SearchCriteriaModel;
+import com.glo4003.project.global.ControllerInterface;
+import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.match.helper.MatchFilter;
@@ -36,15 +38,22 @@ import com.google.inject.Inject;
  * Handles requests for the Match logic.
  */
 @Controller
-public class MatchController {
-	@Inject
+public class MatchController implements ControllerInterface {
+	
+	
 	private MatchModelDao matchDao;
-	@Inject
 	private UserModelDao userDao;
-	@Inject
 	private UserConverter uConverter;
-	@Inject
 	private MatchConverter mConverter;
+	
+	@Override
+	public void dependanciesInjection() {
+		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
+		this.userDao = Resolver.getInjectedInstance(UserModelDao.class);
+		this.uConverter = Resolver.getInjectedInstance(UserConverter.class);
+		this.mConverter = Resolver.getInjectedInstance(MatchConverter.class);
+		
+	}
 	
 	public static final Logger logger = LoggerFactory.getLogger(MatchController.class);	
 	
@@ -206,5 +215,7 @@ public class MatchController {
           
           return uConverter.convertFromView(userViewModel);
 	  }
+
+	
 
 }

@@ -6,7 +6,7 @@ import com.google.inject.Injector;
 public class Resolver {
 
     private static volatile Injector injector;
-
+    
     public static <T> T get(Class<T> clazz) {
         initialize();
 

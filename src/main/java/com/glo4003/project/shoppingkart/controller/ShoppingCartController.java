@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.global.ControllerInterface;
+import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.shoppingkart.cardValidation.AbstractCreditCardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.AmericanExpressoValidation;
 import com.glo4003.project.shoppingkart.cardValidation.MistercardValidation;
@@ -27,6 +30,7 @@ import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
+import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
@@ -34,14 +38,21 @@ import com.glo4003.project.user.model.view.UserViewModel;
 import com.google.inject.Inject;
 
 @Controller
-public class ShoppingCartController {
-	@Inject
+public class ShoppingCartController implements ControllerInterface {
+	
 	private UserConverter userConverter;
-	@Inject
 	private MatchModelDao matchDao;
-	@Inject
 	private InstantiateTicketConverter ticketConverter;	
-	private List<InstantiateTicketViewModel> billTickets = new ArrayList<>();	
+	private List<InstantiateTicketViewModel> billTickets;	
+	
+	public void dependanciesInjection() {
+		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
+		this.userConverter = Resolver.getInjectedInstance(UserConverter.class);
+		this.ticketConverter = Resolver.getInjectedInstance(InstantiateTicketConverter.class);
+		this.billTickets = new ArrayList<>();
+		
+	}
+	
 	
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
 	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws PersistException {	

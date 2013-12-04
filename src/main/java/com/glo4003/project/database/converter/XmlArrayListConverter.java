@@ -19,8 +19,9 @@ import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 public final class XmlArrayListConverter implements Converter {
-	@Inject
-	private XmlModelConverter dto;
+	
+	//@Inject
+	private XmlModelConverter dto = new XmlModelConverter();
 
 	public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {		
 		List<ModelInterface> models = (List<ModelInterface>) source;

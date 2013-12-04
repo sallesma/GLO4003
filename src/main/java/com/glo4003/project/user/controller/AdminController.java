@@ -12,15 +12,19 @@ import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.AbstractTicketCategory;
 import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.global.ControllerInterface;
+import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
-import com.glo4003.project.user.helper.UserConverter;
-import com.google.inject.Inject;
 
 @Controller
-public class AdminController {
+public class AdminController implements ControllerInterface {
 	
-	@Inject
-	private MatchModelDao matchDao;  
+	
+	private MatchModelDao matchDao; 
+	
+	public void dependanciesInjection() {
+		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
+	}
 	
 	@RequestMapping(value = "/addPlacementTickets", method = RequestMethod.GET)
 	public String addPlacementTickets(Model model,HttpServletRequest request) throws PersistException {		

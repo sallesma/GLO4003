@@ -15,8 +15,10 @@ import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 import com.glo4003.project.user.controller.AdminController;
+import com.glo4003.project.user.controller.UserController;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.service.UserService;
 
 
 
@@ -46,7 +48,8 @@ public class BootLoader {
 	    ((MatchController)controllers.get("matchController")).dependanciesInjection(new MatchModelDao(), new UserModelDao(), new MatchConverter(), new UserConverter());
 	    ((ShoppingCartController)controllers.get("shoppingCartController")).dependanciesInjection(new MatchModelDao(), new UserConverter(), new InstantiateTicketConverter(), new ArrayList<InstantiateTicketViewModel>());
 	    ((AdminController)controllers.get("adminController")).dependanciesInjection(new MatchModelDao());
-	    
+	    UserService userService = new UserService(new UserModelDao(), new  UserConverter(), new ModelValidator());
+	    ((UserController)controllers.get("userController")).dependanciesInjection(userService);
 	    
 	    
 	    //server.addBean(home);

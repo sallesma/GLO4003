@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.exception.SaveException;
+import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 import com.glo4003.project.user.service.UserService;
@@ -25,8 +26,12 @@ import com.glo4003.project.user.service.UserService;
 @Controller
 public class UserController {	
 	
-	@Autowired
 	private UserService userService;
+	
+	public void dependanciesInjection(UserService userService)
+	{
+		this.userService = userService;
+	}
 	
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public String newUser(Model model) {		

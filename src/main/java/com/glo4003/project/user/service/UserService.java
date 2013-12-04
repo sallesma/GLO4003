@@ -14,9 +14,16 @@ import com.glo4003.project.user.model.view.UserViewModel;
 
 public class UserService {	
 	
-	private UserModelDao userDao = new UserModelDao();
-	private UserConverter converter = new UserConverter();
-	private ModelValidator validator = new ModelValidator();
+	private UserModelDao userDao;
+	private UserConverter converter;
+	private ModelValidator validator;
+	
+	public UserService (UserModelDao userDao, UserConverter converter, ModelValidator validator)
+	{
+		this.userDao = userDao;
+		this.converter = converter;
+		this.validator = validator;
+	}
 	
 	public void saveNew(UserViewModel user) throws SaveException, PersistException, ConvertException {		
 		List<String> errors = validator.validate(user);

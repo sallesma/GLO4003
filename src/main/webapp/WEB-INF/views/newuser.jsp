@@ -39,6 +39,13 @@
 				<form:input id="newUserUsername" class="form-control" path="username"/>
 			</div>
 		</div>
+		
+		<div class="form-group">
+			<label for="email" class="col-lg-2 control-label">Email</label>
+			<div class="col-lg-3">
+				<form:input id="newEmail" class="form-control" path="email"/>
+			</div>
+		</div>
 
 		<div class="form-group">
 			<label for="phone" class="col-lg-2 control-label">Mot de

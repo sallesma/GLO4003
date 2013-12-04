@@ -29,7 +29,9 @@ public class UserViewModel extends HasWarning {
 	private String lastName;
 	@Size(min=1, message = "entrez un prenon")
 	private String firstName;
-	
+	@Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message = "L'email n'est pas valide")
+	private String email;
 	@Size(min=1, message = "Le nom d'utilisateur est trop court")
 	private String username;
 	@Size(min=3, message = "Le mot de passe est trop court")
@@ -70,6 +72,15 @@ public class UserViewModel extends HasWarning {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}

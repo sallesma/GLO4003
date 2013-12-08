@@ -153,12 +153,12 @@ public class ShoppingCartController {
 					if (ticket instanceof InstantiateGeneralAdmissionTicketViewModel) {
 						InstantiateGeneralAdmissionTicketViewModel tGAVM = (InstantiateGeneralAdmissionTicketViewModel)ticket;
 						InstantiateGeneralAdmissionTicket tGA = ticketConverter.convert(tGAVM);
-						userModel.deleteTicket(tGA);
+						userModel.deleteTicketById(tGA.getId());
 					}
 					else if (ticket instanceof InstantiateReservedTicketViewModel) {
 						InstantiateReservedTicketViewModel tRVM = (InstantiateReservedTicketViewModel)ticket;
 						InstantiateReservedTicket tR = ticketConverter.convert(tRVM);
-						userModel.deleteTicket(tR);
+						userModel.deleteTicketById(tR.getId());
 					}	
 				}
 			}

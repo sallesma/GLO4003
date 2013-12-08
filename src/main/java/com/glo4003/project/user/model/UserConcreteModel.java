@@ -72,9 +72,9 @@ public class UserConcreteModel {
 		
 	}
 	
-	public void deleteTicketById(int ticketId) {
+	public void deleteTicketById(Long id) {
 
-		InstantiateAbstractTicket t = this.getTicketById(ticketId);
+		InstantiateAbstractTicket t = this.getTicketById(id);
 	
 		if (t != null) {
 			this.tickets.remove(t);
@@ -117,7 +117,7 @@ public class UserConcreteModel {
 
 	}
 
-	public InstantiateAbstractTicket getTicketById(int id) {
+	public InstantiateAbstractTicket getTicketById(long id) {
 		InstantiateAbstractTicket res = null;
 		for (InstantiateAbstractTicket t : this.tickets) {
 			if(id == t.getId())

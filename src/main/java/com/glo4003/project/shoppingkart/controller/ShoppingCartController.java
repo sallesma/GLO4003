@@ -162,6 +162,10 @@ public class ShoppingCartController {
 					}	
 				}
 			}
+			model.addAttribute("paymentOk", true);
+		}
+		else {
+			model.addAttribute("paymentOk", false);
 		}
 		this.billTickets.clear();
 		userViewModel = userConverter.convertToView(userModel);

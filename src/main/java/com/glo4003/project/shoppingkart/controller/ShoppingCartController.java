@@ -163,7 +163,7 @@ public class ShoppingCartController {
 				}
 			}
 		}
-		
+		this.billTickets.clear();
 		userViewModel = userConverter.convertToView(userModel);
 		request.getSession().setAttribute("loggedUser", userViewModel);
 		model.addAttribute("user", userViewModel);
@@ -218,7 +218,7 @@ public class ShoppingCartController {
 	public String emptyCart(Model model, HttpServletRequest request) throws PersistException {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
-
+		this.billTickets.clear();
 		try {
 			userModel.emptyCartAndReplaceTickets(matchDao);
 		} catch (Exception e) {

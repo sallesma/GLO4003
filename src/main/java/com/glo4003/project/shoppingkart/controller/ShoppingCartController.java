@@ -31,6 +31,7 @@ import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
+import com.glo4003.project.shoppingkart.mail.Email;
 
 @Controller
 public class ShoppingCartController {
@@ -163,6 +164,10 @@ public class ShoppingCartController {
 				}
 			}
 			model.addAttribute("paymentOk", true);
+			
+			//Sending confirmation eMail to user
+			Email mail = new Email(userModel);
+			mail.sendFromGMail();
 		}
 		else {
 			model.addAttribute("paymentOk", false);

@@ -39,14 +39,12 @@ public class UserConverter {
 				InstantiateGeneralAdmissionTicket tGA = (InstantiateGeneralAdmissionTicket) ticket;
 				tVM = tConverter.convert(tGA);
 				viewModel.getTickets().add(tVM);
-				System.out.println("Convert ticket UVM => UM GA: " + tVM.getCity());
 			}
 			else if (ticket instanceof InstantiateReservedTicket){
 				InstantiateReservedTicketViewModel tVM = new InstantiateReservedTicketViewModel();
 				InstantiateReservedTicket tR = (InstantiateReservedTicket)ticket;
 				tVM = tConverter.convert(tR);
 				viewModel.getTickets().add(tVM);
-				System.out.println("Convert ticket UVM => UM R : " + tVM.getId());
 			}
 			
 			
@@ -78,7 +76,6 @@ public class UserConverter {
 				InstantiateReservedTicketViewModel tRVM = (InstantiateReservedTicketViewModel)tVM;
 				ticket = tConverter.convert(tRVM);
 			}
-			System.out.println("Convert ticket UM => UVM : " + ticket.getId());
 			userModel.getTickets().add(ticket);
 		}
 		userModel.setSearchCriterias(userViewModel.getSearchCriteria());

@@ -133,6 +133,8 @@ public class ShoppingCartController {
 		String expirationYear = (String) request.getParameter("expirationYear");
 		String cardCode = (String) request.getParameter("cardCode");
 		
+		Email mail = new Email(userModel);
+		
 		AbstractCreditCardValidation validator = null;
 		switch (cardType) {
 		case "Vasi":
@@ -150,6 +152,18 @@ public class ShoppingCartController {
 		
 		if (validator.isValid()) {
 			if(billTickets != null) {
+				
+				//Adding ticketList into mail to send
+				String mailContent = new String("Sport\tDate\tAdversaire\tVille\tTerrain\n\n");
+				for(InstantiateTicketViewModel ticket : billTickets){
+					mailContent += ticket.getSport() + "\t";
+					mailContent += ticket.getDate() + "\t";
+					mailContent += ticket.getOpponent() + "\t";
+					mailContent += ticket.getCity() + "\t";
+					mailContent += ticket.getField() + "\n";
+				}
+				
+				mail.setContent(mailContent);
 				for (InstantiateTicketViewModel ticket : billTickets) {
 					if (ticket instanceof InstantiateGeneralAdmissionTicketViewModel) {
 						InstantiateGeneralAdmissionTicketViewModel tGAVM = (InstantiateGeneralAdmissionTicketViewModel)ticket;
@@ -166,7 +180,6 @@ public class ShoppingCartController {
 			model.addAttribute("paymentOk", true);
 			
 			//Sending confirmation eMail to user
-			Email mail = new Email(userModel);
 			mail.sendFromGMail();
 		}
 		else {

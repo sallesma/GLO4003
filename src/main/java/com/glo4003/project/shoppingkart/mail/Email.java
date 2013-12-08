@@ -16,6 +16,7 @@ public class Email {
 	private static String USER_NAME = "equipeb2.glo4003";  // GMail user name (just the part before "@gmail.com")
     private static String PASSWORD = "equipeb2_glo4003"; // GMail password
     private String RECIPIENT;
+    private String CONTENT=null;
     
     
     public Email(UserConcreteModel user) {
@@ -41,6 +42,10 @@ public class Email {
         MimeMessage message = new MimeMessage(session);
         
         String[] to = { RECIPIENT };
+        String body = new String("Votre commande de billets sur le site de Rouge et Or s'est bien passée.");
+        if (CONTENT != null){
+        	body += "\n\nRécapitulatif de votre commande :\n\n" + CONTENT;
+        }
 
         try {
             message.setFrom(new InternetAddress(USER_NAME));
@@ -56,7 +61,7 @@ public class Email {
             }
 
             message.setSubject("[Billeterie Rouge&Or]Confirmation de votre commande");
-            message.setText("Votre commande de billets sur le site de Rouge et Or s'est bien passée.");
+            message.setText(body);
             Transport transport = session.getTransport("smtp");
             transport.connect(host, USER_NAME, PASSWORD);
             transport.sendMessage(message, message.getAllRecipients());
@@ -76,5 +81,13 @@ public class Email {
     
     public void setRecipient(String entry){
     	this.RECIPIENT = entry;
+    }
+    
+    public void setContent(String entry){
+    	this.CONTENT=entry;
+    }
+    
+    public String getContent(){
+    	return this.CONTENT;
     }
 }

@@ -1,7 +1,5 @@
 package com.glo4003.project.user.helper;
 
-import model.InstantiateGeneralAdmissionTicket;
-import model.InstantiateReservedTicket;
 
 import org.springframework.stereotype.Component;
 
@@ -9,6 +7,8 @@ import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
+import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;

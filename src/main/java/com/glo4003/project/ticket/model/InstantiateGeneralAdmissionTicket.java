@@ -1,8 +1,7 @@
-package model;
+package com.glo4003.project.ticket.model;
 
 import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
 import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 
 public class InstantiateGeneralAdmissionTicket extends InstantiateAbstractTicket {
 

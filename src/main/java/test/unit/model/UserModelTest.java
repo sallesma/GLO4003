@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import model.factory.InstantiateTicketFactory;
 
 import org.junit.Test;
 
@@ -18,6 +17,7 @@ import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.factory.InstantiateTicketFactory;
 import com.glo4003.project.user.model.UserConcreteModel;
 
 public class UserModelTest {

@@ -9,7 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import model.factory.InstantiateTicketFactory;
 
 import org.junit.Test;
 
@@ -23,6 +22,7 @@ import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.model.MatchConcreteModel;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.factory.InstantiateTicketFactory;
 import com.glo4003.project.user.model.UserConcreteModel;
 
 public class MatchModelTest {

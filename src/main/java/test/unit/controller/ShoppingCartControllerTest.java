@@ -37,7 +37,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testBuyHandlePostsOnEmptySelection() {
+	public void testBuyHandlePostsOnEmptySelection() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -59,7 +59,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testBuyHandlePosts() {
+	public void testBuyHandlePosts() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -118,7 +118,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testDefaultHandlePosts() {
+	public void testDefaultHandlePosts() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -156,7 +156,7 @@ public class ShoppingCartControllerTest {
 	}
 
 	@Test
-	public void testPayment_done() {
+	public void testPayment_done() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -182,7 +182,7 @@ public class ShoppingCartControllerTest {
 	}
 
 	@Test
-	public void testEmptyCart() {
+	public void testEmptyCart() throws PersistException {
 		//Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);

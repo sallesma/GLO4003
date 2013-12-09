@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
+import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
@@ -19,21 +20,6 @@ public class UserConverterTest {
 	
 	private UserConverter converter = spy(new UserConverter());	
 	
-	
-	/*
-	@Test
-	public void canConvertUserModelList() {
-		//Before
-		Map<Integer, UserModel> users = populate();
-		
-		//When
-		Collection<UserViewModel> models = converter.convert(users);
-		
-		//Then
-		assertTrue(models.size() == 4);
-		verify(converter, times(4)).convert(any(UserModel.class));		
-	}
-	*/
 	@Test
 	public void canConvertUserModelToDB() {
 		//Before
@@ -71,7 +57,7 @@ public class UserConverterTest {
 	}
 	
 	@Test
-	public void canConvertUserViewModel() {
+	public void canConvertUserViewModel() throws PersistException {
 		//Before
 		UserViewModel model = spy(createUserViewModel("Matt", "Martin", "MM", "password", false));
 		

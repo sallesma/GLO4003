@@ -18,6 +18,7 @@ import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
+import com.glo4003.project.shoppingkart.mail.Email;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
@@ -81,7 +82,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testDeleteHandlePosts() {
+	public void testDeleteHandlePosts() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);

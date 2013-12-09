@@ -250,4 +250,13 @@ public class ShoppingCartController {
 		request.getSession().setAttribute("loggedUser", userViewModel);
 		return "shoppingCart";
 	}
+	
+	public void replaceUserConverter(UserConverter converter) {
+		this.userConverter = converter;
+	}
+	public void replaceMatchDAO(MatchModelDao dao) {
+		this.matchDao = dao;
+	}
+
+	
 }

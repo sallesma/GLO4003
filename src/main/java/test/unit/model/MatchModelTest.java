@@ -124,7 +124,7 @@ public class MatchModelTest {
 		MatchConcreteModel model = getPopulatedMatchModel();
 
 		// When
-		int nbTicket = model.getTickets().size();
+		int nbTicket = model.getNumberRemainingTickets();
 
 		// Then
 		assertEquals(nbTicket, 1);
@@ -138,9 +138,10 @@ public class MatchModelTest {
 		model.setTickets(null);
 
 		// When
+		int nbTickets = model.getNumberRemainingTickets();
 
 		// Then
-		assertEquals(model.getTickets(), null);
+		assertEquals(nbTickets, 0);
 
 	}
 
@@ -160,7 +161,7 @@ public class MatchModelTest {
 
 		ArrayList<AbstractTicketCategory> billetsMatch = new ArrayList<AbstractTicketCategory>();
 		billetsMatch.add(TicketCategoryFactory.getTicketCategory(
-				AbstractTicketCategory.RESERVED_TICKET, "Billet loges", 100, 0,
+				AbstractTicketCategory.RESERVED_TICKET, "Billet loges", 1, 0,
 				32));
 		
 		model.setTickets(billetsMatch);

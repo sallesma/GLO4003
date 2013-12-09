@@ -74,4 +74,11 @@ public class AdminController {
 		}
 		return "match";
 	}
+	
+	public void replaceMatchDAO(MatchModelDao dao) {
+		this.matchDao = dao;
+	}
 }
+
+
+

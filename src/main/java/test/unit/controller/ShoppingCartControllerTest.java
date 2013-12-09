@@ -15,10 +15,8 @@ import org.springframework.ui.Model;
 
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
-import com.glo4003.project.shoppingkart.mail.Email;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;

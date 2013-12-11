@@ -15,15 +15,19 @@ import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.global.ControllerInterface;
 import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.user.helper.UserConverter;
 
 @Controller
 public class AdminController implements ControllerInterface {
 	
+public class AdminController {
 	
-	private MatchModelDao matchDao; 
+	private MatchModelDao matchDao = new MatchModelDao();
+  
 	
-	public void dependanciesInjection() {
-		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
+	public void dependanciesInjection(MatchModelDao matchDao)
+	{
+		this.matchDao = matchDao;
 	}
 	
 	@RequestMapping(value = "/addPlacementTickets", method = RequestMethod.GET)
@@ -39,8 +43,9 @@ public class AdminController implements ControllerInterface {
 					cat.setNumberInitialTickets(cat.getNumberInitialTickets()+1);
 				}
 		}
-		model.addAttribute("match", match);		
+		model.addAttribute("match", match);
 		
+		//MatchModelDao matchModelDao = new MatchModelDao();
 		try {
 			matchDao.save(match);
 		} catch (ConvertException e) {
@@ -63,13 +68,17 @@ public class AdminController implements ControllerInterface {
 					cat.setNumberInitialTickets(cat.getNumberInitialTickets()+ticketNumber);
 				}
 		}
-		model.addAttribute("match", match);		
-		
+		model.addAttribute("match", match);
+
 		try {
 			matchDao.save(match);
 		} catch (ConvertException e) {
 			e.printStackTrace();
 		}
 		return "match";
+	}
+	
+	public void replaceMatchDAO(MatchModelDao dao) {
+		this.matchDao = dao;
 	}
 }

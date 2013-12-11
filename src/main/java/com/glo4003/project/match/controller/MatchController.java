@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.factory.InstantiateTicketFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +26,7 @@ import com.glo4003.project.match.helper.MatchFilter;
 import com.glo4003.project.match.model.MatchConcreteModel;
 import com.glo4003.project.match.viewModel.MatchViewModel;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.factory.InstantiateTicketFactory;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;

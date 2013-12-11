@@ -2,8 +2,6 @@ package com.glo4003.project.database.model;
 
 import java.util.ArrayList;
 
-import model.InstantiateGeneralAdmissionTicket;
-import model.InstantiateReservedTicket;
 
 import com.glo4003.project.database.converter.XmlArrayListConverter;
 import com.glo4003.project.database.exception.ConvertException;
@@ -11,6 +9,8 @@ import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ModelInterface;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
+import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 public class UserModel implements ModelInterface {	

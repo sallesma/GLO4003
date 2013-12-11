@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import model.factory.InstantiateTicketFactory;
 
 import org.junit.Test;
 
@@ -18,6 +17,7 @@ import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.factory.InstantiateTicketFactory;
 import com.glo4003.project.user.model.UserConcreteModel;
 
 public class UserModelTest {
@@ -120,60 +120,6 @@ public class UserModelTest {
 	}
 
 
-/*
-	@Test
-	public void PopulatedUserModelGetTicket() throws PersistException, ConvertException {
-		//Before
-		UserModel model = getPopulatedUserModel();
-		InstantiateTicketModel ticket = model.getTickets().get(0);
-
-		int ticketId = ticket.getTicketId();
-
-		//When
-		InstantiateTicketModel gettedTicket = model.getTicketById(ticketId);
-
-		//Then
-		assertEquals(ticket, gettedTicket);
-
-	}
-*/
-
-
-/*
-	@Test
-	public void PopulatedUserModelAddTicket() throws PersistException, ConvertException {
-		//Before
-		UserModel model = getPopulatedUserModel();
-
-		ArrayList<AbstractTicketCategory> billetsMatch = new ArrayList<AbstractTicketCategory>();
-		billetsMatch.add(TicketCategoryFactory.getTicketCategory(ConfigManager.FREE_TICKET,"Billet Debout", 200, 0, 32));
-		Calendar cal = Calendar.getInstance();
-		cal.set(2010, 11, 11);
-		MatchModel match = new MatchModel(Sports.Football, Gender.M, (long) 0, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch);
-		InstantiateTicketModel ticket = new InstantiateTicketModel(match, 0, "23", 1);
-
-		//When
-		model.addTicket(ticket);
-
-		//Then
-		assertTrue(model.getTickets().contains(ticket));
-
-	}
-*/
-/*
-	@Test
-	public void PopulatedUserModelDeleteTicket() throws PersistException, ConvertException {
-		//Before
-		UserModel model = getPopulatedUserModel();
-		InstantiateTicketModel ticket = model.getTickets().get(0);
-
-		//When
-		model.deleteTicket(0);
-
-		//Then
-		assertFalse(model.getTickets().contains(ticket));
-	}
-*/
 	@Test
 	public void PopulatedUserModelNbTicketsWhenTickets() throws PersistException, ConvertException{
 		//Before

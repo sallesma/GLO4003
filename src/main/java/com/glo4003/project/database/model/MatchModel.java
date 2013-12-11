@@ -55,14 +55,6 @@ public class MatchModel implements ModelInterface {
 		this.tickets.add(cat);
 	}
 	
-	public int getNumberRemainingTickets() {
-		int amount = 0;
-		for (AbstractTicketCategory cat : this.tickets) {
-			amount += cat.getNumberRemainingTickets();
-		}
-		return amount;
-	}
-	
 	@Override
 	public Long getId() {		
 		return id;

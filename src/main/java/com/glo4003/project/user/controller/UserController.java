@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +15,8 @@ import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.exception.SaveException;
 import com.glo4003.project.global.ControllerInterface;
+import com.glo4003.project.injection.ProviderCreator;
 import com.glo4003.project.injection.Resolver;
-import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 import com.glo4003.project.user.service.UserService;
@@ -31,13 +30,13 @@ import com.google.inject.Provider;
 public class UserController implements ControllerInterface {	
 	
 	private UserService userService;
-	private Provider<LoginViewModel> loginViewModelProvider;
-	private Provider<UserViewModel> userViewModelProvider;
+	public Provider<LoginViewModel> loginViewModelProvider;
+	public Provider<UserViewModel> userViewModelProvider;
 	
 	public void dependanciesInjection() {
 		this.userService = Resolver.getInjectedInstance(UserService.class);
-		this.loginViewModelProvider = Resolver.getInjectedInstance(Provider.class);
-		this.userViewModelProvider = Resolver.getInjectedInstance(Provider.class);
+		this.loginViewModelProvider = Resolver.getInjectedInstance(ProviderCreator.class).loginViewModelProvider;
+		this.userViewModelProvider = Resolver.getInjectedInstance(ProviderCreator.class).userViewModelProvider;
 	}
 	
 	@RequestMapping(value = "/newuser", method = RequestMethod.GET)

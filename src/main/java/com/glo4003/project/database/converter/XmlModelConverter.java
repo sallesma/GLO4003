@@ -14,14 +14,13 @@ import com.glo4003.project.global.ModelInterface;
 import com.google.inject.Inject;
 import com.thoughtworks.xstream.XStream;
 
-public class XmlModelConverter {
-
-	
-	private XStream xstream = new XStream();
+public class XmlModelConverter {	
+	private XStream xstream;
 	
 	private final String path = "com.glo4003.project.database.model.";
 
-	public XmlModelConverter() {				
+	public XmlModelConverter() {	
+		xstream = new XStream();
 		bootstrap();
 	}
 

@@ -10,6 +10,7 @@ import com.glo4003.project.database.dto.FileAccess;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ModelInterface;
+import com.glo4003.project.injection.Resolver;
 import com.google.inject.Inject;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
@@ -20,8 +21,7 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
 public final class XmlArrayListConverter implements Converter {
 	
-	//@Inject
-	private XmlModelConverter dto = new XmlModelConverter();
+	private XmlModelConverter dto = Resolver.getInjectedInstance(XmlModelConverter.class);
 
 	public void marshal(Object source, HierarchicalStreamWriter writer, MarshallingContext context) {		
 		List<ModelInterface> models = (List<ModelInterface>) source;

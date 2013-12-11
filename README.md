@@ -12,9 +12,11 @@ The project is developped as a Spring Project. However, we use some Aspects, whi
 
 To do so, right click on your project in Eclipse explorer, then "configure" and "convert to AspectJ project.
 
+Also it use the JavaMail API, it is necessary to link the javax.mail.jar to the classpath. To do so locate the JAR file in ./project/Java Resources/Librairies/javax.mail.jar (or download it from http://www.oracle.com/technetwork/java/javamail/javamail-138606.html and include in project), then right clic on it -> Build Path -> Add to Build Path.
+
 #### Running the application
 
-You need to run the project as a Java Application. We have a main method which is in charge of starting the web server and everything for you.
+You need to run the project as a Java Application. We have a main method located in ./project/src/main/java/com/glo4003/project/global/BootLoader.java which is in charge of starting the web server and everything for you.
 
 #### Using fake informations
 

@@ -1,7 +1,5 @@
 package com.glo4003.project.user.helper;
 
-import model.InstantiateGeneralAdmissionTicket;
-import model.InstantiateReservedTicket;
 
 import org.springframework.stereotype.Component;
 
@@ -9,17 +7,18 @@ import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
+import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
-import com.google.inject.Inject;
 
 @Component
 public class UserConverter {
-	@Inject
-	private InstantiateTicketConverter tConverter;
+	
+	private InstantiateTicketConverter tConverter = new InstantiateTicketConverter();
 	
 	public UserViewModel convertToView(UserConcreteModel entry) {
 
@@ -40,19 +39,19 @@ public class UserConverter {
 				InstantiateGeneralAdmissionTicket tGA = (InstantiateGeneralAdmissionTicket) ticket;
 				tVM = tConverter.convert(tGA);
 				viewModel.getTickets().add(tVM);
-				System.out.println("Convert ticket UVM => UM GA: " + tVM.getCity());
 			}
 			else if (ticket instanceof InstantiateReservedTicket){
 				InstantiateReservedTicketViewModel tVM = new InstantiateReservedTicketViewModel();
 				InstantiateReservedTicket tR = (InstantiateReservedTicket)ticket;
 				tVM = tConverter.convert(tR);
 				viewModel.getTickets().add(tVM);
-				System.out.println("Convert ticket UVM => UM R : " + tVM.getId());
-			}			
+			}
+			
+			
+			
 		}
 		viewModel.setNbTickets(entry.getTickets().size());
 		viewModel.setSearchCriteria(entry.getSearchCriteria());
-		
 		return viewModel;
 	}
 	
@@ -77,7 +76,6 @@ public class UserConverter {
 				InstantiateReservedTicketViewModel tRVM = (InstantiateReservedTicketViewModel)tVM;
 				ticket = tConverter.convert(tRVM);
 			}
-			System.out.println("Convert ticket UM => UVM : " + ticket.getId());
 			userModel.getTickets().add(ticket);
 		}
 		userModel.setSearchCriterias(userViewModel.getSearchCriteria());
@@ -118,3 +116,4 @@ public class UserConverter {
 		return userModel;
 	}
 }
+

@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
@@ -37,7 +36,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testBuyHandlePostsOnEmptySelection() {
+	public void testBuyHandlePostsOnEmptySelection() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -59,7 +58,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testBuyHandlePosts() {
+	public void testBuyHandlePosts() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -81,7 +80,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testDeleteHandlePosts() {
+	public void testDeleteHandlePosts() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -118,7 +117,7 @@ public class ShoppingCartControllerTest {
 	}
 	
 	@Test
-	public void testDefaultHandlePosts() {
+	public void testDefaultHandlePosts() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -156,7 +155,7 @@ public class ShoppingCartControllerTest {
 	}
 
 	@Test
-	public void testPayment_done() {
+	public void testPayment_done() throws PersistException {
 		// Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
@@ -182,7 +181,7 @@ public class ShoppingCartControllerTest {
 	}
 
 	@Test
-	public void testEmptyCart() {
+	public void testEmptyCart() throws PersistException {
 		//Given
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);

@@ -54,7 +54,7 @@ public class MatchConcreteModel  implements ModelInterface {
 		
 		public int getNumberRemainingTickets() {
 			int amount = 0;
-			for (AbstractTicketCategory cat : this.tickets) {
+			if (this.tickets != null)for (AbstractTicketCategory cat : this.tickets) {
 				amount += cat.getNumberRemainingTickets();
 			}
 			return amount;

@@ -2,8 +2,6 @@ package com.glo4003.project.user.model;
 
 import java.util.ArrayList;
 
-import model.InstantiateGeneralAdmissionTicket;
-import model.InstantiateReservedTicket;
 
 import com.glo4003.project.database.converter.XmlArrayListConverter;
 import com.glo4003.project.database.exception.ConvertException;
@@ -15,6 +13,8 @@ import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
+import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 public class UserConcreteModel {
@@ -68,20 +68,26 @@ public class UserConcreteModel {
 			InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
 			tRTCat.replace(tRT.getNumPlace());
 			this.tickets.remove(t);
-		}		
+		}
+		
 	}
 	
-	public void deleteTicketById(int ticketId) {
-		InstantiateAbstractTicket t = this.getTicketById(ticketId);	
+	public void deleteTicketById(Long id) {
+
+		InstantiateAbstractTicket t = this.getTicketById(id);
+	
 		if (t != null) {
 			this.tickets.remove(t);
-		}		
+		}
+		
 	}
 	
-	public void deleteTicket(InstantiateAbstractTicket t) {	
+	public void deleteTicket(InstantiateAbstractTicket t) {
+	
 		if (t != null) {
 			this.tickets.remove(t);
-		}		
+		}
+		
 	}
 
 
@@ -108,9 +114,10 @@ public class UserConcreteModel {
 		}
 
 		this.tickets.clear();
+
 	}
 
-	public InstantiateAbstractTicket getTicketById(int id) {
+	public InstantiateAbstractTicket getTicketById(long id) {
 		InstantiateAbstractTicket res = null;
 		for (InstantiateAbstractTicket t : this.tickets) {
 			if(id == t.getId())
@@ -122,9 +129,14 @@ public class UserConcreteModel {
 	public int getNbTicketsInCart() {
 		if (this.tickets != null) 
 			return this.tickets.size();
+
 		else 
 			return 0;
 	}
+
+
+
+	//Getters and Setters 
 
 	public String getLastName() {
 		return lastName;

@@ -83,6 +83,13 @@
 
     
     <%@ include file="footer.jsp" %>
+    
+    <c:if test="${paymentOk == true}">
+    	<script>
+    		confirm("Votre commande a bien été prise en compte.");
+    	</script>
+    </c:if>
+    
   <script type="text/javascript">        
 
 $(".choosePlace").popover();

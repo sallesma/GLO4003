@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="email" class="col-lg-2 control-label">Nom d'utilisateur</label>
+			<label for="email" class="col-lg-2 control-label">Email</label>
 			<div class="col-lg-3">
 				<form:input id="newEmail" class="form-control" path="email"/>
 			</div>

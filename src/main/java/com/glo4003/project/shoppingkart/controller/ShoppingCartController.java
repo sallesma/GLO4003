@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import model.InstantiateGeneralAdmissionTicket;
-import model.InstantiateReservedTicket;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,8 @@ import com.glo4003.project.shoppingkart.cardValidation.MistercardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.VasiValidation;
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
+import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
@@ -31,17 +31,23 @@ import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
-import com.google.inject.Inject;
+import com.glo4003.project.shoppingkart.mail.Email;
 
 @Controller
 public class ShoppingCartController {
-	@Inject
 	private UserConverter userConverter;
-	@Inject
 	private MatchModelDao matchDao;
-	@Inject
-	private InstantiateTicketConverter ticketConverter;	
-	private List<InstantiateTicketViewModel> billTickets = new ArrayList<>();	
+	private InstantiateTicketConverter ticketConverter;
+	private List<InstantiateTicketViewModel> billTickets;
+	
+	
+	public void dependanciesInjection(MatchModelDao matchDao, UserConverter userConverter, InstantiateTicketConverter ticketConverter, ArrayList<InstantiateTicketViewModel> billTickets)
+	{
+		this.matchDao = matchDao;
+		this.userConverter = userConverter;
+		this.ticketConverter = ticketConverter;
+		this.billTickets = billTickets;
+	}
 	
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)
 	public String handlePosts(Model model, HttpServletRequest request, @RequestParam String action) throws PersistException {	
@@ -49,10 +55,10 @@ public class ShoppingCartController {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
 		
-		if(action.equals("buy")){
+		if( action.equals("buy") ){
 			
 			if (selectedTickets == null) {
-				model.addAttribute("noTicket", "Il n'y a pas de billets s��lectionn��s, la facture n'a pas pu ��tre ��dit��e.");
+				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés, la facture n'a pas pu être éditée.");
 				model.addAttribute("user", userViewModel);
 				model.addAttribute("entry", new LoginViewModel());	
 				return "shoppingCart";
@@ -80,7 +86,7 @@ public class ShoppingCartController {
 		else if( action.equals("delete") ){
 
 			if (selectedTickets == null) {
-				model.addAttribute("noTicket", "Il n'y a pas de billets s��lectionn��s");
+				model.addAttribute("noTicket", "Il n'y a pas de billets sélectionnés");
 			} else {
 				for ( String selectedTicket : selectedTickets ) {
 					Long matchId = userModel.getTicketById(Integer.valueOf(selectedTicket)).getMatch().getId();
@@ -127,6 +133,8 @@ public class ShoppingCartController {
 		String expirationYear = (String) request.getParameter("expirationYear");
 		String cardCode = (String) request.getParameter("cardCode");
 		
+		Email mail = new Email(userModel);
+		
 		AbstractCreditCardValidation validator = null;
 		switch (cardType) {
 		case "Vasi":
@@ -144,21 +152,40 @@ public class ShoppingCartController {
 		
 		if (validator.isValid()) {
 			if(billTickets != null) {
+				
+				//Adding ticketList into mail to send
+				String mailContent = new String("Sport\tDate\tAdversaire\tVille\tTerrain\n\n");
+				for(InstantiateTicketViewModel ticket : billTickets){
+					mailContent += ticket.getSport() + "\t";
+					mailContent += ticket.getDate() + "\t";
+					mailContent += ticket.getOpponent() + "\t";
+					mailContent += ticket.getCity() + "\t";
+					mailContent += ticket.getField() + "\n";
+				}
+				
+				mail.setContent(mailContent);
 				for (InstantiateTicketViewModel ticket : billTickets) {
 					if (ticket instanceof InstantiateGeneralAdmissionTicketViewModel) {
 						InstantiateGeneralAdmissionTicketViewModel tGAVM = (InstantiateGeneralAdmissionTicketViewModel)ticket;
 						InstantiateGeneralAdmissionTicket tGA = ticketConverter.convert(tGAVM);
-						userModel.deleteTicket(tGA);
+						userModel.deleteTicketById(tGA.getId());
 					}
 					else if (ticket instanceof InstantiateReservedTicketViewModel) {
 						InstantiateReservedTicketViewModel tRVM = (InstantiateReservedTicketViewModel)ticket;
 						InstantiateReservedTicket tR = ticketConverter.convert(tRVM);
-						userModel.deleteTicket(tR);
+						userModel.deleteTicketById(tR.getId());
 					}	
 				}
 			}
+			model.addAttribute("paymentOk", true);
+			
+			//Sending confirmation eMail to user
+			mail.sendFromGMail();
 		}
-		
+		else {
+			model.addAttribute("paymentOk", false);
+		}
+		this.billTickets.clear();
 		userViewModel = userConverter.convertToView(userModel);
 		request.getSession().setAttribute("loggedUser", userViewModel);
 		model.addAttribute("user", userViewModel);
@@ -213,7 +240,7 @@ public class ShoppingCartController {
 	public String emptyCart(Model model, HttpServletRequest request) throws PersistException {
 		UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
 		UserConcreteModel userModel = userConverter.convertFromView(userViewModel);
-
+		this.billTickets.clear();
 		try {
 			userModel.emptyCartAndReplaceTickets(matchDao);
 		} catch (Exception e) {
@@ -223,4 +250,13 @@ public class ShoppingCartController {
 		request.getSession().setAttribute("loggedUser", userViewModel);
 		return "shoppingCart";
 	}
+	
+	public void replaceUserConverter(UserConverter converter) {
+		this.userConverter = converter;
+	}
+	public void replaceMatchDAO(MatchModelDao dao) {
+		this.matchDao = dao;
+	}
+
+	
 }

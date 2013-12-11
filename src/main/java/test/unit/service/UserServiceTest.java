@@ -15,7 +15,9 @@ import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.exception.SaveException;
 import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.global.ModelValidator;
 import com.glo4003.project.user.dao.UserModelDao;
+import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.view.UserViewModel;
 import com.glo4003.project.user.service.UserService;
 
@@ -27,7 +29,7 @@ public class UserServiceTest {
 	
 	@Before
 	public void initialize() {
-		service = spy(new UserService());
+		service = spy(new UserService(new UserModelDao(), new UserConverter(), new ModelValidator()));
 		dao = mock(UserModelDao.class);		
 	}
 	

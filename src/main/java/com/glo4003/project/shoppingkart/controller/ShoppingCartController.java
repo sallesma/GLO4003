@@ -39,16 +39,17 @@ import com.glo4003.project.shoppingkart.mail.Email;
 
 @Controller
 public class ShoppingCartController implements ControllerInterface {
+	
 	private UserConverter userConverter;
 	private MatchModelDao matchDao;
 	private InstantiateTicketConverter ticketConverter;
 	private List<InstantiateTicketViewModel> billTickets;	
 	
-	public void dependanciesInjection(MatchModelDao matchDao, UserConverter userConverter, InstantiateTicketConverter ticketConverter, ArrayList<InstantiateTicketViewModel> billTickets) {
-		this.matchDao = matchDao;
-		this.userConverter = userConverter;
-		this.ticketConverter = ticketConverter;
-		this.billTickets = billTickets;
+	public void dependanciesInjection() {
+		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
+		this.userConverter = Resolver.getInjectedInstance(UserConverter.class);
+		this.ticketConverter = Resolver.getInjectedInstance(InstantiateTicketConverter.class);
+		this.billTickets = new ArrayList<>();
 	}
 	
 	@RequestMapping(value = "/selectedTicketsAction", method = RequestMethod.POST)

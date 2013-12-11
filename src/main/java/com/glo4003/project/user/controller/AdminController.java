@@ -20,14 +20,12 @@ import com.glo4003.project.user.helper.UserConverter;
 @Controller
 public class AdminController implements ControllerInterface {
 	
-public class AdminController {
-	
-	private MatchModelDao matchDao = new MatchModelDao();
+	private MatchModelDao matchDao;
   
 	
-	public void dependanciesInjection(MatchModelDao matchDao)
+	public void dependanciesInjection()
 	{
-		this.matchDao = matchDao;
+		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
 	}
 	
 	@RequestMapping(value = "/addPlacementTickets", method = RequestMethod.GET)

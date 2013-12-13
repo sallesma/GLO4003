@@ -18,7 +18,7 @@ import com.glo4003.project.user.model.view.UserViewModel;
 
 public class UserConverterTest {
 	
-	private UserConverter converter = spy(new UserConverter());	
+	private UserConverter converter = new UserConverter();	
 	
 	@Test
 	public void canConvertUserModelToDB() {

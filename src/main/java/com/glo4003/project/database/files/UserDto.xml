@@ -46,7 +46,7 @@
         <address>Address</address>
         <isAdmin>false</isAdmin>
         <tickets/>
-        <searchCriteria>8:SearchCriteriaModel,9:SearchCriteriaModel,</searchCriteria>
+        <searchCriteria>8:SearchCriteriaDto,9:SearchCriteriaDto,</searchCriteria>
     </UserDto> 
     <UserDto>
         <id>3</id>
@@ -58,6 +58,6 @@
         <address>Address</address>
         <isAdmin>false</isAdmin>
         <tickets/>
-        <searchCriteria>10:SearchCriteriaModel,11:SearchCriteriaModel,12:SearchCriteriaModel,13:SearchCriteriaModel,14:SearchCriteriaModel,15:SearchCriteriaModel,16:SearchCriteriaModel,17:SearchCriteriaModel,18:SearchCriteriaModel,19:SearchCriteriaModel,20:SearchCriteriaModel,21:SearchCriteriaModel,</searchCriteria>
+        <searchCriteria>10:SearchCriteriaDto,11:SearchCriteriaDto,12:SearchCriteriaDto,13:SearchCriteriaDto,14:SearchCriteriaDto,15:SearchCriteriaDto,16:SearchCriteriaDto,17:SearchCriteriaDto,18:SearchCriteriaDto,19:SearchCriteriaDto,20:SearchCriteriaDto,21:SearchCriteriaDto,</searchCriteria>
     </UserDto>
 </UserDtos>

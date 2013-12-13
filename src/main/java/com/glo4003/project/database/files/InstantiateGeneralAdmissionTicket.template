@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<InstantiateGeneralAdmissionTickets>
+    <InstantiateGeneralAdmissionTicket>
+        <id>1</id>
+        <match>17</match>
+        <catIndex>0</catIndex>
+        <correspondingCat class="com.glo4003.project.database.Dto.GeneralAdmissionTicketCategoryDto">17</correspondingCat>
+        <nbPlaces>2</nbPlaces>
+    </InstantiateGeneralAdmissionTicket>
+</InstantiateGeneralAdmissionTickets>

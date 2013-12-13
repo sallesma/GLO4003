@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.SearchCriteriaModel;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.SearchCriteriaDto;
 
 public class SearchCriteriaModelTest {
 	
-	private SearchCriteriaModel testClass = new SearchCriteriaModel();
+	private SearchCriteriaDto testClass = new SearchCriteriaDto();
 	
 
 	@Test
@@ -22,7 +22,7 @@ public class SearchCriteriaModelTest {
 		testClass.setSport("");
 		assertTrue(testClass.isSportEmpty());
 
-		testClass.setSport(MatchModel.Sports.Football.toString());
+		testClass.setSport(MatchDto.Sports.Football.toString());
 		assertTrue(!(testClass.isSportEmpty()));
 
 	}
@@ -37,7 +37,7 @@ public class SearchCriteriaModelTest {
 		testClass.setGender("");
 		assertTrue(testClass.isGenderEmpty());
 
-		testClass.setGender(MatchModel.Gender.F.toString());
+		testClass.setGender(MatchDto.Gender.F.toString());
 		assertTrue(!(testClass.isGenderEmpty()));
 	}
 

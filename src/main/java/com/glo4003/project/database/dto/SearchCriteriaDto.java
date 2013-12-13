@@ -1,4 +1,4 @@
-package com.glo4003.project.database.model;
+package com.glo4003.project.database.dto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,12 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import com.glo4003.project.database.model.MatchModel.Gender;
-import com.glo4003.project.database.model.MatchModel.Sports;
+import com.glo4003.project.database.dto.MatchDto.Gender;
+import com.glo4003.project.database.dto.MatchDto.Sports;
 import com.glo4003.project.global.ModelInterface;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-public class SearchCriteriaModel implements ModelInterface {
+public class SearchCriteriaDto implements ModelInterface {
 	
 	@XStreamOmitField
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy", Locale.CANADA_FRENCH);
@@ -26,14 +26,14 @@ public class SearchCriteriaModel implements ModelInterface {
 	private Date toDate = null;
 	private String searchName = "";
 	
-	public SearchCriteriaModel() {	
+	public SearchCriteriaDto() {	
 		fromDate = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.YEAR, 1);
 		toDate = cal.getTime();		
 	}
 	
-	public SearchCriteriaModel(String sport, String gender, String opponent, String category, String city, String fromDate, String toDate) throws ParseException {
+	public SearchCriteriaDto(String sport, String gender, String opponent, String category, String city, String fromDate, String toDate) throws ParseException {
 		setSport(sport);	
 		setGender(gender);				
 		setFromDate(fromDate);

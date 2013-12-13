@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page import="com.glo4003.project.database.model.AbstractTicketCategory"%>
+<%@ page import="com.glo4003.project.database.dto.AbstractTicketCategory"%>
 
 <td>
 	<c:set var="billetReserve" value="<%=AbstractTicketCategory.RESERVED_TICKET%>" />

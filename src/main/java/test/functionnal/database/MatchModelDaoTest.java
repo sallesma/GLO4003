@@ -11,12 +11,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.glo4003.project.database.converter.XmlModelConverter;
-import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.dto.GeneralAdmissionTicketCategoryDto;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.database.filesaccess.FileAccess;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.match.model.MatchConcreteModel;
@@ -63,7 +63,7 @@ public class MatchModelDaoTest {
 	@Test
 	public void canGetAllMatchsBySport() throws PersistException, ConvertException {
 		//When
-		List<MatchModel> models = dao.getAllMatchsBySport(MatchModel.Sports.Rugby);
+		List<MatchDto> models = dao.getAllMatchsBySport(MatchDto.Sports.Rugby);
 		
 		//Then
 		assertTrue(models.size() == 20);
@@ -71,16 +71,16 @@ public class MatchModelDaoTest {
 	
 	private void fillBd() throws PersistException, ConvertException {
 		for(Integer i = 0;i<20;i++) {
-			MatchModel model = new MatchModel();
+			MatchDto model = new MatchDto();
 			MatchConcreteModel concreteModel = new MatchConcreteModel();
 			concreteModel.setCity("test");
 			concreteModel.setField(i.toString());
-			concreteModel.setGender(MatchModel.Gender.M);
+			concreteModel.setGender(MatchDto.Gender.M);
 			concreteModel.setOpponent("test");
-			concreteModel.setSport(MatchModel.Sports.Rugby);	
+			concreteModel.setSport(MatchDto.Sports.Rugby);	
 			concreteModel.setDate(new Date());
-			concreteModel.addTicketCategory(new GeneralAdmissionTicketCategory("test", "test", 1,1,1));
-			concreteModel.addTicketCategory(new ReservedTicketCategory("test", "test", 10,1,1));
+			concreteModel.addTicketCategory(new GeneralAdmissionTicketCategoryDto("test", "test", 1,1,1));
+			concreteModel.addTicketCategory(new ReservedTicketCategoryDto("test", "test", 10,1,1));
 			
 			model = mConverter.convertToDB(concreteModel);
 					

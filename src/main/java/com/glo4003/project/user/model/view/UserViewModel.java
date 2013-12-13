@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.glo4003.project.database.model.SearchCriteriaModel;
+import com.glo4003.project.database.dto.SearchCriteriaDto;
 import com.glo4003.project.global.HasWarning;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 
@@ -20,7 +20,7 @@ public class UserViewModel extends HasWarning {
 		address = "";
 		isAdmin = false;
 		tickets = new ArrayList<InstantiateTicketViewModel>();
-		searchCriteria = new ArrayList<SearchCriteriaModel>();
+		searchCriteria = new ArrayList<SearchCriteriaDto>();
 		nbTickets = 0;
 	}
 	
@@ -42,7 +42,7 @@ public class UserViewModel extends HasWarning {
 	private int nbTickets;
 	private boolean isAdmin;
 	private ArrayList<InstantiateTicketViewModel> tickets;
-	private ArrayList<SearchCriteriaModel> searchCriteria;
+	private ArrayList<SearchCriteriaDto> searchCriteria;
 	
 
 
@@ -113,11 +113,11 @@ public class UserViewModel extends HasWarning {
 		this.tickets = tickets;
 	}
 
-	public ArrayList<SearchCriteriaModel> getSearchCriteria() {
+	public ArrayList<SearchCriteriaDto> getSearchCriteria() {
 		return searchCriteria;
 	}
 
-	public void setSearchCriteria(ArrayList<SearchCriteriaModel> searchCriteria) {
+	public void setSearchCriteria(ArrayList<SearchCriteriaDto> searchCriteria) {
 		this.searchCriteria = searchCriteria;
 	}
 	

@@ -1,9 +1,9 @@
 package com.glo4003.project.ticket.model.factory;
 
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.GeneralAdmissionTicketCategoryDto;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
 import com.glo4003.project.ticket.model.InstantiateReservedTicket;
@@ -11,7 +11,7 @@ import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 
 public class InstantiateTicketFactory {
 
-	public static InstantiateAbstractTicket getInstanciateTickets(int catIndex, MatchModel match, String place, int nbPlaces ) {
+	public static InstantiateAbstractTicket getInstanciateTickets(int catIndex, MatchDto match, String place, int nbPlaces ) {
 		
 		AbstractTicketCategory ticketCategory = match.getTickets().get(catIndex);
 		String type = ticketCategory.getCategory();
@@ -22,7 +22,7 @@ public class InstantiateTicketFactory {
 			InstantiateReservedTicket instantiateRTC = new InstantiateReservedTicket(match, catIndex, place);
 			
 			if (ticketCategory.isTicketInstanciable(place, nbPlaces)) {
-				ReservedTicketCategory tCategory = (ReservedTicketCategory)ticketCategory;
+				ReservedTicketCategoryDto tCategory = (ReservedTicketCategoryDto)ticketCategory;
 				tCategory.remove(place);
 				return instantiateRTC;
 			}
@@ -34,7 +34,7 @@ public class InstantiateTicketFactory {
 			InstantiateGeneralAdmissionTicket instantiateGAT = new InstantiateGeneralAdmissionTicket(match, catIndex, nbPlaces);
 		
 			if (ticketCategory.isTicketInstanciable(place, nbPlaces)) {
-				GeneralAdmissionTicketCategory tCategory = (GeneralAdmissionTicketCategory)ticketCategory;
+				GeneralAdmissionTicketCategoryDto tCategory = (GeneralAdmissionTicketCategoryDto)ticketCategory;
 				tCategory.remove(nbPlaces);
 				return instantiateGAT;
 			}

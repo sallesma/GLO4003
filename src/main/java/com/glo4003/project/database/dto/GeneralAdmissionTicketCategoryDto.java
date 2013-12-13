@@ -1,11 +1,11 @@
-package com.glo4003.project.database.model;
+package com.glo4003.project.database.dto;
 
-public class GeneralAdmissionTicketCategory extends AbstractTicketCategory {
+public class GeneralAdmissionTicketCategoryDto extends AbstractTicketCategory {
 
-	public GeneralAdmissionTicketCategory() {
+	public GeneralAdmissionTicketCategoryDto() {
 		super();
 	}
-	public GeneralAdmissionTicketCategory(String category, String name, int nbInitialTickets,
+	public GeneralAdmissionTicketCategoryDto(String category, String name, int nbInitialTickets,
 			int nbSoldTickets, float price) {
 		super(category, name, nbInitialTickets, nbSoldTickets, price);		
 	}

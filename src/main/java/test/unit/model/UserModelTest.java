@@ -7,14 +7,13 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
 import org.junit.Test;
 
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.model.factory.InstantiateTicketFactory;
@@ -24,7 +23,7 @@ public class UserModelTest {
 
 	@Test
 	public void NewModelIsEmpty() {
-		UserModel model = getNewUserModel();
+		UserDto model = getNewUserModel();
 
 		assertTrue(model.getAddress().isEmpty());
 		assertTrue(model.getFirstName().isEmpty());
@@ -162,7 +161,7 @@ public class UserModelTest {
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);
-		MatchModel match = new MatchModel(MatchModel.Sports.Football, MatchModel.Gender.M, (long) 0, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch);
+		MatchDto match = new MatchDto(MatchDto.Sports.Football, MatchDto.Gender.M, (long) 0, cal.getTime(), "UQAM", "Qu��bec", "ULaval", billetsMatch);
 		InstantiateAbstractTicket ticket = InstantiateTicketFactory.getInstanciateTickets(0, match,"32", 1);
 
 		model.addTicket(ticket);
@@ -170,9 +169,9 @@ public class UserModelTest {
 		return model;
 	}
 
-	private UserModel getNewUserModel() {
+	private UserDto getNewUserModel() {
 
-		return new UserModel();    	
+		return new UserDto();    	
 	}
 
 }

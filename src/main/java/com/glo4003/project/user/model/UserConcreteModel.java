@@ -2,15 +2,14 @@ package com.glo4003.project.user.model;
 
 import java.util.ArrayList;
 
-
 import com.glo4003.project.database.converter.XmlArrayListConverter;
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.GeneralAdmissionTicketCategoryDto;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
+import com.glo4003.project.database.dto.SearchCriteriaDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.ReservedTicketCategory;
-import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
@@ -30,7 +29,7 @@ public class UserConcreteModel {
 	@XStreamConverter(XmlArrayListConverter.class)
 	private ArrayList<InstantiateAbstractTicket> tickets;
 	@XStreamConverter(XmlArrayListConverter.class)
-	private ArrayList<SearchCriteriaModel> searchCriteria;
+	private ArrayList<SearchCriteriaDto> searchCriteria;
 
 	public UserConcreteModel() {
 		lastName = "";
@@ -42,7 +41,7 @@ public class UserConcreteModel {
 		address = "";
 		isAdmin = false;
 		tickets = new ArrayList<InstantiateAbstractTicket>();		
-		searchCriteria = new ArrayList<SearchCriteriaModel>();
+		searchCriteria = new ArrayList<SearchCriteriaDto>();
 	}
 	
 	// Shopping cart methods
@@ -50,21 +49,21 @@ public class UserConcreteModel {
 		this.tickets.add(ticket);
 	}
 
-	public void deleteTicketAndReplaceInMatch(int ticketId, MatchModel match) {
+	public void deleteTicketAndReplaceInMatch(int ticketId, MatchDto match) {
 
 		InstantiateAbstractTicket t = this.getTicketById(ticketId);
 		AbstractTicketCategory tCat = match.getTickets().get(t.getCatIndex());
 	
-		if (tCat instanceof GeneralAdmissionTicketCategory) {
+		if (tCat instanceof GeneralAdmissionTicketCategoryDto) {
 			//General Admission Ticket
-			GeneralAdmissionTicketCategory tGATCat = (GeneralAdmissionTicketCategory)tCat;
+			GeneralAdmissionTicketCategoryDto tGATCat = (GeneralAdmissionTicketCategoryDto)tCat;
 			InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
 			tGATCat.replace(tGAT.getNbPlaces());
 			this.tickets.remove(t);
 		}
 		else {
 			//Reserved Ticket
-			ReservedTicketCategory tRTCat = (ReservedTicketCategory)tCat;
+			ReservedTicketCategoryDto tRTCat = (ReservedTicketCategoryDto)tCat;
 			InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
 			tRTCat.replace(tRT.getNumPlace());
 			this.tickets.remove(t);
@@ -95,18 +94,18 @@ public class UserConcreteModel {
 
 		for (InstantiateAbstractTicket t : this.getTickets()) {
 			Long matchId = t.getMatch().getId();
-			MatchModel match = matchDao.getById(matchId);
+			MatchDto match = matchDao.getById(matchId);
 			AbstractTicketCategory tCat = match.getTickets().get(t.getCatIndex());
 			
-			if (tCat instanceof GeneralAdmissionTicketCategory) {
+			if (tCat instanceof GeneralAdmissionTicketCategoryDto) {
 				//General Admission Ticket
-				GeneralAdmissionTicketCategory tGATCat = (GeneralAdmissionTicketCategory)tCat;
+				GeneralAdmissionTicketCategoryDto tGATCat = (GeneralAdmissionTicketCategoryDto)tCat;
 				InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
 				tGATCat.replace(tGAT.getNbPlaces());
 			}
 			else {
 				//Reserved Ticket
-				ReservedTicketCategory tRTCat = (ReservedTicketCategory)tCat;
+				ReservedTicketCategoryDto tRTCat = (ReservedTicketCategoryDto)tCat;
 				InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
 				tRTCat.replace(tRT.getNumPlace());
 			}
@@ -209,15 +208,15 @@ public class UserConcreteModel {
 		this.tickets = tickets;
 	}
 
-	public ArrayList<SearchCriteriaModel> getSearchCriteria() {
+	public ArrayList<SearchCriteriaDto> getSearchCriteria() {
 		return searchCriteria;
 	}
 
-	public void setSearchCriterias(ArrayList<SearchCriteriaModel> searchCriteria) {
+	public void setSearchCriterias(ArrayList<SearchCriteriaDto> searchCriteria) {
 		this.searchCriteria = searchCriteria;
 	}
 
-	public void addSearchCriteria(SearchCriteriaModel model) {
+	public void addSearchCriteria(SearchCriteriaDto model) {
 		searchCriteria.add(model);
 	}
 }

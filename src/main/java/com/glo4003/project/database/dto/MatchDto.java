@@ -1,4 +1,4 @@
-package com.glo4003.project.database.model;
+package com.glo4003.project.database.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,7 +8,7 @@ import com.glo4003.project.database.converter.XmlArrayListConverter;
 import com.glo4003.project.global.ModelInterface;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-public class MatchModel implements ModelInterface {
+public class MatchDto implements ModelInterface {
 	
 	public static enum Sports {
 		Football, Basketball, Rugby, Soccer, Volleyball
@@ -28,7 +28,7 @@ public class MatchModel implements ModelInterface {
 	@XStreamConverter(XmlArrayListConverter.class)
 	private List<AbstractTicketCategory> tickets;	
 	
-	public MatchModel () {
+	public MatchDto () {
 		this.setSport(null);
 		this.setGender(null);
 		this.setDate(null);
@@ -38,7 +38,7 @@ public class MatchModel implements ModelInterface {
 		this.setTickets(new ArrayList<AbstractTicketCategory>());
 	}
 	
-	public MatchModel(Sports sport, Gender gender, Long matchID, Date date,
+	public MatchDto(Sports sport, Gender gender, Long matchID, Date date,
 			String adversaire, String city, String terrain, List<AbstractTicketCategory> billets) {
 		super();
 		this.sport = sport;

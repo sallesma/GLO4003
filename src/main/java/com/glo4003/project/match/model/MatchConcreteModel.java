@@ -1,16 +1,15 @@
 package com.glo4003.project.match.model;
 
-import com.glo4003.project.database.model.*;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.glo4003.project.database.converter.XmlArrayListConverter;
+import com.glo4003.project.database.dto.*;
+import com.glo4003.project.database.dto.MatchDto.Gender;
+import com.glo4003.project.database.dto.MatchDto.Sports;
 import com.glo4003.project.global.ModelInterface;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
-import com.glo4003.project.database.model.MatchModel.Gender;
-import com.glo4003.project.database.model.MatchModel.Sports;
 
 public class MatchConcreteModel  implements ModelInterface {
 		

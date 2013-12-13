@@ -3,8 +3,8 @@ package com.glo4003.project.ticket.model;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.glo4003.project.database.converter.XmlObjectConverter;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.global.ModelInterface;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
@@ -14,7 +14,7 @@ public abstract class InstantiateAbstractTicket implements ModelInterface {
    
      private Long id;
      @XStreamConverter(XmlObjectConverter.class)
-     private MatchModel match;
+     private MatchDto match;
      private int catIndex;
      private AbstractTicketCategory correspondingCat;
      
@@ -23,7 +23,7 @@ public abstract class InstantiateAbstractTicket implements ModelInterface {
     	 this.setCorrespondingCat(null);
      }
      
-     public InstantiateAbstractTicket(MatchModel match, int catIndex) {
+     public InstantiateAbstractTicket(MatchDto match, int catIndex) {
     	 this.id = (long) nextTicketId.incrementAndGet();
          this.match = match;
          this.setCatIndex(catIndex);
@@ -32,10 +32,10 @@ public abstract class InstantiateAbstractTicket implements ModelInterface {
      
      
 
-	 public MatchModel getMatch() {
+	 public MatchDto getMatch() {
 	         return match;
 	 }
-	 public void setMatch(MatchModel match) {
+	 public void setMatch(MatchDto match) {
 	         this.match = match;
 	 }
 

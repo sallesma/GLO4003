@@ -1,4 +1,4 @@
-package com.glo4003.project.database.dto;
+package com.glo4003.project.database.filesaccess;
 
 import java.io.File;
 import java.io.FileOutputStream;

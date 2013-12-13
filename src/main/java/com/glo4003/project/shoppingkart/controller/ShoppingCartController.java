@@ -5,16 +5,15 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.global.ControllerInterface;
 import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
@@ -93,7 +92,7 @@ public class ShoppingCartController implements ControllerInterface {
 			} else {
 				for ( String selectedTicket : selectedTickets ) {
 					Long matchId = userModel.getTicketById(Integer.valueOf(selectedTicket)).getMatch().getId();
-					MatchModel match;
+					MatchDto match;
 					try {
 						match = matchDao.getById(matchId);
 						userModel.deleteTicketAndReplaceInMatch(Integer.valueOf(selectedTicket), match);
@@ -209,7 +208,7 @@ public class ShoppingCartController implements ControllerInterface {
 		if (t instanceof InstantiateGeneralAdmissionTicket ) {
 			int newNbPlaces = Integer.valueOf(request.getParameter("nbPlaceInput"));
 			InstantiateGeneralAdmissionTicket tGAT = (InstantiateGeneralAdmissionTicket)t;
-			MatchModel match = matchDao.getById(tGAT.getMatch().getId());
+			MatchDto match = matchDao.getById(tGAT.getMatch().getId());
 			
 			if (!tGAT.changeNbPlaces(newNbPlaces, match)) {
 				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");
@@ -224,7 +223,7 @@ public class ShoppingCartController implements ControllerInterface {
 		else {
 			String newPlacement = request.getParameter("placement");
 			InstantiateReservedTicket tRT = (InstantiateReservedTicket)t;
-			MatchModel match = matchDao.getById(tRT.getMatch().getId());
+			MatchDto match = matchDao.getById(tRT.getMatch().getId());
 			
 			if (!tRT.changePlace(newPlacement, match)) {
 				model.addAttribute("impossibleChange", "Changement impossible, pas assez de place libres");

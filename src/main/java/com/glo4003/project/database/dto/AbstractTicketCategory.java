@@ -1,10 +1,10 @@
-package com.glo4003.project.database.model;
+package com.glo4003.project.database.dto;
 
 import com.glo4003.project.global.ModelInterface;
 
 public abstract class AbstractTicketCategory implements ModelInterface {
 	
-	public static final String RESERVED_TICKET = "r��serv��";
+	public static final String RESERVED_TICKET = "reserve";
 	public static final String FREE_TICKET = "libre";
 	
 	private Long id = 0L;	
@@ -17,7 +17,6 @@ public abstract class AbstractTicketCategory implements ModelInterface {
 	public AbstractTicketCategory() {		
 	}
 	
-	//Constructor 
 	public AbstractTicketCategory(String category, String name, int numberInitialTickets,
 			int numberSoldTickets, float price) {
 		this.category = category;
@@ -33,8 +32,6 @@ public abstract class AbstractTicketCategory implements ModelInterface {
 	
 	public abstract boolean isTicketInstanciable (String placement, int nbPlace);
 	
-	
-	// Getters and Setters
 	public String getCategory() {
 		return category;
 	}

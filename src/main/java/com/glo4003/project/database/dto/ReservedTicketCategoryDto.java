@@ -1,15 +1,15 @@
-package com.glo4003.project.database.model;
+package com.glo4003.project.database.dto;
 
 import java.util.ArrayList;
 
-public class ReservedTicketCategory extends AbstractTicketCategory {
+public class ReservedTicketCategoryDto extends AbstractTicketCategory {
 
 	private ArrayList<String> placements;
 	
-	public ReservedTicketCategory() {		
+	public ReservedTicketCategoryDto() {		
 	}
 	
-	public ReservedTicketCategory(String cat, String name, int nbInitialTickets,
+	public ReservedTicketCategoryDto(String cat, String name, int nbInitialTickets,
 			int nbSoldTickets, float price) {
 		super(cat, name, nbInitialTickets, nbSoldTickets, price);
 		this.placements = new ArrayList<String>();

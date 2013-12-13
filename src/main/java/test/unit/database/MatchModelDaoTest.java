@@ -18,10 +18,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.glo4003.project.database.converter.XmlModelConverter;
-import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.filesaccess.FileAccess;
 import com.glo4003.project.match.dao.MatchModelDao;
 
 public class MatchModelDaoTest {
@@ -32,8 +32,8 @@ public class MatchModelDaoTest {
 	
 	@Before
 	public void bootStrap() throws PersistException {	
-		List<MatchModel> models = new ArrayList<MatchModel>();
-		models.add(new MatchModel());
+		List<MatchDto> models = new ArrayList<MatchDto>();
+		models.add(new MatchDto());
 		fileAccess = mock(FileAccess.class);
 		FileAccess.replace(fileAccess);
 		converter = mock(XmlModelConverter.class);		
@@ -48,11 +48,11 @@ public class MatchModelDaoTest {
 		List<Element> list = new ArrayList<Element>();
 		list.add(mock(Element.class));
 		list.add(mock(Element.class));
-		when(converter.toObject(any(Element.class))).thenReturn(new MatchModel());
+		when(converter.toObject(any(Element.class))).thenReturn(new MatchDto());
 		when(fileAccess.getAll(anyString())).thenReturn(list);
 		
 		//When
-		List<MatchModel> models = dao.getAllMatchsBySport(MatchModel.Sports.Rugby);
+		List<MatchDto> models = dao.getAllMatchsBySport(MatchDto.Sports.Rugby);
 		
 		//Then
 		verify(dao, times(1)).getAll();

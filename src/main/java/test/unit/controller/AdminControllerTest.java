@@ -15,11 +15,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.GeneralAdmissionTicketCategoryDto;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.user.controller.AdminController;
@@ -28,22 +28,22 @@ public class AdminControllerTest {
 
 	private AdminController controller = null;
 	ArrayList<AbstractTicketCategory> billetsMatch = null;
-	MatchModel match = null;
+	MatchDto match = null;
 	MatchModelDao matchDao = null;
-	ReservedTicketCategory cat1 = null;
-	GeneralAdmissionTicketCategory cat2 = null;
+	ReservedTicketCategoryDto cat1 = null;
+	GeneralAdmissionTicketCategoryDto cat2 = null;
 	
 	@Before
 	public void initialize() {
 		controller = spy(new AdminController());
-		cat1 = (ReservedTicketCategory) TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.RESERVED_TICKET, "Billet loges", 100, 0, 32);
-		cat2 = (GeneralAdmissionTicketCategory) TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.FREE_TICKET, "Debout", 200, 0, 10);
+		cat1 = (ReservedTicketCategoryDto) TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.RESERVED_TICKET, "Billet loges", 100, 0, 32);
+		cat2 = (GeneralAdmissionTicketCategoryDto) TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.FREE_TICKET, "Debout", 200, 0, 10);
 		billetsMatch = new ArrayList<AbstractTicketCategory>();
 		billetsMatch.add(cat1);
 		billetsMatch.add(cat2);
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);
-		match = new MatchModel(MatchModel.Sports.Football, MatchModel.Gender.M, (long) 0, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch);
+		match = new MatchDto(MatchDto.Sports.Football, MatchDto.Gender.M, (long) 0, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch);
 		
 		matchDao = mock(MatchModelDao.class);
 		controller.replaceMatchDAO(matchDao);

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ page import="com.glo4003.project.user.model.view.UserViewModel"%>
-<%@ page import="com.glo4003.project.database.model.AbstractTicketCategory"%>
+<%@ page import="com.glo4003.project.database.dto.AbstractTicketCategory"%>
 <%@ include file="header.jsp"%>
 
 <div class="container">

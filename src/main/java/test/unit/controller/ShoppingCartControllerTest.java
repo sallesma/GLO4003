@@ -13,8 +13,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.ui.Model;
 
+import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.MatchModel;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
@@ -96,7 +96,7 @@ public class ShoppingCartControllerTest {
 		Mockito.doReturn( new String[]{"1"} ).when(mockRequest).getParameterValues("ticketId");
 		
 		InstantiateAbstractTicket  ticket = mock(InstantiateAbstractTicket.class);
-		MatchModel match = mock(MatchModel.class);
+		MatchDto match = mock(MatchDto.class);
 		when(user.getTicketById( org.mockito.Matchers.anyInt())).thenReturn(ticket);
 		when(ticket.getMatch()).thenReturn(match);
 

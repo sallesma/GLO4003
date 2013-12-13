@@ -1,6 +1,5 @@
 package com.glo4003.project.ticket.helper;
 
-import com.glo4003.project.database.dto.AbstractTicketCategory;
 import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.match.dao.MatchModelDao;

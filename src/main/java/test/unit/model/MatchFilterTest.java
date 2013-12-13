@@ -107,13 +107,7 @@ public class MatchFilterTest {
 	
 	@Test
 	public void testFilterMatchNoFilters() {
-		when(searchCriteria.getCategory()).thenReturn("");
-		when(searchCriteria.getCity()).thenReturn("");
-		when(searchCriteria.getFromDateObject()).thenReturn(null);
-		when(searchCriteria.getToDateObject()).thenReturn(null);
-		when(searchCriteria.getGender()).thenReturn(null);
-		when(searchCriteria.getOpponent()).thenReturn("");
-		when(searchCriteria.getSport()).thenReturn(null);
+		
 		
 		
 		//Before

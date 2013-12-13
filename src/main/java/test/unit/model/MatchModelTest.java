@@ -41,105 +41,86 @@ public class MatchModelTest {
 	@Test
 	public void PopulatedModelHasCity() throws PersistException,
 			ConvertException {
-		// Before
+
 		MatchConcreteModel model = getPopulatedMatchModel();
 
-		// When
 		String result = model.getCity();
 
-		// Then
 		assertTrue(result.contentEquals("test"));
 	}
 	
 	@Test
 	public void PopulatedModelHasField() throws PersistException,
 			ConvertException {
-		// Before
 		MatchConcreteModel model = getPopulatedMatchModel();
 
-		// When
 		String result = model.getField();
 
-		// Then
 		assertTrue(result.contentEquals("test"));
 	}
 	
 	@Test
 	public void PopulatedModelHasDate() throws PersistException,
 			ConvertException {
-		// Before
 		MatchConcreteModel model = getPopulatedMatchModel();
 
-		// When
 		Date result = model.getDate();
 
-		// Then
 		assertTrue(result.equals(new Date(42, 42, 42, 42, 42, 42)));
 	}
 	
 	@Test
 	public void PopulatedModelHasGender() throws PersistException,
 			ConvertException {
-		// Before
 		MatchConcreteModel model = getPopulatedMatchModel();
 
-		// When
 		Gender result = model.getGender();
 
-		// Then
 		assertTrue(result.equals(Gender.M));
 	}
 	
 	@Test
 	public void PopulatedModelHasOpponent() throws PersistException,
 			ConvertException {
-		// Before
+		
 		MatchConcreteModel model = getPopulatedMatchModel();
 
-		// When
 		String result = model.getOpponent();
 
-		// Then
 		assertTrue(result.contentEquals("test"));
 	}
 	
 	@Test
 	public void PopulatedModelHasSport() throws PersistException,
 			ConvertException {
-		// Before
+
 		MatchConcreteModel model = getPopulatedMatchModel();
 
-		// When
 		Sports result = model.getSport();
 
-		// Then
 		assertTrue(result.equals(Sports.Soccer));
 	}
 
 	@Test
 	public void PopulatedMatchModelNbTicketsWhenTickets()
 			throws PersistException, ConvertException {
-		// Before
+
 		MatchConcreteModel model = getPopulatedMatchModel();
 
-		// When
 		int nbTicket = model.getNumberRemainingTickets();
 
-		// Then
 		assertEquals(nbTicket, 1);
 	}
 
 	@Test
 	public void PopulatedMatchModelNbTicketsWhenNoTicket()
 			throws PersistException, ConvertException {
-		// Before
+
 		MatchConcreteModel model = getPopulatedMatchModel();
 		model.setTickets(null);
 
-		// When
 		int nbTickets = model.getNumberRemainingTickets();
 
-		// Then
 		assertEquals(nbTickets, 0);
 
 	}

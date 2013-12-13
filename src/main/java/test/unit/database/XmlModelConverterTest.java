@@ -39,26 +39,22 @@ public class XmlModelConverterTest {
 	
 	@Test
 	public void canConvertToXml() throws Exception {		
-		//Before
+		
 		TestClass test = new TestClass();
 		when(xstream.toXML(any(ModelInterface.class))).thenReturn("<Model></Model>");
 		
-		//When
 		converter.toElement(test);		
-		
-		//Then
+	
 		verify(xstream, times(1)).toXML(eq(test));
 	}
 	
 	@Test
 	public void canConvertToObject() throws Exception {		
-		//Before					
+							
 		Element xml = converter.toElement(new TestClass2());	
-		
-		//When
+	
 		converter.toObject(xml);		
-		
-		//Then				
+				
 		verify(xstream, times(1)).fromXML(eq(xml.toXML()));		
 	}
 	

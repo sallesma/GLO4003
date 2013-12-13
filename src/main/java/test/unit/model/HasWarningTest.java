@@ -14,25 +14,21 @@ public class HasWarningTest {
 
 	@Test
 	public void NewDontHaveWarnings() {
-		//Before
+	
 		ObjectHasWarning obj = getNewHasWarning();
 		
-		//When
 		ArrayList<String> list = obj.getWarning();
 		
-		//Then
 		assertTrue(list.isEmpty());
 	}
 	
 	@Test
 	public void PopulatedHaveWarnings() {
-		//Before
+		
 		ObjectHasWarning obj = getPopulatedHasWarning();
-		
-		//When
+	
 		ArrayList<String> list = obj.getWarning();
-		
-		//Then
+	
 		assertFalse(list.isEmpty());
 	}
 	

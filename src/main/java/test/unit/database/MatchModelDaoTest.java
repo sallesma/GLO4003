@@ -44,17 +44,15 @@ public class MatchModelDaoTest {
 	
 	@Test
 	public void canGetAllMatchsBySport() throws PersistException, ConvertException {
-		//Before
+	
 		List<Element> list = new ArrayList<Element>();
 		list.add(mock(Element.class));
 		list.add(mock(Element.class));
 		when(converter.toObject(any(Element.class))).thenReturn(new MatchDto());
 		when(fileAccess.getAll(anyString())).thenReturn(list);
 		
-		//When
 		List<MatchDto> models = dao.getAllMatchsBySport(MatchDto.Sports.Rugby);
-		
-		//Then
+	
 		verify(dao, times(1)).getAll();
 		assertTrue(models.size() == 0);
 	}

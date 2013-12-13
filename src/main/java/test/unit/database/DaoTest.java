@@ -43,60 +43,51 @@ public class DaoTest {
 	
 	@Test
 	public void canSave() throws PersistException, ConvertException, ValidityException, IOException, ParsingException {
-		//When
+		
 		testedClass.save(new TestClass2());
 		
-		//Then
 		verify(fileAccess, times(1)).save(any(Element.class), anyString());
 	}
 	
 	@Test
 	public void canGetById() throws PersistException {		
-		//Before
+		
 		when(converter.toObject(any(Element.class))).thenReturn(new TestClass2());
 		
-		//When
 		testedClass.getById(1L);
 				
-		//Then
 		verify(fileAccess, times(1)).getByID(1L, "TestClass2");
 	}
 	
 	@Test
 	public void canDelete() throws PersistException, ConvertException {		
-		//Before
+		
 		when(converter.toElement(any(TestClass2.class))).thenReturn(mock(Element.class));
 		
-		//When
 		testedClass.delete(new TestClass2());
-				
-		//Then
+		
 		verify(fileAccess, times(1)).delete(any(Element.class));
 	}
 	
 	@Test
 	public void canDeleteById() throws PersistException, ConvertException {		
 		
-		//When
 		testedClass.deleteById(2L);
-				
-		//Then
+	
 		verify(fileAccess, times(1)).delete(2L, "TestClass2");
 	}
 	
 	@Test
 	public void canGetAll() throws PersistException, ConvertException {		
-		//Before
+		
 		List<Element> list = new ArrayList<Element>();
 		list.add(mock(Element.class));
 		list.add(mock(Element.class));
 		when(converter.toObject(any(Element.class))).thenReturn(new TestClass2());
 		when(fileAccess.getAll(anyString())).thenReturn(list);
 		
-		//When
 		testedClass.getAll();
-				
-		//Then
+		
 		verify(fileAccess, times(1)).getAll(anyString());
 		verify(converter, times(2)).toObject(any(Element.class));
 	}

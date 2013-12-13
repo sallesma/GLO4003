@@ -22,13 +22,12 @@ public class UserConverterTest {
 	
 	@Test
 	public void canConvertUserModelToDB() {
-		//Before
+		
 		UserConcreteModel model = spy(createUserConcreteModel("Matt", "Martin", "MM", "password", false));
 		
-		//When
+		
 		converter.convertToDB(model);		
 		
-		//Then
 		verify(model, times(1)).getAddress();
 		verify(model, times(1)).getFirstName();
 		verify(model, times(1)).getLastName();
@@ -40,13 +39,11 @@ public class UserConverterTest {
 	
 	@Test
 	public void canConvertUserModelToView() {
-		//Before
+		
 		UserConcreteModel model = spy(createUserConcreteModel("Matt", "Martin", "MM", "password", false));
 		
-		//When
 		converter.convertToView(model);		
 		
-		//Then
 		verify(model, times(1)).getAddress();
 		verify(model, times(1)).getFirstName();
 		verify(model, times(1)).getLastName();
@@ -58,13 +55,11 @@ public class UserConverterTest {
 	
 	@Test
 	public void canConvertUserViewModel() throws PersistException {
-		//Before
+		
 		UserViewModel model = spy(createUserViewModel("Matt", "Martin", "MM", "password", false));
 		
-		//When
 		converter.convertFromView(model);		
 		
-		//Then
 		verify(model, times(1)).getAddress();
 		verify(model, times(1)).getFirstName();
 		verify(model, times(1)).getLastName();
@@ -75,13 +70,11 @@ public class UserConverterTest {
 	
 	@Test
 	public void canConvertUserDBModel() {
-		//Before
-		UserDto model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
 		
-		//When
+		UserDto model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
+	
 		converter.convertFromDB(model);		
 		
-		//Then
 		verify(model, times(1)).getAddress();
 		verify(model, times(1)).getFirstName();
 		verify(model, times(1)).getLastName();

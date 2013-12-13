@@ -43,42 +43,36 @@ public class UserModelDaoTest {
 	
 	@Test
 	public void canGetUserByUsername() throws PersistException, ConvertException {
-		//Before
+		
 		List<Element> models = getModels();
 		when(fileAccess.getNewId(anyString())).thenReturn(1L,2L,3L,4L,5L,6L,7L,8L,9L,10L,11L);
 		when(fileAccess.getAll(anyString())).thenReturn(models);
 		when(converter.toObject(any(Element.class))).thenReturn(getModel());
-		
-		//When
+	
 		dao.getUserByUsername("test");
-		
-		//Then
+	
 		verify(converter, times(10)).toObject(any(Element.class));
 	}
 	
 	@Test
 	public void canReturnTrueIfLoginValid() throws PersistException, ConvertException {
-		//Before
+	
 		when(fileAccess.getAll(anyString())).thenReturn(getModels());
 		when(converter.toObject(any(Element.class))).thenReturn(getModel());
-		
-		//When
+	
 		Boolean result = dao.isLoginValid("test 3", "password");
 		
-		//Then
 		assertTrue(result);
 	}
 	
 	@Test
 	public void canReturnFalseIfLoginInvalid() throws PersistException, ConvertException {
-		//Before
+		
 		when(fileAccess.getAll(anyString())).thenReturn(getModels());
 		when(converter.toObject(any(Element.class))).thenReturn(getModel());
-				
-		//When
-		Boolean result = dao.isLoginValid("userr 3", "password");
 		
-		//Then
+		Boolean result = dao.isLoginValid("userr 3", "password");
+	
 		assertFalse(result);
 	}
 	

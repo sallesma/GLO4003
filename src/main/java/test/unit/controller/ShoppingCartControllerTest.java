@@ -44,7 +44,7 @@ public class ShoppingCartControllerTest {
 	
 	@Test
 	public void testBuyHandlePostsOnEmptySelection() throws PersistException {
-		// Given
+		
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		String action = "buy";
@@ -57,16 +57,14 @@ public class ShoppingCartControllerTest {
 		
 		when(mockRequest.getParameterValues("ticketId")).thenReturn(null);
 		
-		// When
 		String returned = controller.handlePosts(model, mockRequest, action);
 
-		// Then
 		assertTrue(returned.contentEquals("shoppingCart"));
 	}
 	
 	@Test
 	public void testBuyHandlePosts() throws PersistException {
-		// Given
+	
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		String action = "buy";
@@ -79,16 +77,14 @@ public class ShoppingCartControllerTest {
 		
 		Mockito.doReturn( new String[]{"1"} ).when(mockRequest).getParameterValues("ticketId");
 		
-		// When
 		String returned = controller.handlePosts(model, mockRequest, action);
 
-		// Then
 		assertTrue(returned.contentEquals("bill"));
 	}
 	
 	@Test
 	public void testDeleteHandlePosts() throws PersistException {
-		// Given
+		
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		String action = "delete";
@@ -112,14 +108,11 @@ public class ShoppingCartControllerTest {
 		try {
 			when(matchDao.getById( org.mockito.Matchers.anyLong())).thenReturn(match);
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		// When
 		String returned = controller.handlePosts(model, mockRequest, action);
-
-		// Then
+		
 		assertTrue(returned.contentEquals("redirect:/shoppingCart"));
 	}
 	
@@ -138,32 +131,28 @@ public class ShoppingCartControllerTest {
 		
 		Mockito.doReturn( new String[]{"1"} ).when(mockRequest).getParameterValues("ticketId");
 		
-		// When
 		String returned = controller.handlePosts(model, mockRequest, action);
-
-		// Then
+		
 		assertTrue(returned.contentEquals("redirect:/"));
 	}
 
 	@Test
 	public void testPayment() {
-		//Given
+	
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		HttpSession mockSession = mock(HttpSession.class);
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		//When
 		String returned = controller.payment(model, mockRequest);
 		
-		//Then
 		assertTrue(returned.contentEquals("payment"));
 	}
 
 	@Test
 	public void testPayment_done() throws PersistException {
-		// Given
+	
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		
@@ -183,17 +172,15 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getParameter("expirationMonth")).thenReturn("02");
 		when(mockRequest.getParameter("expirationYear")).thenReturn("2020");
 		when(mockRequest.getParameter("cardCode")).thenReturn("123");
-
-		// When
+		
 		String returned = controller.payment_done(model, mockRequest);
 
-		// Then
 		assertTrue(returned.contentEquals("shoppingCart"));
 	}
 
 	@Test
 	public void testEmptyCart() throws PersistException {
-		//Given
+		
 		Model model = mock(Model.class);
 		HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 		
@@ -203,10 +190,8 @@ public class ShoppingCartControllerTest {
 		
 		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserConcreteModel.class));
 		
-		//When
 		String returned = controller.emptyCart(model, mockRequest);
 
-		//Then
 		assertTrue(returned.contentEquals("shoppingCart"));
 	}
 }

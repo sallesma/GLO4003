@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
@@ -18,7 +19,7 @@ import com.glo4003.project.user.model.view.UserViewModel;
 @Component
 public class UserConverter {
 	
-	private InstantiateTicketConverter tConverter = new InstantiateTicketConverter();
+	private InstantiateTicketConverter tConverter = Resolver.getInjectedInstance(InstantiateTicketConverter.class);
 	
 	public UserViewModel convertToView(UserConcreteModel entry) {
 

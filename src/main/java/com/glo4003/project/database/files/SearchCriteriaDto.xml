@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchCriteriaDtos>
+    <SearchCriteriaDto>
+        <id>1</id>
+        <opponent/>
+        <city/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>2</id>
+        <opponent/>
+        <city/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>ttttt</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>3</id>
+        <opponent/>
+        <city/>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>yyyy</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>4</id>
+        <sport>Football</sport>
+        <gender>M</gender>
+        <opponent>Alifax</opponent>
+        <city>Montr?l</city>
+        <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-10 05:00:00.0 UTC</toDate>
+        <searchName>rrrr</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>5</id>
+        <sport>Basketball</sport>
+        <gender>F</gender>
+        <opponent>Concordia</opponent>
+        <category>General</category>
+        <city>Montr?l</city>
+        <fromDate>2013-11-20 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-21 05:00:00.0 UTC</toDate>
+        <searchName>trrtrtr</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>6</id>
+        <sport>Basketball</sport>
+        <opponent/>
+        <category/>
+        <city>Montr?l</city>
+        <fromDate>2013-11-15 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-15 05:00:00.0 UTC</toDate>
+        <searchName>ghg</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>7</id>
+        <opponent>ETS</opponent>
+        <category/>
+        <city>Alifax</city>
+        <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-18 05:00:00.0 UTC</toDate>
+        <searchName>test</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>8</id>
+        <gender>F</gender>
+        <opponent/>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-18 05:00:00.0 UTC</toDate>
+        <searchName>uuu</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>9</id>
+        <gender>F</gender>
+        <opponent>Rimouski</opponent>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-18 05:00:00.0 UTC</toDate>
+        <searchName>lklkl</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>10</id>
+        <opponent/>
+        <category>Reserve</category>
+        <city/>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>dsd</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>11</id>
+        <opponent/>
+        <category>General</category>
+        <city>Montr?l</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>sdsd</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>12</id>
+        <opponent/>
+        <category>General</category>
+        <city>Montr?l</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>asdasd</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>13</id>
+        <opponent>Alifax</opponent>
+        <category>General</category>
+        <city>Montr?l</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>asdasd</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>14</id>
+        <opponent/>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>a</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>15</id>
+        <gender>F</gender>
+        <opponent/>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>AS</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>16</id>
+        <gender>F</gender>
+        <opponent/>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>d</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>17</id>
+        <gender>F</gender>
+        <opponent/>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>dsd</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>18</id>
+        <gender>F</gender>
+        <opponent/>
+        <category/>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>as</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>19</id>
+        <gender>F</gender>
+        <opponent/>
+        <category>General</category>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>as</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>20</id>
+        <gender>F</gender>
+        <opponent/>
+        <category>Reserve</category>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>as</searchName>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
+        <id>21</id>
+        <gender>F</gender>
+        <opponent>Concordia</opponent>
+        <category>Reserve</category>
+        <city>Qu?ec</city>
+        <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
+        <toDate>2014-11-22 05:00:00.0 UTC</toDate>
+        <searchName>as</searchName>
+    </SearchCriteriaDto>
+</SearchCriteriaDtos>

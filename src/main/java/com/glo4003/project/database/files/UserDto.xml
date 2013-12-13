@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UserDtos>
+    <UserDto>
+        <id>1</id>
+        <lastName>Matt</lastName>
+        <firstName>Martin</firstName>
+        <username>MM</username>
+        <password>password</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>false</isAdmin>
+        <tickets/>
+        <searchCriteria/>
+    </UserDto>
+    <UserDto>
+        <id>2</id>
+        <lastName>Houde</lastName>
+        <firstName>Louis-Jos??</firstName>
+        <username>LH</username>
+        <password>password</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>false</isAdmin>
+        <tickets/>
+        <searchCriteria/>
+    </UserDto>
+    <UserDto>
+        <id>5</id>
+        <lastName>Admin</lastName>
+        <firstName>Admin</firstName>
+        <username>admin</username>
+        <password>admin</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>true</isAdmin>
+        <tickets/>
+        <searchCriteria/>
+    </UserDto>
+    <UserDto>
+        <id>4</id>
+        <lastName>Petit</lastName>
+        <firstName>Martin</firstName>
+        <username>MP</username>
+        <password>password</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>false</isAdmin>
+        <tickets/>
+        <searchCriteria>8:SearchCriteriaModel,9:SearchCriteriaModel,</searchCriteria>
+    </UserDto> 
+    <UserDto>
+        <id>3</id>
+        <lastName>Baddouri</lastName>
+        <firstName>Rachid</firstName>
+        <username>RB</username>
+        <password>password</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>false</isAdmin>
+        <tickets/>
+        <searchCriteria>10:SearchCriteriaModel,11:SearchCriteriaModel,12:SearchCriteriaModel,13:SearchCriteriaModel,14:SearchCriteriaModel,15:SearchCriteriaModel,16:SearchCriteriaModel,17:SearchCriteriaModel,18:SearchCriteriaModel,19:SearchCriteriaModel,20:SearchCriteriaModel,21:SearchCriteriaModel,</searchCriteria>
+    </UserDto>
+</UserDtos>

@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<SearchCriteriaModels>
-    <SearchCriteriaModel>
+<SearchCriteriaDtos>
+    <SearchCriteriaDto>
         <id>1</id>
         <opponent/>
         <city/>
         <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-10 05:00:00.0 UTC</toDate>
         <searchName>test</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>2</id>
         <opponent/>
         <city/>
         <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-10 05:00:00.0 UTC</toDate>
         <searchName>ttttt</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>3</id>
         <opponent/>
         <city/>
         <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-10 05:00:00.0 UTC</toDate>
         <searchName>yyyy</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>4</id>
         <sport>Football</sport>
         <gender>M</gender>
@@ -33,8 +33,8 @@
         <fromDate>2013-11-10 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-10 05:00:00.0 UTC</toDate>
         <searchName>rrrr</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>5</id>
         <sport>Basketball</sport>
         <gender>F</gender>
@@ -44,8 +44,8 @@
         <fromDate>2013-11-20 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-21 05:00:00.0 UTC</toDate>
         <searchName>trrtrtr</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>6</id>
         <sport>Basketball</sport>
         <opponent/>
@@ -54,8 +54,8 @@
         <fromDate>2013-11-15 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-15 05:00:00.0 UTC</toDate>
         <searchName>ghg</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>7</id>
         <opponent>ETS</opponent>
         <category/>
@@ -63,8 +63,8 @@
         <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-18 05:00:00.0 UTC</toDate>
         <searchName>test</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>8</id>
         <gender>F</gender>
         <opponent/>
@@ -73,8 +73,8 @@
         <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-18 05:00:00.0 UTC</toDate>
         <searchName>uuu</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>9</id>
         <gender>F</gender>
         <opponent>Rimouski</opponent>
@@ -83,8 +83,8 @@
         <fromDate>2013-11-18 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-18 05:00:00.0 UTC</toDate>
         <searchName>lklkl</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>10</id>
         <opponent/>
         <category>Reserve</category>
@@ -92,8 +92,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>dsd</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>11</id>
         <opponent/>
         <category>General</category>
@@ -101,8 +101,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>sdsd</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>12</id>
         <opponent/>
         <category>General</category>
@@ -110,8 +110,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>asdasd</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>13</id>
         <opponent>Alifax</opponent>
         <category>General</category>
@@ -119,8 +119,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>asdasd</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>14</id>
         <opponent/>
         <category/>
@@ -128,8 +128,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>a</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>15</id>
         <gender>F</gender>
         <opponent/>
@@ -138,8 +138,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>AS</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>16</id>
         <gender>F</gender>
         <opponent/>
@@ -148,8 +148,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>d</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>17</id>
         <gender>F</gender>
         <opponent/>
@@ -158,8 +158,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>dsd</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>18</id>
         <gender>F</gender>
         <opponent/>
@@ -168,8 +168,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>as</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>19</id>
         <gender>F</gender>
         <opponent/>
@@ -178,8 +178,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>as</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>20</id>
         <gender>F</gender>
         <opponent/>
@@ -188,8 +188,8 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>as</searchName>
-    </SearchCriteriaModel>
-    <SearchCriteriaModel>
+    </SearchCriteriaDto>
+    <SearchCriteriaDto>
         <id>21</id>
         <gender>F</gender>
         <opponent>Concordia</opponent>
@@ -198,5 +198,5 @@
         <fromDate>2013-11-22 05:00:00.0 UTC</fromDate>
         <toDate>2014-11-22 05:00:00.0 UTC</toDate>
         <searchName>as</searchName>
-    </SearchCriteriaModel>
-</SearchCriteriaModels>
+    </SearchCriteriaDto>
+</SearchCriteriaDtos>

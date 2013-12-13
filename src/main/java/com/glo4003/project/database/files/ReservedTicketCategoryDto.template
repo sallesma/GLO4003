@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ReservedTicketCategorys>
-    <ReservedTicketCategory>
+<ReservedTicketCategoryDtoDtos>
+    <ReservedTicketCategoryDto>
         <id>3</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -18,8 +18,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>4</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -37,8 +37,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>8</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -56,8 +56,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>10</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -75,8 +75,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>11</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -94,8 +94,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>12</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -113,8 +113,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>13</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -132,8 +132,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>16</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -151,8 +151,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>18</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -170,8 +170,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>19</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -189,8 +189,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>20</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -208,8 +208,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>1</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -227,8 +227,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>15</id>
         <category>réservé</category>
         <name>Places assises</name>
@@ -246,8 +246,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>2</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -264,8 +264,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>6</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -282,8 +282,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>7</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -300,8 +300,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>17</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -319,8 +319,8 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>9</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -337,8 +337,8 @@
             <string>9</string>
             <string>1</string>
         </placements>
-    </ReservedTicketCategory>
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto>
+    <ReservedTicketCategoryDto>
         <id>14</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -353,8 +353,8 @@
             <string>7</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory> 
-    <ReservedTicketCategory>
+    </ReservedTicketCategoryDto> 
+    <ReservedTicketCategoryDto>
         <id>5</id>
         <category>réservé</category>
         <name>Place assises</name>
@@ -370,5 +370,5 @@
             <string>8</string>
             <string>9</string>
         </placements>
-    </ReservedTicketCategory>
-</ReservedTicketCategorys>
+    </ReservedTicketCategoryDto>
+</ReservedTicketCategoryDtoDtos>

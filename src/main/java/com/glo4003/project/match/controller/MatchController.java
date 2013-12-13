@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,16 @@ public class MatchController implements ControllerInterface {
 		this.userDao = Resolver.getInjectedInstance(UserModelDao.class);
 		this.uConverter = Resolver.getInjectedInstance(UserConverter.class);
 		this.mConverter = Resolver.getInjectedInstance(MatchConverter.class);
+		
+	}
+	
+	
+	//Uniquement pour les tests
+	public void dependanciesInjection(MatchModelDao matchDao, UserModelDao userDao, UserConverter uConverter, MatchConverter mConverter) {
+		this.matchDao = matchDao;
+		this.userDao = userDao;
+		this.uConverter = uConverter;
+		this.mConverter = mConverter;
 		
 	}
 	
@@ -207,7 +218,8 @@ public class MatchController implements ControllerInterface {
 	  
 	  
 	  private UserConcreteModel getUser(HttpServletRequest request) throws PersistException {
-		  UserViewModel userViewModel = (UserViewModel) request.getSession().getAttribute("loggedUser");
+		  HttpSession session = request.getSession();
+		  UserViewModel userViewModel = (UserViewModel) session.getAttribute("loggedUser");
 		  if(userViewModel == null) {
 			  return null;
 		  }

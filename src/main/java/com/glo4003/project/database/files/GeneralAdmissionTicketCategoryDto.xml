@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GeneralAdmissionTicketCategoryDtoDtos>
+<GeneralAdmissionTicketCategoryDtos>
     <GeneralAdmissionTicketCategoryDto>
         <id>3</id>
         <category>libre</category>
@@ -160,4 +160,4 @@
         <numberInitialTickets>1</numberInitialTickets>
         <numberSoldTickets>0</numberSoldTickets>
     </GeneralAdmissionTicketCategoryDto>
-</GeneralAdmissionTicketCategoryDtoDtos>
+</GeneralAdmissionTicketCategoryDtos>

@@ -15,6 +15,7 @@ import org.junit.Test;
 import com.glo4003.project.database.converter.XmlModelConverter;
 import com.glo4003.project.database.converter.XmlObjectConverter;
 import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.MatchDto.Gender;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ModelInterface;
@@ -138,7 +139,7 @@ public class XmlModelConverterTest {
 		Long id = 0L;
 		long four = 4;
 		Date date = new Date();
-		MatchModel.Gender gender = MatchDto.Gender.F;
+		Gender gender = Gender.F;
 				
 		public Long getId() {			
 			return id;
@@ -156,7 +157,7 @@ public class XmlModelConverterTest {
 		String test1 = "test1";
 		String test2 = "test2";
 		Date date = new Date();
-		MatchModel.Gender gender = MatchDto.Gender.F;
+		Gender gender = Gender.F;
 		
 		@XStreamConverter(XmlObjectConverter.class)
 		TestClass2 testClass2 = new TestClass2();		

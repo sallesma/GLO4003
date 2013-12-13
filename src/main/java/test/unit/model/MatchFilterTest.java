@@ -84,23 +84,23 @@ public class MatchFilterTest {
 
 	@Test
 	public void testFilterEmptyMatchList() {
-		//Before
+		
 		try {
 			matchFilter = new MatchFilter(emptyMatchList, searchCriteria);
 		} catch (PersistException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		
-		//When
+		
 		try {
 			matchFilter.filterMatchList();
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		//then
+		
 		assertTrue(matchFilter.getMatchList().isEmpty());
 		assertTrue(matchFilter.getOpponentsList().isEmpty());
 	}
@@ -110,7 +110,7 @@ public class MatchFilterTest {
 		
 		
 		
-		//Before
+		
 		try {
 			matchFilter = new MatchFilter(populatedMatchList, searchCriteria);
 
@@ -123,27 +123,27 @@ public class MatchFilterTest {
 			when(searchCriteria.isToDateEmpty()).thenReturn(true);
 			
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		//when
+		
 		try {
 			matchFilter.filterMatchList();
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
 				
-		//then
+		
 		assertTrue(matchFilter.getMatchList().equals(populatedMatchList));
 	}
 	
 	
 	@Test
 	public void testSportFilter() {
-		//Before
+		
 		
 		try {
 			matchFilter = new MatchFilter(populatedMatchList, searchCriteria);
@@ -157,7 +157,7 @@ public class MatchFilterTest {
 			when(searchCriteria.getSport()).thenReturn(Sports.Football);
 			
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -168,16 +168,16 @@ public class MatchFilterTest {
 				nbFootballMatchs++;
 		}
 		
-		//When
+		
 		List<MatchViewModel> matchsList = null;
 		try {
 			matchsList = matchFilter.filterMatchList();
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		//Then
+		
 		assertEquals(matchsList.size(), nbFootballMatchs);
 		for (MatchViewModel m : matchsList) {
 			assertEquals(m.getSport(), Sports.Football);
@@ -187,7 +187,7 @@ public class MatchFilterTest {
 	
 	@Test
 	public void testGenreFilter() {
-		//Before
+		
 		
 		try {
 			matchFilter = new MatchFilter(populatedMatchList, searchCriteria);
@@ -200,7 +200,7 @@ public class MatchFilterTest {
 			when(searchCriteria.isToDateEmpty()).thenReturn(true);
 			when(searchCriteria.getGender()).thenReturn(Gender.F);
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -211,16 +211,16 @@ public class MatchFilterTest {
 				nbChicksMatchs++;
 		}
 		
-		//When
+		
 		List<MatchViewModel> matchsList = null;
 		try {
 			matchsList = matchFilter.filterMatchList();
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		//Then
+		
 		assertEquals(matchsList.size(), nbChicksMatchs);
 		for (MatchViewModel m : matchsList) {
 			assertEquals(m.getGender(), Gender.F);
@@ -230,7 +230,7 @@ public class MatchFilterTest {
 	
 	@Test
 	public void testOpponentFilter() {
-		//Before
+		
 		String opp = populatedMatchList.get(0).getOpponent();		
 		
 		try {
@@ -255,7 +255,7 @@ public class MatchFilterTest {
 				nbOpponentMatchs++;
 		}
 		
-		//When
+		
 		List<MatchViewModel> matchsList = null;
 		try {
 			matchsList = matchFilter.filterMatchList();
@@ -263,7 +263,7 @@ public class MatchFilterTest {
 			e.printStackTrace();
 		}
 		
-		//Then
+		
 		assertEquals(matchsList.size(), nbOpponentMatchs);
 		for (MatchViewModel m : matchsList) {
 			assertEquals(m.getOpponent(), opp);
@@ -285,7 +285,7 @@ public class MatchFilterTest {
 			when(searchCriteria.getCategory()).thenReturn("General");
 			
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -296,16 +296,16 @@ public class MatchFilterTest {
 				nbTicketTypeMatchs++;
 		}
 		
-		//When
+		
 		List<MatchViewModel> matchsList = null;
 		try {
 			matchsList = matchFilter.filterMatchList();
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		//Then
+		
 		assertEquals(matchsList.size(), nbTicketTypeMatchs);
 		for (MatchViewModel m : matchsList) {
 			assertEquals(m.getTickets().get(0).getClass(), GeneralAdmissionTicketCategoryDto.class);
@@ -314,7 +314,7 @@ public class MatchFilterTest {
 	
 	@Test
 	public void testFilterByCity() {
-		//Before
+		
 		String city = populatedMatchList.get(0).getCity();
 		
 		try {
@@ -328,7 +328,7 @@ public class MatchFilterTest {
 			when(searchCriteria.isToDateEmpty()).thenReturn(true);
 			when(searchCriteria.getCity()).thenReturn(city);
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -338,16 +338,16 @@ public class MatchFilterTest {
 				nbCityMatchs++;
 		}
 		
-		//When
+		
 		List<MatchViewModel> matchsList = null;
 		try {
 			matchsList = matchFilter.filterMatchList();
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		//Then
+		
 		assertEquals(matchsList.size(), nbCityMatchs);
 		for (MatchViewModel m : matchsList) {
 			assertEquals(m.getCity(), city);
@@ -356,7 +356,7 @@ public class MatchFilterTest {
 	
 	@Test
 	public void testFromDateFilter() {
-		//Before
+		
 		Date exempleDate = populatedMatchList.get(0).getDate();
 		
 		Calendar cal = Calendar.getInstance();
@@ -380,7 +380,7 @@ public class MatchFilterTest {
 			when(searchCriteria.getToDateObject()).thenReturn(toDate);
 			
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -391,16 +391,16 @@ public class MatchFilterTest {
 				nbBetweenDatesMatchs++;
 		}
 		
-		//When
+		
 		List<MatchViewModel> matchsList = null;
 		try {
 			matchsList = matchFilter.filterMatchList();
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
-		//Then
+		
 		assertEquals(matchsList.size(), nbBetweenDatesMatchs);
 		for (MatchViewModel m : matchsList) {
 			assertTrue((m.getDate().after(fromDate)) && (m.getDate().before(toDate))) ;

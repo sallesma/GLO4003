@@ -36,111 +36,111 @@ public class UserModelTest {
 
 	@Test
 	public void PopulatedModelHasAddress() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		String result = model.getAddress();
 
-		//Then    	
+		     	
 		assertTrue(result.contentEquals("test"));
 	}
 
 	@Test
 	public void PopulatedModelHasFirstName() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		String result = model.getFirstName();
 
-		//Then
+		 
 		assertTrue(result.contentEquals("test"));
 	}
 
 	@Test
 	public void PopulatedModelHasLastName() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		String result = model.getLastName();
 
-		//Then
+		 
 		assertTrue(result.contentEquals("test"));
 	}
 
 	@Test
 	public void PopulatedModelHasPhoneNumber() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		String result = model.getPhoneNumber();
 
-		//Then
+		 
 		assertTrue(result.contentEquals("test"));
 	}
 
 	@Test
 	public void PopulatedModelHasUserName() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		String result = model.getUsername();
 
-		//Then    	
+		     	
 		assertTrue(result.contentEquals("test"));
 	}
 
 	@Test
 	public void PopulatedModelHasPassword() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		String result = model.getPassword();
 
-		//Then
+		 
 		assertTrue(result.contentEquals("test"));
 	}
 
 	@Test
 	public void PopulatedUSerModelIsNotAdmin() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		Boolean result = model.isAdmin();
 
-		//Then
+		 
 		assertFalse(result);
 	}
 
 
 	@Test
 	public void PopulatedUserModelNbTicketsWhenTickets() throws PersistException, ConvertException{
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 
-		//When
+		 
 		int nbTicket = model.getNbTicketsInCart();
 
-		//Then
+		 
 		assertEquals(nbTicket, 1);
 	}
 
 	@Test
 	public void PopulatedUserModelNbTicketsWhenNoTicket() throws PersistException, ConvertException {
-		//Before
+		 
 		UserConcreteModel model = getPopulatedUserModel();
 		model.setTickets(null);
 
-		//When
+		 
 		int nbTickets = model.getNbTicketsInCart();
 
-		//Then
+		 
 		assertEquals(nbTickets, 0);
 
 	}

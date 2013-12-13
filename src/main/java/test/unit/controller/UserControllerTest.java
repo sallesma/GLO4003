@@ -24,8 +24,6 @@ import com.google.inject.Provider;
 public class UserControllerTest {
 	
 	private UserService userService;
-	public Provider<LoginViewModel> loginViewModelProvider;
-	public Provider<UserViewModel> userViewModelProvider;
 	
 	private UserController controller;
 	

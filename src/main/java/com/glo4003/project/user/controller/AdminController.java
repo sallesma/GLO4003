@@ -28,6 +28,13 @@ public class AdminController implements ControllerInterface {
 		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
 	}
 	
+	
+	// Uniquement pour les tests
+	public void dependanciesInjection(MatchModelDao matchDao)
+	{
+		this.matchDao = matchDao;
+	}
+	
 	@RequestMapping(value = "/addPlacementTickets", method = RequestMethod.GET)
 	public String addPlacementTickets(Model model,HttpServletRequest request) throws PersistException {		
 		String newTicket = request.getParameter("newTicket");

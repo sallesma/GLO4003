@@ -35,7 +35,8 @@ public class AdminControllerTest {
 	
 	@Before
 	public void initialize() {
-		controller = spy(new AdminController());
+		controller = new AdminController();
+		
 		cat1 = (ReservedTicketCategoryDto) TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.RESERVED_TICKET, "Billet loges", 100, 0, 32);
 		cat2 = (GeneralAdmissionTicketCategoryDto) TicketCategoryFactory.getTicketCategory(AbstractTicketCategory.FREE_TICKET, "Debout", 200, 0, 10);
 		billetsMatch = new ArrayList<AbstractTicketCategory>();
@@ -46,7 +47,7 @@ public class AdminControllerTest {
 		match = new MatchDto(MatchDto.Sports.Football, MatchDto.Gender.M, (long) 0, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch);
 		
 		matchDao = mock(MatchModelDao.class);
-		controller.replaceMatchDAO(matchDao);
+		controller.dependanciesInjection(matchDao);
 	}
 
 	@Test

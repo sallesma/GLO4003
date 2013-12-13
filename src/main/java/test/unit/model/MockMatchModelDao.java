@@ -52,7 +52,7 @@ public class MockMatchModelDao implements MatchModelDaoInterface {
 	}
 
 	@Override
-	public List<MatchDto> getAllMatchsBySport(MatchModel.Sports sport)
+	public List<MatchDto> getAllMatchsBySport(MatchDto.Sports sport)
 			throws PersistException {
 		// TODO Auto-generated method stub
 		return null;

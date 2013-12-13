@@ -1,7 +1,7 @@
 package com.glo4003.project.ticket.model;
 
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.ReservedTicketCategory;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
 
 public class InstantiateReservedTicket extends InstantiateAbstractTicket {
 
@@ -12,13 +12,13 @@ public class InstantiateReservedTicket extends InstantiateAbstractTicket {
 		this.setNumPlace("");
 	}
 	
-	public InstantiateReservedTicket(MatchModel match,int catIndex, String numPlace) {
+	public InstantiateReservedTicket(MatchDto match,int catIndex, String numPlace) {
 		super(match, catIndex);
 		this.numPlace = numPlace;
 	}
 	
-	public boolean changePlace(String placement, MatchModel match) {
-		ReservedTicketCategory tCAT = (ReservedTicketCategory) match.getTickets().get(this.getCatIndex());
+	public boolean changePlace(String placement, MatchDto match) {
+		ReservedTicketCategoryDto tCAT = (ReservedTicketCategoryDto) match.getTickets().get(this.getCatIndex());
 		if (tCAT.isTicketInstanciable(placement, 0)) {
 			tCAT.getPlacements().add(this.getNumPlace());
 			tCAT.getPlacements().remove(placement);

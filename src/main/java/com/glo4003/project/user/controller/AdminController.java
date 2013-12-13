@@ -7,11 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.global.ControllerInterface;
 import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
@@ -33,11 +33,11 @@ public class AdminController implements ControllerInterface {
 		String newTicket = request.getParameter("newTicket");
 		String categoryName = request.getParameter("category");		
 		Long id = Long.valueOf(request.getParameter("matchID"));
-		MatchModel match = matchDao.getById(id);
+		MatchDto match = matchDao.getById(id);
 		for ( AbstractTicketCategory cat : match.getTickets() ) {
 			if ( cat.getName().equals(categoryName) )
-				if ( !((ReservedTicketCategory) cat).getPlacements().contains(newTicket) ) {
-					((ReservedTicketCategory) cat).getPlacements().add(newTicket);
+				if ( !((ReservedTicketCategoryDto) cat).getPlacements().contains(newTicket) ) {
+					((ReservedTicketCategoryDto) cat).getPlacements().add(newTicket);
 					cat.setNumberInitialTickets(cat.getNumberInitialTickets()+1);
 				}
 		}
@@ -59,7 +59,7 @@ public class AdminController implements ControllerInterface {
 		
 		Long id = Long.valueOf(request.getParameter("matchID"));
 		int ticketNumber = Integer.valueOf(request.getParameter("ticketNumber"));	
-		MatchModel match = matchDao.getById(id);
+		MatchDto match = matchDao.getById(id);
 		for ( AbstractTicketCategory cat : match.getTickets() ) {
 			if ( cat.getName().equals(categoryName) ) {
 					

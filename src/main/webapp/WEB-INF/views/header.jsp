@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="false"%>
 <%@ page import="com.glo4003.project.user.model.view.UserViewModel"%>
-<%@ page import="com.glo4003.project.database.model.MatchModel"%>
+<%@ page import="com.glo4003.project.database.dto.MatchDto"%>
 
 <!DOCTYPE html>
 <html lang="en">

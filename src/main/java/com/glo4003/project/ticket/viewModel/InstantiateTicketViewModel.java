@@ -2,7 +2,7 @@ package com.glo4003.project.ticket.viewModel;
 
 import java.util.Date;
 
-import com.glo4003.project.database.model.MatchModel.Sports;
+import com.glo4003.project.database.dto.MatchDto.Sports;
 
 public abstract class InstantiateTicketViewModel {
 

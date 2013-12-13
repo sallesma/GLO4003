@@ -6,9 +6,9 @@ import java.util.List;
 
 import nu.xom.Element;
 
-import com.glo4003.project.database.dto.FileAccess;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.filesaccess.FileAccess;
 import com.glo4003.project.global.ModelInterface;
 import com.glo4003.project.injection.Resolver;
 import com.google.inject.Inject;

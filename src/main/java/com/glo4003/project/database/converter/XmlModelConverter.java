@@ -7,9 +7,9 @@ import nu.xom.Builder;
 import nu.xom.Element;
 import nu.xom.ParsingException;
 
-import com.glo4003.project.database.dto.FileAccess;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
+import com.glo4003.project.database.filesaccess.FileAccess;
 import com.glo4003.project.global.ModelInterface;
 import com.google.inject.Inject;
 import com.thoughtworks.xstream.XStream;
@@ -17,7 +17,7 @@ import com.thoughtworks.xstream.XStream;
 public class XmlModelConverter {	
 	private XStream xstream;
 	
-	private final String path = "com.glo4003.project.database.model.";
+	private final String path = "com.glo4003.project.database.dto.";
 
 	public XmlModelConverter() {	
 		xstream = new XStream();

@@ -11,10 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.glo4003.project.database.converter.XmlModelConverter;
-import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.database.filesaccess.FileAccess;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.thoughtworks.xstream.XStream;
 
@@ -47,7 +47,7 @@ public class UserModelDaoTest {
 	@Test
 	public void canGetUserByUsername() throws PersistException {
 		//When
-		UserModel model = dao.getUserByUsername("test 1");
+		UserDto model = dao.getUserByUsername("test 1");
 		
 		//Then
 		assertTrue(model.getFirstName().contentEquals("1"));
@@ -73,7 +73,7 @@ public class UserModelDaoTest {
 	
 	private void fillBd() throws PersistException, ConvertException {
 		for(Integer i = 0;i<20;i++) {
-			UserModel model = new UserModel();
+			UserDto model = new UserDto();
 			model.setAddress(i.toString());
 			model.setFirstName(i.toString());
 			model.setIsAdmin(false);

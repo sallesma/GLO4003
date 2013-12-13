@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
+import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
@@ -76,7 +76,7 @@ public class UserConverterTest {
 	@Test
 	public void canConvertUserDBModel() {
 		//Before
-		UserModel model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
+		UserDto model = spy(createUserModel("Matt", "Martin", "MM", "password", false));
 		
 		//When
 		converter.convertFromDB(model);		
@@ -90,14 +90,14 @@ public class UserConverterTest {
 		verify(model, times(1)).getUsername();		
 	}
 	
-	private Map<Integer, UserModel> populate() {	
+	private Map<Integer, UserDto> populate() {	
 		AtomicInteger nextId = new AtomicInteger(0);
-		Map<Integer, UserModel> users = new HashMap<Integer, UserModel>();
+		Map<Integer, UserDto> users = new HashMap<Integer, UserDto>();
 		
-		UserModel user1 = createUserModel("Matt", "Martin", "MM", "password", false);
-		UserModel user2 = createUserModel("Houde", "Louis-Jos??", "LH", "password", false);
-		UserModel user3 = createUserModel("Baddouri", "Rachid", "RB", "password", false);
-		UserModel user4 = createUserModel("Petit", "Martin", "MP", "password", false);
+		UserDto user1 = createUserModel("Matt", "Martin", "MM", "password", false);
+		UserDto user2 = createUserModel("Houde", "Louis-Jos??", "LH", "password", false);
+		UserDto user3 = createUserModel("Baddouri", "Rachid", "RB", "password", false);
+		UserDto user4 = createUserModel("Petit", "Martin", "MP", "password", false);
 		
 		users.put(nextId.incrementAndGet(), user1);
 		users.put(nextId.incrementAndGet(), user2);
@@ -132,8 +132,8 @@ public class UserConverterTest {
 		return user;
 	}
 	
-	private UserModel createUserModel(String lastName, String firstName, String username, String password, boolean isAdmin) {
-		UserModel user= new UserModel();
+	private UserDto createUserModel(String lastName, String firstName, String username, String password, boolean isAdmin) {
+		UserDto user= new UserDto();
 		user.setAddress("Address");
 		user.setFirstName(firstName);
 		user.setLastName(lastName);

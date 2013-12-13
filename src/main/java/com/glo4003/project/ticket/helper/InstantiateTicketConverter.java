@@ -1,8 +1,8 @@
 package com.glo4003.project.ticket.helper;
 
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.ReservedTicketCategory;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
 import com.glo4003.project.ticket.model.InstantiateReservedTicket;
@@ -64,8 +64,8 @@ public InstantiateReservedTicketViewModel convert (InstantiateReservedTicket mod
 	instantiateTicketViewModel.setCatIndex(model.getCatIndex());
 	instantiateTicketViewModel.setMatchId(model.getMatch().getId());
 	
-	ReservedTicketCategory rTC = new ReservedTicketCategory();
-	rTC = (ReservedTicketCategory) model.getCorrespondingCat();
+	ReservedTicketCategoryDto rTC = new ReservedTicketCategoryDto();
+	rTC = (ReservedTicketCategoryDto) model.getCorrespondingCat();
 	instantiateTicketViewModel.setPlacements(rTC.getPlacements());
 	instantiateTicketViewModel.setSport(model.getMatch().getSport());
 	instantiateTicketViewModel.setField(model.getMatch().getField());

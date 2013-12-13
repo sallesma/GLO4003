@@ -16,9 +16,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.filesaccess.FileAccess;
 
 public class FileAccessTest {
 	
@@ -53,21 +53,21 @@ public class FileAccessTest {
 		try {
 			p.createNewFile();
 			write = new FileWriter(p);
-			write.write("<Matchs><" + MatchModel.class.getSimpleName() + "><id>1</id></" + MatchModel.class.getSimpleName() + "><" + MatchModel.class.getSimpleName() + "><id>2</id></" + MatchModel.class.getSimpleName() + "></Matchs>");
+			write.write("<Matchs><" + MatchDto.class.getSimpleName() + "><id>1</id></" + MatchDto.class.getSimpleName() + "><" + MatchDto.class.getSimpleName() + "><id>2</id></" + MatchDto.class.getSimpleName() + "></Matchs>");
 	        write.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		
-		Element elem = new Element(MatchModel.class.getSimpleName());
+		Element elem = new Element(MatchDto.class.getSimpleName());
 		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("1");
 		
 		
 		try {
-			Element result = fa.getByID(1L, MatchModel.class.getSimpleName());
+			Element result = fa.getByID(1L, MatchDto.class.getSimpleName());
 			assertThat(result.toString(), is(elem.toString()));
 			
 		} catch (PersistException e) {
@@ -80,7 +80,7 @@ public class FileAccessTest {
 	public void testSaveElementString() {
 		
 		
-		Element elem = new Element(MatchModel.class.getSimpleName());
+		Element elem = new Element(MatchDto.class.getSimpleName());
 		Element elemid = new Element("id");
 		Element elemtest = new Element("test");
 		elem.appendChild(elemid);
@@ -89,15 +89,15 @@ public class FileAccessTest {
 		elemtest.appendChild("1");
 		
 		try {
-			fa.save(elem, MatchModel.class.getSimpleName());
-			Element result = fa.getByID(1L, MatchModel.class.getSimpleName());
+			fa.save(elem, MatchDto.class.getSimpleName());
+			Element result = fa.getByID(1L, MatchDto.class.getSimpleName());
 			
 			assertThat(result.toString(), is(elem.toString()));
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
-		Element elem2 = new Element(MatchModel.class.getSimpleName());
+		Element elem2 = new Element(MatchDto.class.getSimpleName());
 		Element elemid2 = new Element("id");
 		Element elemtest2 = new Element("test");
 		elem2.appendChild(elemid2);
@@ -106,8 +106,8 @@ public class FileAccessTest {
 		elemtest2.appendChild("2");
 		
 		try {
-			fa.save(elem2, MatchModel.class.getSimpleName());
-			Element result = fa.getByID(1L, MatchModel.class.getSimpleName());
+			fa.save(elem2, MatchDto.class.getSimpleName());
+			Element result = fa.getByID(1L, MatchDto.class.getSimpleName());
 			
 			assertThat(result.toString(), is(elem2.toString()));
 		} catch (PersistException e) {
@@ -121,33 +121,33 @@ public class FileAccessTest {
 	public void testGetAll() {
 		
 		
-		Element elem = new Element(MatchModel.class.getSimpleName());
+		Element elem = new Element(MatchDto.class.getSimpleName());
 		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("1");
 		
 		try {
-			fa.save(elem, MatchModel.class.getSimpleName());
+			fa.save(elem, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
-		Element elem2 = new Element(MatchModel.class.getSimpleName());
+		Element elem2 = new Element(MatchDto.class.getSimpleName());
 		Element elemid2 = new Element("id");
 		elem2.appendChild(elemid2);
 		elemid2.appendChild("2");
 		
 		try {
-			fa.save(elem2, MatchModel.class.getSimpleName());
+			fa.save(elem2, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
 		List<Element> expected = new ArrayList<Element>(2);
 		try {
-			expected.add(fa.getByID(1L, MatchModel.class.getSimpleName()));
-			expected.add(fa.getByID(2L, MatchModel.class.getSimpleName()));
-			List<Element> result = fa.getAll(MatchModel.class.getSimpleName());
+			expected.add(fa.getByID(1L, MatchDto.class.getSimpleName()));
+			expected.add(fa.getByID(2L, MatchDto.class.getSimpleName()));
+			List<Element> result = fa.getAll(MatchDto.class.getSimpleName());
 			
 			assertThat(result.size(), is(expected.size()));
 			
@@ -169,47 +169,47 @@ public class FileAccessTest {
 	public void testDeleteLongString() {
 		
 		
-		Element elem = new Element(MatchModel.class.getSimpleName());
+		Element elem = new Element(MatchDto.class.getSimpleName());
 		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("1");
 		
 		try {
-			fa.save(elem, MatchModel.class.getSimpleName());
+			fa.save(elem, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
-		Element elem2 = new Element(MatchModel.class.getSimpleName());
+		Element elem2 = new Element(MatchDto.class.getSimpleName());
 		Element elemid2 = new Element("id");
 		elem2.appendChild(elemid2);
 		elemid2.appendChild("2");
 		
 		try {
-			fa.save(elem2, MatchModel.class.getSimpleName());
+			fa.save(elem2, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
-		Element elem3 = new Element(MatchModel.class.getSimpleName());
+		Element elem3 = new Element(MatchDto.class.getSimpleName());
 		Element elemid3 = new Element("id");
 		elem3.appendChild(elemid3);
 		elemid3.appendChild("3");
 		
 		try {
-			fa.save(elem3, MatchModel.class.getSimpleName());
+			fa.save(elem3, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
 		List<Element> expected = new ArrayList<Element>(2);
 		try {
-			expected.add(fa.getByID(1L, MatchModel.class.getSimpleName()));
-			expected.add(fa.getByID(3L, MatchModel.class.getSimpleName()));
+			expected.add(fa.getByID(1L, MatchDto.class.getSimpleName()));
+			expected.add(fa.getByID(3L, MatchDto.class.getSimpleName()));
 			
-			fa.delete(2L, MatchModel.class.getSimpleName());
+			fa.delete(2L, MatchDto.class.getSimpleName());
 			
-			List<Element> result = fa.getAll(MatchModel.class.getSimpleName());
+			List<Element> result = fa.getAll(MatchDto.class.getSimpleName());
 			
 			assertThat(result.size(), is(expected.size()));
 			
@@ -230,44 +230,44 @@ public class FileAccessTest {
 	@Test
 	public void testGetNewId() {
 
-		Element elem = new Element(MatchModel.class.getSimpleName());
+		Element elem = new Element(MatchDto.class.getSimpleName());
 		Element elemid = new Element("id");
 		elem.appendChild(elemid);
 		elemid.appendChild("0");
 		
 		try {
-			fa.save(elem, MatchModel.class.getSimpleName());
+			fa.save(elem, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
 		
-		Element elem2 = new Element(MatchModel.class.getSimpleName());
+		Element elem2 = new Element(MatchDto.class.getSimpleName());
 		Element elemid2 = new Element("id");
 		elem2.appendChild(elemid2);
 		elemid2.appendChild("1");
 		
 		try {
-			fa.save(elem2, MatchModel.class.getSimpleName());
+			fa.save(elem2, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
 		
-		Element elem3 = new Element(MatchModel.class.getSimpleName());
+		Element elem3 = new Element(MatchDto.class.getSimpleName());
 		Element elemid3 = new Element("id");
 		elem3.appendChild(elemid3);
 		elemid3.appendChild("3");
 		
 		try {
-			fa.save(elem3, MatchModel.class.getSimpleName());
+			fa.save(elem3, MatchDto.class.getSimpleName());
 		} catch (PersistException e) {
 			e.printStackTrace();
 		}
 		
 		
 		try {
-			Long result = fa.getNewId(MatchModel.class.getSimpleName());
+			Long result = fa.getNewId(MatchDto.class.getSimpleName());
 			assertThat(result, is(2L));
 		} catch (PersistException e) {
 			// TODO Auto-generated catch block

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.SearchCriteriaDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.global.ControllerInterface;
 import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
@@ -60,9 +59,9 @@ public class MatchController implements ControllerInterface {
 	@RequestMapping(value = "/matchsList", method = RequestMethod.GET)
 	public String getMatchList(Model model, HttpServletRequest request) throws PersistException {		
 		
-		List<MatchModel> matchModelDBList = matchDao.getAll();
+		List<MatchDto> matchModelDBList = matchDao.getAll();
 		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
-		for (MatchModel m : matchModelDBList){
+		for (MatchDto m : matchModelDBList){
 			matchModelList.add(mConverter.convertFromDB(m));
 		}
 		
@@ -75,7 +74,7 @@ public class MatchController implements ControllerInterface {
 		matchFilter.filterMatchList();
 		model.addAttribute("filter", matchFilter);
 		
-		List<SearchCriteriaModel> customCriterias = getUserCriterias(request);
+		List<SearchCriteriaDto> customCriterias = getUserCriterias(request);
 		model.addAttribute("customCriterias",customCriterias);
 		model.addAttribute("customCriteria","");
 
@@ -90,7 +89,7 @@ public class MatchController implements ControllerInterface {
 		UserConcreteModel user = getUser(request);
 		
 		
-		SearchCriteriaModel criterias = new SearchCriteriaModel(
+		SearchCriteriaDto criterias = new SearchCriteriaDto(
 				request.getParameter("criterias.sport"),
 				request.getParameter("criterias.gender"), 
 				request.getParameter("criterias.opponent"),
@@ -101,16 +100,16 @@ public class MatchController implements ControllerInterface {
 		
 		String criteria = request.getParameter("customCriteria");
 		if ((criteria != null) && (!criteria.isEmpty())) {			
-			for (SearchCriteriaModel oneCriteria : user.getSearchCriteria()) {
+			for (SearchCriteriaDto oneCriteria : user.getSearchCriteria()) {
 				if (oneCriteria.getSearchName().contentEquals(criteria)) {
 					criterias = oneCriteria;
 				}
 			}
 		}
 		
-		List<MatchModel> matchModelDBList = matchDao.getAll();
+		List<MatchDto> matchModelDBList = matchDao.getAll();
 		ArrayList<MatchConcreteModel> matchModelList = new ArrayList<>();
-		for(MatchModel m : matchModelDBList){
+		for(MatchDto m : matchModelDBList){
 			matchModelList.add(mConverter.convertFromDB(m));
 		}
 		
@@ -146,10 +145,10 @@ public class MatchController implements ControllerInterface {
 		return "matchsList";
 	}
 
-	  private List<SearchCriteriaModel> getUserCriterias(HttpServletRequest request) throws PersistException {
+	  private List<SearchCriteriaDto> getUserCriterias(HttpServletRequest request) throws PersistException {
 		UserConcreteModel user = getUser(request);
 		if (user == null) {
-			return new ArrayList<SearchCriteriaModel>(0);
+			return new ArrayList<SearchCriteriaDto>(0);
 		}
 		
 		return user.getSearchCriteria();
@@ -159,7 +158,7 @@ public class MatchController implements ControllerInterface {
       public String getMatch(Model model, HttpServletRequest request) throws PersistException {		  
           Long id = Long.valueOf(request.getParameter("matchID"));
           
-          MatchModel matchDB = matchDao.getById(id);
+          MatchDto matchDB = matchDao.getById(id);
           MatchConcreteModel match = mConverter.convertFromDB(matchDB);
           MatchViewModel mViewModel = mConverter.convertToView(match);
           
@@ -178,7 +177,7 @@ public class MatchController implements ControllerInterface {
           int nbPlace = (request.getParameter("nbPlace")) != null ? (Integer.valueOf(request.getParameter("nbPlace"))) : 1 ;
           
           // Retrieve selected match from Db          
-          MatchModel match = matchDao.getById(matchId);
+          MatchDto match = matchDao.getById(matchId);
           
           // Create the ticket for the specific match
           InstantiateAbstractTicket ticket = InstantiateTicketFactory.getInstanciateTickets(catId, match, numPlace, nbPlace);

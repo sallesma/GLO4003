@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.MatchModel.Gender;
-import com.glo4003.project.database.model.MatchModel.Sports;
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.MatchDto.Gender;
+import com.glo4003.project.database.dto.MatchDto.Sports;
 
 public class MatchViewModel {
 	

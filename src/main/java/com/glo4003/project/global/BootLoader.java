@@ -34,22 +34,7 @@ public class BootLoader {
 	    for (Object o : controllers.values()) {
 			((ControllerInterface)o).dependanciesInjection();
 		}
-	    
-	    /*
-	    ((MatchController) controllers.get("matchController")).dependanciesInjection();
-	    
-	    controllers.put("matchController", Resolver.getInjectedInstance(MatchController.class));
-	    controllers.put("shoppingCartController", Resolver.getInjectedInstance(ShoppingCartController.class));
-	    controllers.put("adminController", Resolver.getInjectedInstance(AdminController.class));
-	    controllers.put("userController", Resolver.getInjectedInstance(UserController.class));	
-	    
-	    HomeController hc = new HomeController();
-	    hc.setAtt("test");
-	    controllers.put("homeController", hc);	
-	    */
-	    
-	    
-	    
+	    	    
 	    server.join();	    
 	  }
 

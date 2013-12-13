@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.GeneralAdmissionTicketCategoryDto;
+import com.glo4003.project.database.dto.ReservedTicketCategoryDto;
+import com.glo4003.project.database.dto.SearchCriteriaDto;
+import com.glo4003.project.database.dto.MatchDto.Gender;
+import com.glo4003.project.database.dto.MatchDto.Sports;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.GeneralAdmissionTicketCategory;
-import com.glo4003.project.database.model.MatchModel.Gender;
-import com.glo4003.project.database.model.MatchModel.Sports;
-import com.glo4003.project.database.model.ReservedTicketCategory;
-import com.glo4003.project.database.model.SearchCriteriaModel;
 import com.glo4003.project.match.viewModel.MatchViewModel;
 
 public class MatchFilter {
@@ -23,18 +23,18 @@ public class MatchFilter {
 	private Set<String> cityList = null;
 	private Set<String> opponentsList = null;
 	private List<MatchViewModel> matchList = null;
-	private SearchCriteriaModel criterias = null;	
+	private SearchCriteriaDto criterias = null;	
 	private String customCriteria = "";
 
 	public MatchFilter(List<MatchViewModel> list) {
 		matchList = list;
-		criterias = new SearchCriteriaModel();
+		criterias = new SearchCriteriaDto();
 		ticketCategory = new ArrayList<String>(2);
 		ticketCategory.add("Reserve");
 		ticketCategory.add("General");		
 	}
 
-	public MatchFilter(List<MatchViewModel> list, SearchCriteriaModel model) throws PersistException {
+	public MatchFilter(List<MatchViewModel> list, SearchCriteriaDto model) throws PersistException {
 		matchList = list;
 		criterias = model;	
 		ticketCategory = new ArrayList<String>(2);
@@ -80,11 +80,11 @@ public class MatchFilter {
 			for (MatchViewModel match : matchList) {				
 				for (AbstractTicketCategory ticket : match.getTickets())
 					if (criterias.getCategory().contentEquals("Reserve")) {
-						if (ticket instanceof ReservedTicketCategory) {
+						if (ticket instanceof ReservedTicketCategoryDto) {
 							newMatchList.add(match);							
 						}						
 					} else if (criterias.getCategory().contentEquals("General")){
-						if (ticket instanceof GeneralAdmissionTicketCategory) {
+						if (ticket instanceof GeneralAdmissionTicketCategoryDto) {
 							newMatchList.add(match);
 						}						
 					}
@@ -169,11 +169,11 @@ public class MatchFilter {
 		this.genderList = genderList;
 	}
 
-	public SearchCriteriaModel getCriterias() {
+	public SearchCriteriaDto getCriterias() {
 		return criterias;
 	}
 
-	public void setCriterias(SearchCriteriaModel criterias) {
+	public void setCriterias(SearchCriteriaDto criterias) {
 		this.criterias = criterias;
 	}
 

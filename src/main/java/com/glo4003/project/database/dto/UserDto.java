@@ -1,19 +1,13 @@
-package com.glo4003.project.database.model;
+package com.glo4003.project.database.dto;
 
 import java.util.ArrayList;
 
-
 import com.glo4003.project.database.converter.XmlArrayListConverter;
-import com.glo4003.project.database.exception.ConvertException;
-import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ModelInterface;
-import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
-import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
-import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-public class UserModel implements ModelInterface {	
+public class UserDto implements ModelInterface {	
 
 	private Long id = 0L;
 	private String lastName;
@@ -27,9 +21,9 @@ public class UserModel implements ModelInterface {
 	@XStreamConverter(XmlArrayListConverter.class)
 	private ArrayList<InstantiateAbstractTicket> tickets;
 	@XStreamConverter(XmlArrayListConverter.class)
-	private ArrayList<SearchCriteriaModel> searchCriteria;
+	private ArrayList<SearchCriteriaDto> searchCriteria;
 
-	public UserModel() {
+	public UserDto() {
 		lastName = "";
 		firstName = "";
 		username = "";
@@ -39,7 +33,7 @@ public class UserModel implements ModelInterface {
 		address = "";
 		isAdmin = false;
 		tickets = new ArrayList<InstantiateAbstractTicket>();		
-		searchCriteria = new ArrayList<SearchCriteriaModel>();
+		searchCriteria = new ArrayList<SearchCriteriaDto>();
 	}
 
 	public String getLastName() {
@@ -112,13 +106,11 @@ public class UserModel implements ModelInterface {
 		this.tickets = tickets;
 	}
 
-	public ArrayList<SearchCriteriaModel> getSearchCriteria() {
+	public ArrayList<SearchCriteriaDto> getSearchCriteria() {
 		return searchCriteria;
 	}
 
-	public void setSearchCriterias(ArrayList<SearchCriteriaModel> searchCriteria) {
+	public void setSearchCriterias(ArrayList<SearchCriteriaDto> searchCriteria) {
 		this.searchCriteria = searchCriteria;
 	}
-
-
 }

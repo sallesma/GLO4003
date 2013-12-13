@@ -9,16 +9,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
 import org.junit.Test;
 
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.UserDto;
+import com.glo4003.project.database.dto.MatchDto.Gender;
+import com.glo4003.project.database.dto.MatchDto.Sports;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.MatchModel.Gender;
-import com.glo4003.project.database.model.MatchModel.Sports;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.match.model.MatchConcreteModel;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
@@ -28,7 +27,7 @@ import com.glo4003.project.user.model.UserConcreteModel;
 public class MatchModelTest {
 	@Test
 	public void NewModelIsEmpty() {
-		MatchModel model = getNewMatchModel();
+		MatchDto model = getNewMatchModel();
 		
 		assertTrue(model.getCity().isEmpty());
 		assertTrue(model.getField().isEmpty());
@@ -169,7 +168,7 @@ public class MatchModelTest {
 		return model;
 	}
 
-	private MatchModel getNewMatchModel() {
-		return new MatchModel();
+	private MatchDto getNewMatchModel() {
+		return new MatchDto();
 	}
 }

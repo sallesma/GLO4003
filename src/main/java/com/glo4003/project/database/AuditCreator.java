@@ -6,13 +6,13 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import com.glo4003.project.database.dto.AbstractTicketCategory;
+import com.glo4003.project.database.dto.MatchDto;
+import com.glo4003.project.database.dto.UserDto;
+import com.glo4003.project.database.dto.MatchDto.Gender;
+import com.glo4003.project.database.dto.MatchDto.Sports;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.AbstractTicketCategory;
-import com.glo4003.project.database.model.MatchModel;
-import com.glo4003.project.database.model.UserModel;
-import com.glo4003.project.database.model.MatchModel.Gender;
-import com.glo4003.project.database.model.MatchModel.Sports;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
 import com.glo4003.project.user.dao.UserModelDao;
@@ -57,15 +57,15 @@ public class AuditCreator {
 
 		Calendar cal = Calendar.getInstance();
 		cal.set(2010, 11, 11);
-		MatchModel match0 = createMatch(Sports.Football, Gender.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
+		MatchDto match0 = createMatch(Sports.Football, Gender.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
 		cal.set(2013, 11, 11);
-		MatchModel match1 = createMatch(Sports.Football, Gender.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
+		MatchDto match1 = createMatch(Sports.Football, Gender.M, cal.getTime(), "UQAM", "Québec", "ULaval", billetsMatch1);
 		cal.set(2013, 11, 9);
-		MatchModel match2 = createMatch(Sports.Rugby, Gender.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch2);
+		MatchDto match2 = createMatch(Sports.Rugby, Gender.F, cal.getTime(), "Vert et or", "Sherbrooke", "unknown", billetsMatch2);
 		cal.set(2013, 11, 8);
-		MatchModel match3 = createMatch(Sports.Volleyball, Gender.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch3);
+		MatchDto match3 = createMatch(Sports.Volleyball, Gender.F, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch3);
 		cal.set(2013, 11, 23);
-		MatchModel match4 = createMatch(Sports.Volleyball, Gender.M, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch4);
+		MatchDto match4 = createMatch(Sports.Volleyball, Gender.M, cal.getTime(), "Rimouski", "Rimouski", "Gymnase municipal", billetsMatch4);
 		
 		matchDao.save(match0);
 		matchDao.save(match1);
@@ -74,8 +74,8 @@ public class AuditCreator {
 		matchDao.save(match4);
 	}
 	
-	private UserModel createUser(String lastName, String firstName, String username, String password, boolean isAdmin) {
-		UserModel user= new UserModel();
+	private UserDto createUser(String lastName, String firstName, String username, String password, boolean isAdmin) {
+		UserDto user= new UserDto();
 		user.setAddress("Address");
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
@@ -86,8 +86,8 @@ public class AuditCreator {
 		return user;
 	}
 	
-	private MatchModel createMatch(Sports sport, Gender gender, Date date, String adversaire, String city, String terrain, ArrayList<AbstractTicketCategory> cat) {
-		MatchModel match = new MatchModel(sport, gender, 0L, date, adversaire, city, terrain, cat);
+	private MatchDto createMatch(Sports sport, Gender gender, Date date, String adversaire, String city, String terrain, ArrayList<AbstractTicketCategory> cat) {
+		MatchDto match = new MatchDto(sport, gender, 0L, date, adversaire, city, terrain, cat);
 		return match;
 	}
 }

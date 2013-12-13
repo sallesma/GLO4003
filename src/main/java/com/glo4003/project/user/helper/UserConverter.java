@@ -3,8 +3,8 @@ package com.glo4003.project.user.helper;
 
 import org.springframework.stereotype.Component;
 
+import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
@@ -84,7 +84,7 @@ public class UserConverter {
 }
 
 	
-	public UserConcreteModel convertFromDB(UserModel entry) {
+	public UserConcreteModel convertFromDB(UserDto entry) {
 		UserConcreteModel userConcreteModel = new UserConcreteModel();
 		userConcreteModel.setId(entry.getId());
 		userConcreteModel.setAddress(entry.getAddress());
@@ -100,8 +100,8 @@ public class UserConverter {
 		return userConcreteModel;
 	}
 	
-	public UserModel convertToDB(UserConcreteModel userConcreteModel) {
-		UserModel userModel = new UserModel();
+	public UserDto convertToDB(UserConcreteModel userConcreteModel) {
+		UserDto userModel = new UserDto();
 		userModel.setId(userConcreteModel.getId());
 		userModel.setAddress(userConcreteModel.getAddress());
 		userModel.setFirstName(userConcreteModel.getFirstName());

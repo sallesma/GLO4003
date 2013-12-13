@@ -1,6 +1,6 @@
 package com.glo4003.project.match.helper;
 
-import com.glo4003.project.database.model.MatchModel;
+import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.match.model.MatchConcreteModel;
 import com.glo4003.project.match.viewModel.MatchViewModel;
 
@@ -33,8 +33,8 @@ public class MatchConverter {
 		return matchViewModel; 
 	}
 	
-	public MatchModel convertToDB(MatchConcreteModel matchConcreteModel) {
-		MatchModel matchModel = new MatchModel();
+	public MatchDto convertToDB(MatchConcreteModel matchConcreteModel) {
+		MatchDto matchModel = new MatchDto();
 		matchModel.setId(matchConcreteModel.getId());
 		matchModel.setGender(matchConcreteModel.getGender());
 		matchModel.setSport(matchConcreteModel.getSport());
@@ -46,7 +46,7 @@ public class MatchConverter {
 		return matchModel; 
 	}
 	
-	public MatchConcreteModel convertFromDB(MatchModel matchModel) {
+	public MatchConcreteModel convertFromDB(MatchDto matchModel) {
 		MatchConcreteModel matchConcreteModel = new MatchConcreteModel();
 		matchConcreteModel.setId(matchModel.getId());
 		matchConcreteModel.setGender(matchModel.getGender());

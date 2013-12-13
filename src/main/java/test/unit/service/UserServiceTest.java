@@ -11,11 +11,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.exception.SaveException;
-import com.glo4003.project.database.model.UserModel;
 import com.glo4003.project.global.ModelValidator;
+import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.view.UserViewModel;
@@ -29,7 +30,7 @@ public class UserServiceTest {
 	
 	@Before
 	public void initialize() {
-		service = spy(new UserService(new UserModelDao(), new UserConverter(), new ModelValidator()));
+		service = Resolver.getInjectedInstance(UserService.class);
 		dao = mock(UserModelDao.class);		
 	}
 	
@@ -70,7 +71,7 @@ public class UserServiceTest {
 		service.saveNew(viewModel);		
 		
 		//Then
-		verify(dao).save(any(UserModel.class));
+		verify(dao).save(any(UserDto.class));
 	}
 	
 	@Test
@@ -85,14 +86,14 @@ public class UserServiceTest {
 		}
 		
 		//Then
-		verify(dao, never()).save(any(UserModel.class));
+		verify(dao, never()).save(any(UserDto.class));
 	}
 	
 	@Test
 	public void canThrowExceptionOnExistingUser() throws PersistException, ConvertException {
 		//Before
 		UserViewModel model = getWellFormedUserModel();
-		Mockito.when(dao.getUserByUsername(model.getUsername())).thenReturn(new UserModel());
+		Mockito.when(dao.getUserByUsername(model.getUsername())).thenReturn(new UserDto());
 		
 		Boolean exceptionFound = false;
 		try {
@@ -104,7 +105,7 @@ public class UserServiceTest {
 		
 		//Then
 		assertTrue(exceptionFound);
-		verify(dao, never()).save(any(UserModel.class));
+		verify(dao, never()).save(any(UserDto.class));
 	}
 	
 	@Test
@@ -144,7 +145,7 @@ public class UserServiceTest {
 		service.modify(viewModel);		
 		
 		//Then
-		verify(dao).save(any(UserModel.class));
+		verify(dao).save(any(UserDto.class));
 	}	
 	
 	@Test
@@ -159,7 +160,7 @@ public class UserServiceTest {
 		}
 		
 		//Then
-		verify(dao, never()).save(any(UserModel.class));
+		verify(dao, never()).save(any(UserDto.class));
 	}
 	
 	
@@ -180,7 +181,7 @@ public class UserServiceTest {
 		
 		//Then
 		assertTrue(exceptionFound);
-		verify(dao, never()).save(any(UserModel.class));
+		verify(dao, never()).save(any(UserDto.class));
 	}
 	
 	private UserViewModel getWellFormedUserModel() {
@@ -195,8 +196,8 @@ public class UserServiceTest {
     	return model;
 	}
 	
-	private UserModel getWellFormedUserModelDifferentUsername() {
-		UserModel model = new UserModel();
+	private UserDto getWellFormedUserModelDifferentUsername() {
+		UserDto model = new UserDto();
     	model.setAddress("test");
     	model.setFirstName("test");
     	model.setLastName("test");

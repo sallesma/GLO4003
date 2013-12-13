@@ -19,10 +19,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.glo4003.project.database.converter.XmlModelConverter;
-import com.glo4003.project.database.dto.FileAccess;
+import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.database.model.UserModel;
+import com.glo4003.project.database.filesaccess.FileAccess;
 import com.glo4003.project.user.dao.UserModelDao;
 
 public class UserModelDaoTest {
@@ -92,8 +92,8 @@ public class UserModelDaoTest {
 		return models;
 	}
 	
-	private UserModel getModel() {
-		UserModel model = new UserModel();
+	private UserDto getModel() {
+		UserDto model = new UserDto();
 		model.setAddress("address");
 		model.setFirstName("firstname");
 		model.setIsAdmin(false);

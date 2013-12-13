@@ -36,7 +36,7 @@ public class DaoTest {
 		fileAccess = mock(FileAccess.class);
 		FileAccess.replace(fileAccess);
 		converter = mock(XmlModelConverter.class);		
-		testedClass = spy(new TestClass(converter, fileAccess));		
+		testedClass = new TestClass(converter, fileAccess);		
 		
 		configureFileAccess();
 	}

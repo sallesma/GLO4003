@@ -36,7 +36,7 @@ public class UserModelDaoTest {
 		fileAccess = mock(FileAccess.class);
 		FileAccess.replace(fileAccess);
 		converter = mock(XmlModelConverter.class);		
-		dao = spy(new UserModelDao(converter, fileAccess));		
+		dao = new UserModelDao(converter, fileAccess);		
 		
 		configureFileAccess();
 	}

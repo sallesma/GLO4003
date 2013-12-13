@@ -1,9 +1,13 @@
 package test.unit.database;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import nu.xom.Element;
 
 import org.junit.Before;
@@ -11,6 +15,7 @@ import org.junit.Test;
 
 import com.glo4003.project.database.converter.XmlModelConverter;
 import com.glo4003.project.database.converter.XmlObjectConverter;
+import com.glo4003.project.database.filesaccess.FileAccess;
 import com.glo4003.project.global.ModelInterface;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -18,11 +23,15 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 public class XmlModelConverterTest {
 	private XStream xstream;
 	private XmlModelConverter converter;
+	private FileAccess fileAccess;
 	
 	@Before
 	public void bootstrap() {
 		xstream = spy(new XStream());
-		converter = spy(new XmlModelConverter(xstream));
+		converter = new XmlModelConverter(xstream);
+		
+		fileAccess = mock(FileAccess.class);
+		FileAccess.replace(fileAccess);
 		
 		converter.registerModel(TestClass.class);
 		converter.registerModel(TestClass2.class);
@@ -32,6 +41,7 @@ public class XmlModelConverterTest {
 	public void canConvertToXml() throws Exception {		
 		//Before
 		TestClass test = new TestClass();
+		when(xstream.toXML(any(ModelInterface.class))).thenReturn("<Model></Model>");
 		
 		//When
 		converter.toElement(test);		

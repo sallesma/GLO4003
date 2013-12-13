@@ -44,6 +44,14 @@ public class ShoppingCartController implements ControllerInterface {
 	private InstantiateTicketConverter ticketConverter;
 	private List<InstantiateTicketViewModel> billTickets;	
 	
+	public void dependanciesInjection(MatchModelDao matchDao ,UserConverter userConverter,InstantiateTicketConverter ticketConverter ){ 
+		this.matchDao = matchDao ;
+		this.userConverter = userConverter;
+		this.billTickets = new ArrayList<>();
+		this.ticketConverter = ticketConverter;
+	}
+	
+	
 	public void dependanciesInjection() {
 		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
 		this.userConverter = Resolver.getInjectedInstance(UserConverter.class);

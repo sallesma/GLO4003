@@ -33,6 +33,12 @@ public class UserController implements ControllerInterface {
 	public Provider<LoginViewModel> loginViewModelProvider;
 	public Provider<UserViewModel> userViewModelProvider;
 	
+	public void dependanciesInjection( UserService userService ){
+		this.userService = userService;
+		this.loginViewModelProvider = Resolver.getInjectedInstance(ProviderCreator.class).loginViewModelProvider;
+		this.userViewModelProvider = Resolver.getInjectedInstance(ProviderCreator.class).userViewModelProvider;
+	}
+	
 	public void dependanciesInjection() {
 		this.userService = Resolver.getInjectedInstance(UserService.class);
 		this.loginViewModelProvider = Resolver.getInjectedInstance(ProviderCreator.class).loginViewModelProvider;

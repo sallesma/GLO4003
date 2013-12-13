@@ -12,15 +12,28 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.ui.Model;
 
+import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.user.controller.UserController;
+import com.glo4003.project.user.helper.UserConverter;
+import com.glo4003.project.user.model.view.LoginViewModel;
+import com.glo4003.project.user.model.view.UserViewModel;
+import com.glo4003.project.user.service.UserService;
+import com.google.inject.Provider;
 
 public class UserControllerTest {
+	
+	private UserService userService;
+	public Provider<LoginViewModel> loginViewModelProvider;
+	public Provider<UserViewModel> userViewModelProvider;
 	
 	private UserController controller;
 	
 	@Before
 	public void initialize() {
-		controller = spy(new UserController());
+		controller = new UserController();
+		userService = mock(UserService.class);
+		controller.dependanciesInjection(userService);
 	}
 	
 	@Test

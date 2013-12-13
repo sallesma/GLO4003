@@ -5,6 +5,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +19,9 @@ import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.match.dao.MatchModelDao;
 import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
+import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
+import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.UserViewModel;
@@ -26,13 +30,16 @@ public class ShoppingCartControllerTest {
 	private ShoppingCartController controller;
 	private UserConverter userConverter;
 	private MatchModelDao matchDao;
+	private InstantiateTicketConverter ticketConverter;
 	
 	@Before
 	public void initialise() {
-		controller = spy(new ShoppingCartController());
+		controller = new ShoppingCartController();
 		
 		userConverter = mock(UserConverter.class);
-		controller.replaceUserConverter(userConverter);
+		matchDao = mock(MatchModelDao.class);
+		ticketConverter= mock(InstantiateTicketConverter.class);
+		controller.dependanciesInjection(matchDao, userConverter, ticketConverter  );
 	}
 	
 	@Test
@@ -164,7 +171,11 @@ public class ShoppingCartControllerTest {
 		when(mockRequest.getSession()).thenReturn(mockSession);
 		when(mockSession.getAttribute("loggedUser")).thenReturn(null);
 		
-		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(mock(UserConcreteModel.class));
+		UserConcreteModel user = mock(UserConcreteModel.class);
+		
+		when(userConverter.convertFromView( (UserViewModel) org.mockito.Matchers.any())).thenReturn(user);
+		
+		when(user.getEmail()).thenReturn("a@aa.com");
 		
 		when(mockRequest.getParameter("cardType")).thenReturn("Vasi");
 		when(mockRequest.getParameter("cardOwner")).thenReturn("Martin");

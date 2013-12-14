@@ -7,13 +7,6 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import com.glo4003.project.home.controller.HomeController;
-import com.glo4003.project.injection.Resolver;
-import com.glo4003.project.match.controller.MatchController;
-import com.glo4003.project.shoppingkart.controller.ShoppingCartController;
-import com.glo4003.project.user.controller.AdminController;
-import com.glo4003.project.user.controller.UserController;
-
 public class BootLoader {
 	
 	public static void main(String[] args) throws Exception {		

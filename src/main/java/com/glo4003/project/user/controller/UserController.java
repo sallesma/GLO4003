@@ -20,7 +20,6 @@ import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
 import com.glo4003.project.user.service.UserService;
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**

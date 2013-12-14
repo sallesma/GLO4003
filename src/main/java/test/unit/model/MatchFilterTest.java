@@ -2,10 +2,10 @@ package test.unit.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,12 +18,10 @@ import org.junit.Test;
 
 import com.glo4003.project.database.dto.AbstractTicketCategory;
 import com.glo4003.project.database.dto.GeneralAdmissionTicketCategoryDto;
-import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.database.dto.MatchDto.Gender;
 import com.glo4003.project.database.dto.MatchDto.Sports;
 import com.glo4003.project.database.dto.SearchCriteriaDto;
 import com.glo4003.project.database.exception.PersistException;
-import com.glo4003.project.match.dao.MatchModelDaoInterface;
 import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.match.helper.MatchFilter;
 import com.glo4003.project.match.model.MatchConcreteModel;

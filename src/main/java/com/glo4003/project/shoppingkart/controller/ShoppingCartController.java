@@ -17,11 +17,11 @@ import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ControllerInterface;
 import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
-import com.glo4003.project.match.helper.MatchConverter;
 import com.glo4003.project.shoppingkart.cardValidation.AbstractCreditCardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.AmericanExpressoValidation;
 import com.glo4003.project.shoppingkart.cardValidation.MistercardValidation;
 import com.glo4003.project.shoppingkart.cardValidation.VasiValidation;
+import com.glo4003.project.shoppingkart.mail.Email;
 import com.glo4003.project.ticket.helper.InstantiateTicketConverter;
 import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
 import com.glo4003.project.ticket.model.InstantiateGeneralAdmissionTicket;
@@ -29,12 +29,10 @@ import com.glo4003.project.ticket.model.InstantiateReservedTicket;
 import com.glo4003.project.ticket.viewModel.InstantiateGeneralAdmissionTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateReservedTicketViewModel;
 import com.glo4003.project.ticket.viewModel.InstantiateTicketViewModel;
-import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
-import com.glo4003.project.shoppingkart.mail.Email;
 
 @Controller
 public class ShoppingCartController implements ControllerInterface {

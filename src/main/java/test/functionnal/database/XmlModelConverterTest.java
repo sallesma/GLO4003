@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import com.glo4003.project.database.converter.XmlModelConverter;
 import com.glo4003.project.database.converter.XmlObjectConverter;
-import com.glo4003.project.database.dto.MatchDto;
 import com.glo4003.project.database.dto.MatchDto.Gender;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;

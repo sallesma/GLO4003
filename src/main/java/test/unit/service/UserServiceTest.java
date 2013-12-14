@@ -5,14 +5,11 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.Validator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +23,6 @@ import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.database.exception.SaveException;
 import com.glo4003.project.global.ModelValidator;
-import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.user.dao.UserModelDao;
 import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.view.UserViewModel;

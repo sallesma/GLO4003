@@ -15,7 +15,6 @@ import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ControllerInterface;
 import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
-import com.glo4003.project.user.helper.UserConverter;
 
 @Controller
 public class AdminController implements ControllerInterface {

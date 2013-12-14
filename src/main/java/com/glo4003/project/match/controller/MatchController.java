@@ -32,7 +32,6 @@ import com.glo4003.project.user.helper.UserConverter;
 import com.glo4003.project.user.model.UserConcreteModel;
 import com.glo4003.project.user.model.view.LoginViewModel;
 import com.glo4003.project.user.model.view.UserViewModel;
-import com.google.inject.Inject;
 
 /**
  * Handles requests for the Match logic.

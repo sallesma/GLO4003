@@ -1,28 +1,21 @@
 package test.unit.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Test;
 
 import com.glo4003.project.database.dto.AbstractTicketCategory;
 import com.glo4003.project.database.dto.MatchDto;
-import com.glo4003.project.database.dto.UserDto;
 import com.glo4003.project.database.dto.MatchDto.Gender;
 import com.glo4003.project.database.dto.MatchDto.Sports;
 import com.glo4003.project.database.exception.ConvertException;
 import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.match.model.MatchConcreteModel;
 import com.glo4003.project.ticket.category.factory.TicketCategoryFactory;
-import com.glo4003.project.ticket.model.InstantiateAbstractTicket;
-import com.glo4003.project.ticket.model.factory.InstantiateTicketFactory;
-import com.glo4003.project.user.model.UserConcreteModel;
 
 public class MatchModelTest {
 	@Test

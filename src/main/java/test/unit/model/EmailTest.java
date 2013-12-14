@@ -1,17 +1,11 @@
 package test.unit.model;
 
 import static org.junit.Assert.assertTrue;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
-import org.mockito.Mock;
 
-import com.glo4003.project.database.exception.SaveException;
 import com.glo4003.project.shoppingkart.mail.Email;
-
-import static org.mockito.Mockito.mock;
 
 public class EmailTest {
 	@Test

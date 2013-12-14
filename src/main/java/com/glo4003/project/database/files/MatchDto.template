@@ -14,7 +14,7 @@
         <sport>Rugby</sport>
         <gender>M</gender>
         <id>4</id>
-        <date>2013-10-29 21:53:17.838 UTC</date>
+        <date>2014-10-29 21:53:17.838 UTC</date>
         <opponent>Rimouski</opponent>
         <city>Québec</city>
         <field>3</field>
@@ -34,9 +34,9 @@
         <sport>Rugby</sport>
         <gender>M</gender>
         <id>8</id>
-        <date>2013-10-23 21:53:17.995 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2014-10-23 21:53:17.995 UTC</date>
+        <opponent>University of Calgary</opponent>
+        <city>Calgary</city>
         <field>7</field>
         <tickets>8:GeneralAdmissionTicketCategoryDto,8:ReservedTicketCategoryDto,</tickets>
     </MatchDto>
@@ -44,47 +44,17 @@
         <sport>Basketball</sport>
         <gender>M</gender>
         <id>10</id>
-        <date>2013-10-23 21:53:18.79 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
+        <date>2014-10-23 21:53:18.79 UTC</date>
+        <opponent>Montréal</opponent>
+        <city>UQAC</city>
         <field>9</field>
         <tickets>10:GeneralAdmissionTicketCategoryDto,10:ReservedTicketCategoryDto,</tickets>
-    </MatchDto>
-    <MatchDto>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>11</id>
-        <date>2013-10-23 21:53:18.122 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>10</field>
-        <tickets>11:GeneralAdmissionTicketCategoryDto,11:ReservedTicketCategoryDto,</tickets>
-    </MatchDto>
-    <MatchDto>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>12</id>
-        <date>2013-10-23 21:53:18.171 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>11</field>
-        <tickets>12:GeneralAdmissionTicketCategoryDto,12:ReservedTicketCategoryDto,</tickets>
-    </MatchDto>
-    <MatchDto>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>13</id>
-        <date>2013-10-23 21:53:18.219 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>12</field>
-        <tickets>13:GeneralAdmissionTicketCategoryDto,13:ReservedTicketCategoryDto,</tickets>
     </MatchDto>
     <MatchDto>
         <sport>Basketball</sport>
         <gender>M</gender>
         <id>16</id>
-        <date>2013-10-29 18:30:18.364 UTC</date>
+        <date>2014-10-29 18:30:18.364 UTC</date>
         <opponent>ETS</opponent>
         <city>Montréal</city>
         <field>15</field>
@@ -94,27 +64,17 @@
         <sport>Rugby</sport>
         <gender>F</gender>
         <id>18</id>
-        <date>2013-10-23 21:53:18.466 UTC</date>
+        <date>2014-10-23 21:53:18.466 UTC</date>
         <opponent>UQAM</opponent>
         <city>Montréal</city>
         <field>17</field>
         <tickets>18:GeneralAdmissionTicketCategoryDto,18:ReservedTicketCategoryDto,</tickets>
     </MatchDto>
     <MatchDto>
-        <sport>Rugby</sport>
-        <gender>M</gender>
-        <id>19</id>
-        <date>2013-10-23 21:53:18.523 UTC</date>
-        <opponent>test</opponent>
-        <city>test</city>
-        <field>18</field>
-        <tickets>19:GeneralAdmissionTicketCategoryDto,19:ReservedTicketCategoryDto,</tickets>
-    </MatchDto>
-    <MatchDto>
         <sport>Volleyball</sport>
         <gender>F</gender>
         <id>7</id>
-        <date>2013-11-23 21:53:17.951 UTC</date>
+        <date>2014-11-23 21:53:17.951 UTC</date>
         <opponent>UQAM</opponent>
         <city>Montréal</city>
         <field>6</field>
@@ -124,7 +84,7 @@
         <sport>Soccer</sport>
         <gender>M</gender>
         <id>17</id>
-        <date>2013-12-23 15:53:18.415 UTC</date>
+        <date>2014-12-23 15:53:18.415 UTC</date>
         <opponent>UQAM</opponent>
         <city>Montréal</city>
         <field>16</field>
@@ -134,7 +94,7 @@
         <sport>Soccer</sport>
         <gender>M</gender>
         <id>9</id>
-        <date>2013-12-12 17:00:00.41 UTC</date>
+        <date>2014-12-12 17:00:00.41 UTC</date>
         <opponent>Alifax</opponent>
         <city>Alifax</city>
         <field>8</field>
@@ -144,7 +104,7 @@
         <sport>Basketball</sport>
         <gender>F</gender>
         <id>14</id>
-        <date>2013-12-23 21:53:18.268 UTC</date>
+        <date>2014-12-23 21:53:18.268 UTC</date>
         <opponent>Université</opponent>
         <city>Rimouski</city>
         <field>13</field>
@@ -154,7 +114,7 @@
         <sport>Rugby</sport>
         <gender>F</gender>
         <id>5</id>
-        <date>2013-11-27 20:35:17.870 UTC</date>
+        <date>2014-11-27 20:35:17.870 UTC</date>
         <opponent>UQAM</opponent>
         <city>Québec</city>
         <field>4</field>

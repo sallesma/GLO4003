@@ -1,3 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UserDtos>
+    <UserDto>
+        <id>1</id>
+        <lastName>Matt</lastName>
+        <firstName>Martin</firstName>
+        <username>MM</username>
+        <email>equipeb2.glo4003@gmail.com</email>
+        <password>password</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>false</isAdmin>
+        <tickets/>
+        <searchCriteria/>
+    </UserDto>
+        <UserDto>
+        <id>5</id>
+        <lastName>Admin</lastName>
+        <firstName>Admin</firstName>
+        <username>admin</username>
+        <email>equipeb2.glo4003@gmail.com</email>
+        <password>admin</password>
+        <phoneNumber>(444) 444-4444</phoneNumber>
+        <address>Address</address>
+        <isAdmin>true</isAdmin>
+        <tickets/>
+        <searchCriteria/>
+    </UserDto>
 </UserDtos>

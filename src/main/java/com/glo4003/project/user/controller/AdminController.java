@@ -15,16 +15,19 @@ import com.glo4003.project.database.exception.PersistException;
 import com.glo4003.project.global.ControllerInterface;
 import com.glo4003.project.injection.Resolver;
 import com.glo4003.project.match.dao.MatchModelDao;
+import com.glo4003.project.match.helper.MatchConverter;
+import com.glo4003.project.match.model.MatchConcreteModel;
 
 @Controller
 public class AdminController implements ControllerInterface {
 	
 	private MatchModelDao matchDao;
-  
+	private MatchConverter mConverter;
 	
 	public void dependanciesInjection()
 	{
 		this.matchDao = Resolver.getInjectedInstance(MatchModelDao.class);
+		this.mConverter = Resolver.getInjectedInstance(MatchConverter.class);
 	}
 	
 	
@@ -39,7 +42,8 @@ public class AdminController implements ControllerInterface {
 		String newTicket = request.getParameter("newTicket");
 		String categoryName = request.getParameter("category");		
 		Long id = Long.valueOf(request.getParameter("matchID"));
-		MatchDto match = matchDao.getById(id);
+		MatchDto matchDto = matchDao.getById(id);
+		MatchConcreteModel match = mConverter.convertFromDB(matchDto);
 		for ( AbstractTicketCategory cat : match.getTickets() ) {
 			if ( cat.getName().equals(categoryName) )
 				if ( !((ReservedTicketCategoryDto) cat).getPlacements().contains(newTicket) ) {
@@ -48,10 +52,9 @@ public class AdminController implements ControllerInterface {
 				}
 		}
 		model.addAttribute("match", match);
-		
-		//MatchModelDao matchModelDao = new MatchModelDao();
+		matchDto = mConverter.convertToDB(match);
 		try {
-			matchDao.save(match);
+			matchDao.save(matchDto);
 		} catch (ConvertException e) {
 			e.printStackTrace();
 		}
@@ -65,7 +68,8 @@ public class AdminController implements ControllerInterface {
 		
 		Long id = Long.valueOf(request.getParameter("matchID"));
 		int ticketNumber = Integer.valueOf(request.getParameter("ticketNumber"));	
-		MatchDto match = matchDao.getById(id);
+		MatchDto matchDto = matchDao.getById(id);
+		MatchConcreteModel match = mConverter.convertFromDB(matchDto);
 		for ( AbstractTicketCategory cat : match.getTickets() ) {
 			if ( cat.getName().equals(categoryName) ) {
 					
@@ -73,9 +77,9 @@ public class AdminController implements ControllerInterface {
 				}
 		}
 		model.addAttribute("match", match);
-
+		matchDto = mConverter.convertToDB(match);
 		try {
-			matchDao.save(match);
+			matchDao.save(matchDto);
 		} catch (ConvertException e) {
 			e.printStackTrace();
 		}
